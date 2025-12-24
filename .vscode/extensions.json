@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker"
+  ] // 推荐安装的插件
+  // "unwantedRecommendations": ["some.extension.you.dont.want"] // 不希望安装的插件
+}

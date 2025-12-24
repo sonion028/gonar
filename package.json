@@ -1,0 +1,88 @@
+{
+  "name": "tonar",
+  "version": "1.0.0",
+  "description": "Tonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "type": "module",
+  "module": "dist/index.es.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils.es.js",
+      "types": "./dist/types/utils.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks.es.js",
+      "types": "./dist/types/hooks.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components.es.js",
+      "types": "./dist/types/components.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && vite build",
+    "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
+    "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
+    "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
+    "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
+    "format": "prettier --write '{src,packages,apps}/**/*.*'",
+    "preinstall": "npx -y only-allow pnpm || exit 1",
+    "prepare": "npx simple-git-hooks"
+  },
+  "engines": {
+    "node": ">=24.11.1",
+    "pnpm": ">=10.22.0"
+  },
+  "engineStrict": true,
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.4",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^5.1.2",
+    "cspell": "^9.4.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^61.5.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^16.5.0",
+    "lint-staged": "^16.2.7",
+    "only-allow": "^1.2.2",
+    "prettier": "^3.7.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass-embedded": "^1.97.1",
+    "simple-git-hooks": "^2.13.1",
+    "terser": "^5.44.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.50.1",
+    "vite": "^7.3.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2"
+  },
+  "keywords": [
+    "hooks",
+    "utils",
+    "components",
+    "react"
+  ],
+  "author": "sonion",
+  "license": "MIT",
+  "repository": "https://github.com/sonion028/tonar",
+  "bugs": {
+    "url": "https://github.com/sonion028/tonar/issues"
+  },
+  "private": false
+}

@@ -1,0 +1,63 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import path from 'path';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+
+export default defineConfig({
+  plugins: [
+    react(),
+    libInjectCss(), // 注入 CSS 到每个生成的 chunk 文件
+    dts({
+      insertTypesEntry: true,
+      outDir: 'dist/types',
+      include: ['src/**/*'],
+    }), // 生成类型声明文件
+  ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  // CSS 配置
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly', // 推荐使用驼峰命名
+    },
+  },
+  build: {
+    target: 'es2020',
+    lib: {
+      name: 'Tonar',
+      entry: {
+        index: 'src/index.ts',
+        hooks: 'src/hooks/index.ts',
+        utils: 'src/utils/index.ts',
+        components: 'src/components/index.ts',
+      },
+      formats: ['es'], // 只输出 ESM
+      fileName: (format, entryName) => `${entryName}.${format}.js`,
+    },
+    minify: 'terser', // 用terser替代esbuild压缩混淆器
+    terserOptions: {
+      compress: { drop_console: true }, // 可选：清console
+      // format: {
+      //   comments: (_, c) => c.type === 'comment2' && c.value.startsWith('*'),
+      // },  // 保留 多行注释（以 `*` 开头的块注释）
+    },
+    // 不用 libInjectCss 设置cssCodeSplit css文件名会变为index，不设置就跟随build.lib.name
+    cssCodeSplit: false, // 是否开启 CSS 代码分割
+    rollupOptions: {
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'ReactJSXRuntime',
+        },
+        assetFileNames: `css/[name].[hash][extname]`,
+        chunkFileNames: `js/[name].[hash].js`, // 除入口外的 chunk 文件放js文件夹
+      },
+    },
+  },
+});
