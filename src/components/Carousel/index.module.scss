@@ -1,0 +1,162 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%; // 没制定宽度，默认100%
+  height: 100%;
+
+  &[style*='--wrapperWidth'] {
+    // 指定宽度用变量
+    width: calc(var(--wrapperWidth) * 1px);
+  }
+
+  &[style*='--wrapperHeight'] {
+    // 指定了高度
+    height: calc(var(--wrapperHeight) * 1px);
+  }
+
+  &:not([style*='--cardHeight']) {
+    // 没有指定高度，默认100%
+    .wrapper {
+      .inner {
+        height: 100%;
+      }
+    }
+  }
+
+  &[style*='--cardWidth'] {
+    // 指定了单张宽度
+    .wrapper {
+      width: calc(var(--cardWidth) * 1px); // 和卡片宽度一致，作为逻辑宽度
+      .inner {
+        transform: translateX(
+          calc(var(--index) * (var(--cardWidth) + var(--gapSize, 0)) * -1px)
+        );
+        & > * {
+          flex: 0 0 calc(var(--cardWidth) * 1px);
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &:not([style*='--cardWidth']) {
+    // 没有指定单张宽度
+    .wrapper {
+      width: 100%; // 没制定宽度，默认100%
+      .inner {
+        transform: translateX(
+          calc((-100% + (var(--gapSize, 0) * -1px)) * var(--index))
+        );
+        & > * {
+          flex: 0 0 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &:hover > .arrow:global(.hover) {
+    // hover时显示箭头
+    display: block;
+  }
+  & > .arrow {
+    // 切换箭头
+    &:global(.hover) {
+      // 有hover类时不显示
+      display: none;
+    }
+    &:global(.none) {
+      display: none;
+    }
+    &:global(.always, .auto) {
+      display: block;
+    }
+    .left,
+    .right {
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9;
+      width: 20px;
+      height: 20px;
+      padding: 14px;
+      border: 1px solid rgb(221, 226, 233);
+      border-radius: 50%;
+      background: rgb(255, 255, 255)
+        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMSAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9ImRvd24iPgo8cGF0aCBpZD0iVW5pb24iIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNi43OTE4MiA1Ljc2ODY1QzYuNDAyNzMgNS4zNzk1NiA2LjQwMjczIDQuNzQ4NzEgNi43OTE4MiA0LjM1OTYyTDcuNDk2MzQgMy42NTUxQzcuODg1NDMgMy4yNjYwMSA4LjUxNjI4IDMuMjY2MDEgOC45MDUzNyAzLjY1NTFMMTQuNTQxNSA5LjI5MTI0QzE0LjczNzEgOS40ODY4MyAxNC44MzQ0IDkuNzQzNSAxNC44MzMzIDkuOTk5ODVDMTQuODM0NCAxMC4yNTYyIDE0LjczNzEgMTAuNTEyOSAxNC41NDE1IDEwLjcwODVMOC45MDUzNyAxNi4zNDQ2QzguNTE2MjggMTYuNzMzNyA3Ljg4NTQzIDE2LjczMzcgNy40OTYzNCAxNi4zNDQ2TDYuNzkxODIgMTUuNjQwMUM2LjQwMjczIDE1LjI1MSA2LjQwMjczIDE0LjYyMDEgNi43OTE4MiAxNC4yMzExTDExLjAyMyA5Ljk5OTg1TDYuNzkxODIgNS43Njg2NVoiIGZpbGw9IiMwMDY2RkMiLz4KPC9nPgo8L3N2Zz4K')
+        no-repeat center / contain;
+      background-origin: content-box;
+      box-shadow:
+        0px 15px 35px -2px rgba(0, 0, 0, 0.05),
+        0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+    }
+    // 通过dom操作，所以用global
+    & > :global(.show) {
+      display: block;
+    }
+    .left {
+      left: 12px;
+      transform: translateY(-50%) rotate(180deg);
+    }
+    .right {
+      right: 12px;
+    }
+  }
+  .wrapper {
+    // 轮播图容器
+    height: 100%;
+    .inner {
+      // 轮播图内容列表
+      display: flex;
+      gap: calc(var(--gapSize) * 1px);
+      height: calc(var(--cardHeight) * 1px);
+      transition: transform 0.3s;
+    }
+  }
+}
+
+.indicator {
+  // 指示器
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  z-index: 9;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  border-radius: 8px;
+  &:global(.none) {
+    // 指示器为none
+    display: none;
+  }
+  &:global(.line) {
+    // 指示器为line
+    & > i {
+      width: 40px;
+      height: 5px;
+      border-radius: 8px;
+      background-color: var(--Gray-3, rgb(229, 232, 239));
+      cursor: pointer;
+      // 通过dom操作，所以用global
+      &:global(.active) {
+        background: var(--byte-plus-blue-brand-primary-60, rgb(0, 102, 252));
+      }
+    }
+  }
+  &:global(.dot) {
+    // 指示器为dot
+    & > i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--Gray-3, rgb(229, 232, 239));
+      cursor: pointer;
+      // 通过dom操作，所以用global
+      &:global(.active) {
+        background: var(--byte-plus-blue-brand-primary-60, rgb(0, 102, 252));
+      }
+    }
+  }
+}
