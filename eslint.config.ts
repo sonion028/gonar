@@ -13,8 +13,8 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx,js,jsx}'], // 对所有 TS TSX JS JSX 文件应用规则
     languageOptions: {
-      ecmaVersion: 2020, // ✅ 语法检查 支持的 ES 版本
-      globals: globals.browser, // ✅ 浏览器全局变量
+      ecmaVersion: 2020, // 语法检查 支持的 ES 版本
+      globals: globals.browser, // 浏览器全局变量
     },
     settings: {
       react: {
