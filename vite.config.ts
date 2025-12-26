@@ -36,27 +36,21 @@ export default defineConfig({
         components: 'src/components/index.ts',
       },
       formats: ['es'], // 只输出 ESM
-      fileName: (format, entryName) => `${entryName}.${format}.js`,
+      fileName: '[name].[format]',
+      // fileName: (format, entryName) => `${entryName}.${format}.js`,
     },
     minify: 'terser', // 用terser替代esbuild压缩混淆器
     terserOptions: {
       compress: { drop_console: true }, // 可选：清console
-      // format: {
-      //   comments: (_, c) => c.type === 'comment2' && c.value.startsWith('*'),
-      // },  // 保留 多行注释（以 `*` 开头的块注释）
     },
     // 不用 libInjectCss 设置cssCodeSplit css文件名会变为index，不设置就跟随build.lib.name
     cssCodeSplit: false, // 是否开启 CSS 代码分割
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'ReactJSXRuntime',
-        },
-        assetFileNames: `css/[name].[hash][extname]`,
-        chunkFileNames: `js/[name].[hash].js`, // 除入口外的 chunk 文件放js文件夹
+        assetFileNames: ({ names: [name] }) =>
+          `${name.endsWith('.css') ? 'css' : 'assets'}/[name].[hash][extname]`,
+        chunkFileNames: 'js/[name].[hash].js', // 除入口外的 chunk 文件放js文件夹
       },
     },
   },
