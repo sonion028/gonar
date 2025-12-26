@@ -36,15 +36,9 @@ export default defineConfig({
         components: 'src/components/index.ts',
       },
       formats: ['es'], // 只输出 ESM
-      fileName: '[name].[format]',
-      // fileName: (format, entryName) => `${entryName}.${format}.js`,
+      fileName: '[name].[format]', // 不用后缀
     },
-    minify: 'terser', // 用terser替代esbuild压缩混淆器
-    terserOptions: {
-      compress: { drop_console: true }, // 可选：清console
-    },
-    // 不用 libInjectCss 设置cssCodeSplit css文件名会变为index，不设置就跟随build.lib.name
-    cssCodeSplit: false, // 是否开启 CSS 代码分割
+    minify: 'esbuild',
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
