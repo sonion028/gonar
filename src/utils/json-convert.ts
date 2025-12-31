@@ -13,7 +13,8 @@ const camel2pascal = (str: string) => {
 };
 
 /**
- * 将大驼峰（PascalCase）字符串转换为小驼峰（camelCase）
+ * @author sonion
+ * @description 将大驼峰（PascalCase）字符串转换为小驼峰（camelCase）
  * @param str 大驼峰格式的字符串
  * @returns 小驼峰格式的字符串
  */
@@ -71,7 +72,10 @@ const snake2camel = (str: string) => {
  * @param convertFn 键名转换方法，默认值为 identity（不转换）
  * @returns 处理后的 JSON 对象或数组
  */
-const convertKeysDeep = <R extends string, T>(
+const convertKeysDeep = <
+  R extends string,
+  T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+>(
   obj: T,
   convertFn: (key: string) => R
 ): T => {
@@ -162,13 +166,13 @@ type ConvertKeys<T, M extends ConvertMode> = T extends (
  * @author sonion
  * @description 深度遍历JSON，将所有键名从蛇形转换为小驼峰
  * @param obj 要处理的JSON对象或数组
- * @param convertFn 转换方法，默认值为snakeToCamel
  */
-const convertSnake2camel = <T extends Record<string, unknown>>(
-  obj: T,
-  convertFn = snake2camel
+const convertSnake2camel = <
+  T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+>(
+  obj: T
 ): ConvertKeys<T, typeof ConvertMode.SnakeToCamel> => {
-  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+  return convertKeysDeep(obj, snake2camel) as ConvertKeys<
     T,
     typeof ConvertMode.SnakeToCamel
   >;
@@ -178,13 +182,13 @@ const convertSnake2camel = <T extends Record<string, unknown>>(
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为蛇形
  * @param obj 要处理的JSON对象或数组
- * @param convertFn 转换方法，默认值为 camel2snake
  */
-const convertCamel2snake = <T extends Record<string, unknown>>(
-  obj: T,
-  convertFn = camel2snake
+const convertCamel2snake = <
+  T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+>(
+  obj: T
 ): ConvertKeys<T, typeof ConvertMode.CamelToSnake> => {
-  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+  return convertKeysDeep(obj, camel2snake) as ConvertKeys<
     T,
     typeof ConvertMode.CamelToSnake
   >;
@@ -194,13 +198,13 @@ const convertCamel2snake = <T extends Record<string, unknown>>(
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为大驼峰
  * @param obj 要处理的JSON对象或数组
- * @param convertFn 转换方法，默认值为 camel2pascal
  */
-const convertCamel2pascal = <T extends Record<string, unknown>>(
-  obj: T,
-  convertFn = camel2pascal
+const convertCamel2pascal = <
+  T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+>(
+  obj: T
 ): ConvertKeys<T, typeof ConvertMode.CamelToPascal> => {
-  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+  return convertKeysDeep(obj, camel2pascal) as ConvertKeys<
     T,
     typeof ConvertMode.CamelToPascal
   >;
@@ -210,13 +214,13 @@ const convertCamel2pascal = <T extends Record<string, unknown>>(
  * @author sonion
  * @description 深度遍历JSON，将所有键名从大驼峰转换为小驼峰
  * @param obj 要处理的JSON对象或数组
- * @param convertFn 转换方法，默认值为 pascal2camel
  */
-const convertPascal2camel = <T extends Record<string, unknown>>(
-  obj: T,
-  convertFn = pascal2camel
+const convertPascal2camel = <
+  T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+>(
+  obj: T
 ): ConvertKeys<T, typeof ConvertMode.PascalToCamel> => {
-  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+  return convertKeysDeep(obj, pascal2camel) as ConvertKeys<
     T,
     typeof ConvertMode.PascalToCamel
   >;
