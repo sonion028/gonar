@@ -55,16 +55,16 @@ import {
 
 #### 🔗 Hooks / 钩子函数
 
-- useCreateSafeRef （安全引用，相同不更新，改变可触发更新, 支持自定义差异对比函数）
 - useDistinctState （差异才更新的状态，支持onChange事件和自定义差异对比函数）
 - useStaticState （静态属性，不触发react更新）
-- useAsyncActionLock （异步操作锁，根据传入异步函数确定是否可再触发，并提供运行中状态）
-- useInterval （定时器）
-- useRAfInterval （RAf 定时器）
+- useCreateSafeRef （安全引用，相同不更新，改变可触发更新, 支持自定义差异对比函数）
 - useLatestCallback （保持稳定的最新回调，稳定引用函数与闭包获取新值不可兼得的问题）
+- useAsyncActionLock （异步操作锁，根据传入异步函数确定是否可再触发，并提供运行中状态）
 - useIntersectionObserver （交叉观察器）
 - useMutationObserver （节点变化观察器）
 - useResizeObserver （尺寸变化观察器）
+- useInterval （定时器）
+- useRAfInterval （RAf 定时器）
 - useStorage （支持事件的本地存储）
 
 ```js
@@ -84,6 +84,10 @@ import {
 - stringToHash （字符串转哈希值）
 - browserNativeDownload （浏览器原生下载，支持检测是否被浏览器拦截）
 - blobDownload （Blob 下载）
+- convertSnake2Camel （json对象属性名，蛇形命名转小驼峰命名）
+- convertCamel2Snake （json对象属性名，小驼峰命名转蛇形命名）
+- convertPascal2Camel （json对象属性名，大驼峰命名转小驼峰命名）
+- convertCamel2Pascal （json对象属性名，小驼峰命名转大驼峰命名）
 - extractChildrenListByType （获取 React 子节点中符合多个指定类型的节点数组）
 - extractChildrenByType （获取 React 子节点中单个指定类型的节点）
 - rAfInterval （RAf 定时器）
