@@ -13,4 +13,6 @@ export {
   rAfInterval,
   clearRAfInterval,
 } from './rAfInterval';
+
+export * from './json-convert';
 import './dev';

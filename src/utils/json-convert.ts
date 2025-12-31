@@ -1,0 +1,230 @@
+/**
+ * @author sonion
+ * @description 将小驼峰（camelCase）字符串转换为大驼峰（PascalCase）
+ * @param str 小驼峰格式的字符串
+ * @returns 大驼峰格式的字符串
+ */
+const camel2pascal = (str: string) => {
+  if (!str) {
+    return str;
+  }
+  // 将首字母转为大写，其余保持不变
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+/**
+ * 将大驼峰（PascalCase）字符串转换为小驼峰（camelCase）
+ * @param str 大驼峰格式的字符串
+ * @returns 小驼峰格式的字符串
+ */
+const pascal2camel = (str: string) => {
+  if (!str) {
+    return str;
+  }
+  // 将首字母转为小写，其余保持不变
+  return str.charAt(0).toLowerCase() + str.slice(1);
+};
+
+/**
+ * @author sonion
+ * @description 将小驼峰命名（camelCase）字符串转换为蛇形命名（snake_case）
+ * @param str 小驼峰格式的字符串
+ * @returns 蛇形格式的字符串
+ */
+const camel2snake = (str: string) => {
+  if (!str) {
+    return str;
+  }
+  return (
+    str
+      // 在大写字母前加下划线
+      .replace(/([A-Z])/g, '_$1')
+      // 转成小写
+      .toLowerCase()
+      // 去掉可能出现在开头的下划线
+      .replace(/^_/, '')
+  );
+};
+
+/**
+ * @author sonion
+ * @description 将蛇形命名（snake_case）字符串转换为小驼峰（camelCase）
+ * @param str 蛇形命名格式的字符串
+ * @returns 小驼峰格式的字符串
+ */
+const snake2camel = (str: string) => {
+  if (!str) {
+    return str;
+  }
+  // 将下划线后的字母转为大写，并删除下划线
+  // 匹配下划线后的字母，将字母转为大写；如果是数字，只删除下划线
+  return str
+    .replace(/_([a-zA-Z])/g, (_, letter) => letter.toUpperCase())
+    .replace(/_(\d+)/g, (_, digit) => digit)
+    .replace(/_/g, ''); // 删除所有剩余的下划线
+};
+
+/**
+ * @author sonion
+ * @description 深度遍历 JSON，将所有键名按指定的转换函数处理
+ * @param obj 要处理的 JSON 对象或数组
+ * @param convertFn 键名转换方法，默认值为 identity（不转换）
+ * @returns 处理后的 JSON 对象或数组
+ */
+const convertKeysDeep = <R extends string, T>(
+  obj: T,
+  convertFn: (key: string) => R
+): T => {
+  if (obj === null || obj === undefined) {
+    return obj;
+  }
+
+  if (typeof obj !== 'object') {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map((item) => convertKeysDeep(item, convertFn)) as unknown as T;
+  }
+
+  const converted: Record<string, unknown> = {};
+  const entries = Object.entries(obj);
+  for (const [key, value] of entries) {
+    const newKey = convertFn(key);
+    converted[newKey] = convertKeysDeep(value, convertFn);
+  }
+  return converted as T;
+};
+
+/** 小驼峰命名支持用小划线分割 */
+type CamelToSnakeRaw<S extends string> = S extends `${infer First}${infer Rest}`
+  ? First extends Lowercase<First>
+    ? `${First}${CamelToSnakeRaw<Rest>}`
+    : `_${Lowercase<First>}${CamelToSnakeRaw<Rest>}`
+  : S;
+
+/** 去掉开头的下划线 */
+type TrimLeadingUnderscore<S extends string> = S extends `_${infer R}` ? R : S;
+
+/** 小驼峰命名转换为蛇形命名类型 */
+type CamelToSnake<S extends string> = TrimLeadingUnderscore<CamelToSnakeRaw<S>>;
+
+/** 蛇形命名转换为小驼峰命名类型 */
+type SnakeToCamel<S extends string> = S extends `${infer Head}_${infer Tail}`
+  ? `${Lowercase<Head>}${Capitalize<SnakeToCamel<Tail>>}`
+  : Lowercase<S>;
+
+/** 小驼峰命名转换为大驼峰命名类型 */
+type CamelToPascal<S extends string> = Capitalize<S>;
+/** 大驼峰命名转换为小驼峰命名类型 */
+type PascalToCamel<S extends string> = Uncapitalize<S>;
+
+/** 转换模式 */
+export const ConvertMode = {
+  SnakeToCamel: 'snakeToCamel',
+  CamelToSnake: 'camelToSnake',
+  CamelToPascal: 'camelToPascal',
+  PascalToCamel: 'pascalToCamel',
+} as const;
+/** 转换模式类型 */
+export type ConvertMode = (typeof ConvertMode)[keyof typeof ConvertMode];
+// 类型和值一样，erasableSyntaxOnly 模式下 enum 的替代
+
+type ApplyKeyTransform<
+  M extends ConvertMode,
+  K extends string,
+> = M extends typeof ConvertMode.SnakeToCamel
+  ? SnakeToCamel<K>
+  : M extends typeof ConvertMode.CamelToSnake
+    ? CamelToSnake<K>
+    : M extends typeof ConvertMode.CamelToPascal
+      ? CamelToPascal<K>
+      : M extends typeof ConvertMode.PascalToCamel
+        ? PascalToCamel<K>
+        : K;
+
+/** 通用：深度转换对象所有键名（保留函数与数组）*/
+type ConvertKeys<T, M extends ConvertMode> = T extends (
+  ...args: never
+) => unknown
+  ? T
+  : T extends readonly unknown[]
+    ? { [I in keyof T]: ConvertKeys<T[I], M> }
+    : T extends object
+      ? {
+          [K in keyof T as K extends string
+            ? ApplyKeyTransform<M, K>
+            : K]: ConvertKeys<T[K], M>;
+        }
+      : T;
+
+/**
+ * @author sonion
+ * @description 深度遍历JSON，将所有键名从蛇形转换为小驼峰
+ * @param obj 要处理的JSON对象或数组
+ * @param convertFn 转换方法，默认值为snakeToCamel
+ */
+const convertSnake2camel = <T extends Record<string, unknown>>(
+  obj: T,
+  convertFn = snake2camel
+): ConvertKeys<T, typeof ConvertMode.SnakeToCamel> => {
+  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+    T,
+    typeof ConvertMode.SnakeToCamel
+  >;
+};
+
+/**
+ * @author sonion
+ * @description 深度遍历JSON，将所有键名从小驼峰转换为蛇形
+ * @param obj 要处理的JSON对象或数组
+ * @param convertFn 转换方法，默认值为 camel2snake
+ */
+const convertCamel2snake = <T extends Record<string, unknown>>(
+  obj: T,
+  convertFn = camel2snake
+): ConvertKeys<T, typeof ConvertMode.CamelToSnake> => {
+  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+    T,
+    typeof ConvertMode.CamelToSnake
+  >;
+};
+
+/**
+ * @author sonion
+ * @description 深度遍历JSON，将所有键名从小驼峰转换为大驼峰
+ * @param obj 要处理的JSON对象或数组
+ * @param convertFn 转换方法，默认值为 camel2pascal
+ */
+const convertCamel2pascal = <T extends Record<string, unknown>>(
+  obj: T,
+  convertFn = camel2pascal
+): ConvertKeys<T, typeof ConvertMode.CamelToPascal> => {
+  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+    T,
+    typeof ConvertMode.CamelToPascal
+  >;
+};
+
+/**
+ * @author sonion
+ * @description 深度遍历JSON，将所有键名从大驼峰转换为小驼峰
+ * @param obj 要处理的JSON对象或数组
+ * @param convertFn 转换方法，默认值为 pascal2camel
+ */
+const convertPascal2camel = <T extends Record<string, unknown>>(
+  obj: T,
+  convertFn = pascal2camel
+): ConvertKeys<T, typeof ConvertMode.PascalToCamel> => {
+  return convertKeysDeep(obj, convertFn) as ConvertKeys<
+    T,
+    typeof ConvertMode.PascalToCamel
+  >;
+};
+
+export {
+  convertSnake2camel,
+  convertCamel2snake,
+  convertCamel2pascal,
+  convertPascal2camel,
+};
