@@ -3,11 +3,11 @@ export { ConcurrencyController } from './concurrency';
 export { debounce } from './debounce';
 export { type SupportedHashType, stringToHash } from './hash';
 export { browserNativeDownload, blobDownload } from './download';
-export { deepClone } from './deepCopy';
+export { deepClone } from './deep-copy';
 export {
   extractChildrenListByType,
   extractChildrenByType,
-} from './react.getSlot';
+} from './react-get-slot';
 export {
   type RAfIntervalReturn,
   rAfInterval,
