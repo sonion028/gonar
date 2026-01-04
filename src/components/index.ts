@@ -1,11 +1,11 @@
-export {
-  default as Carousel,
-  type CarouselType,
-  type CarouselProps,
-  type CarouselRef,
-  type ShowArrowType,
-  type RerenderType,
-} from './carousel';
+// export {
+//   default as Carousel,
+//   type CarouselType,
+//   type CarouselProps,
+//   type CarouselRef,
+//   type ShowArrowType,
+//   type RerenderType,
+// } from './carousel';
 export {
   default as CustomShow,
   type CustomShowType,
