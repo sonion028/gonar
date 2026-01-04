@@ -68,30 +68,39 @@ const snake2Camel = (str: string) => {
 /**
  * @author sonion
  * @description 深度遍历 JSON，将所有键名按指定的转换函数处理
- * @param obj 要处理的 JSON 对象或数组
- * @param convertFn 键名转换方法，默认值为 identity（不转换）
+ * @param params 参数对象
+ * @param params.obj 要处理的 JSON 对象或数组
+ * @param params.convertFn 键名转换方法，默认值为 identity（不转换）
+ * @param params.ignoreKeys 要忽略的键名集合，默认值为空集合
  * @returns 处理后的 JSON 对象或数组
  */
 const convertKeysDeep = <
-  R extends string,
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
->(
-  obj: T,
-  convertFn: (key: string) => R
-): T => {
+  R extends string,
+>({
+  obj,
+  ignoreKeys = new Set(),
+  convertFn,
+}: {
+  obj: T;
+  ignoreKeys?: Set<string>;
+  convertFn: (key: string) => R;
+}): T => {
   if (Object(obj) !== obj) {
     return obj;
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => convertKeysDeep(item, convertFn)) as unknown as T;
+    return obj.map((item) =>
+      convertKeysDeep({ obj: item, ignoreKeys, convertFn })
+    ) as unknown as T;
   }
 
   const converted: Record<string, unknown> = {};
   const entries = Object.entries(obj);
   for (const [key, value] of entries) {
-    const newKey = convertFn(key);
-    converted[newKey] = convertKeysDeep(value, convertFn);
+    const newKey = ignoreKeys.has(key) ? key : convertFn(key);
+    converted[newKey] = convertKeysDeep({ obj: value, ignoreKeys, convertFn });
   }
   return converted as T;
 };
@@ -162,64 +171,76 @@ type ConvertKeys<T, M extends ConvertMode> = T extends (
  * @author sonion
  * @description 深度遍历JSON，将所有键名从蛇形转换为小驼峰
  * @param obj 要处理的JSON对象或数组
+ * @param ignoreKeys 忽略转换的键名数组
  */
 const convertSnake2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
 >(
-  obj: T
+  obj: T,
+  ignoreKeys?: string[]
 ): ConvertKeys<T, typeof ConvertMode.SnakeToCamel> => {
-  return convertKeysDeep(obj, snake2Camel) as ConvertKeys<
-    T,
-    typeof ConvertMode.SnakeToCamel
-  >;
+  return convertKeysDeep({
+    obj,
+    ignoreKeys: new Set(ignoreKeys ?? []),
+    convertFn: snake2Camel,
+  }) as ConvertKeys<T, typeof ConvertMode.SnakeToCamel>;
 };
 
 /**
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为蛇形
  * @param obj 要处理的JSON对象或数组
+ * @param ignoreKeys 忽略转换的键名数组
  */
 const convertCamel2Snake = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
 >(
-  obj: T
+  obj: T,
+  ignoreKeys?: string[]
 ): ConvertKeys<T, typeof ConvertMode.CamelToSnake> => {
-  return convertKeysDeep(obj, camel2Snake) as ConvertKeys<
-    T,
-    typeof ConvertMode.CamelToSnake
-  >;
+  return convertKeysDeep({
+    obj,
+    ignoreKeys: new Set(ignoreKeys ?? []),
+    convertFn: camel2Snake,
+  }) as ConvertKeys<T, typeof ConvertMode.CamelToSnake>;
 };
 
 /**
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为大驼峰
  * @param obj 要处理的JSON对象或数组
+ * @param ignoreKeys 忽略转换的键名数组
  */
 const convertCamel2Pascal = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
 >(
-  obj: T
+  obj: T,
+  ignoreKeys?: string[]
 ): ConvertKeys<T, typeof ConvertMode.CamelToPascal> => {
-  return convertKeysDeep(obj, camel2Pascal) as ConvertKeys<
-    T,
-    typeof ConvertMode.CamelToPascal
-  >;
+  return convertKeysDeep({
+    obj,
+    ignoreKeys: new Set(ignoreKeys ?? []),
+    convertFn: camel2Pascal,
+  }) as ConvertKeys<T, typeof ConvertMode.CamelToPascal>;
 };
 
 /**
  * @author sonion
  * @description 深度遍历JSON，将所有键名从大驼峰转换为小驼峰
  * @param obj 要处理的JSON对象或数组
+ * @param ignoreKeys 忽略转换的键名数组
  */
 const convertPascal2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
 >(
-  obj: T
+  obj: T,
+  ignoreKeys?: string[]
 ): ConvertKeys<T, typeof ConvertMode.PascalToCamel> => {
-  return convertKeysDeep(obj, pascal2Camel) as ConvertKeys<
-    T,
-    typeof ConvertMode.PascalToCamel
-  >;
+  return convertKeysDeep({
+    obj,
+    ignoreKeys: new Set(ignoreKeys ?? []),
+    convertFn: pascal2Camel,
+  }) as ConvertKeys<T, typeof ConvertMode.PascalToCamel>;
 };
 
 export {
