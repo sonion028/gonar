@@ -153,17 +153,21 @@ type ApplyKeyTransform<
         : K;
 
 /** 通用：深度转换对象所有键名（保留函数与数组）*/
-type ConvertKeys<T, M extends ConvertMode> = T extends (
-  ...args: never
-) => unknown
+type ConvertKeys<
+  T,
+  M extends ConvertMode,
+  IGN extends readonly string[] = readonly [],
+> = T extends (...args: never) => unknown
   ? T
   : T extends readonly unknown[]
-    ? { [I in keyof T]: ConvertKeys<T[I], M> }
+    ? { [I in keyof T]: ConvertKeys<T[I], M, IGN> }
     : T extends object
       ? {
           [K in keyof T as K extends string
-            ? ApplyKeyTransform<M, K>
-            : K]: ConvertKeys<T[K], M>;
+            ? K extends IGN[number]
+              ? K
+              : ApplyKeyTransform<M, K>
+            : K]: ConvertKeys<T[K], M, IGN>;
         }
       : T;
 
@@ -175,15 +179,16 @@ type ConvertKeys<T, M extends ConvertMode> = T extends (
  */
 const convertSnake2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+  K extends readonly string[] = readonly [],
 >(
   obj: T,
-  ignoreKeys?: string[]
-): ConvertKeys<T, typeof ConvertMode.SnakeToCamel> => {
+  ignoreKeys?: K
+): ConvertKeys<T, typeof ConvertMode.SnakeToCamel, K> => {
   return convertKeysDeep({
     obj,
     ignoreKeys: new Set(ignoreKeys ?? []),
     convertFn: snake2Camel,
-  }) as ConvertKeys<T, typeof ConvertMode.SnakeToCamel>;
+  }) as ConvertKeys<T, typeof ConvertMode.SnakeToCamel, K>;
 };
 
 /**
@@ -194,15 +199,16 @@ const convertSnake2Camel = <
  */
 const convertCamel2Snake = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+  K extends readonly string[] = readonly [],
 >(
   obj: T,
-  ignoreKeys?: string[]
-): ConvertKeys<T, typeof ConvertMode.CamelToSnake> => {
+  ignoreKeys?: K
+): ConvertKeys<T, typeof ConvertMode.CamelToSnake, K> => {
   return convertKeysDeep({
     obj,
     ignoreKeys: new Set(ignoreKeys ?? []),
     convertFn: camel2Snake,
-  }) as ConvertKeys<T, typeof ConvertMode.CamelToSnake>;
+  }) as ConvertKeys<T, typeof ConvertMode.CamelToSnake, K>;
 };
 
 /**
@@ -213,15 +219,16 @@ const convertCamel2Snake = <
  */
 const convertCamel2Pascal = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+  K extends readonly string[] = readonly [],
 >(
   obj: T,
-  ignoreKeys?: string[]
-): ConvertKeys<T, typeof ConvertMode.CamelToPascal> => {
+  ignoreKeys?: K
+): ConvertKeys<T, typeof ConvertMode.CamelToPascal, K> => {
   return convertKeysDeep({
     obj,
     ignoreKeys: new Set(ignoreKeys ?? []),
     convertFn: camel2Pascal,
-  }) as ConvertKeys<T, typeof ConvertMode.CamelToPascal>;
+  }) as ConvertKeys<T, typeof ConvertMode.CamelToPascal, K>;
 };
 
 /**
@@ -232,15 +239,16 @@ const convertCamel2Pascal = <
  */
 const convertPascal2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
+  K extends readonly string[] = readonly [],
 >(
   obj: T,
-  ignoreKeys?: string[]
-): ConvertKeys<T, typeof ConvertMode.PascalToCamel> => {
+  ignoreKeys?: K
+): ConvertKeys<T, typeof ConvertMode.PascalToCamel, K> => {
   return convertKeysDeep({
     obj,
     ignoreKeys: new Set(ignoreKeys ?? []),
     convertFn: pascal2Camel,
-  }) as ConvertKeys<T, typeof ConvertMode.PascalToCamel>;
+  }) as ConvertKeys<T, typeof ConvertMode.PascalToCamel, K>;
 };
 
 export {
