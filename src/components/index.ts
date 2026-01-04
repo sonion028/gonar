@@ -1,16 +1,11 @@
 export * from './carousel';
-export {
-  default as CustomShow,
-  type CustomShowType,
-  type CustomShowProps,
-} from './custom-show';
-export {
-  default as AsyncCustomShow,
-  type AsyncCustomShowType,
-  type AsyncCustomShowProps,
-} from './async-custom-show';
-export {
-  default as ErrorBoundary,
-  type ErrorBoundaryType,
-  type ErrorBoundaryProps,
-} from './error-boundary';
+export { default as Carousel } from './carousel'; // 默认导出需重命名
+
+export * from './custom-show';
+export { default as CustomShow } from './custom-show';
+
+export * from './async-custom-show';
+export { default as AsyncCustomShow } from './async-custom-show';
+
+export * from './error-boundary';
+export { default as ErrorBoundary } from './error-boundary';
