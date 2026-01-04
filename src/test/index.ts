@@ -29,4 +29,7 @@ const testObjCamel = convertSnake2Camel(testObjSnake, ignoreKeys);
 const testObjPascal = convertCamel2Pascal(testObj);
 const testObjCamel2 = convertPascal2Camel(testObjPascal);
 
-console.log(testObjSnake, testObjCamel, testObjPascal, testObjCamel2);
+console.clog('testObjSnake:', testObjSnake);
+console.clog('testObjCamel:', testObjCamel);
+console.clog('testObjPascal:', testObjPascal);
+console.clog('testObjCamel2:', testObjCamel2);
