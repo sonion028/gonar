@@ -175,7 +175,8 @@ type ConvertKeys<
  * @author sonion
  * @description 深度遍历JSON，将所有键名从蛇形转换为小驼峰
  * @param obj 要处理的JSON对象或数组
- * @param ignoreKeys 忽略转换的键名数组
+ * @param ignoreKeys 忽略转换的键名数组。⚠️ ignoreKeys必须是使用 as const断言的数组，否则类型会失效
+ * @example convertSnake2Camel({ a_b: 1, c_d: { e_f: 2 } }, ['c_d'] as const)
  */
 const convertSnake2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
@@ -195,7 +196,8 @@ const convertSnake2Camel = <
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为蛇形
  * @param obj 要处理的JSON对象或数组
- * @param ignoreKeys 忽略转换的键名数组
+ * @param ignoreKeys 忽略转换的键名数组。⚠️ ignoreKeys必须是使用 as const断言的数组，否则类型会失效
+ * @example convertCamel2Snake({ aB: 1, cD: { eF: 2 } }, ['cD'] as const)
  */
 const convertCamel2Snake = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
@@ -215,7 +217,8 @@ const convertCamel2Snake = <
  * @author sonion
  * @description 深度遍历JSON，将所有键名从小驼峰转换为大驼峰
  * @param obj 要处理的JSON对象或数组
- * @param ignoreKeys 忽略转换的键名数组
+ * @param ignoreKeys 忽略转换的键名数组。⚠️ ignoreKeys必须是使用 as const断言的数组，否则类型会失效
+ * @example convertCamel2Pascal({ aB: 1, cD: { eF: 2 } }, ['cD'] as const)
  */
 const convertCamel2Pascal = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
@@ -235,7 +238,8 @@ const convertCamel2Pascal = <
  * @author sonion
  * @description 深度遍历JSON，将所有键名从大驼峰转换为小驼峰
  * @param obj 要处理的JSON对象或数组
- * @param ignoreKeys 忽略转换的键名数组
+ * @param ignoreKeys 忽略转换的键名数组。⚠️ ignoreKeys必须是使用 as const断言的数组，否则类型会失效
+ * @example convertPascal2Camel({ AB: 1, CD: { EF: 2 } }, ['CD'] as const)
  */
 const convertPascal2Camel = <
   T extends Record<keyof T, unknown> | Record<keyof T, unknown>[],
