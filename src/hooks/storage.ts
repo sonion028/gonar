@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const handleMap = new Map<string, () => void>();
-
 /**
  * @author sonion
  * @description 本地储存
@@ -9,7 +7,7 @@ const handleMap = new Map<string, () => void>();
  * @param {string} params.key - 储存的key
  * @param {T} params.initialValue - 初始值
  * @param {typeof localStorage | typeof sessionStorage} [params.storage] - 储存类型
- * @param {() => void} [params.beforeunload] - tab关闭前的回调, 相同key的不同回调会被覆盖。
+ * @param {() => void} [params.beforeunload] - tab关闭前的回调, 相同key的不同回调只有初始生效。
  * @param {(val: T) => boolean} [params.checkType] - 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误
  */
 export const useStorage = <T>({
@@ -56,7 +54,7 @@ export const useStorage = <T>({
         console.error('持久化储存错误', error);
       }
     },
-    [key, storage, setStoredValue]
+    [key, storage]
   );
 
   useEffect(() => {
@@ -77,18 +75,11 @@ export const useStorage = <T>({
     return () => window.removeEventListener('storage', handleStorageChange);
   }, [key, storage, initialValue]);
 
-  // 不用useEffect，因为组件卸载事件不移除。不用useRef存旧事件函数，因为组件卸载就没有了
-  // 不用担心Map造成内存泄漏，因为beforeunload事件还在，事件处理函数本就该存在，所以不存在泄漏
-  const oldBeforeunload = handleMap.get(key);
-  if (oldBeforeunload && beforeunload !== oldBeforeunload) {
-    window.removeEventListener('beforeunload', oldBeforeunload);
-    handleMap.delete(key);
-  }
-
-  if (beforeunload && beforeunload !== oldBeforeunload) {
+  useEffect(() => {
+    if (!beforeunload) return;
     window.addEventListener('beforeunload', beforeunload);
-    handleMap.set(key, beforeunload);
-  }
+    // 不用返回清理，因为组件卸载事件不移除
+  }, []);
 
   return [storedValue, setValue] as const;
 };
