@@ -15,4 +15,5 @@ export {
 } from './raf-interval';
 
 export * from './json-convert';
+export * from './fetch-xhr';
 import './dev';
