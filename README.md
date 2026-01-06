@@ -88,6 +88,7 @@ import {
 - convertCamel2Snake （json对象属性名，小驼峰命名转蛇形命名）
 - convertPascal2Camel （json对象属性名，大驼峰命名转小驼峰命名）
 - convertCamel2Pascal （json对象属性名，小驼峰命名转大驼峰命名）
+- fetchXHR （基于 XMLHttpRequest 的 fetch 实现，支持超时、取消请求、进度回调）
 - extractChildrenListByType （获取 React 子节点中符合多个指定类型的节点数组）
 - extractChildrenByType （获取 React 子节点中单个指定类型的节点）
 - rAfInterval （RAf 定时器）
