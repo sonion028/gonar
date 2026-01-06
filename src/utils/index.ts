@@ -12,7 +12,7 @@ export {
   type RAfIntervalReturn,
   rAfInterval,
   clearRAfInterval,
-} from './rAfInterval';
+} from './raf-interval';
 
 export * from './json-convert';
 import './dev';
