@@ -79,6 +79,7 @@ export const useStorage = <T>({
     if (!beforeunload) return;
     window.addEventListener('beforeunload', beforeunload);
     // 不用返回清理，因为组件卸载事件不移除
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [storedValue, setValue] as const;
