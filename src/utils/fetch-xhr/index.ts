@@ -6,7 +6,14 @@ import {
 
 export { CustomTimeoutError };
 
-export interface FetchXHRInit extends RequestInit {
+type RequestInitFields =
+  | 'body'
+  | 'method'
+  | 'headers'
+  | 'credentials'
+  | 'signal';
+
+export interface FetchXHRInit extends Pick<RequestInit, RequestInitFields> {
   /**
    * @description 超时时间，单位毫秒
    */
