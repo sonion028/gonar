@@ -1,5 +1,5 @@
+/** 响应头分隔符 正则 */
 const RegExpForSplitHeaders = /[\r\n]+/;
-const RegExpForSplitHeaderLine = /:\s?/;
 
 /**
  * @author sonion
@@ -9,12 +9,17 @@ const RegExpForSplitHeaderLine = /:\s?/;
 export const getResponseHeaders = function (xhr: XMLHttpRequest) {
   const headerStr = xhr.getAllResponseHeaders();
   const arr = headerStr.trim().split(RegExpForSplitHeaders);
-  return new Headers(
-    arr.map((line) => line.split(RegExpForSplitHeaderLine)) as [
+  const headerLines = arr.map((line) => {
+    const index = line.indexOf(':');
+    if (index <= -1) {
+      return [] as unknown as [string, string];
+    }
+    return [line.slice(0, index), line.slice(index + 1).trim()] satisfies [
       string,
       string,
-    ][]
-  );
+    ];
+  });
+  return new Headers(headerLines);
 };
 
 /**
