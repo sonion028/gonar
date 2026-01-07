@@ -139,18 +139,12 @@ export const ConvertMode = {
 export type ConvertMode = (typeof ConvertMode)[keyof typeof ConvertMode];
 // 类型和值一样，erasableSyntaxOnly 模式下 enum 的替代
 
-type ApplyKeyTransform<
-  M extends ConvertMode,
-  K extends string,
-> = M extends typeof ConvertMode.SnakeToCamel
-  ? SnakeToCamel<K>
-  : M extends typeof ConvertMode.CamelToSnake
-    ? CamelToSnake<K>
-    : M extends typeof ConvertMode.CamelToPascal
-      ? CamelToPascal<K>
-      : M extends typeof ConvertMode.PascalToCamel
-        ? PascalToCamel<K>
-        : K;
+type TransformMap<K extends string> = {
+  snakeToCamel: SnakeToCamel<K>;
+  camelToSnake: CamelToSnake<K>;
+  camelToPascal: CamelToPascal<K>;
+  pascalToCamel: PascalToCamel<K>;
+};
 
 /** 通用：深度转换对象所有键名（保留函数与数组）*/
 type ConvertKeys<
@@ -166,7 +160,7 @@ type ConvertKeys<
           [K in keyof T as K extends string
             ? K extends IGN[number]
               ? K
-              : ApplyKeyTransform<M, K>
+              : TransformMap<K>[M]
             : K]: ConvertKeys<T[K], M, IGN>;
         }
       : T;
