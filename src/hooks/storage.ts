@@ -1,37 +1,58 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useDistinctState } from './state';
+
+type StorageParams<T> = Omit<
+  Parameters<typeof useDistinctState<T>>[0],
+  'onlyEvent'
+> & {
+  key: string;
+  storage?: typeof localStorage | typeof sessionStorage;
+  checkType?: (val: T) => boolean;
+  /** 初始化读取 `storage` 的回调，参数为 `storage` 读取的原始值。返回初始化后的值。 */
+  initReadStorage?: (rawValue: string | null) => T;
+  beforeunload?: () => void;
+};
 
 /**
  * @author sonion
  * @description 本地储存
  * @param params - 参数对象
- * @param {string} params.key - 储存的key
- * @param {T} params.initialValue - 初始值
- * @param {typeof localStorage | typeof sessionStorage} [params.storage] - 储存类型
- * @param {() => void} [params.beforeunload] - tab关闭前的回调, 相同key的不同回调只有初始生效。
- * @param {(val: T) => boolean} [params.checkType] - 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误
+ * @param params.key - 储存的key
+ * @param params.initialValue - 初始值
+ * @param [params.hasDiff] - 对比函数，默认对比引用是否不相同。
+ * @param params.onChange - 变化回调
+ * @param [params.storage] - 储存类型。 localStorage 或 sessionStorage
+ * @param [params.checkType] - 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误
+ * @param [params.initReadStorage] - 初始化读取 `storage` 的回调，参数为 `storage` 读取的原始值。返回初始化后的值。
+ * @param [params.beforeunload] - tab关闭前的回调, 相同key的不同回调只有初始生效。
  */
 export const useStorage = <T>({
   key,
   initialValue,
+  hasDiff,
+  onChange,
   storage = localStorage,
-  beforeunload,
   checkType = () => true,
-}: {
-  key: string;
-  initialValue: T;
-  storage?: typeof localStorage | typeof sessionStorage;
-  beforeunload?: () => void;
-  checkType?: (val: T) => boolean;
-}) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      const saved = storage.getItem(key);
-      const saved2 = saved ? JSON.parse(saved) : initialValue;
-      return checkType(saved2) ? saved2 : initialValue;
-    } catch (err) {
-      console.warn('初始化出错，已使用默认值', err);
-      return initialValue;
-    }
+  initReadStorage,
+  beforeunload,
+}: StorageParams<T>) => {
+  const [storedValue, setStoredValue] = useDistinctState<T>({
+    initialValue: () => {
+      try {
+        const saved = storage.getItem(key);
+        const saved2 = initReadStorage
+          ? initReadStorage(saved)
+          : saved
+            ? JSON.parse(saved)
+            : initialValue;
+        return checkType(saved2) ? saved2 : initialValue;
+      } catch (err) {
+        console.warn('初始化出错，已使用默认值', err);
+        return initialValue;
+      }
+    },
+    hasDiff,
+    onChange,
   });
 
   const setValue = useCallback(
@@ -54,7 +75,7 @@ export const useStorage = <T>({
         console.error('持久化储存错误', error);
       }
     },
-    [key, storage]
+    [key, storage, setStoredValue]
   );
 
   useEffect(() => {
@@ -73,7 +94,7 @@ export const useStorage = <T>({
     };
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
-  }, [key, storage, initialValue]);
+  }, [key, storage, initialValue, setStoredValue]);
 
   useEffect(() => {
     if (!beforeunload) return;
