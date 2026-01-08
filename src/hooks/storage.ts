@@ -8,8 +8,6 @@ type StorageParams<T> = Omit<
   key: string;
   storage?: typeof localStorage | typeof sessionStorage;
   checkType?: (val: T) => boolean;
-  /** 初始化读取 `storage` 的回调，参数为 `storage` 读取的原始值。返回初始化后的值。 */
-  initReadStorage?: (rawValue: string | null) => T;
   beforeunload?: () => void;
 };
 
