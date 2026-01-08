@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { type SetStateAction, useState, useCallback, useRef } from 'react';
 
 /**
  * @author sonion
@@ -42,9 +42,6 @@ export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
   return useCallback(() => ref.current, []);
 }
 
-type SetStateAction<T> = (p?: T) => T;
-type SetState<T> = T | SetStateAction<T>;
-
 /**
  * @author sonion
  * @description 创建相同值不触发组件重新渲染的state。和useCreateSafeRef类似，但useCreateSafeRef更专注于ref
@@ -59,13 +56,13 @@ export function useDistinctState<T>(params: {
   onChange?: (val: T) => void;
   hasDiff?: (prev?: T, next?: T) => boolean;
   onlyEvent: true;
-}): [undefined, (val: SetState<T>) => void, () => T];
+}): [undefined, (val: SetStateAction<T>) => void, () => T];
 export function useDistinctState<T>(params: {
   initialValue: T | (() => T);
   onChange?: (val: T) => void;
   hasDiff?: (prev?: T, next?: T) => boolean;
   onlyEvent?: false;
-}): [T, (val: SetState<T>) => void, () => T];
+}): [T, (val: SetStateAction<T>) => void, () => T];
 export function useDistinctState<T>({
   initialValue,
   onChange,
@@ -88,10 +85,10 @@ export function useDistinctState<T>({
 
   const getOnChange = useLatestCallback(onChange);
   const setValueDistinct = useCallback(
-    (val: SetState<T>) => {
+    (val: SetStateAction<T>) => {
       const value =
         typeof val === 'function'
-          ? (val as SetStateAction<T>)(prevRef.current)
+          ? (val as (prevState: T) => T)(prevRef.current)
           : val;
       // eslint-disable-next-line react-hooks/exhaustive-deps
       hasDiff ??= (prev, next) => prev !== next;
