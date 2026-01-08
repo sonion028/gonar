@@ -23,7 +23,6 @@ type StorageParams<T> = Omit<
  * @param params.onChange - 变化回调
  * @param [params.storage] - 储存类型。 localStorage 或 sessionStorage
  * @param [params.checkType] - 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误
- * @param [params.initReadStorage] - 初始化读取 `storage` 的回调，参数为 `storage` 读取的原始值。返回初始化后的值。
  * @param [params.beforeunload] - tab关闭前的回调, 相同key的不同回调只有初始生效。
  */
 export const useStorage = <T>({
@@ -33,18 +32,13 @@ export const useStorage = <T>({
   onChange,
   storage = localStorage,
   checkType = () => true,
-  initReadStorage,
   beforeunload,
 }: StorageParams<T>) => {
   const [storedValue, setStoredValue] = useDistinctState<T>({
     initialValue: () => {
       try {
         const saved = storage.getItem(key);
-        const saved2 = initReadStorage
-          ? initReadStorage(saved)
-          : saved
-            ? JSON.parse(saved)
-            : initialValue;
+        const saved2 = saved ? JSON.parse(saved) : initialValue;
         return checkType(saved2) ? saved2 : initialValue;
       } catch (err) {
         console.warn('初始化出错，已使用默认值', err);
