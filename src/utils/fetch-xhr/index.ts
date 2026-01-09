@@ -1,11 +1,13 @@
 import {
-  getResponseHeaders,
+  setRequestHeaders,
   handleRequestBody,
+  getResponseHeaders,
   CustomTimeoutError,
 } from './util';
 
 export { CustomTimeoutError };
 
+// fetch 请求参数中 xhr 支持的参数
 type RequestInitFields =
   | 'body'
   | 'method'
@@ -40,7 +42,7 @@ export interface FetchXHRInit extends Pick<RequestInit, RequestInitFields> {
  * @param init 请求配置。
  */
 export const fetchXHR = async (url: string, init?: FetchXHRInit) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<Response>((resolve, reject) => {
     const {
       body,
       method = 'GET',
@@ -55,22 +57,7 @@ export const fetchXHR = async (url: string, init?: FetchXHRInit) => {
     const normalizedMethod = method.toUpperCase();
     xhr.open(normalizedMethod, url, true); // 必须在设置请求头之前
     // 设置请求头
-    if (headers) {
-      if (headers instanceof Headers) {
-        headers.forEach((value, key) => {
-          xhr.setRequestHeader(key, value);
-        });
-      } else if (Array.isArray(headers)) {
-        headers.forEach((header) => {
-          xhr.setRequestHeader(header[0], header[1]);
-        });
-      } else {
-        Object.keys(headers).forEach((key) => {
-          xhr.setRequestHeader(key, headers[key]);
-        });
-      }
-    }
-
+    setRequestHeaders(xhr, headers);
     credentials === 'include' && (xhr.withCredentials = true); // cookie跨域是否携带
     xhr.responseType = 'blob'; // 固定 blob，传给Response处理
     typeof timeout === 'number' &&
