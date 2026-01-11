@@ -1,19 +1,14 @@
-export { safeAwait } from './thenable';
-export { ConcurrencyController } from './concurrency';
-export { debounce } from './debounce';
-export { type SupportedHashType, stringToHash } from './hash';
-export { browserNativeDownload, blobDownload } from './download';
-export { deepClone } from './deep-copy';
-export {
-  extractChildrenListByType,
-  extractChildrenByType,
-} from './react-get-slot';
-export {
-  type RAfIntervalReturn,
-  rAfInterval,
-  clearRAfInterval,
-} from './raf-interval';
+export * from './thenable';
+export * from './concurrency';
+export * from './debounce';
+export * from './hash';
+export * from './download';
+export * from './deep-copy';
+export * from './react-get-slot';
+export * from './raf-interval';
 
 export * from './json-convert';
 export * from './fetch-xhr';
+export * from './class-singleton';
+
 import './dev';
