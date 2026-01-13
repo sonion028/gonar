@@ -1,6 +1,7 @@
 import {
   type EventHandler,
   type EventHandlerOptions,
+  type EventCollection,
   type EventOptionExecutor,
   type EventCenter,
   createEventCollection,
@@ -46,7 +47,7 @@ type KeysWithoutUndefined<T> = {
  */
 export class EventEmitter<T extends Record<string, NonFunction>> {
   /** Map<事件名, Map<事件处理函数, 配置参数>> */
-  private events: EventCenter<T, keyof T> = new Map();
+  private events: EventCenter<keyof T, T> = new Map();
 
   /** 配置对象执行器，不同配置参数的不同处理。在emit中执行 */
   private eventOptionExecutor: EventOptionExecutor<T>;
@@ -84,10 +85,14 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
     }
 
     // Map类型不能成键值对，只能是联合类型。所以用断言，在消费（emit）时，再断言为具体的事件处理函数类型
+    // 也可以用class包装Map
     this.events.has(eventName) ||
-      this.events.set(eventName, createEventCollection<T>());
-    const collection = this.events.get(eventName);
-    collection?.set(callback as EventHandler<T[keyof T]>, options);
+      this.events.set(
+        eventName,
+        createEventCollection<K, T>() as EventCollection<T[keyof T]>
+      );
+    const collection = this.events.get(eventName) as EventCollection<T[K]>;
+    collection?.set(callback, options);
   }
 
   /**
@@ -135,31 +140,36 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
    */
   emit<K extends KeysWithoutUndefined<T>>(eventName: K, data: T[K]): void;
   emit<K extends KeysWithUndefined<T>>(eventName: K, data?: T[K]): void;
-  emit<Key extends keyof T>(eventName: Key, data?: T[Key]) {
+  emit<K extends keyof T>(eventName: K, data?: T[K]) {
     if (!this.events.has(eventName)) return;
     // 遍历订阅对象，执行handler
     this.scheduler(() => {
-      this.events.get(eventName)?.forEach((options, callback) => {
-        const eventExecutorParams = [callback, options] as const;
+      (this.events.get(eventName) as EventCollection<T[K]>).forEach(
+        (options, callback) => {
+          const eventExecutorParams = [callback, options] as [
+            EventHandler<T[keyof T]>,
+            EventHandlerOptions | undefined,
+          ];
 
-        if (options) {
-          const optionKeys = Object.keys(
-            options
-          ) as (keyof EventHandlerOptions)[];
-          optionKeys.forEach((key) => {
-            hasOwnProperty(this.eventOptionExecutor, key) &&
-              this.eventOptionExecutor[key](
-                this.events,
-                eventName,
-                eventExecutorParams
-              );
-          });
+          if (options) {
+            const optionKeys = Object.keys(
+              options
+            ) as (keyof EventHandlerOptions)[];
+            optionKeys.forEach((key) => {
+              hasOwnProperty(this.eventOptionExecutor, key) &&
+                this.eventOptionExecutor[key](
+                  this.events,
+                  eventName,
+                  eventExecutorParams
+                );
+            });
+          }
+          // 可能执行时事件可能已经被移除
+          // 利用 eventExecutorParams 是数组的引用类型特征
+          // eventOptionExecutor 处理后 eventHandler 内还存在才运行
+          eventExecutorParams[0] && callback(data as T[K]);
         }
-        // 可能执行时事件可能已经被移除
-        // 利用 eventExecutorParams 是数组的引用类型特征
-        // eventOptionExecutor 处理后 eventHandler 内还存在才运行
-        eventExecutorParams[0] && callback(data as T[keyof T]);
-      });
+      );
     });
   }
 }

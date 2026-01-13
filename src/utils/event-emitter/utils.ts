@@ -19,7 +19,10 @@ export type EventHandler<P> = undefined extends P
 export type EventHandlerOptions = { once?: boolean; signal?: AbortSignal };
 
 /** 事件处理函数集合 */
-type EventCollection<P> = Map<EventHandler<P>, EventHandlerOptions | undefined>;
+export type EventCollection<P> = Map<
+  EventHandler<P>,
+  EventHandlerOptions | undefined
+>;
 
 /**
  * @author sonion
@@ -28,23 +31,23 @@ type EventCollection<P> = Map<EventHandler<P>, EventHandlerOptions | undefined>;
  * @returns 事件处理函数集合
  */
 export const createEventCollection = <
+  K extends keyof T,
   T extends Record<string, unknown>,
->(): EventCollection<T[keyof T]> =>
-  new Map() satisfies EventCollection<T[keyof T]>;
+>(): EventCollection<T[K]> => new Map() satisfies EventCollection<T[K]>;
 
 /** 事件中心数据类型 `Map<事件名, Map<事件处理函数, 配置参数>>` */
 export type EventCenter<
-  T extends Record<string, unknown>,
   K extends keyof T,
+  T extends Record<string, unknown>,
 > = Map<K, EventCollection<T[K]>>;
 
 export type EventOptionExecutor<T extends Record<string, unknown>> = Record<
   keyof EventHandlerOptions,
   (
-    events: EventCenter<T, keyof T>,
+    events: EventCenter<keyof T, T>,
     eventName: keyof T,
     // 在emit工程中传入，因为是引用类型，可用于控制执行过程。如signal信号终止不再运行，就删除处理函数
-    eventExecutorParams: readonly [
+    eventExecutorParams: [
       EventHandler<T[keyof T]>,
       EventHandlerOptions | undefined,
     ]
@@ -56,8 +59,10 @@ export const createEventOptionExecutor = <
 >() =>
   ({
     // 删除事件中心的任务，但当次还要运行
-    once: (events, eventName, eventHandler) =>
-      events.get(eventName)?.delete(eventHandler[0]),
+    once: (events, eventName, eventHandler) => {
+      events.get(eventName)?.delete(eventHandler[0]);
+      events.get(eventName)?.size || events.delete(eventName); // 如果没有任务了，就删除该事件集合
+    },
     signal: (events, eventName, eventHandler) => {
       if (!(eventHandler[1]?.signal instanceof AbortSignal))
         throw new TypeError(
@@ -65,7 +70,35 @@ export const createEventOptionExecutor = <
         );
       if (eventHandler[1].signal.aborted) {
         events.get(eventName)?.delete(eventHandler[0]); // 删除事件中心的任务，且不再执行当次任务
+        events.get(eventName)?.size || events.delete(eventName); // 如果没有任务了，就删除该事件集合
         Reflect.deleteProperty(eventHandler, 0); // 索引不变
       }
     },
   }) satisfies EventOptionExecutor<T>;
+
+export class TypedMap<T extends object> {
+  private _map: Map<keyof T, T[keyof T]>;
+  constructor(obj?: T) {
+    this._map = new Map<keyof T, T[keyof T]>(
+      obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []
+    );
+  }
+  has<K extends keyof T>(key: K): boolean {
+    return this._map.has(key);
+  }
+  get<K extends keyof T>(key: K): T[K] | undefined {
+    return this._map.get(key) as T[K] | undefined;
+  }
+  set<K extends keyof T>(key: K, value: T[K]): void {
+    this._map.set(key, value);
+  }
+  delete<K extends keyof T>(key: K): boolean {
+    return this._map.delete(key);
+  }
+  clear(): void {
+    this._map.clear();
+  }
+  get size(): number {
+    return this._map.size;
+  }
+}
