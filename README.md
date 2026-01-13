@@ -77,22 +77,24 @@ import {
 
 #### 🛠️ Utils / 工具函数
 
-- debounce （防抖）
-- safeAwait （安全 await，通过返回状态处理 reject 情况，避免 try-catch 嵌套）
+- singleton （创建单例类，不可通过原型链绕过）
 - ConcurrencyController （并发控制器）
+- safeAwait （安全 await，通过返回状态处理 reject 情况，避免 try-catch 嵌套）
+- fetchXHR （基于 XMLHttpRequest 的 fetch 实现，支持超时、取消请求、进度回调）
+- EventEmitter （事件中心。支持自定义调度器、API对齐原生事件、类型安全，支持 “事件类型/事件参数” 泛型）
+- convertSnake2Camel （对象属性名，蛇形命名转小驼峰命名）
+- convertCamel2Snake （对象属性名，小驼峰命名转蛇形命名）
+- convertPascal2Camel （对象属性名，大驼峰命名转小驼峰命名）
+- convertCamel2Pascal （对象属性名，小驼峰命名转大驼峰命名）
 - deepClone （深拷贝，支持Set、Map、ExpReg、Date、循环引用）
+- debounce （防抖）
 - stringToHash （字符串转哈希值）
 - browserNativeDownload （浏览器原生下载，支持检测是否被浏览器拦截）
 - blobDownload （Blob 下载）
-- convertSnake2Camel （json对象属性名，蛇形命名转小驼峰命名）
-- convertCamel2Snake （json对象属性名，小驼峰命名转蛇形命名）
-- convertPascal2Camel （json对象属性名，大驼峰命名转小驼峰命名）
-- convertCamel2Pascal （json对象属性名，小驼峰命名转大驼峰命名）
-- fetchXHR （基于 XMLHttpRequest 的 fetch 实现，支持超时、取消请求、进度回调）
-- extractChildrenListByType （获取 React 子节点中符合多个指定类型的节点数组）
-- extractChildrenByType （获取 React 子节点中单个指定类型的节点）
 - rAfInterval （RAf 定时器）
 - clearRAfInterval （清除 RAf 定时器）
+- extractChildrenListByType （获取 React 子节点中符合多个指定类型的节点数组）
+- extractChildrenByType （获取 React 子节点中单个指定类型的节点）
 
 ```js
 import {
