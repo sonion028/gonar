@@ -1,3 +1,6 @@
+import type { TypedMap } from './type-map';
+export { TypedMap } from './type-map';
+
 /**
  * @author sonion
  * @description 判断对象自身是否有指定属性
@@ -75,30 +78,3 @@ export const createEventOptionExecutor = <
       }
     },
   }) satisfies EventOptionExecutor<K, T>;
-
-export class TypedMap<T extends object> {
-  private _map: Map<keyof T, T[keyof T]>;
-  constructor(obj?: T) {
-    this._map = new Map<keyof T, T[keyof T]>(
-      obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []
-    );
-  }
-  has<K extends keyof T>(key: K): boolean {
-    return this._map.has(key);
-  }
-  get<K extends keyof T>(key: K): T[K] | undefined {
-    return this._map.get(key) as T[K] | undefined;
-  }
-  set<K extends keyof T>(key: K, value: T[K]): void {
-    this._map.set(key, value);
-  }
-  delete<K extends keyof T>(key: K): boolean {
-    return this._map.delete(key);
-  }
-  clear(): void {
-    this._map.clear();
-  }
-  get size(): number {
-    return this._map.size;
-  }
-}

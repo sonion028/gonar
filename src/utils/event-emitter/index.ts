@@ -7,7 +7,7 @@ import {
   createEventOptionExecutor,
   hasOwnProperty,
   TypedMap,
-} from './utils';
+} from './util';
 import { createMicroQueueScheduler } from './default-scheduler';
 
 // 定义一个排除函数的类型
