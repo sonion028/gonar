@@ -10,5 +10,6 @@ export * from './raf-interval';
 export * from './json-convert';
 export * from './fetch-xhr';
 export * from './class-singleton';
+export * from './event-emitter';
 
 import './dev';
