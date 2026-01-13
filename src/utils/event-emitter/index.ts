@@ -1,12 +1,12 @@
 import {
   type EventHandler,
   type EventHandlerOptions,
-  type EventCollection,
   type EventOptionExecutor,
   type EventCenter,
   createEventCollection,
   createEventOptionExecutor,
   hasOwnProperty,
+  TypedMap,
 } from './utils';
 import { createMicroQueueScheduler } from './default-scheduler';
 
@@ -47,10 +47,10 @@ type KeysWithoutUndefined<T> = {
  */
 export class EventEmitter<T extends Record<string, NonFunction>> {
   /** Map<事件名, Map<事件处理函数, 配置参数>> */
-  private events: EventCenter<keyof T, T> = new Map();
+  private events: EventCenter<T> = new TypedMap();
 
   /** 配置对象执行器，不同配置参数的不同处理。在emit中执行 */
-  private eventOptionExecutor: EventOptionExecutor<T>;
+  private eventOptionExecutor: EventOptionExecutor<keyof T, T>;
 
   /** 自定义调度器，怎么执行事件处理函数 */
   private scheduler: (eventHandel: () => void) => void;
@@ -58,7 +58,7 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
   constructor(scheduler?: (eventHandel: () => void) => void) {
     this.scheduler = scheduler ?? createMicroQueueScheduler();
     // 事件处理 options 执行器。如需添加处理参数，直接扩展 createEventOptionExecutor 返回对象属性
-    this.eventOptionExecutor = createEventOptionExecutor<T>();
+    this.eventOptionExecutor = createEventOptionExecutor<keyof T, T>();
   }
 
   /**
@@ -83,15 +83,10 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
         throw new TypeError(`options 仅支持 ${keys.join('、')} 参数`);
       }
     }
-
-    // Map类型不能成键值对，只能是联合类型。所以用断言，在消费（emit）时，再断言为具体的事件处理函数类型
-    // 也可以用class包装Map
+    // events 为用class 包装的 Map 类型更友好
     this.events.has(eventName) ||
-      this.events.set(
-        eventName,
-        createEventCollection<K, T>() as EventCollection<T[keyof T]>
-      );
-    const collection = this.events.get(eventName) as EventCollection<T[K]>;
+      this.events.set(eventName, createEventCollection<K, T>());
+    const collection = this.events.get(eventName);
     collection?.set(callback, options);
   }
 
@@ -101,22 +96,25 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
    * @param eventName 事件名
    * @param callback 事件处理函数
    */
-  removeEventListener(eventName: keyof T, callback: EventHandler<T[keyof T]>) {
+  removeEventListener<K extends keyof T>(
+    eventName: K,
+    callback: EventHandler<T[K]>
+  ) {
     if (!this.events.has(eventName)) return;
     this.events.get(eventName)?.delete(callback);
   }
 
   // 添加事件 别名
-  on(
-    eventName: keyof T,
-    callback: EventHandler<T[keyof T]>,
+  on<K extends keyof T>(
+    eventName: K,
+    callback: EventHandler<T[K]>,
     options?: EventHandlerOptions
   ) {
     this.addEventListener(eventName, callback, options);
   }
 
   // 移除事件 别名
-  off(eventName: keyof T, callback: EventHandler<T[keyof T]>) {
+  off<K extends keyof T>(eventName: K, callback: EventHandler<T[K]>) {
     this.removeEventListener(eventName, callback);
   }
 
@@ -144,32 +142,30 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
     if (!this.events.has(eventName)) return;
     // 遍历订阅对象，执行handler
     this.scheduler(() => {
-      (this.events.get(eventName) as EventCollection<T[K]>).forEach(
-        (options, callback) => {
-          const eventExecutorParams = [callback, options] as [
-            EventHandler<T[keyof T]>,
-            EventHandlerOptions | undefined,
-          ];
+      this.events.get(eventName)?.forEach((options, callback) => {
+        const eventExecutorParams = [callback, options] as [
+          EventHandler<T[keyof T]>,
+          EventHandlerOptions | undefined,
+        ]; // 这里类型还是有点问题，但消费 eventExecutorParams 的地方不关心类型
 
-          if (options) {
-            const optionKeys = Object.keys(
-              options
-            ) as (keyof EventHandlerOptions)[];
-            optionKeys.forEach((key) => {
-              hasOwnProperty(this.eventOptionExecutor, key) &&
-                this.eventOptionExecutor[key](
-                  this.events,
-                  eventName,
-                  eventExecutorParams
-                );
-            });
-          }
-          // 可能执行时事件可能已经被移除
-          // 利用 eventExecutorParams 是数组的引用类型特征
-          // eventOptionExecutor 处理后 eventHandler 内还存在才运行
-          eventExecutorParams[0] && callback(data as T[K]);
+        if (options) {
+          const optionKeys = Object.keys(
+            options
+          ) as (keyof EventHandlerOptions)[];
+          optionKeys.forEach((key) => {
+            hasOwnProperty(this.eventOptionExecutor, key) &&
+              this.eventOptionExecutor[key](
+                this.events,
+                eventName,
+                eventExecutorParams
+              );
+          });
         }
-      );
+        // 可能执行时事件可能已经被移除
+        // 利用 eventExecutorParams 是数组的引用类型特征
+        // eventOptionExecutor 处理后 eventHandler 内还存在才运行
+        eventExecutorParams[0] && callback(data as T[K]);
+      });
     });
   }
 }
