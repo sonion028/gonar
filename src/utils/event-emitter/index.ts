@@ -6,7 +6,7 @@ import {
   createEventCollection,
   createEventOptionExecutor,
   hasOwnProperty,
-  TypedMap,
+  ExactTypedMap,
 } from './helpers';
 import { createMicroQueueScheduler } from './default-scheduler';
 
@@ -47,7 +47,7 @@ type KeysWithoutUndefined<T> = {
  */
 export class EventEmitter<T extends Record<string, NonFunction>> {
   /** Map<事件名, Map<事件处理函数, 配置参数>> */
-  private events: EventCenter<T> = new TypedMap();
+  private events: EventCenter<T> = new ExactTypedMap();
 
   /** 配置对象执行器，不同配置参数的不同处理。在emit中执行 */
   private eventOptionExecutor: EventOptionExecutor<T>;
