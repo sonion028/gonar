@@ -164,7 +164,7 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
         // 可能执行时事件可能已经被移除
         // 利用 eventExecutorParams 是数组的引用类型特征
         // eventOptionExecutor 处理后 eventHandler 内还存在才运行
-        eventExecutorParams[0] && callback(data as T[K]);
+        eventExecutorParams[0] && callback(data as T[K]); // 必须在最后
       });
     });
   }
