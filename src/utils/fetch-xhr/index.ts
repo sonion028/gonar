@@ -3,7 +3,7 @@ import {
   handleRequestBody,
   getResponseHeaders,
   CustomTimeoutError,
-} from './util';
+} from './helpers';
 
 export { CustomTimeoutError };
 

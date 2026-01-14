@@ -7,7 +7,7 @@ import {
   createEventOptionExecutor,
   hasOwnProperty,
   TypedMap,
-} from './util';
+} from './helpers';
 import { createMicroQueueScheduler } from './default-scheduler';
 
 // 定义一个排除函数的类型
@@ -50,7 +50,7 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
   private events: EventCenter<T> = new TypedMap();
 
   /** 配置对象执行器，不同配置参数的不同处理。在emit中执行 */
-  private eventOptionExecutor: EventOptionExecutor<keyof T, T>;
+  private eventOptionExecutor: EventOptionExecutor<T>;
 
   /** 自定义调度器，怎么执行事件处理函数 */
   private scheduler: (eventHandel: () => void) => void;
@@ -58,7 +58,7 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
   constructor(scheduler?: (eventHandel: () => void) => void) {
     this.scheduler = scheduler ?? createMicroQueueScheduler();
     // 事件处理 options 执行器。如需添加处理参数，直接扩展 createEventOptionExecutor 返回对象属性
-    this.eventOptionExecutor = createEventOptionExecutor<keyof T, T>();
+    this.eventOptionExecutor = createEventOptionExecutor<T>();
   }
 
   /**
@@ -143,10 +143,10 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
     // 遍历订阅对象，执行handler
     this.scheduler(() => {
       this.events.get(eventName)?.forEach((options, callback) => {
-        const eventExecutorParams = [callback, options] as [
-          EventHandler<T[keyof T]>,
+        const eventExecutorParams: [
+          EventHandler<T[K]>,
           EventHandlerOptions | undefined,
-        ]; // 这里类型还是有点问题，但消费 eventExecutorParams 的地方不关心类型
+        ] = [callback, options];
 
         if (options) {
           const optionKeys = Object.keys(

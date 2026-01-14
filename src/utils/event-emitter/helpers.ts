@@ -43,12 +43,9 @@ export type EventCenter<T extends Record<string, unknown>> = TypedMap<{
   [K in keyof T]: EventCollection<T[K]>;
 }>;
 
-export type EventOptionExecutor<
-  K extends keyof T,
-  T extends Record<string, unknown>,
-> = Record<
+export type EventOptionExecutor<T extends Record<string, unknown>> = Record<
   keyof EventHandlerOptions,
-  (
+  <K extends keyof T>(
     events: EventCenter<T>,
     eventName: K,
     // 在emit工程中传入，因为是引用类型，可用于控制执行过程。如signal信号终止不再运行，就删除处理函数
@@ -57,7 +54,6 @@ export type EventOptionExecutor<
 >;
 
 export const createEventOptionExecutor = <
-  K extends keyof T,
   T extends Record<string, unknown>,
 >() =>
   ({
@@ -77,4 +73,4 @@ export const createEventOptionExecutor = <
         Reflect.deleteProperty(eventExecutorParams, 0); // 索引不变
       }
     },
-  }) satisfies EventOptionExecutor<K, T>;
+  }) satisfies EventOptionExecutor<T>;
