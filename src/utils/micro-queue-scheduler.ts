@@ -1,7 +1,15 @@
 /**
  * @author sonion
- * @description 创建微队列调度器 - 调度器的作用是将本次同步执行中的所有异步任务防到一个Promise中
+ * @description 创建微队列调度器 - 将同一个同步执行阶段中的所有任务合并到一个微任务中执行。
  * @returns 调度器函数
+ *
+ * 使用场景：
+ * - 批量合并异步任务，保证它们在同一个微任务中执行
+ * - 避免频繁创建多个 Promise 微任务，提高性能
+ * @example
+ * const scheduler = createMicroTaskScheduler();
+ * scheduler(() => console.log("task1"));
+ * scheduler(() => console.log("task2"));
  */
 export const createMicroQueueScheduler = (): ((
   fn: () => void
