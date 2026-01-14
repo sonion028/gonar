@@ -1,5 +1,4 @@
 import type { ExactTypedMap } from '../exact-typed-map';
-export { ExactTypedMap } from '../exact-typed-map';
 
 /**
  * @author sonion

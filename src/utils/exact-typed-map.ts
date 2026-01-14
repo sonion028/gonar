@@ -26,44 +26,19 @@ export interface ExactTypedMap<T extends object> extends Omit<
  * map.set("port", "oops"); // ❌ 类型错误
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class ExactTypedMap<T extends object> {
-  private innerMap: Map<keyof T, T[keyof T]>;
-
+export class ExactTypedMap<T extends object> extends Map<keyof T, T[keyof T]> {
   constructor(obj?: T) {
-    this.innerMap = new Map<keyof T, T[keyof T]>(
-      obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []
-    );
+    super(obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []);
     // 创建 Proxy 实例，拦截属性/方法访问
-    return new Proxy(this, {
-      get(target, prop, receiver) {
-        // 白名单：保留自定义的 get、set 方法
-        // 自身有实现的优先返回自身实现
-        if (
-          prop === 'get' ||
-          prop === 'set' ||
-          Object.hasOwnProperty.call(target, prop)
-        ) {
-          return Reflect.get(target, prop, receiver);
-        }
-
-        // 自动转发其他属性/方法到内部 _map 实例
-        const mapProperty =
-          target.innerMap[prop as keyof Map<keyof T, T[keyof T]>];
-        // 绑定 this 指向 _map，避免 Map 方法内部 this 丢失
-        return typeof mapProperty === 'function'
-          ? mapProperty.bind(target.innerMap)
-          : mapProperty;
-      },
-    });
   }
 
   // 自定义的强类型 get 方法
   get<K extends keyof T>(key: K): T[K] | undefined {
-    return this.innerMap.get(key) as T[K] | undefined;
+    return super.get(key) as T[K];
   }
 
   // 自定义的强类型 set 方法
-  set<K extends keyof T>(key: K, value: T[K]): void {
-    this.innerMap.set(key, value);
+  set<K extends keyof T>(key: K, value: T[K]) {
+    return super.set(key, value);
   }
 }
