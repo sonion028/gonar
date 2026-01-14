@@ -11,5 +11,7 @@ export * from './json-convert';
 export * from './fetch-xhr';
 export * from './class-singleton';
 export * from './event-emitter';
+export * from './micro-queue-scheduler';
+export * from './exact-typed-map';
 
 import './dev';

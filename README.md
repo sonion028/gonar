@@ -82,6 +82,8 @@ import {
 - safeAwait （安全 await，通过返回状态处理 reject 情况，避免 try-catch 嵌套）
 - fetchXHR （基于 XMLHttpRequest 的 fetch 实现，支持超时、取消请求、进度回调）
 - EventEmitter （事件中心。支持自定义调度器、API对齐原生事件、类型安全，支持 “事件类型/事件参数” 泛型）
+- createMicroQueueScheduler （创建微队列调度器 - 将同一个同步执行阶段中的所有任务合并到一个微任务中执行）
+- ExactTypedMap （精确类型Map，键和值的类型一一对应。通过对象类型定义）
 - convertSnake2Camel （对象属性名，蛇形命名转小驼峰命名）
 - convertCamel2Snake （对象属性名，小驼峰命名转蛇形命名）
 - convertPascal2Camel （对象属性名，大驼峰命名转小驼峰命名）

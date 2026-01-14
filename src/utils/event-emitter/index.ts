@@ -7,7 +7,7 @@ import {
   createEventOptionExecutor,
   hasOwnProperty,
 } from './helpers';
-import { createMicroQueueScheduler } from './default-scheduler';
+import { createMicroQueueScheduler } from '../micro-queue-scheduler';
 import { ExactTypedMap } from '../exact-typed-map';
 
 // 定义一个排除函数的类型
