@@ -1,9 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ExactTypedMap<T extends object> extends Omit<
-  Map<keyof T, T[keyof T]>,
-  'get' | 'set'
-> {}
-
 /**
  * @author sonion
  * @description 一个带有精确类型约束的 Map。
@@ -25,7 +19,6 @@ export interface ExactTypedMap<T extends object> extends Omit<
  * map.set("host", "localhost"); // ✅ 正确
  * map.set("port", "oops"); // ❌ 类型错误
  */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class ExactTypedMap<T extends object> extends Map<keyof T, T[keyof T]> {
   constructor(obj?: T) {
     super(obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []);
