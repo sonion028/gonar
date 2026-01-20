@@ -6,6 +6,7 @@
  * 它保证键和值的类型一一对应：
  * - 键只能是对象 T 的属性名
  * - 值必须是该属性对应的类型
+ * - 因使用 object 约束泛型，键只能是 string|number|symbol
  *
  * 这样可以避免宽泛的联合类型，提供类似对象的强类型体验。
  * @example
@@ -14,12 +15,12 @@
  *   host: string;
  * }
  *
- * const map = new ExactTypedMap<Config>();
+ * const map = new RecordTypedMap<Config>();
  * map.set("port", 3000);   // ✅ 正确
  * map.set("host", "localhost"); // ✅ 正确
  * map.set("port", "oops"); // ❌ 类型错误
  */
-export class ExactTypedMap<T extends object> extends Map<keyof T, T[keyof T]> {
+export class RecordTypedMap<T extends object> extends Map<keyof T, T[keyof T]> {
   constructor(obj?: T) {
     super(obj ? (Object.entries(obj) as [[keyof T, T[keyof T]]]) : []);
     // 创建 Proxy 实例，拦截属性/方法访问
