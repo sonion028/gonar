@@ -1,4 +1,4 @@
-import type { ExactTypedMap } from '../exact-typed-map';
+import type { RecordTypedMap } from '../record-typed-map';
 
 /**
  * @author sonion
@@ -38,7 +38,7 @@ export const createEventCollection = <
 >(): EventCollection<T[K]> => new Map() satisfies EventCollection<T[K]>;
 
 /** 事件中心数据类型 `Map<事件名, Map<事件处理函数, 配置参数>>` */
-export type EventCenter<T extends Record<string, unknown>> = ExactTypedMap<{
+export type EventCenter<T extends Record<string, unknown>> = RecordTypedMap<{
   [K in keyof T]: EventCollection<T[K]>;
 }>;
 

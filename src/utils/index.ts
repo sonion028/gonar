@@ -12,6 +12,6 @@ export * from './fetch-xhr';
 export * from './class-singleton';
 export * from './event-emitter';
 export * from './micro-queue-scheduler';
-export * from './exact-typed-map';
+export * from './record-typed-map';
 
 import './dev';
