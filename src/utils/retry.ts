@@ -20,7 +20,7 @@ export const retry = <R>(
             const nextCount = remainingCount - 1;
             setTimeout(
               () => attempt(nextCount),
-              typeof delay === 'function' ? delay(nextCount) : delay
+              typeof delay === 'function' ? delay(count - nextCount) : delay
             );
           } else {
             reject(error);
