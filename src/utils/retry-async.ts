@@ -22,7 +22,7 @@ export const retryAsync = <R>(
           const attemptIndex = count - remainingCount; // 第几次重试
           const wait =
             typeof delay === 'function' ? delay(attemptIndex, error) : delay;
-          setTimeout(() => attempt(remainingCount - 1), wait);
+          setTimeout(() => attempt(remainingCount - 1), wait ?? 0);
         });
     };
     attempt(count);
