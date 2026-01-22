@@ -13,5 +13,7 @@ export * from './class-singleton';
 export * from './event-emitter';
 export * from './micro-queue-scheduler';
 export * from './record-typed-map';
+export * from './retry-async';
+export * from './is-deep-plain-equal';
 
 import './dev';

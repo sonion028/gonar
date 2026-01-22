@@ -1,4 +1,4 @@
-import { EventEmitter } from '@/utils';
+import { EventEmitter } from '../utils/index.ts';
 
 const emitter = new EventEmitter<{
   test: 'fgh';
