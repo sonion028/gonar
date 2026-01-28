@@ -69,9 +69,13 @@ export function useDistinctState<T>({
   hasDiff = (prev, next) => prev !== next,
   onlyEvent,
 }: {
+  /** 初始值 */
   initialValue: T;
+  /** 变化回调 */
   onChange?: (val: T) => void;
+  /** 对比函数，默认对比引用是否不相同。 */
   hasDiff?: (prev: T, next: T) => boolean;
+  /** 是否仅触发事件，不更新值，避免重渲染 */
   onlyEvent?: true | false;
 }) {
   const prevRef = useRef<T>(void 0 as T);

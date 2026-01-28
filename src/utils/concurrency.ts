@@ -4,8 +4,11 @@
  * @param {number} concurrency - 并发数
  */
 export class ConcurrencyController<T> {
+  /** 任务队列 */
   private queue: (() => Promise<T>)[] = [];
+  /** 并发数 */
   private concurrency: number;
+  /** 当前运行中的任务数 */
   private running = 0;
 
   constructor(concurrency = 5) {

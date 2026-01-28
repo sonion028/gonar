@@ -1,7 +1,9 @@
 import type { FC, ReactNode, JSX, PropsWithChildren } from 'react';
 
 export type CustomShowProps<T> = PropsWithChildren<{
+  /** 判断条件 */
   when: T | null | undefined | false;
+  /** 不满足条件时的渲染内容 */
   fallback?: ReactNode;
 }>;
 

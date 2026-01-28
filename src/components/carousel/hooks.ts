@@ -78,9 +78,13 @@ const domOperation = (
 export type ShowArrowType = 'always' | 'auto' | 'hover' | 'none';
 
 type ShowArrowHookParams = {
+  /** 箭头类型 */
   showArrow: ShowArrowType;
+  /** 轮播图数量 */
   length: number;
+  /** 轮播图宽度 */
   cardWidth?: number;
+  /** 轮播图容器 */
   wrapperRef?: HTMLElement;
 };
 /**
@@ -127,17 +131,27 @@ export const useShowArrow = ({
 };
 
 export type NonLoopEndFuncType = (
+  /** 切换方向 */
   direction: 'prev' | 'next',
+  /** 当前索引 */
   current: number,
+  /** 轮播图数量 */
   total: number,
+  /** 非循环轮播结束时的偏移量 */
   offset: number
 ) => void;
 type PlayControlHookParams = {
+  /** 轮播图数量 */
   length: number;
+  /** 是否无缝轮播 */
   loop: boolean;
+  /** 箭头类型 */
   showArrow: ShowArrowType;
+  /** 轮播图宽度 */
   cardWidth?: number;
+  /** 非循环轮播结束时的回调 */
   onNonLoopEnd?: NonLoopEndFuncType;
+  /** 非循环轮播结束时的偏移量 */
   offsetOnEnd?: number;
 };
 

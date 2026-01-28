@@ -20,35 +20,59 @@ import styles from './index.module.scss';
 
 type IndicatorType = 'line' | 'dot' | 'none';
 export type CarouselProps = {
-  cardWidth?: number; // 单个轮播
+  /** 单个轮播项的宽度 */
+  cardWidth?: number;
+  /** 单个轮播项的高度 */
   cardHeight?: number;
-  wrapperWidth?: number; // 容器
+  /** 轮播容器的宽度 */
+  wrapperWidth?: number;
+  /** 轮播容器的高度 */
   wrapperHeight?: number;
-  gapSize?: number; // 间隔
+  /** 轮播项之间的间隔 */
+  gapSize?: number;
+  /** 是否无缝轮播 */
   loop?: boolean; // 是否循环
-  duration?: number; // 切换时间
-  autoPlay?: boolean; // 是否自动播放
-  showArrow?: ShowArrowType; // 箭头类型
-  indicatorType?: IndicatorType; // 指示器类型
-  className?: string; // 主轮播类名，不包括指示器
-  style?: CSSProperties; // 主轮播样式，不包括指示器
-  children: ReactElement[]; // 轮播项
-  rerender?: RerenderType; // 轮播项更新依赖方式
-  onNonLoopEnd?: NonLoopEndFuncType; // 非循环模式下，轮播结束回调。
-  offsetOnEnd?: number; // 非循环模式下，轮播结束时的偏移量。就是提前第几张就算结束。暂不支持延后。
+  /** 切换时间（毫秒） */
+  duration?: number;
+  /** 是否自动播放 */
+  autoPlay?: boolean;
+  /** 箭头类型 */
+  showArrow?: ShowArrowType;
+  /** 指示器类型 */
+  indicatorType?: IndicatorType;
+  /** 主轮播类名，不包括指示器 */
+  className?: string;
+  /** 主轮播样式，不包括指示器 */
+  style?: CSSProperties;
+  /** 轮播项 */
+  children: ReactElement[];
+  /** 轮播项更新依赖方式 */
+  rerender?: RerenderType;
+  /** 非循环模式下，轮播结束回调 */
+  onNonLoopEnd?: NonLoopEndFuncType;
+  /** 非循环模式下，轮播结束时的偏移量。就是提前第几张就算结束。暂不支持延后。 */
+  offsetOnEnd?: number;
   // 因外框可达于轮播项，一页可能展示多张，设置偏移时注意是否可能永远触发不到
+  /** 自定义渲染箭头 */
   arrows?: [
+    /** 自定义渲染上一个箭头 */
     FC<{ onClick: () => void; className?: string }>,
+    /** 自定义渲染下一个箭头 */
     FC<{ onClick: () => void; className?: string }>,
-  ]; // 自定义渲染箭头
+  ];
 };
 
 export type CarouselRef = {
-  run: () => void; // 开始播放
-  stop: () => void; // 停止播放
-  stepChange: (arg: 'prev' | 'next') => void; // 切换到上一个或下一个
-  jumpChange: (arg: number) => void; // 跳转到指定索引
-  getCurrentIndex: () => number; // 获取当前索引
+  /** 开始播放 */
+  run: () => void;
+  /** 停止播放 */
+  stop: () => void;
+  /** 切换到上一个或下一个 */
+  stepChange: (arg: 'prev' | 'next') => void;
+  /** 跳转到指定索引 */
+  jumpChange: (arg: number) => void;
+  /** 获取当前索引 */
+  getCurrentIndex: () => number;
 };
 
 /**
