@@ -34,8 +34,8 @@
     "prepare": "npx simple-git-hooks"
   },
   "engines": {
-    "node": ">=24.11.1",
-    "pnpm": ">=10.22.0"
+    "node": ">=24.13.0",
+    "pnpm": ">=10.28.2"
   },
   "engineStrict": true,
   "peerDependencies": {
