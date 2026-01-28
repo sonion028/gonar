@@ -1,8 +1,11 @@
 import { type FC, type ReactNode, type JSX, useEffect, useState } from 'react';
 
 export type AsyncCustomShowProps<T> = {
+  /** 异步判断 Promise */
   when: Promise<T> | undefined | null | false;
+  /** 异步失败时的展示 */
   fallback?: ReactNode;
+  /** 异步成功时的展示 */
   children: (value: T | undefined | null | false) => ReactNode;
 };
 
@@ -14,7 +17,7 @@ export interface AsyncCustomShowType<T> extends FC<AsyncCustomShowProps<T>> {
  * @author sonion
  * @description 异步展示组件
  * @param {AsyncCustomShowProps<T>} props - 组件属性
- * @param {Promise<T> | undefined | null | false} props.when 异步 Promise
+ * @param {Promise<T> | undefined | null | false} props.when 异步判断 Promise
  * @param {ReactNode} [props.fallback] 异步失败时的展示
  * @param {(value: T | undefined | null | false) => ReactNode} props.children 异步成功时的展示
  */

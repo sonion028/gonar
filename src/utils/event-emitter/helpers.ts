@@ -18,7 +18,12 @@ export type EventHandler<P> = undefined extends P
   : (payload: P) => void;
 
 /** 事件处理函数配置类型 */
-export type EventHandlerOptions = { once?: boolean; signal?: AbortSignal };
+export type EventHandlerOptions = {
+  /** 是否仅触发一次 */
+  once?: boolean;
+  /** 取消信号 */
+  signal?: AbortSignal;
+};
 
 /** 事件处理函数集合 */
 export type EventCollection<P> = Map<

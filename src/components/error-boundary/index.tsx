@@ -1,8 +1,11 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 export interface ErrorBoundaryProps {
+  /** 正常展示 */
   children: ReactNode;
+  /** 错误发生时显示的回退内容 */
   fallback: ReactNode;
+  /** 错误信息的提示文本 */
   msg?: string;
 }
 

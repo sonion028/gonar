@@ -64,8 +64,11 @@ export const useMutationObserver = (
 };
 
 type IntersectionObserverCallback = (
+  /** 交叉目标 */
   target: Element,
+  /** 交叉目标的根元素 */
   root: Element | undefined,
+  /** 交叉观察器实例 */
   observer: IntersectionObserver
 ) => void;
 type IntersectionObserverParams = {
@@ -165,7 +168,9 @@ export const useIntersectionObserver = ({
 };
 
 type ResizeObserverCallback = (
+  /** 变化记录 */
   entry: ResizeObserverEntry,
+  /** 观察器实例 */
   observer: ResizeObserver
 ) => void;
 /**

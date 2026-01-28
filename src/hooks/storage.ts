@@ -5,9 +5,13 @@ type StorageParams<T> = Omit<
   Parameters<typeof useDistinctState<T>>[0],
   'onlyEvent'
 > & {
+  /** 储存的key */
   key: string;
+  /** 储存类型。 localStorage 或 sessionStorage */
   storage?: typeof localStorage | typeof sessionStorage;
+  /** 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误 */
   checkType?: (val: T) => boolean;
+  /** tab关闭前的回调, 相同key的不同回调只有初始生效。 */
   beforeunload?: () => void;
 };
 
