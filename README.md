@@ -97,8 +97,6 @@ import {
 - blobDownload （Blob 下载）
 - rAfInterval （RAf 定时器）
 - clearRAfInterval （清除 RAf 定时器）
-- extractChildrenListByType （获取 React 子节点中符合多个指定类型的节点数组）
-- extractChildrenByType （获取 React 子节点中单个指定类型的节点）
 
 ```js
 import {
