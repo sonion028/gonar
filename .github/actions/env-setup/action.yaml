@@ -12,6 +12,7 @@ runs:
 
     # 检查并安装 jq（如果不存在）
     - name: Check and install jq
+      shell: bash
       run: |
         if ! command -v jq &> /dev/null; then
           echo "jq 未找到，开始安装..."
