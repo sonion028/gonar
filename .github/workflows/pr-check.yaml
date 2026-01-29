@@ -21,7 +21,7 @@ jobs:
         with:
           fetch-depth: 0 # 拉取完整历史。当仓库历史多时可能变慢，可考虑用 GitHub API compare 优化
       - name: 准备环境
-        uses: ./.github/actions/env # 引入 环境准备
+        uses: ./.github/actions/env-setup # 引入 环境准备
       - name: 基础检查
         uses: ./.github/actions/base-check # 引入 基础检查
 
