@@ -1,3 +1,5 @@
+import { promiseTry } from './thenable';
+
 /**
  * @author sonion
  * @description 并发控制器
@@ -34,10 +36,10 @@ export class ConcurrencyController<T> {
 
   private next() {
     if (this.running >= this.concurrency) return;
-    this.running++;
     const { task, resolve, reject } = this.queue.shift() ?? {};
     if (!task) return;
-    task()
+    this.running++;
+    promiseTry(task)
       .then(resolve, reject)
       .finally(() => {
         this.running--;
