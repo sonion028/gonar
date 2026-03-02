@@ -78,7 +78,7 @@ export const getResponseHeaders = function (xhr: XMLHttpRequest) {
  * @description 自定义超时错误类
  */
 export class CustomTimeoutError extends DOMException {
-  isTimeout = true;
+  readonly isTimeout = true;
   constructor(msg?: string) {
     super(msg ?? 'signal is aborted without reason', 'AbortError');
   }
