@@ -1,3 +1,5 @@
+import { promiseTry } from './thenable';
+
 /**
  * @author sonion
  * @description 并发控制器
@@ -5,7 +7,11 @@
  */
 export class ConcurrencyController<T> {
   /** 任务队列 */
-  private queue: (() => Promise<T>)[] = [];
+  private queue: Array<{
+    task: () => Promise<T>;
+    resolve: (value: T | PromiseLike<T>) => void;
+    reject: (reason?: unknown) => void;
+  }> = [];
   /** 并发数 */
   private concurrency: number;
   /** 当前运行中的任务数 */
@@ -17,17 +23,7 @@ export class ConcurrencyController<T> {
 
   push(task: () => Promise<T>) {
     return new Promise<T>((resolve, reject) => {
-      const wrapper = () => {
-        try {
-          const res = task();
-          res.then(resolve, reject);
-          return res;
-        } catch (err) {
-          reject(err);
-          throw err; // 保证返回 Promise
-        }
-      };
-      this.queue.push(wrapper);
+      this.queue.push({ task, resolve, reject });
       this.run();
     });
   }
@@ -39,16 +35,15 @@ export class ConcurrencyController<T> {
   }
 
   private next() {
-    if (this.running >= this.concurrency) {
-      return;
-    }
+    if (this.running >= this.concurrency) return;
+    const { task, resolve, reject } = this.queue.shift() ?? {};
+    if (!task) return;
     this.running++;
-    const task = this.queue.shift();
-    if (task) {
-      task().finally(() => {
+    promiseTry(task)
+      .then(resolve, reject)
+      .finally(() => {
         this.running--;
         this.run();
       });
-    }
   }
 }

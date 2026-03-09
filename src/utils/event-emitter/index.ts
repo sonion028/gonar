@@ -75,7 +75,7 @@ export class EventEmitter<T extends Record<string, NonFunction>> {
   ): void {
     if (options) {
       const keys = Object.keys(this.eventOptionExecutor);
-      if (!options || typeof options !== 'object' || Array.isArray(options)) {
+      if (typeof options !== 'object' || Array.isArray(options)) {
         throw new TypeError(
           '参数 options 类型错误。options 应该为一个配置对象。'
         );

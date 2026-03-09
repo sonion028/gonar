@@ -17,3 +17,14 @@ export const safeAwait = async <T>(
     return [false, error, null] as const;
   }
 };
+
+/**
+ * @author sonion
+ * @description Promise.try 的polyfill实现
+ * @param p - promise 或 一个返回 promise 的函数
+ */
+export const promiseTry = <T>(p: PromiseLike<T> | (() => PromiseLike<T>)) => {
+  return new Promise<T>((resolve) => {
+    resolve(typeof p === 'function' ? p() : p);
+  });
+};
