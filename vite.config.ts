@@ -15,6 +15,7 @@ export default defineConfig({
     }), // 生成类型声明文件
   ],
   resolve: {
+    // tsconfigPaths: true, // 启用 tsconfig 路径解析
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
@@ -38,8 +39,7 @@ export default defineConfig({
       formats: ['es'], // 只输出 ESM
       fileName: '[name].[format]', // 不用后缀
     },
-    minify: 'esbuild',
-    rollupOptions: {
+    rolldownOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         assetFileNames: ({ names: [name] }) =>
