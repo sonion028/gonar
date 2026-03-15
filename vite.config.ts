@@ -38,8 +38,7 @@ export default defineConfig({
       formats: ['es'], // 只输出 ESM
       fileName: '[name].[format]', // 不用后缀
     },
-    minify: 'oxc',
-    rollupOptions: {
+    rolldownOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         assetFileNames: ({ names: [name] }) =>
