@@ -24,7 +24,8 @@
     }
   },
   "scripts": {
-    "build": "rm -rf dist && vite build",
+    "rm:dist": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run rm:dist && vite build",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
