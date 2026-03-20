@@ -3,10 +3,10 @@ export default {
   '{src,packages,apps}/**/*.{ts,tsx,vue}': () => ['tsc --noEmit'],
   '{src,packages,apps}/**/*.{js,jsx,ts,tsx,vue}': [
     'eslint',
-    'prettier --write',
+    'oxfmt',
   ],
   '{src,packages,apps}/**/*.{css,scss,less,md,mdx,html,json,yml,yaml}': [
-    'prettier --write',
+    'oxfmt',
   ],
   '{src,packages,apps}/**/*.{js,jsx,ts,tsx,vue,css,scss,less,md,mdx,html,json,yml,yaml}':
     ['cspell lint'],
