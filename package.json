@@ -24,7 +24,6 @@
     }
   },
   "scripts": {
-    "rm:dist": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
     "build": "npm run rm:dist && vite build",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
@@ -34,6 +33,7 @@
     "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
     "preinstall": "npm run sync:node-version && (npx -y only-allow pnpm || exit 1)",
     "prepare": "npx simple-git-hooks",
+    "rm:dist": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
     "sync:node-version": "NODE_VERSION=$(grep -oE '\\\"node\\\": \\\">=[0-9]+\\.[0-9]+\\.[0-9]+\\\"' package.json | sed -E 's/.*>=([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/') && echo $NODE_VERSION > .node-version"
   },
   "engines": {
