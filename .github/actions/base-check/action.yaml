@@ -19,3 +19,9 @@ runs:
         echo "运行 ESLint 检查..."
         pnpm run lint
         echo "Lint 检查通过 ✅"
+    - name: Oxfmt 检查
+      shell: bash
+      run: |
+        echo "运行 Oxfmt 检查..."
+        pnpm run fmt:check
+        echo "Oxfmt 检查通过 ✅"
