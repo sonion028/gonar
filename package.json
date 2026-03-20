@@ -30,7 +30,8 @@
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
     "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
-    "format": "prettier --write '{src,packages,apps}/**/*.*'",
+    "fmt": "oxfmt '{src,packages,apps}/**/*.*'",
+    "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
     "preinstall": "npm run sync:node-version && (npx -y only-allow pnpm || exit 1)",
     "prepare": "npx simple-git-hooks",
     "sync:node-version": "NODE_VERSION=$(grep -oE '\\\"node\\\": \\\">=[0-9]+\\.[0-9]+\\.[0-9]+\\\"' package.json | sed -E 's/.*>=([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/') && echo $NODE_VERSION > .node-version"
@@ -62,7 +63,7 @@
     "globals": "^16.5.0",
     "lint-staged": "^16.4.0",
     "only-allow": "^1.2.2",
-    "prettier": "^3.8.1",
+    "oxfmt": "^0.41.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rolldown": "1.0.0-rc.10",
