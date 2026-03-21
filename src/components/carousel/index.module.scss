@@ -68,7 +68,8 @@
     &:global(.none) {
       display: none;
     }
-    &:global(.always, .auto) {
+    &:global(.always),
+    &:global(.auto) {
       display: block;
     }
     .left,
