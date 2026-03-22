@@ -24,8 +24,7 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build",
-    "build:rolldown": "rimraf dist && rolldown -c rolldown.build.config.ts",
+    "build": "rimraf dist && rolldown -c rolldown.config.ts",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
@@ -52,7 +51,6 @@
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@typescript/native-preview": "7.0.0-dev.20260319.1",
-    "@vitejs/plugin-react": "^6.0.1",
     "cspell": "^9.7.0",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
@@ -73,9 +71,6 @@
     "sass-embedded": "^1.98.0",
     "simple-git-hooks": "^2.13.1",
     "typescript-eslint": "^8.57.1",
-    "vite": "^8.0.1",
-    "vite-plugin-dts": "^4.5.4",
-    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^4.1.0"
   },
   "keywords": [
