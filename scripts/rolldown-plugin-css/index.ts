@@ -20,8 +20,6 @@ export interface CSSPluginOptions {
    * CSS 文件输出到总输出目录下的相对子目录。
    * 设为空字符串 '' 则直接输出到根目录。
    * @default 'css'
-   * @example 'assets/css'  → dist/assets/css/components.css
-   * @example ''            → dist/components.css
    */
   cssDir?: string;
 }
@@ -99,7 +97,6 @@ export function cssPlugin(options: CSSPluginOptions = {}): Plugin {
     cssDir = 'css',
   } = options;
 
-  // CSS module id → transformed CSS string
   const cssRecords = new Map<string, string>();
 
   return {
@@ -178,23 +175,18 @@ export function cssPlugin(options: CSSPluginOptions = {}): Plugin {
       for (const chunk of Object.values(bundle)) {
         if (chunk.type !== 'chunk') continue;
 
-        // 只看这个 chunk 直接拥有的 CSS 模块（平铺，不递归）。
-        // rolldown 把 CSS stub 模块分配到引用它的 JS 所在的 chunk，
-        // 所以 chunk.moduleIds 里出现 CSS id = 这个 chunk 直接包含了这段样式。
-        const cssIds = chunk.moduleIds.filter((id) => cssRecords.has(id));
+        const cssIds = Object.keys(chunk.modules).filter((id) =>
+          cssRecords.has(id)
+        );
         if (cssIds.length === 0) continue;
 
         const css = cssIds.map((id) => cssRecords.get(id)!).join('\n');
 
-        // CSS asset 与 JS chunk 一一对应。
-        // 取 chunk 的基础名（不含目录、不含后缀）作为 CSS 文件名，
-        // 统一放到 cssDir 目录下。
-        //   entry chunk:     chunk.name             → "css/components.css"
-        //   非 entry chunk:  chunk.fileName 的 basename → "css/components.Dzqt_Fdc.css"
-        const baseName =
+        const baseName = `${
           chunk.isEntry && chunk.name
-            ? `${chunk.name}.css`
-            : path.basename(chunk.fileName).replace(/\.[cm]?[jt]s$/, '.css');
+            ? chunk.name
+            : path.basename(chunk.fileName, path.extname(chunk.fileName))
+        }.css`;
         const cssFileName = cssDir ? `${cssDir}/${baseName}` : baseName;
 
         this.emitFile({ type: 'asset', fileName: cssFileName, source: css });
