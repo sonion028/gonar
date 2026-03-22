@@ -1,7 +1,7 @@
 import { defineConfig } from 'rolldown';
 import path from 'path';
 import { dts } from 'rolldown-plugin-dts';
-import { cssPlugin, cssInjectPlugin } from './scripts';
+import { cssPlugin } from './scripts';
 
 // 入口 重复提取公共
 const INPUTS = {
@@ -32,7 +32,7 @@ export default defineConfig([
       },
     },
     external: ['react', 'react-dom', 'react/jsx-runtime'],
-    plugins: [cssPlugin({ minify: true }), cssInjectPlugin()],
+    plugins: [cssPlugin({ minify: true })],
   },
   // dts 类型声明生成
   {

@@ -1,6 +1,6 @@
 # rolldown-plugin-css
 
-Rolldown 的 CSS 编译插件。负责将 CSS / SCSS / Sass / Less 文件编译为标准 CSS，经由 LightningCSS 转换处理后，按 chunk 输出为独立的 CSS asset 文件。
+Rolldown 的一体化 CSS 处理插件。在单个插件内完成 CSS 编译、转换、asset 输出和 import 语句注入的全部工作。
 
 ---
 
@@ -8,10 +8,10 @@ Rolldown 的 CSS 编译插件。负责将 CSS / SCSS / Sass / Less 文件编译�
 
 - 自动识别并处理 `.css` / `.scss` / `.sass` / `.less` 文件
 - 自动检测可用的 Sass 编译器（优先 `sass-embedded`，回退到 `sass`）
-- 通过 LightningCSS 进行语法降级、自动 vendor prefix、CSS Nesting 展开
+- 通过 LightningCSS 进行语法降级、自动 vendor prefix、CSS Nesting 展开、压缩
 - 支持 CSS Modules（`*.module.*`），输出稳定的哈希类名
-- 每个 JS chunk 对应一个 CSS 文件，输出路径统一归入指定子目录
-- 不负责向 JS 注入 `import` 语句（由 `rolldown-plugin-css-inject` 负责）
+- 每个含有 CSS 的 JS chunk 对应输出一个 CSS 文件，统一归入指定子目录
+- 在对应的 JS chunk 头部自动注入 `import './xxx.css'` 语句
 
 ---
 
@@ -54,17 +54,17 @@ export default defineConfig({
 })
 ```
 
-默认配置下，所有 CSS 文件会输出到 `dist/css/` 目录：
+默认配置下输出结构：
 
 ```
 dist/
   css/
-    components.css          ← components entry 的样式
-    components.Dzqt_Fdc.css ← 共享 chunk 的样式
+    components.css             ← components entry 的样式
+    components.Dzqt_Fdc.css   ← 共享 chunk 的样式
   index.esm.js
   components.esm.js
   js/
-    components.Dzqt_Fdc.js
+    components.Dzqt_Fdc.js    ← 头部自动插入 import '../css/components.Dzqt_Fdc.css'
 ```
 
 ---
@@ -73,10 +73,10 @@ dist/
 
 ### `targets`
 
-类型：`Targets`（来自 `lightningcss`）  
-默认值：`undefined`（不做语法降级）
+类型：`Targets`（来自 `lightningcss`）
+默认值：`undefined`
 
-LightningCSS 的浏览器编译目标，用于控制 CSS 语法降级的范围。建议配合 `browserslist` 使用。
+LightningCSS 的浏览器编译目标，用于控制 CSS 语法降级范围。建议配合 `browserslist` 使用。
 
 ```ts
 import { browserslistToTargets } from 'lightningcss'
@@ -87,42 +87,30 @@ cssPlugin({
 })
 ```
 
-不设置则 LightningCSS 不做任何语法降级，只做转换（如 CSS Nesting 展开）。
+不设置则不做任何语法降级，只做转换（如 CSS Nesting 展开）。
 
 ---
 
 ### `include`
 
-类型：`number`（LightningCSS `Features` bitmask）  
+类型：`number`（LightningCSS `Features` bitmask）
 默认值：`Features.Nesting | Features.CustomMediaQueries`
 
-控制 LightningCSS 需要转换/降级哪些 CSS 草案特性。值为 `Features` 枚举的按位或组合。
-
-```ts
-import { Features } from 'lightningcss'
-
-cssPlugin({
-  // 只展开 CSS Nesting
-  include: Features.Nesting,
-})
-
-cssPlugin({
-  // 展开 Nesting + 自定义媒体查询 + 颜色函数
-  include: Features.Nesting | Features.CustomMediaQueries | Features.OklabColors,
-})
-```
-
-`Features` 从本插件直接 re-export，无需单独引入：
+控制 LightningCSS 需要转换哪些 CSS 草案特性。`Features` 从本插件直接 re-export：
 
 ```ts
 import { cssPlugin, Features } from './scripts/rolldown-plugin-css'
+
+cssPlugin({
+  include: Features.Nesting | Features.CustomMediaQueries | Features.OklabColors,
+})
 ```
 
 ---
 
 ### `minify`
 
-类型：`boolean`  
+类型：`boolean`
 默认值：`false`
 
 是否压缩输出的 CSS。压缩由 LightningCSS 完成，速度极快。
@@ -137,70 +125,57 @@ cssPlugin({
 
 ### `cssModulesPattern`
 
-类型：`string`  
+类型：`string`
 默认值：`'[hash]_[local]'`
 
-CSS Modules 的类名生成规则。支持以下占位符：
-
-| 占位符 | 含义 |
-|--------|------|
-| `[hash]` | 基于文件路径生成的短哈希 |
-| `[local]` | 原始类名 |
-| `[name]` | 文件名（不含扩展名） |
+CSS Modules 的类名生成规则。支持 `[hash]`、`[local]`、`[name]` 占位符。
 
 ```ts
-// 默认：a1b2c_button
-cssPlugin({ cssModulesPattern: '[hash]_[local]' })
-
-// 仅哈希：a1b2c
-cssPlugin({ cssModulesPattern: '[hash]' })
-
-// 文件名 + 类名：Button_button
-cssPlugin({ cssModulesPattern: '[name]_[local]' })
+cssPlugin({ cssModulesPattern: '[hash]_[local]' })  // → a1b2c_button（默认）
+cssPlugin({ cssModulesPattern: '[name]_[local]' })  // → Button_button
+cssPlugin({ cssModulesPattern: '[hash]' })           // → a1b2c
 ```
 
-**识别规则**：文件名包含 `.module.` 的文件会被当作 CSS Module 处理，例如 `Button.module.scss`、`card.module.css`。
+文件名包含 `.module.` 的文件自动启用 CSS Modules，如 `Button.module.scss`。
+
+---
+
+### `format`
+
+类型：`'es' | 'cjs'`
+默认值：`'es'`
+
+注入的 import 语句格式，需与 `output.format` 保持一致。
+
+```ts
+cssPlugin({ format: 'es' })   // → import './css/components.css'（默认）
+cssPlugin({ format: 'cjs' })  // → require('./css/components.css')
+```
 
 ---
 
 ### `cssDir`
 
-类型：`string`  
+类型：`string`
 默认值：`'css'`
 
-CSS 文件输出到总输出目录（`output.dir`）下的相对子目录。
+CSS 文件输出到总输出目录（`output.dir`）下的相对子目录。注入的 import 路径会自动跟随计算。
 
 ```ts
-// 默认：dist/css/components.css
-cssPlugin({ cssDir: 'css' })
-
-// 自定义：dist/assets/styles/components.css
-cssPlugin({ cssDir: 'assets/styles' })
-
-// 直接输出到根目录：dist/components.css
-cssPlugin({ cssDir: '' })
+cssPlugin({ cssDir: 'css' })            // → dist/css/components.css（默认）
+cssPlugin({ cssDir: 'assets/styles' }) // → dist/assets/styles/components.css
+cssPlugin({ cssDir: '' })              // → dist/components.css
 ```
-
-> **注意**：如果同时使用 `rolldown-plugin-css-inject`，两者的 `cssDir` 必须保持一致，否则注入的 import 路径会指向不存在的文件。
 
 ---
 
 ## CSS Modules 用法
 
-文件名包含 `.module.` 即自动启用 CSS Modules：
-
 ```scss
 // Button.module.scss
 .button {
   color: red;
-
-  &:hover {
-    color: darkred;
-  }
-}
-
-.icon {
-  width: 16px;
+  &:hover { color: darkred; }
 }
 ```
 
@@ -209,98 +184,93 @@ cssPlugin({ cssDir: '' })
 import styles from './Button.module.scss'
 
 export function Button() {
-  return (
-    <button className={styles.button}>
-      <span className={styles.icon} />
-      Click
-    </button>
-  )
+  return <button className={styles.button}>Click</button>
 }
 ```
 
-插件会将 CSS Module 文件转换为 JS 模块，导出类名映射：
+插件将 CSS Module 文件转换为 JS 模块，导出类名映射：
 
 ```js
 // 编译产物（示意）
-const classes = {
-  "button": "a1b2c_button",
-  "icon":   "a1b2c_icon"
-}
+const classes = { "button": "a1b2c_button" }
 export default classes
 ```
 
-对应的 CSS 内容（`.a1b2c_button { ... }`）会被提取并写入对应 chunk 的 CSS 文件。
-
----
-
-## 输出规则
-
-CSS 文件与 JS chunk **一一对应**，命名规则：
-
-| chunk 类型 | JS 文件示例 | CSS 文件示例（cssDir='css'）|
-|-----------|------------|--------------------------|
-| entry chunk | `components.esm.js` | `css/components.css` |
-| 非 entry chunk | `js/components.Dzqt_Fdc.js` | `css/components.Dzqt_Fdc.css` |
-
-**关键**：插件只处理"这个 chunk 直接拥有的 CSS 模块"，不递归遍历依赖。Rolldown 在打包时会将 CSS stub 模块（CSS 文件经 transform 后产生的空 JS 占位）分配到与引用它的 JS 模块相同的 chunk，所以平铺检查 `chunk.moduleIds` 就能准确找到属于这个 chunk 的 CSS。
+对应的 CSS（`.a1b2c_button { ... }`）会被提取并写入该 chunk 的 CSS 文件。
 
 ---
 
 ## 设计思路
 
-### 为什么不用 PostCSS？
+### 为什么把编译和注入集成在同一个插件里？
 
-LightningCSS 是用 Rust 编写的，解析和转换速度比 PostCSS 快 100 倍以上，同时内置了 CSS Modules、语法降级、vendor prefix、minify 等所有常用功能，无需额外插件生态。
+早期版本将 CSS 编译（`cssPlugin`）和 import 注入（`cssInjectPlugin`）拆成两个独立插件，原因是误以为 Rolldown 的 `generateBundle` 里 `chunk.code` 是只读的，必须用 `renderChunk` 的返回值才能修改 JS 输出。
 
-### 预编译器为什么自动检测而非手动配置？
+实际验证后发现 `chunk.code` 在 `generateBundle` 里可以直接赋值。这让两件事可以在同一个 hook 里完成：emit CSS asset 时已经知道了 `cssFileName`，当前遍历的 `chunk` 就是需要注入的目标，不需要任何额外的查找或插件间通信。
 
-手动配置意味着用户需要了解插件内部机制并多写一段样板代码。而预编译器的选择通常只取决于项目里安装了什么，让插件自动检测更符合"零配置"的使用习惯。检测结果会缓存在模块级变量中，整个构建过程只执行一次 `import` 尝试。
+```ts
+// generateBundle 里的核心逻辑（简化）
+this.emitFile({ type: 'asset', fileName: cssFileName, source: css })
 
-`sass-embedded` 优先于 `sass` 是因为前者使用原生 binary，在大型项目中编译速度有数量级的差距。
+const rel = path.relative(path.dirname(chunk.fileName), cssFileName)
+chunk.code = `import '${rel}';\n` + chunk.code
+```
+
+拆成两个插件时需要通过约定命名规则让注入插件推算 CSS 文件位置，合并后完全不存在这个问题。
 
 ### transform hook 的职责
 
-`transform` 是 Rolldown 构建阶段的 hook，每个模块被解析后都会经过这里。插件在这个阶段做三件事：
+`transform` 把每个 CSS/预编译文件转换成 Rolldown 能处理的 JS 模块：
 
-1. **预编译**：如果是 Sass/Less 文件，调用对应编译器生成标准 CSS，同时拿到 sourceMap。sourceMap 会作为 `inputSourceMap` 传给 LightningCSS，这样最终的 sourcemap 可以直接追溯到原始 `.scss` 源文件，而不是编译后的中间 CSS。
+**普通 CSS** → 返回只有注释的空 JS 占位符：
 
-2. **LightningCSS 转换**：对标准 CSS 执行语法转换。CSS Module 文件传入 `cssModules` 选项，LightningCSS 会返回 `exports` 对象（原始类名 → 哈希类名的映射）。
+```js
+/* css-plugin: src/components/carousel/style.css */
+```
 
-3. **返回 JS 代码**：
-   - CSS Module：返回包含类名映射的 JS 对象（`export default { button: 'a1b2c_button' }`），让 Rolldown 将它当成普通 JS 模块处理。
-   - 普通 CSS：返回一个注释占位符（`/* css-plugin: filename */`），让 Rolldown 知道这个模块存在，同时不产生任何 JS 运行时代码。
+这个占位符告诉 Rolldown "这个模块存在于模块图里"，使 Rolldown 将其分配到对应的 chunk。`generateBundle` 阶段通过 `Object.keys(chunk.modules)` 找到它，就知道这个 chunk 需要处理 CSS。`moduleSideEffects: true` 确保它不被 tree-shaker 移除。
 
-两种情况都设置 `moduleSideEffects: true`，确保模块不会被 tree-shake 掉，在后续 `generateBundle` 阶段能通过 `chunk.moduleIds` 找到它。
+**CSS Module** → 返回导出类名映射的真实 JS 模块：
+
+```js
+const classes = { "button": "a1b2c_button" }
+export default classes
+```
+
+消费方 `import styles from './Button.module.scss'` 拿到的就是这个对象。CSS 内容同样被存入 `cssRecords`，在 `generateBundle` 阶段写入输出文件。
 
 ### generateBundle hook 的职责
 
-`generateBundle` 是 Rolldown 输出阶段的最后一个 hook，此时所有 chunk 的归属已经确定。插件在这里：
+对每个包含 CSS 的 chunk 依次执行三步：
 
-1. 遍历 bundle 中所有 chunk（包括非 entry chunk）
-2. 对每个 chunk，平铺检查其 `moduleIds`，找出属于该 chunk 的 CSS 模块 id
-3. 按 `moduleIds` 的顺序拼接 CSS 字符串（顺序 = import 顺序，保证样式覆盖关系正确）
-4. 调用 `this.emitFile` 输出 CSS asset
+1. 用 `Object.keys(chunk.modules)` 找出属于这个 chunk 的 CSS 模块 id
+2. 拼接 CSS 内容，`this.emitFile` 输出 CSS asset
+3. 计算从 JS chunk 目录到 CSS asset 的相对路径，prepend import 语句到 `chunk.code`
+
+**为什么用 `chunk.modules` 而不是 `chunk.moduleIds`？**
+
+`chunk.moduleIds` 是 tree-shake 后的存活模块列表，内容为注释的 CSS 占位符模块可能被过滤掉。`chunk.modules`（`Record<id, RenderedModule>`）包含所有实际渲染进 chunk 的模块，包括空内容模块，更可靠。
 
 **为什么用平铺检查而不是递归遍历模块图？**
 
-递归遍历（DFS）会把所有传递依赖的 CSS 都收进来，导致同一段 CSS 可能出现在多个 chunk 的输出里（例如 `components.css` 和 `index.css` 都包含 carousel 的样式）。Rolldown 在打包时已经做了模块归属的决策——每个模块（包括 CSS stub）只归属于一个 chunk，直接读 `chunk.moduleIds` 就能得到准确的"这个 chunk 独有的 CSS"，不需要自己再做归属判断。
+Rolldown 在 code splitting 时会把每个模块（包括 CSS 占位符）分配到唯一的一个 chunk。直接检查 `chunk.modules` 就能得到这个 chunk 独有的 CSS，不会产生跨 chunk 的重复收集。递归遍历反而会把传递依赖的 CSS 也收进来，导致多个 chunk 重复包含同一段样式。
 
-### CSS Module 的 CSS 去哪了？
+### 预处理器为什么自动检测？
 
-CSS Module 文件经 `transform` 后，对 Rolldown 来说是一个普通 JS 模块（导出类名映射）。但它的 CSS 内容同样被存入了 `cssRecords`。`generateBundle` 阶段检查 `chunk.moduleIds` 时，CSS Module 的模块 id 也会出现在里面，对应的 CSS 会和普通 CSS 一起写入 chunk 的 CSS 文件。JS 端消费的是类名映射，CSS 端消费的是哈希后的样式规则，两者各走各的路。
+按文件扩展名判断预处理器，结果缓存在模块级变量中，整个构建过程只尝试 `import` 一次。`sass-embedded` 优先于 `sass` 是因为前者使用原生 binary，大型项目中速度有数量级差距。
 
-### 为什么不在 transform 里直接 emitFile？
+### sourceMap 链路
 
-一个 CSS 文件可能在多个地方被 import，`transform` 会为同一个文件调用多次（或被缓存）。更重要的是，在 `transform` 阶段还不知道这个 CSS 模块最终会归属到哪个 JS chunk，无法确定 CSS 文件的命名和位置。只有在 `generateBundle` 阶段，chunk 归属才完全确定，这时 emit 才是准确的。
+Sass/Less 编译时开启 sourceMap，将其作为 `inputSourceMap` 传给 LightningCSS，最终的 sourcemap 可以直接追溯到原始 `.scss`/`.less` 源文件，而不是编译后的中间 CSS。
 
 ---
 
 ## 注意事项
 
-**Sass 与 Less 不能混用在同一个文件里。** 插件按文件扩展名判断使用哪个预编译器，`.scss`/`.sass` 走 Sass，`.less` 走 Less，`.css` 直接进 LightningCSS。
+**`format` 需与 `output.format` 一致。** 插件不自动感知 Rolldown 的输出格式，需手动配置。ESM 项目用默认值 `'es'` 即可，CJS 项目需显式设置 `format: 'cjs'`。
 
-**LightningCSS 不处理 `@import`。** 如果你的 CSS 文件里有 `@import`，LightningCSS 默认不会内联它们。Sass 和 Less 的 `@import`/`@use` 由各自的编译器处理，不受此限制。
+**不适用于 `iife` 或 `umd` 格式。** 这些格式的产物通常是自包含的单文件，建议直接在 HTML 里用 `<link>` 标签引入 CSS。
 
-**CSS asset 文件名不含路径前缀。** 非 entry chunk 的 CSS 文件名取自 `path.basename(chunk.fileName)`，即只保留文件名部分（如 `components.Dzqt_Fdc.css`），不保留原来的 `js/` 目录前缀，统一归入 `cssDir` 目录。
+**CSS asset 文件名不含原始目录前缀。** 非 entry chunk 的 CSS 文件名取自 `path.basename(chunk.fileName, ext)`，只保留文件名部分，统一归入 `cssDir` 目录。例如 `js/components.Dzqt_Fdc.js` 对应 `css/components.Dzqt_Fdc.css`，而不是 `css/js/components.Dzqt_Fdc.css`。
 
-**`cssDir` 与 `rolldown-plugin-css-inject` 的 `cssDir` 必须一致。** 两个插件独立运行，通过相同的命名规则约定 CSS 文件位置。如果两边配置不一致，inject 插件注入的路径会指向不存在的文件。
+**LightningCSS 不内联 `@import`。** 纯 CSS 文件里的 `@import` 不会被 LightningCSS 自动内联。Sass 的 `@use`/`@forward` 和 Less 的 `@import` 由各自编译器处理，不受此限制。

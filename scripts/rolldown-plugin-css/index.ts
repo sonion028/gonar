@@ -17,6 +17,11 @@ export interface CSSPluginOptions {
   /** @default '[hash]_[local]' */
   cssModulesPattern?: string;
   /**
+   * 注入的 import 语句格式，需与 output.format 保持一致。
+   * @default 'es'
+   */
+  format?: 'cjs' | 'es';
+  /**
    * CSS 文件输出到总输出目录下的相对子目录。
    * 设为空字符串 '' 则直接输出到根目录。
    * @default 'css'
@@ -82,6 +87,8 @@ const SASS_RE = /\.(scss|sass)$/i;
 const LESS_RE = /\.less$/i;
 const CSS_MOD_RE = /\.module\.[a-z]+$/i;
 
+const slash = (p: string) => p.replace(/\\/g, '/');
+
 // ── Plugin ────────────────────────────────────────────────────────────────────
 
 /**
@@ -94,6 +101,7 @@ export function cssPlugin(options: CSSPluginOptions = {}): Plugin {
     include = Features.Nesting | Features.CustomMediaQueries,
     minify = false,
     cssModulesPattern = '[hash]_[local]',
+    format = 'es',
     cssDir = 'css',
   } = options;
 
@@ -179,7 +187,6 @@ export function cssPlugin(options: CSSPluginOptions = {}): Plugin {
           cssRecords.has(id)
         );
         if (cssIds.length === 0) continue;
-
         const css = cssIds.map((id) => cssRecords.get(id)!).join('\n');
 
         const baseName = `${
@@ -188,8 +195,17 @@ export function cssPlugin(options: CSSPluginOptions = {}): Plugin {
             : path.basename(chunk.fileName, path.extname(chunk.fileName))
         }.css`;
         const cssFileName = cssDir ? `${cssDir}/${baseName}` : baseName;
-
         this.emitFile({ type: 'asset', fileName: cssFileName, source: css });
+
+        // 注入 import CSS 语句
+        const jsDir = path.dirname(chunk.fileName);
+        const rel = slash(path.relative(jsDir, cssFileName));
+        const importPath = rel.startsWith('.') ? rel : `./${rel}`;
+        const importStmt =
+          format === 'cjs'
+            ? `require('${importPath}');\n`
+            : `import '${importPath}';\n`;
+        chunk.code = importStmt + chunk.code;
       }
     },
   };
