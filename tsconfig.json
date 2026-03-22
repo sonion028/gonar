@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["vite/client"],
+    "types": ["rolldown"],
 
     /* 目标与模块 */
     "target": "ESNext",
