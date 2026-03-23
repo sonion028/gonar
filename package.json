@@ -33,7 +33,7 @@
     "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
     "preinstall": "npm run sync:node-version && (npx -y only-allow pnpm || exit 1)",
     "prepare": "npx simple-git-hooks",
-    "sync:node-version": "NODE_VERSION=$(grep -oE '\\\"node\\\": \\\">=[0-9]+\\.[0-9]+\\.[0-9]+\\\"' package.json | sed -E 's/.*>=([0-9]+\\.[0-9]+\\.[0-9]+).*/\\1/') && echo $NODE_VERSION > .node-version"
+    "sync:node-version": "node scripts/sync-node-version/index.js"
   },
   "engines": {
     "node": ">=24.14.0",
