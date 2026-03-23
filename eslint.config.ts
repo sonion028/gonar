@@ -15,6 +15,7 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020, // 语法检查 支持的 ES 版本
       globals: globals.browser, // 浏览器全局变量
+      // env: globals.node, // Node.js 环境变量
     },
     settings: {
       react: {
