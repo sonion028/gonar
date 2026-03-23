@@ -3,12 +3,12 @@ name: Release
 on:
   push:
     tags:
-      - 'v*.*.*' # 例如 v1.2.3
+      - "v*.*.*" # 例如 v1.2.3
 
 # Trusted Publisher 权限
 permissions:
   id-token: write # Required for OIDC
-  contents: read
+  contents: write # Required for Release
 
 jobs:
   build-and-publish:
@@ -93,6 +93,8 @@ jobs:
           echo "开始发布到 npm..."
           npm publish --access public --verbose
           echo "发布成功 ✅"
+        # env:
+        #   NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }} # 首次发布需要
 
       # 只有发布成功后才生成 GitHub Release
       - name: 创建 GitHub Release 记录
