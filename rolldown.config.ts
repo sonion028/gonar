@@ -1,7 +1,7 @@
 import { defineConfig } from 'rolldown';
 import path from 'path';
 import { dts } from 'rolldown-plugin-dts';
-import { cssPlugin } from './scripts';
+import { cssPlugin } from 'rolldown-plugin-css';
 
 // 入口 重复提取公共
 const INPUTS = {
