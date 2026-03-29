@@ -67,12 +67,12 @@
     "react-dom": "^18.3.1",
     "rimraf": "^6.1.3",
     "rolldown": "1.0.0-rc.10",
-    "rolldown-plugin-css": "^0.1.8",
+    "rolldown-plugin-css": "^0.1.9",
     "rolldown-plugin-dts": "^0.22.5",
     "sass-embedded": "^1.98.0",
     "simple-git-hooks": "^2.13.1",
-    "typescript-eslint": "^8.57.1",
-    "vitest": "^4.1.0"
+    "typescript-eslint": "^8.57.2",
+    "vitest": "^4.1.2"
   },
   "keywords": [
     "hooks",

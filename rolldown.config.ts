@@ -32,7 +32,7 @@ export default defineConfig([
       },
     },
     external: ['react', 'react-dom', 'react/jsx-runtime'],
-    plugins: [cssRolldown({ minify: true, cssModules: true })],
+    plugins: [cssRolldown({ minify: true })],
   },
   // dts 类型声明生成
   {
