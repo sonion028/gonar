@@ -78,8 +78,8 @@ importers:
         specifier: 1.0.0-rc.10
         version: 1.0.0-rc.10
       rolldown-plugin-css:
-        specifier: ^0.1.0
-        version: 0.1.0(less@4.6.4)(lightningcss@1.32.0)(sass-embedded@1.98.0)(sass@1.98.0)
+        specifier: ^0.1.8
+        version: 0.1.8(less@4.6.4)(lightningcss@1.32.0)(rolldown@1.0.0-rc.10)(sass-embedded@1.98.0)(sass@1.98.0)
       rolldown-plugin-dts:
         specifier: ^0.22.5
         version: 0.22.5(@typescript/native-preview@7.0.0-dev.20260319.1)(rolldown@1.0.0-rc.10)(typescript@5.8.2)
@@ -504,8 +504,14 @@ packages:
     resolution: {integrity: sha512-ZaaBr0pTvNxmyUbIn+nVPXPr383VqJzfUDMWicgTjJIeo2+T2hOq2kNpgpvTIrWtZrsZnSP8oXms1+sKTjcvkw==}
     engines: {node: '>=20'}
 
+  '@emnapi/core@1.9.1':
+    resolution: {integrity: sha512-mukuNALVsoix/w1BJwFzwXBN/dHeejQtuVzcDsfOEsdpCumXb/E9j8w11h5S54tT1xhifGfbbSm/ICrObRb3KA==}
+
   '@emnapi/runtime@1.9.1':
     resolution: {integrity: sha512-VYi5+ZVLhpgK4hQ0TAjiQiZ6ol0oe4mBx7mVv7IflsiEp0OWoVsp/+f9Vc1hOhE0TtkORVrI1GvzyreqpgWtkA==}
+
+  '@emnapi/wasi-threads@1.2.0':
+    resolution: {integrity: sha512-N10dEJNSsUx41Z6pZsXU8FjPjpBEplgH24sfkmITrBED1/U2Esum9F3lfLrMjKHHjmi557zQn7kR9R+XWXu5Rg==}
 
   '@es-joy/jsdoccomment@0.78.0':
     resolution: {integrity: sha512-rQkU5u8hNAq2NVRzHnIUUvR6arbO0b6AOlvpTNS48CkiKSn/xtNfOzBK23JE4SiW89DgvU7GtxLVgV4Vn2HBAw==}
@@ -2381,12 +2387,13 @@ packages:
     engines: {node: 20 || >=22}
     hasBin: true
 
-  rolldown-plugin-css@0.1.0:
-    resolution: {integrity: sha512-/JzkKVP3oFgXNPWiG/Fb2kps01cGHDTa+GcgIi1HehYxuuVYHy1n1gI89sDlskqQ+a29LpElnnYvCoHviDI0tg==}
+  rolldown-plugin-css@0.1.8:
+    resolution: {integrity: sha512-9pAkNKr1kC3a32LjjYfGqvwgrtLIoXT1hud9GURBOTGMa844wQ8tau3LQyBUvJwrjM9Jj+p4EhghzRarWsq/Bw==}
     engines: {node: '>=24.14.0', pnpm: '>=10.32.1'}
     peerDependencies:
       less: ^4.6.4
       lightningcss: ^1.32.0
+      rolldown: '>=1.0.0-rc.10'
       sass: ^1.98.0
       sass-embedded: ^1.98.0
 
@@ -3443,7 +3450,18 @@ snapshots:
 
   '@cspell/url@9.7.0': {}
 
+  '@emnapi/core@1.9.1':
+    dependencies:
+      '@emnapi/wasi-threads': 1.2.0
+      tslib: 2.8.1
+    optional: true
+
   '@emnapi/runtime@1.9.1':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
+
+  '@emnapi/wasi-threads@1.2.0':
     dependencies:
       tslib: 2.8.1
     optional: true
@@ -3536,6 +3554,7 @@ snapshots:
 
   '@napi-rs/wasm-runtime@1.1.1':
     dependencies:
+      '@emnapi/core': 1.9.1
       '@emnapi/runtime': 1.9.1
       '@tybys/wasm-util': 0.10.1
     optional: true
@@ -5370,10 +5389,11 @@ snapshots:
       glob: 13.0.6
       package-json-from-dist: 1.0.1
 
-  rolldown-plugin-css@0.1.0(less@4.6.4)(lightningcss@1.32.0)(sass-embedded@1.98.0)(sass@1.98.0):
+  rolldown-plugin-css@0.1.8(less@4.6.4)(lightningcss@1.32.0)(rolldown@1.0.0-rc.10)(sass-embedded@1.98.0)(sass@1.98.0):
     dependencies:
       less: 4.6.4
       lightningcss: 1.32.0
+      rolldown: 1.0.0-rc.10
       sass: 1.98.0
       sass-embedded: 1.98.0
 
