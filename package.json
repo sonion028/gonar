@@ -1,7 +1,7 @@
 {
-  "name": "tonar",
-  "version": "1.0.0",
-  "description": "Tonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "name": "gonar",
+  "version": "0.0.1",
+  "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
   "type": "module",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -82,9 +82,9 @@
   ],
   "author": "sonion",
   "license": "MIT",
-  "repository": "https://github.com/sonion028/tonar",
+  "repository": "https://github.com/sonion028/gonar",
   "bugs": {
-    "url": "https://github.com/sonion028/tonar/issues"
+    "url": "https://github.com/sonion028/gonar/issues"
   },
   "private": false
 }

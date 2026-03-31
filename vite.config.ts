@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     target: 'es2020',
     lib: {
-      name: 'Tonar',
+      name: 'Gonar',
       entry: {
         index: 'src/index.ts',
         hooks: 'src/hooks/index.ts',
