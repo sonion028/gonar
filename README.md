@@ -2,6 +2,9 @@
 
 **Gonar** 是一个现代前端工具库，提供常用的 **工具函数 (Utils)**、**React 钩子函数 (Hooks)** 和 **React 组件 (Components)**。
 
+[![npm version](https://img.shields.io/npm/v/gonar)](https://www.npmjs.com/package/gonar)
+[![license](https://img.shields.io/npm/l/gonar)](./LICENSE)
+
 - ✅ 支持 **React 18+**
 - ✅ 支持 **TypeScript**
 - ✅ 仅支持 **ESM（不支持 CommonJS）**
