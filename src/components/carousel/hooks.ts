@@ -300,7 +300,7 @@ export const useLoopChildren = (
       throw new Error('Carousel children must be an array');
     }
     if (loop) {
-      const first = children[0];
+      const first = children[0] as ReactElement;
       const clonedChildren = [...children]; // 加到后面，指示器和轮播项目好对应
       // const last = children.at(-1);
       // clonedChildren.unshift(cloneElement(last!, { key: autoIncrementId() }));

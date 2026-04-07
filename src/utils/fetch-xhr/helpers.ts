@@ -13,14 +13,17 @@ export const setRequestHeaders = (
       headers.forEach((value, key) => {
         xhr.setRequestHeader(key, value);
       });
-    } else if (Array.isArray(headers)) {
+      return;
+    }
+    if (Array.isArray(headers)) {
       headers.forEach((header) => {
         xhr.setRequestHeader(header[0], header[1]);
       });
-    } else {
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
+      return;
+    }
+    const entries = Object.entries(headers);
+    for (const [key, value] of entries) {
+      xhr.setRequestHeader(key, value);
     }
   }
 };
