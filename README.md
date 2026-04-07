@@ -1,13 +1,16 @@
-# Tonar
+# Gonar
 
-**Tonar** 是一个现代前端工具库，提供常用的 **工具函数 (Utils)**、**React 钩子函数 (Hooks)** 和 **React 组件 (Components)**。
+**Gonar** 是一个现代前端工具库，提供常用的 **工具函数 (Utils)**、**React 钩子函数 (Hooks)** 和 **React 组件 (Components)**。
+
+[![npm version](https://img.shields.io/npm/v/gonar)](https://www.npmjs.com/package/gonar)
+[![license](https://img.shields.io/npm/l/gonar)](./LICENSE)
 
 - ✅ 支持 **React 18+**
 - ✅ 支持 **TypeScript**
 - ✅ 仅支持 **ESM（不支持 CommonJS）**
 - ✅ 支持 **Tree-shaking**
 
-Tonar is a modern frontend library that provides **utility functions**, **React hooks**, and **React components**.
+Gonar is a modern frontend library that provides **utility functions**, **React hooks**, and **React components**.
 
 - ✅ Supports **React 18+**
 - ✅ Supports **TypeScript**
@@ -19,9 +22,9 @@ Tonar is a modern frontend library that provides **utility functions**, **React 
 ## 📦 Installation / 安装
 
 ```bash
-npm install tonar@latest
-pnpm add tonar@latest
-yarn add tonar@latest
+npm install gonar@latest
+pnpm add gonar@latest
+yarn add gonar@latest
 ```
 
 ## 🚀 Usage / 使用方法
@@ -35,7 +38,7 @@ import {
   rAfInterval,
   type RAfIntervalReturn,
   // ...other components、hooks、utils
-} from 'tonar';
+} from 'gonar';
 ```
 
 #### 🧩 Components / 组件
@@ -50,7 +53,7 @@ import {
   Carousel,
   CustomShow,
   // ...other components
-} from 'tonar/components';
+} from 'gonar/components';
 ```
 
 #### 🔗 Hooks / 钩子函数
@@ -72,7 +75,7 @@ import {
   useCreateSafeRef,
   useDistinctState,
   // ...other hooks
-} from 'tonar/hooks';
+} from 'gonar/hooks';
 ```
 
 #### 🛠️ Utils / 工具函数
@@ -103,7 +106,7 @@ import {
   debounce,
   ConcurrencyController,
   // ...other utils
-} from 'tonar/utils';
+} from 'gonar/utils';
 ```
 
 ## 📖 Example / 示例
@@ -112,9 +115,9 @@ import {
 
 ```tsx
 import React from 'react';
-import { Carousel, ErrorBoundary } from 'tonar/components';
-import { useDistinctState } from 'tonar/hooks';
-import { debounce } from 'tonar/utils';
+import { Carousel, ErrorBoundary } from 'gonar/components';
+import { useDistinctState } from 'gonar/hooks';
+import { debounce } from 'gonar/utils';
 
 export default function App() {
   // 支持onChange事件和自定义差异对比函数
@@ -126,7 +129,7 @@ export default function App() {
 
   return (
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      <h1>Tonar Demo</h1>
+      <h1>Gonar Demo</h1>
       <button onClick={handleClick}>Click Me ({count})</button>
       <Carousel cardWidth={200} cardHeight={120}>
         <div style={{ background: 'lightblue' }}>Slide 1</div>
@@ -143,18 +146,18 @@ export default function App() {
 #### 从包根目录直接导入类型（例如组件 Props）：
 
 ```ts
-import { type CarouselProps } from 'tonar';
+import { type CarouselProps } from 'gonar';
 ```
 
 #### 或按子路径导入（如果你更喜欢明确的来源）：
 
 ```ts
-import type { CarouselProps } from 'tonar/components';
+import type { CarouselProps } from 'gonar/components';
 ```
 
 ## 📝 License / 许可证
 
 MIT © Sonion
 
-欢迎 [Pull Requests](https://github.com/sonion028/tonar/pulls) 和 [Issues](https://github.com/sonion028/tonar/issues)  
-源码仓库：[https://github.com/sonion028/tonar](https://github.com/sonion028/tonar)
+欢迎 [Pull Requests](https://github.com/sonion028/gonar/pulls) 和 [Issues](https://github.com/sonion028/gonar/issues)  
+源码仓库：[https://github.com/sonion028/gonar](https://github.com/sonion028/gonar)

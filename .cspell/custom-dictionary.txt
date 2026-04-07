@@ -1,6 +1,6 @@
 Behaviour
 lightningcss
+gonar
 oxfmt
 sonion
-Tonar
 Uncapitalize
