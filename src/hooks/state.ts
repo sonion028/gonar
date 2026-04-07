@@ -48,7 +48,7 @@ export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
  * @param params - 参数对象
  * @param {T} params.initialValue - 初始值
  * @param {(val: T) => void} [params.onChange] - 变化回调
- * @param {(prev: T, next: T) => boolean} [params.hasDiff] - 对比函数，默认对比引用是否不相同。
+ * @param {(prev: T, next: T) => boolean} [params.hasDiff] - 对比函数，返回true变更生效。默认对比引用是否不相同。
  * @param {boolean} [params.onlyEvent] - 是否仅触发事件，不更新值，避免重渲染
  */
 export function useDistinctState<T>(params: {
@@ -115,7 +115,7 @@ export function useDistinctState<T>({
 /**
  * @author sonion
  * @description 创建安全的Ref引用
- * @param {(oldNode?: T, newNode?: T) => boolean} [hasDiff] - 对比函数，默认对比引用是否不相同。
+ * @param {(oldNode?: T, newNode?: T) => boolean} [hasDiff] - 对比函数，返回true变更生效。默认对比引用是否不相同。
  */
 export const useCreateSafeRef = <T extends object = HTMLElement>(
   hasDiff?: (oldNode?: T, newNode?: T) => boolean
