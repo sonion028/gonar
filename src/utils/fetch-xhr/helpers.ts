@@ -18,7 +18,7 @@ export const setRequestHeaders = (
     return;
   }
   const entries = Array.isArray(headers) ? headers : Object.entries(headers);
-  headers.forEach(([key, value]) => {
+  entries.forEach(([key, value]) => {
     xhr.setRequestHeader(key, value);
   });
 };
