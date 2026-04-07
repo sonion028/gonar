@@ -8,21 +8,17 @@ export const setRequestHeaders = (
   xhr: XMLHttpRequest,
   headers: RequestInit['headers']
 ) => {
-  if (headers) {
-    if (headers instanceof Headers) {
-      headers.forEach((value, key) => {
-        xhr.setRequestHeader(key, value);
-      });
-    } else if (Array.isArray(headers)) {
-      headers.forEach((header) => {
-        xhr.setRequestHeader(header[0], header[1]);
-      });
-    } else {
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
-    }
+  if (!headers) return;
+  if (headers instanceof Headers) {
+    headers.forEach((value, key) => {
+      xhr.setRequestHeader(key, value);
+    });
+    return;
   }
+  const entries = Array.isArray(headers) ? headers : Object.entries(headers);
+  entries.forEach(([key, value]) => {
+    xhr.setRequestHeader(key, value);
+  });
 };
 
 /**
