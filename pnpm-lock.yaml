@@ -78,7 +78,7 @@ importers:
         specifier: 1.0.0-rc.10
         version: 1.0.0-rc.10(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)
       rolldown-plugin-css:
-        specifier: ^0.1.10
+        specifier: ^0.1.11
         version: 0.1.11(less@4.6.4)(lightningcss@1.32.0)(rolldown@1.0.0-rc.10(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1))(sass-embedded@1.99.0)(sass@1.99.0)
       rolldown-plugin-dts:
         specifier: ^0.22.5
