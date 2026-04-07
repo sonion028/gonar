@@ -8,9 +8,7 @@ export const setRequestHeaders = (
   xhr: XMLHttpRequest,
   headers: RequestInit['headers']
 ) => {
-  if (!headers) {
-    return
-  }
+  if (!headers) return;
   if (headers instanceof Headers) {
     headers.forEach((value, key) => {
       xhr.setRequestHeader(key, value);
