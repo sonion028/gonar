@@ -70,7 +70,7 @@
     "sass-embedded": "^1.99.0",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.0",
+    "typescript-eslint": "^8.58.1",
     "vite": "^8.0.7",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
