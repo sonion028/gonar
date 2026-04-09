@@ -55,6 +55,7 @@ export default defineConfig([
       {
         dir: 'dist/types',
         format: 'es',
+        preserveModules: true, // 不打包保留目录结构，结合之生成.d.ts配置，是类型声明代目录结构
       },
     ],
     plugins: [
@@ -62,6 +63,7 @@ export default defineConfig([
         tsconfig: 'tsconfig.json',
         emitDtsOnly: true,
         tsgo: true,
+
         // 以下oxc需要，需要显式返回，不推荐
         // oxc: true,
         // resolver: 'oxc',
