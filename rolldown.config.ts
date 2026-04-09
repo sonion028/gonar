@@ -41,6 +41,8 @@ export default defineConfig([
       {
         dir: 'dist/types',
         format: 'es',
+        // 先观察是否需要保留目录结构
+        // preserveModules: true, // 不打包保留目录结构，结合之生成.d.ts配置，是类型声明代目录结构
       },
     ],
     plugins: [
