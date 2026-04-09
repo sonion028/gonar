@@ -19,7 +19,7 @@ export function useStaticState<T>(initialValue?: T) {
     (t?: T) => (t === void 0 ? ref.current : (ref.current = t)),
     []
   );
-  return [getValue, setValue, withValue];
+  return [getValue, setValue, withValue] as const;
 }
 
 /**
