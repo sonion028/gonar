@@ -28,4 +28,4 @@ const cleanVersion = versionMatch[1];
 const nodeVersionPath = path.join(process.cwd(), '.node-version');
 fs.writeFileSync(nodeVersionPath, cleanVersion, 'utf8');
 
-console.log(`Synced node version: ${cleanVersion}`);
+console.log(`✓ Node version synced: ${cleanVersion}`);
