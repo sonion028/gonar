@@ -41,6 +41,7 @@ const compareVersions = (a, b) => {
   return 0;
 };
 
+// 获取最大版本号
 const validVersion = versions.reduce((max, v) =>
   compareVersions(v, max) > 0 ? v : max
 );
