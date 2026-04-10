@@ -14,13 +14,18 @@ if (!nodeVersion) {
   process.exit(1);
 }
 
+// const versionPattern = /[>=<~^]*([0-9]+\.[0-9]+\.[0-9]+)/g; // 严格3段式
+
 // 提取所有版本号（支持 >=、^、~、= 等前缀，以及 || 分隔）
-// "^18.18.0 || >=21.1.0 || ~20.9.0||=25.16.0||22.0.9"
-const versionPattern = /[>=<~^]*([0-9]+\.[0-9]+\.[0-9]+)/g;
+// "^18.18. || >=21..0 || ~20.||=25.16.0||22.0.9"
+// 支持 不足 3 位版本号、超过 3 段版本号会被丢弃。版本号错误会丢弃
+const versionPattern =
+  /(?<![0-9.])[>=<~^]*([0-9]+(?:\.[0-9]+){0,2})(?=[\s|]|$|\.(?!\.))/g;
 const versions = [];
 let match;
 
-while ((match = versionPattern.exec(nodeVersion)) !== null) {
+// 提取所有版本号
+while ((match = versionPattern.exec(nodeVersion))) {
   versions.push(match[1]);
 }
 
