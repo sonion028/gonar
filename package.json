@@ -47,7 +47,8 @@
     "fmt": "oxfmt '{src,packages,apps}/**/*.*'",
     "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
     "check": "npx tsc --noEmit && npm run lint && npm run fmt:check && npm run lint:spell",
-    "fix": "npm run lint:fix && npm run fmt"
+    "fix": "npm run lint:fix && npm run fmt",
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
