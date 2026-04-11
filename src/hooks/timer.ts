@@ -1,5 +1,6 @@
 import { useRef, useCallback } from 'react';
 import { type RAfIntervalReturn, rAfInterval, clearRAfInterval } from '@/utils';
+import { useLatestCallback } from './state';
 
 /**
  * @author sonion
@@ -10,16 +11,19 @@ import { type RAfIntervalReturn, rAfInterval, clearRAfInterval } from '@/utils';
  */
 export const useInterval = (cb: () => void, duration: number) => {
   const timer = useRef<ReturnType<typeof setTimeout>>(void 0);
-  const cbRef = useRef(cb);
-  cbRef.current = cb;
+  const getLatestCb = useLatestCallback(cb);
   const run = useCallback(() => {
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      cbRef.current();
+      try {
+        getLatestCb()?.();
+      } catch (err) {
+        console.error('useInterval error', err);
+      }
       // eslint-disable-next-line react-hooks/immutability
       run?.();
     }, duration);
-  }, [duration]);
+  }, [duration, getLatestCb]);
   const stop = useCallback(() => clearTimeout(timer.current), [timer]);
   return [run, stop] as const;
 };
