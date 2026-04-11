@@ -21,7 +21,7 @@ export const useInterval = (cb: () => void, duration: number) => {
     }, duration);
   }, [duration]);
   const stop = useCallback(() => clearTimeout(timer.current), [timer]);
-  return [run, stop];
+  return [run, stop] as const;
 };
 
 /**
