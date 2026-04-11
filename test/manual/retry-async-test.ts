@@ -1,4 +1,4 @@
-import { retryAsync } from '../utils/retry-async.ts';
+import { retryAsync } from '../src/utils/retry-async.ts';
 
 retryAsync(() => {
   console.log('retryAsync');
