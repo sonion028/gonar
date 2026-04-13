@@ -26,23 +26,23 @@ export default defineConfig([
       },
     },
     extends: [
-      prettier, // ✅ 关闭和 Prettier 冲突的规则
       jslint.configs.recommended, // ✅ JavaScript 规则
       ...tseslint.configs.recommended, // ✅ TypeScript 规则
+      jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
+      prettier, // ✅ 关闭和 Prettier 冲突的规则
       reactHooks.configs.flat.recommended, // ✅ React Hooks 扁平插件配置对象
       reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
       react.configs.flat.recommended, // ✅ React 扁平插件配置对象
-      jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
     ],
     rules: {
       'jsdoc/no-undefined-types': 'off', // JSDoc 里的泛型会报错
       'jsdoc/require-returns': 'off', // 关闭 JSDoc 缺少返回值规则
       'jsdoc/require-returns-type': 'off', // 关闭 JSDoc 缺少返回值类型规则
       'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
-      'react/react-in-jsx-scope': 'off', // 关闭 React 17+ ，JSX 可以空标签
-      'react-hooks/exhaustive-deps': 'warn', // 不完整的依赖项
       '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
       '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
+      'react-hooks/exhaustive-deps': 'warn', // 不完整的依赖项
+      'react/react-in-jsx-scope': 'off', // 关闭 React 17+ ，JSX 可以空标签
     },
   },
 ]);
