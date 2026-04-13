@@ -95,9 +95,10 @@ export const fetchXHR = async (url: string, init?: FetchXHRInit) => {
           headers: getResponseHeaders(xhr),
         })
       );
-
+    // 处理请求体,在发送
+    // 不用捕获 signal?.throwIfAborted 错误。onabort 会触发 reject
     handleRequestBody(body, signal).then((res) =>
       xhr.send(['GET', 'HEAD'].includes(normalizedMethod) ? null : res)
-    ); // 处理请求体,在发送
+    );
   });
 };
