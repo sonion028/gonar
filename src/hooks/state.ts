@@ -97,9 +97,8 @@ export function useDistinctState<T>({
         typeof val === 'function'
           ? (val as (prevState: T) => T)(prevRef.current)
           : val;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      hasDiff ??= (prev, next) => prev !== next;
-      if (hasDiff(prevRef.current, value)) {
+      const isDiff = hasDiff ?? ((prev, next) => prev !== next);
+      if (isDiff(prevRef.current, value)) {
         latestOnChange?.(value);
         prevRef.current = value;
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
