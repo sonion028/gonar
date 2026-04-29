@@ -31,15 +31,16 @@ export function useStaticState<T>(initialValue?: T) {
  */
 export function useLatestCallback<T extends (...args: never) => unknown>(
   dep: T
-): () => T;
+): T;
 export function useLatestCallback<T extends (...args: never) => unknown>(
   dep?: T | undefined
-): () => T | undefined;
+): T | undefined;
 export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
   const ref = useRef(dep);
   // eslint-disable-next-line react-hooks/refs
   ref.current !== dep && (ref.current = dep);
-  return useCallback(() => ref.current, []);
+  type Args = Parameters<typeof dep>;
+  return useCallback((...args: Args) => ref.current?.(...args), []);
 }
 
 /**
@@ -85,9 +86,11 @@ export function useDistinctState<T>({
       typeof initialValue === 'function'
         ? (initialValue as () => T)()
         : initialValue);
+  // eslint-disable-next-line react-hooks/refs
   const [value, setValue] = useState(initial);
 
-  const getOnChange = useLatestCallback(onChange);
+  const latestOnChange = useLatestCallback(onChange);
+  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
   const setValueDistinct = useCallback(
     (val: SetStateAction<T>) => {
       const value =
@@ -97,13 +100,12 @@ export function useDistinctState<T>({
       // eslint-disable-next-line react-hooks/exhaustive-deps
       hasDiff ??= (prev, next) => prev !== next;
       if (hasDiff(prevRef.current, value)) {
-        const onChange = getOnChange();
-        onChange?.(value);
+        latestOnChange?.(value);
         prevRef.current = value;
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    [getOnChange, onlyEvent, setValue, !!hasDiff]
+    [latestOnChange, onlyEvent, setValue, depHasDiff]
   );
   return [
     onlyEvent ? void 0 : value, // 仅触发事件时，返回undefined
@@ -122,19 +124,18 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
 ) => {
   const [el, setEl] = useState<T>();
   const isReadyRef = useRef(false); // 是否赋值完成
-  return [
-    el,
-    useCallback(
-      (node: T | null) => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        hasDiff ??= (oldNode, newNode) => oldNode !== newNode;
-        if (node && hasDiff(el, node)) {
-          isReadyRef.current = true;
-          setEl(node);
-        }
-      },
-      [el, !!hasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
-    ),
-    isReadyRef,
-  ] as const;
+  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
+  const safeRef = useCallback(
+    (node: T | null) => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      hasDiff ??= (oldNode, newNode) => oldNode !== newNode;
+      if (node && hasDiff(el, node)) {
+        isReadyRef.current = true;
+        setEl(node);
+      }
+    },
+    [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
+  );
+
+  return [el, safeRef, isReadyRef] as const;
 };
