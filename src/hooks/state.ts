@@ -126,9 +126,8 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
   const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
   const safeRef = useCallback(
     (node: T | null) => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      hasDiff ??= (oldNode, newNode) => oldNode !== newNode;
-      if (node && hasDiff(el, node)) {
+      const isDiff = hasDiff ?? ((oldNode, newNode) => oldNode !== newNode);
+      if (node && isDiff(el, node)) {
         isReadyRef.current = true;
         setEl(node);
       }
