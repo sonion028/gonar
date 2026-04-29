@@ -132,6 +132,7 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
         setEl(node);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 
