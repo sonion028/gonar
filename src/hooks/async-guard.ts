@@ -23,7 +23,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
       setIsPending(val);
       latestOnChange?.(val);
     },
-    [syncPending, setIsPending, latestOnChange]
+    [setIsPending, latestOnChange]
   );
 
   const latestAsyncAction = useLatestCallback(asyncAction); // 稳定函数引用
