@@ -71,39 +71,45 @@ describe('useStaticState', () => {
 });
 
 describe('useLatestCallback', () => {
-  it('should return a function that returns the latest callback', () => {
+  it('should call the latest callback when invoked', () => {
     const callback1 = vi.fn();
     const { result, rerender } = renderHook(({ cb }) => useLatestCallback(cb), {
       initialProps: { cb: callback1 },
     });
 
-    const getLatest = result.current;
-    expect(getLatest()).toBe(callback1);
+    const stableCallback = result.current;
+    stableCallback('arg1', 'arg2');
+    expect(callback1).toHaveBeenCalledWith('arg1', 'arg2');
 
     const callback2 = vi.fn();
     rerender({ cb: callback2 });
 
-    expect(getLatest()).toBe(callback2);
+    // 返回的函数引用是稳定的，但会调用最新的回调
+    result.current('arg3', 'arg4');
+    expect(callback2).toHaveBeenCalledWith('arg3', 'arg4');
+    expect(callback1).toHaveBeenCalledTimes(1); // 只被调用一次
   });
 
-  it('should return stable getter function across re-renders', () => {
+  it('should return stable callback function across re-renders', () => {
     const callback1 = vi.fn();
     const { result, rerender } = renderHook(({ cb }) => useLatestCallback(cb), {
       initialProps: { cb: callback1 },
     });
 
-    const getLatest1 = result.current;
+    const stableCallback1 = result.current;
 
     rerender({ cb: vi.fn() });
-    const getLatest2 = result.current;
+    const stableCallback2 = result.current;
 
-    expect(getLatest1).toBe(getLatest2);
+    // 返回的函数引用应该是稳定的
+    expect(stableCallback1).toBe(stableCallback2);
   });
 
   it('should handle undefined callback', () => {
     const { result } = renderHook(() => useLatestCallback(undefined));
-    const getLatest = result.current;
-    expect(getLatest()).toBeUndefined();
+    const stableCallback = result.current;
+    // 当传入 undefined 时，返回的函数调用时应该不执行任何操作（不会抛出错误）
+    expect(() => stableCallback?.()).not.toThrow();
   });
 });
 
