@@ -25,21 +25,29 @@ export function useStaticState<T>(initialValue?: T) {
 /**
  * @author sonion
  * @description 创建最新的回调函数，不触发重新执行，同时避免闭包问题。
- * 作用类似19.2的useEffectEvent，但原理和用法不同。
+ * 作用类似 React 19 的 useEffectEvent，但原理不同。
  * @param {T} dep - 依赖函数、依赖函数数组、依赖函数对象
- * @returns {()=>T} - 获取最新回调函数、依赖函数数组、依赖函数对象的方法
+ * @returns {T} - 返回稳定的函数引用，始终调用最新的 dep
  */
 export function useLatestCallback<T extends (...args: never) => unknown>(
   dep: T
-): () => T;
-export function useLatestCallback<T extends (...args: never) => unknown>(
+): T;
+export function useLatestCallback<T extends (...args: never[]) => unknown>(
   dep?: T | undefined
-): () => T | undefined;
+): T | undefined;
 export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
   const ref = useRef(dep);
+  // 注意：在渲染期间更新 ref.current 是 React 官方认可的模式。
+  // 参考：React 19 useEffectEvent 实现、Dan Abramov 的博客文章。
+  // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+  // https://jser.dev/react/2023/03/18/useeffectevent/
+  // https://www.epicreact.dev/the-latest-ref-pattern-in-react
+  // 这是实现"稳定引用 + 最新值"语义的标准做法。
+  // ESLint 规则 react-hooks/refs 对此场景存在误判，故禁用。
   // eslint-disable-next-line react-hooks/refs
   ref.current !== dep && (ref.current = dep);
-  return useCallback(() => ref.current, []);
+  type Args = Parameters<typeof dep>;
+  return useCallback((...args: Args) => ref.current?.(...args), []);
 }
 
 /**
@@ -79,31 +87,33 @@ export function useDistinctState<T>({
   onlyEvent?: true | false;
 }) {
   const prevRef = useRef<T>(void 0 as T);
-  // 初始化只可能是函数，所以包一层，在这层一起初始化prevRef的值，避免初始化重复调用
+  // 初始化只可能是函数，所以包一层，在这层一起初始化 prevRef 的值，避免初始化重复调用
   const initial = () =>
     (prevRef.current =
       typeof initialValue === 'function'
         ? (initialValue as () => T)()
         : initialValue);
+  // 注意：ESLint 规则 react-hooks/refs 误判了此场景。
+  // useState 的初始化函数只在组件挂载时执行一次，此时修改 prevRef.current 是安全的。
+  // eslint-disable-next-line react-hooks/refs
   const [value, setValue] = useState(initial);
-
-  const getOnChange = useLatestCallback(onChange);
+  const latestOnChange = useLatestCallback(onChange);
+  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
   const setValueDistinct = useCallback(
     (val: SetStateAction<T>) => {
       const value =
         typeof val === 'function'
           ? (val as (prevState: T) => T)(prevRef.current)
           : val;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      hasDiff ??= (prev, next) => prev !== next;
-      if (hasDiff(prevRef.current, value)) {
-        const onChange = getOnChange();
-        onChange?.(value);
+      const isDiff = hasDiff ?? ((prev, next) => prev !== next);
+      if (isDiff(prevRef.current, value)) {
+        latestOnChange?.(value);
         prevRef.current = value;
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    [getOnChange, onlyEvent, setValue, !!hasDiff]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [latestOnChange, onlyEvent, setValue, depHasDiff]
   );
   return [
     onlyEvent ? void 0 : value, // 仅触发事件时，返回undefined
@@ -122,19 +132,18 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
 ) => {
   const [el, setEl] = useState<T>();
   const isReadyRef = useRef(false); // 是否赋值完成
-  return [
-    el,
-    useCallback(
-      (node: T | null) => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        hasDiff ??= (oldNode, newNode) => oldNode !== newNode;
-        if (node && hasDiff(el, node)) {
-          isReadyRef.current = true;
-          setEl(node);
-        }
-      },
-      [el, !!hasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
-    ),
-    isReadyRef,
-  ] as const;
+  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
+  const safeRef = useCallback(
+    (node: T | null) => {
+      const isDiff = hasDiff ?? ((oldNode, newNode) => oldNode !== newNode);
+      if (node && isDiff(el, node)) {
+        isReadyRef.current = true;
+        setEl(node);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
+  );
+
+  return [el, safeRef, isReadyRef] as const;
 };
