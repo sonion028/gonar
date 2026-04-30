@@ -17,7 +17,7 @@ export const useMutationObserver = (
   once = false
 ) => {
   const observerRef = useRef<MutationObserver>();
-  const getLatestCallback = useLatestCallback(callback);
+  const latestCallback = useLatestCallback(callback);
 
   useEffect(
     () => () => {
@@ -37,13 +37,13 @@ export const useMutationObserver = (
       if (!el) return;
       observerRef.current ??= new MutationObserver(
         (mutations: MutationRecord[], observer: MutationObserver) => {
-          getLatestCallback()?.(mutations, observer);
+          latestCallback?.(mutations, observer);
           once && observer.disconnect();
         }
       );
       observerRef.current?.observe?.(el, options);
     },
-    [once, getLatestCallback]
+    [once, latestCallback]
   );
 
   const takeRecords = useCallback(
@@ -94,7 +94,7 @@ export const useIntersectionObserver = ({
 }: IntersectionObserverParams) => {
   const observerRef = useRef<IntersectionObserver>();
   const [rootRef, setRootRef] = useCreateSafeRef<Element>();
-  const getLatestCallback = useLatestCallback(callback);
+  const latestCallback = useLatestCallback(callback);
 
   const options = useMemo(
     () => ({
@@ -128,7 +128,7 @@ export const useIntersectionObserver = ({
       observerRef.current ??= new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            getLatestCallback()?.(entry.target, rootRef, observer);
+            latestCallback?.(entry.target, rootRef, observer);
             once && observer.unobserve?.(entry.target); // 取消观察, 因为只需要触发一次。反复触发可不取消
           }
         });
@@ -138,7 +138,7 @@ export const useIntersectionObserver = ({
     },
     // rootRef 已经是options 依赖了
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [options, once, getLatestCallback]
+    [options, once, latestCallback]
   );
 
   const unobserve = useCallback(
@@ -184,7 +184,7 @@ export const useResizeObserver = (
   once = false
 ) => {
   const observerRef = useRef<ResizeObserver>();
-  const getLatestCallback = useLatestCallback(callback);
+  const latestCallback = useLatestCallback(callback);
 
   useEffect(
     () => () => {
@@ -205,7 +205,7 @@ export const useResizeObserver = (
       observerRef.current ??= new ResizeObserver(
         (entries: ResizeObserverEntry[], observer: ResizeObserver) => {
           entries.forEach((entry) => {
-            getLatestCallback()?.(entry, observer);
+            latestCallback?.(entry, observer);
           });
           once && observer.disconnect();
         }
@@ -213,7 +213,7 @@ export const useResizeObserver = (
       observerRef.current?.unobserve?.(el); // 避免重复
       observerRef.current?.observe?.(el, options);
     },
-    [once, getLatestCallback]
+    [once, latestCallback]
   );
 
   /** 取消观察 */

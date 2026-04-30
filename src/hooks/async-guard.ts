@@ -16,17 +16,17 @@ export const useAsyncActionLock = <T extends unknown[], R>(
 ) => {
   const [isPending, setIsPending] = useState(false); // 对外可能需要触发渲染
   const syncPending = useRef(isPending); // 对内，同步更改，返回的函数不更改
-  const getLatestOnChange = useLatestCallback(onChange); // 稳定函数引用
+  const latestOnChange = useLatestCallback(onChange); // 稳定函数引用
   const setPending = useCallback(
     (val: boolean) => {
       syncPending.current = val;
       setIsPending(val);
-      getLatestOnChange()?.(val);
+      latestOnChange?.(val);
     },
-    [syncPending, setIsPending, getLatestOnChange]
+    [syncPending, setIsPending, latestOnChange]
   );
 
-  const getLatestAsyncAction = useLatestCallback(asyncAction); // 稳定函数引用
+  const latestAsyncAction = useLatestCallback(asyncAction); // 稳定函数引用
 
   const handler = useCallback<(...args: T) => Promise<R> | Promise<void>>(
     (...args: T) => {
@@ -37,7 +37,6 @@ export const useAsyncActionLock = <T extends unknown[], R>(
       setPending(true);
       return new Promise<R>((resolve, reject) => {
         try {
-          const latestAsyncAction = getLatestAsyncAction();
           resolve(latestAsyncAction?.(...args));
         } catch (err) {
           reject(err);
@@ -46,7 +45,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
         setPending(false);
       });
     },
-    [getLatestAsyncAction, msg, setPending]
+    [latestAsyncAction, msg, setPending]
   );
 
   return [isPending, handler] as const;

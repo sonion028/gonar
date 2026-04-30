@@ -11,19 +11,19 @@ import { useLatestCallback } from './state';
  */
 export const useInterval = (cb: () => void, duration: number) => {
   const timer = useRef<ReturnType<typeof setTimeout>>(void 0);
-  const getLatestCb = useLatestCallback(cb);
+  const latestCallback = useLatestCallback(cb);
   const run = useCallback(() => {
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       try {
-        getLatestCb()?.();
+        latestCallback?.();
       } catch (err) {
         console.error('useInterval error', err);
       }
       // eslint-disable-next-line react-hooks/immutability
       run?.();
     }, duration);
-  }, [duration, getLatestCb]);
+  }, [duration, latestCallback]);
   const stop = useCallback(() => clearTimeout(timer.current), [timer]);
   return [run, stop] as const;
 };
