@@ -22,6 +22,10 @@ export function useStaticState<T>(initialValue?: T) {
   return [getValue, setValue, withValue] as const;
 }
 
+interface UseLatestCallbackType {
+  <T extends (...args: never[]) => unknown>(cb: T): T;
+  <T extends (...args: never[]) => unknown>(cb?: T | undefined): T | undefined;
+}
 /**
  * @author sonion
  * @description 创建最新的回调函数，不触发重新执行，同时避免闭包问题。
@@ -29,13 +33,7 @@ export function useStaticState<T>(initialValue?: T) {
  * @param {T} cb - 依赖函数、依赖函数数组、依赖函数对象
  * @returns {T} - 返回稳定的函数引用，始终调用最新的 cb
  */
-export function useLatestCallback<T extends (...args: never[]) => unknown>(
-  cb: T
-): T;
-export function useLatestCallback<T extends (...args: never[]) => unknown>(
-  cb?: T | undefined
-): T | undefined;
-export function useLatestCallback(cb: (...args: unknown[]) => unknown) {
+export const useLatestCallback: UseLatestCallbackType = (cb) => {
   const ref = useRef(cb);
   // 注意：在渲染期间更新 ref.current 是 React 官方认可的模式。
   // 参考：React 19 useEffectEvent 实现、Dan Abramov 的博客文章。
@@ -46,9 +44,9 @@ export function useLatestCallback(cb: (...args: unknown[]) => unknown) {
   // ESLint 规则 react-hooks/refs 对此场景存在误判，故禁用。
   // eslint-disable-next-line react-hooks/refs
   ref.current !== cb && (ref.current = cb);
-  type Args = Parameters<typeof cb>;
+  type Args = Parameters<Exclude<typeof cb, undefined>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
-}
+};
 
 /**
  * @author sonion
