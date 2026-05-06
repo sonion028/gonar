@@ -26,17 +26,17 @@ export function useStaticState<T>(initialValue?: T) {
  * @author sonion
  * @description 创建最新的回调函数，不触发重新执行，同时避免闭包问题。
  * 作用类似 React 19 的 useEffectEvent，但原理不同。
- * @param {T} dep - 依赖函数、依赖函数数组、依赖函数对象
- * @returns {T} - 返回稳定的函数引用，始终调用最新的 dep
+ * @param {T} cb - 依赖函数、依赖函数数组、依赖函数对象
+ * @returns {T} - 返回稳定的函数引用，始终调用最新的 cb
  */
-export function useLatestCallback<T extends (...args: never) => unknown>(
-  dep: T
+export function useLatestCallback<T extends (...args: never[]) => unknown>(
+  cb: T
 ): T;
 export function useLatestCallback<T extends (...args: never[]) => unknown>(
-  dep?: T | undefined
+  cb?: T | undefined
 ): T | undefined;
-export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
-  const ref = useRef(dep);
+export function useLatestCallback(cb: (...args: unknown[]) => unknown) {
+  const ref = useRef(cb);
   // 注意：在渲染期间更新 ref.current 是 React 官方认可的模式。
   // 参考：React 19 useEffectEvent 实现、Dan Abramov 的博客文章。
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
@@ -45,8 +45,8 @@ export function useLatestCallback(dep: (...args: unknown[]) => unknown) {
   // 这是实现"稳定引用 + 最新值"语义的标准做法。
   // ESLint 规则 react-hooks/refs 对此场景存在误判，故禁用。
   // eslint-disable-next-line react-hooks/refs
-  ref.current !== dep && (ref.current = dep);
-  type Args = Parameters<typeof dep>;
+  ref.current !== cb && (ref.current = cb);
+  type Args = Parameters<typeof cb>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
 }
 

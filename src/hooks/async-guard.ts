@@ -7,7 +7,7 @@ import { useLatestCallback } from './state';
  * @param {(...args: T)=>Promise<R>} asyncAction - 异步方法，需返回Promise
  * @param {(isPending: boolean) => void} [onChange] - 状态变化回调
  * @param {string} [msg] - 警告信息
- * @returns {[boolean, (...args: T) => (Promise<R> | Promise<void>)]} - 返回是否执行中，执行方法
+ * @returns {[boolean, (...args: T) => Promise<R | void>]} - 返回是否执行中，执行方法
  */
 export const useAsyncActionLock = <T extends unknown[], R>(
   asyncAction: (...args: T) => Promise<R>,
@@ -28,11 +28,11 @@ export const useAsyncActionLock = <T extends unknown[], R>(
 
   const latestAsyncAction = useLatestCallback(asyncAction); // 稳定函数引用
 
-  const handler = useCallback<(...args: T) => Promise<R> | Promise<void>>(
+  const handler = useCallback<(...args: T) => Promise<R | void>>(
     (...args: T) => {
       if (syncPending.current) {
         console.clog(msg || '正在提交中，请稍后再试');
-        return Promise.resolve(void 0);
+        return Promise.resolve();
       }
       setPending(true);
       return new Promise<R>((resolve, reject) => {
