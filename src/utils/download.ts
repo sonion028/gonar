@@ -7,11 +7,13 @@
 export const browserNativeDownload = (url: string) =>
   new Promise<boolean>((resolve, reject) => {
     try {
+      const oldTab = window;
       const newTab = window.open(url, '_blank');
       if (!newTab || newTab.closed || typeof newTab.closed === 'undefined') {
         reject(new Error('Tab 可能被拦截了'));
       } else {
         resolve(true);
+        oldTab.focus();
       }
     } catch {
       reject(new Error('下载出错'));
