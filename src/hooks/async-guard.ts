@@ -11,17 +11,17 @@ import { useLatestCallback } from './state';
  */
 export const useAsyncActionLock = <T extends unknown[], R>(
   asyncAction: (...args: T) => Promise<R>,
-  onChange?: (isPending: boolean) => void,
+  onChange?: (isPending: boolean, ...args: T) => void,
   msg?: string
 ) => {
   const [isPending, setIsPending] = useState(false); // 对外可能需要触发渲染
   const syncPending = useRef(isPending); // 对内，同步更改，返回的函数不更改
   const latestOnChange = useLatestCallback(onChange); // 稳定函数引用
   const setPending = useCallback(
-    (val: boolean) => {
+    (val: boolean, ...args: T) => {
       syncPending.current = val;
       setIsPending(val);
-      latestOnChange?.(val);
+      latestOnChange?.(val, ...args);
     },
     [setIsPending, latestOnChange]
   );
@@ -34,7 +34,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
         console.clog(msg || '正在提交中，请稍后再试');
         return Promise.resolve();
       }
-      setPending(true);
+      setPending(true, ...args);
       return new Promise<R>((resolve, reject) => {
         try {
           resolve(latestAsyncAction?.(...args));
@@ -42,7 +42,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
           reject(err);
         }
       }).finally(() => {
-        setPending(false);
+        setPending(false, ...args);
       });
     },
     [latestAsyncAction, msg, setPending]
