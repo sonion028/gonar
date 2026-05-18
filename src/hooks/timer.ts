@@ -20,7 +20,6 @@ export const useInterval = (cb: () => void, duration: number) => {
       } catch (err) {
         console.error('useInterval error', err);
       }
-      // eslint-disable-next-line react-hooks/immutability
       run?.();
     }, duration);
   }, [duration, latestCallback]);

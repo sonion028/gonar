@@ -3,9 +3,8 @@ import globals from 'globals';
 import jslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
-import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import react from 'eslint-plugin-react';
+import react from '@eslint-react/eslint-plugin';
 import jsdoc from 'eslint-plugin-jsdoc';
 
 export default defineConfig([
@@ -30,9 +29,8 @@ export default defineConfig([
       ...tseslint.configs.recommended, // ✅ TypeScript 规则
       jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
       prettier, // ✅ 关闭和 Prettier 冲突的规则
-      reactHooks.configs.flat.recommended, // ✅ React Hooks 扁平插件配置对象
       reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
-      react.configs.flat.recommended, // ✅ React 扁平插件配置对象
+      react.configs['recommended-typescript'], // ✅ React TypeScript 扁平插件配置对象
     ],
     rules: {
       'jsdoc/no-undefined-types': 'off', // JSDoc 里的泛型会报错
@@ -41,8 +39,12 @@ export default defineConfig([
       'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
       '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
       '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
-      'react-hooks/exhaustive-deps': 'warn', // 不完整的依赖项
-      'react/react-in-jsx-scope': 'off', // 关闭 React 17+ ，JSX 可以空标签
+      '@eslint-react/immutability': 'error', // 不可变数据 手动开启
+      '@eslint-react/refs': 'error', // ref不可在渲染过程中更新 手动开启
+      '@eslint-react/globals': 'error', // 不在渲染过程中设置状态 手动开启
+      '@eslint-react/exhaustive-deps': 'warn', // 不完整的依赖项
+      '@eslint-react/no-clone-element': 'off', // 关闭不可克隆元素
+      '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
     },
   },
 ]);
