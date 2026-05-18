@@ -34,6 +34,7 @@ export const blobDownload = (blob: Blob, fileName: string, inline = true) => {
     a.href = url;
     a.download = fileName;
     inline || a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noreferrer noopener');
     a.click();
   } finally {
     URL.revokeObjectURL(url);
