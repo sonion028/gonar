@@ -137,7 +137,7 @@ export const useIntersectionObserver = ({
       observerRef.current?.observe?.(el);
     },
     // rootRef 已经是options 依赖了
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [options, once, latestCallback]
   );
 
