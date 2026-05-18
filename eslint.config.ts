@@ -39,9 +39,10 @@ export default defineConfig([
       'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
       '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
       '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
+      '@eslint-react/immutability': 'error', // 不可变数据 手动开启
+      '@eslint-react/refs': 'error', // ref不可在渲染过程中更新 手动开启
+      '@eslint-react/globals': 'error', // 不在渲染过程中设置状态 手动开启
       '@eslint-react/exhaustive-deps': 'warn', // 不完整的依赖项
-      '@eslint-react/immutability': 'warn', // 不可变数据
-      '@eslint-react/refs': 'warn', // ref不可在渲染过程中更新
       '@eslint-react/no-clone-element': 'off', // 关闭不可克隆元素
       '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
     },
