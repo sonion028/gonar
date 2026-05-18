@@ -41,8 +41,8 @@ export const useLatestCallback: UseLatestCallbackType = (cb) => {
   // https://jser.dev/react/2023/03/18/useeffectevent/
   // https://www.epicreact.dev/the-latest-ref-pattern-in-react
   // 这是实现"稳定引用 + 最新值"语义的标准做法。
-  // ESLint 规则 react-hooks/refs 对此场景存在误判，故禁用。
-  // eslint-disable-next-line react-hooks/refs
+  // ESLint 规则 @eslint-react/refs 对此场景存在误判，故禁用。
+  // eslint-disable-next-line @eslint-react/refs
   ref.current !== cb && (ref.current = cb);
   type Args = Parameters<Exclude<typeof cb, undefined>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
@@ -91,9 +91,7 @@ export function useDistinctState<T>({
       typeof initialValue === 'function'
         ? (initialValue as () => T)()
         : initialValue);
-  // 注意：ESLint 规则 react-hooks/refs 误判了此场景。
   // useState 的初始化函数只在组件挂载时执行一次，此时修改 prevRef.current 是安全的。
-  // eslint-disable-next-line react-hooks/refs
   const [value, setValue] = useState(initial);
   const latestOnChange = useLatestCallback(onChange);
   const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
@@ -110,7 +108,7 @@ export function useDistinctState<T>({
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [latestOnChange, onlyEvent, setValue, depHasDiff]
   );
   return [
@@ -139,7 +137,7 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
         setEl(node);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 
