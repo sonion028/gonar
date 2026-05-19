@@ -42,6 +42,7 @@ export default defineConfig([
       '@eslint-react/immutability': 'error', // 不可变数据 手动开启
       '@eslint-react/refs': 'error', // ref不可在渲染过程中更新 手动开启
       '@eslint-react/globals': 'error', // 不在渲染过程中设置状态 手动开启
+      '@eslint-react/dom-no-unsafe-target-blank': 'error', // target="_blank" 有没有 rel="noreferrer noopener" 手动开启
       '@eslint-react/exhaustive-deps': 'warn', // 不完整的依赖项
       '@eslint-react/no-clone-element': 'off', // 关闭不可克隆元素
       '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
