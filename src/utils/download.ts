@@ -8,7 +8,7 @@ export const browserNativeDownload = (url: string) =>
   new Promise<boolean>((resolve, reject) => {
     try {
       const oldTab = window;
-      const newTab = window.open(url, '_blank');
+      const newTab = window.open(url, '_blank', 'noopener,noreferrer');
       if (!newTab || newTab.closed || typeof newTab.closed === 'undefined') {
         reject(new Error('Tab 可能被拦截了'));
       } else {
