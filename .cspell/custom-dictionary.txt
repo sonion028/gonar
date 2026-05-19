@@ -1,6 +1,8 @@
 Abramov
 Behaviour
 gonar
+noopener
+noreferrer
 oxfmt
 sonion
 Uncapitalize
