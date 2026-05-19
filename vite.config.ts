@@ -10,7 +10,7 @@ export default defineConfig({
     libInjectCss(), // 注入 CSS 到每个生成的 chunk 文件
     dts({
       insertTypesEntry: true,
-      outDir: 'dist/types',
+      outDirs: 'dist/types',
       include: ['src/**/*'],
     }), // 生成类型声明文件
   ],
