@@ -1,6 +1,7 @@
 Abramov
 Behaviour
 lightningcss
+esbuild
 gonar
 noopener
 noreferrer
