@@ -22,12 +22,12 @@ runs:
           echo "jq 已存在，版本: $(jq --version)"
         fi
 
-    # 获取 pnpm 版本（来自 package.json engines）
+    # 获取 pnpm 版本（来自 package.json devEngines.packageManager）
     - name: 读取 pnpm 版本
       id: read-pnpm-version
       shell: bash
       run: |
-        PNPM_VERSION=$(jq -r '.engines.pnpm' package.json | grep -oE '[0-9]+(\.[0-9]+)*' | head -n1)
+        PNPM_VERSION=$(jq -r '.devEngines.packageManager.version' package.json | grep -oE '[0-9]+(\.[0-9]+)*' | head -n1)
         echo "pnpm-version=$PNPM_VERSION" >> $GITHUB_OUTPUT
 
     - name: 全局安装 pnpm
@@ -40,10 +40,10 @@ runs:
     - name: 安装 Node.js
       uses: actions/setup-node@v4
       with:
-        node-version-file: '.node-version'
+        node-version-file: ".node-version"
         # node-version: 24.13.0 # 建议用 LTS 版本，稳定性更好
-        registry-url: 'https://registry.npmjs.org/'
-        cache: 'pnpm'
+        registry-url: "https://registry.npmjs.org/"
+        cache: "pnpm"
 
     # 调试 Node 环境（新增）
     - name: 调试 Node.js 环境

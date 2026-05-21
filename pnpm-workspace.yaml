@@ -1,2 +1,6 @@
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+  simple-git-hooks: true
 onlyBuiltDependencies:
   - simple-git-hooks
