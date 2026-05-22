@@ -53,11 +53,11 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.1",
     "@commitlint/config-conventional": "^21.0.1",
-    "@eslint-react/eslint-plugin": "^5.8.1",
+    "@eslint-react/eslint-plugin": "^5.8.3",
     "@eslint/js": "^10.0.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^24.12.4",
-    "@types/react": "^18.3.28",
+    "@types/react": "^18.3.29",
     "@types/react-dom": "^18.3.7",
     "@typescript/native-preview": "7.0.0-dev.20260518.1",
     "cspell": "^10.0.0",
@@ -79,7 +79,7 @@
     "sass-embedded": "^1.99.0",
     "simple-git-hooks": "^2.13.1",
     "typescript-eslint": "^8.59.4",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.7"
   },
   "peerDependencies": {
     "react": "^18.0.0",
