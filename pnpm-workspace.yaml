@@ -2,4 +2,4 @@ allowBuilds:
   "@parcel/watcher": true
   esbuild: false
   simple-git-hooks: true
-minimumReleaseAge: 360 # 小时
+minimumReleaseAge: 0 # 小时
