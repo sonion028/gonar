@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["rolldown"],
-
     /* 目标与模块 */
     "target": "ESNext",
     "module": "ESNext",
