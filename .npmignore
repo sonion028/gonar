@@ -2,6 +2,7 @@ node_modules
 # 发布 不忽略 dist 目录
 !dist
 src
+tests
 
 # 不生效
 !.gitignore
