@@ -31,7 +31,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
   const handler = useCallback<(...args: T) => Promise<R | void>>(
     (...args: T) => {
       if (syncPending.current) {
-        console.clog(msg || '正在提交中，请稍后再试');
+        console.log(msg || '正在提交中，请稍后再试');
         return Promise.resolve();
       }
       setPending(true, ...args);
