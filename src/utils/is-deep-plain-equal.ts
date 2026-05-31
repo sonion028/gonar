@@ -4,7 +4,7 @@
  * @description 是否为null或undefined
  */
 export const isNil = (value: unknown): value is null | undefined =>
-  value === null || value === undefined;
+  value === null || value === void 0;
 
 /**
  * @author sonion
