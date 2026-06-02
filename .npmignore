@@ -6,5 +6,4 @@ tests
 
 # 不生效
 !.gitignore
-# 不生效
 !.npmignore
