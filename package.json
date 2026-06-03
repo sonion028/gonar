@@ -19,8 +19,6 @@
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "preinstall": "node scripts/sync-node-version/index.js",
-    "prepare": "pnpm exec simple-git-hooks",
     "build": "pnpm -r run build",
     "tsc": "pnpm -r exec tsc --noEmit",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
@@ -29,9 +27,11 @@
     "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
     "fmt": "oxfmt '{src,packages,apps}/**/*.*'",
     "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
-    "check": "pnpm run typecheck && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
+    "check": "pnpm run tsc && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "preinstall": "node scripts/sync-node-version/index.js",
+    "prepare": "pnpm exec simple-git-hooks"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",

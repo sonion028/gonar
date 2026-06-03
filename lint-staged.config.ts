@@ -6,21 +6,24 @@ const toRelativePath = (file: string) =>
   relative(import.meta.dirname, file).replaceAll('\\', '/');
 
 const getAffectedTypecheckCommands = (files: string[]) => {
-  const commands = new Set<string>();
+  const commands: string[] = [];
+  const packageFilters = new Set<string>();
   // 转相对路径
   const normalizedFiles = files.map(toRelativePath);
   // 是否在根src检查
   if (normalizedFiles.some((file) => file.startsWith('src/'))) {
-    commands.add('tsc -p tsconfig.json --noEmit');
+    commands.push('tsc -p tsconfig.json --noEmit');
   }
   // 子包的检查
   for (const file of normalizedFiles) {
     const match = file.match(/^(packages|apps)\/([^/]+)\//);
     if (!match) continue;
     const [, scope, name] = match;
-    commands.add(`tsc -p ${scope}/${name}/tsconfig.json --noEmit`);
+    packageFilters.add(`--filter ./${scope}/${name}`);
   }
-  return [...commands];
+  packageFilters.size &&
+    commands.push(`pnpm ${[...packageFilters].join(' ')} exec tsc --noEmit`);
+  return commands;
 };
 
 export default {
