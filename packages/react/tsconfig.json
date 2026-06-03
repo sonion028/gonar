@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    /* JSX */
+    "jsx": "react-jsx",
+
+    /* 路径别名 */
+    "paths": {
+      "@/*": ["./src/*"],
+      "@gonar/utils": ["../utils/src/index.ts"]
+    }
+  },
+  "include": ["src", "types"],
+  "exclude": ["dist", "node_modules"]
+}

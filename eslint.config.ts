@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
@@ -8,7 +9,7 @@ import react from '@eslint-react/eslint-plugin';
 import jsdoc from 'eslint-plugin-jsdoc';
 
 export default defineConfig([
-  globalIgnores(['dist', 'node_modules']), // 忽略 dist 和 node_modules 目录
+  globalIgnores(['**/dist/**', '**/node_modules/**']), // 忽略 dist 和 node_modules 目录
   {
     files: ['**/*.{ts,tsx,js,jsx}'], // 对所有 TS TSX JS JSX 文件应用规则
     languageOptions: {
@@ -20,9 +21,6 @@ export default defineConfig([
       },
     },
     settings: {
-      react: {
-        version: 'detect', // 自动检测 React 版本
-      },
       jsdoc: {
         mode: 'typescript',
       },
@@ -32,8 +30,6 @@ export default defineConfig([
       ...tseslint.configs.recommended, // ✅ TypeScript 规则
       jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
       prettier, // ✅ 关闭和 Prettier 冲突的规则
-      reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
-      react.configs['recommended-typescript'], // ✅ React TypeScript 扁平插件配置对象
     ],
     rules: {
       'jsdoc/no-undefined-types': 'off', // JSDoc 里的泛型会报错
@@ -42,6 +38,28 @@ export default defineConfig([
       'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
       '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
       '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
+    },
+  },
+  {
+    files: ['packages/react/**/*.{ts,tsx,js,jsx}'], // 仅 React 子包应用 React 规则
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: `${import.meta.dirname}/packages/react`, // 指定 tsconfig
+      },
+    },
+    settings: {
+      react: {
+        version: 'detect', // 自动检测 React 版本
+      },
+      '@eslint-react': {
+        reactVersion: '18', // @eslint-react 插件
+      },
+    },
+    extends: [
+      reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
+      react.configs['recommended-typescript'], // ✅ React TypeScript 扁平插件配置对象
+    ],
+    rules: {
       '@eslint-react/immutability': 'error', // 不可变数据 手动开启
       '@eslint-react/refs': 'error', // ref不可在渲染过程中更新 手动开启
       '@eslint-react/globals': 'error', // 不在渲染过程中设置状态 手动开启

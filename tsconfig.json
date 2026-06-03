@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
-    "types": ["vite/client"],
+    "types": [],
 
     /* 目标与模块 */
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-
-    /* JSX */
-    "jsx": "react-jsx",
 
     /* 模块解析：现代 bundler 模式 */
     "moduleResolution": "bundler", // 更适合 Vite/Rollup
@@ -33,14 +30,8 @@
     /* 互操作与工具支持 */
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-
-    // "baseUrl": ".", // 已废弃，使用 paths 替代
-    /* 路径别名 */
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "isolatedModules": true
   },
-  "include": ["src", "types"],
+  "include": ["src", "packages"], // "*.config.ts", "vite.config.base.ts"
   "exclude": ["node_modules", "dist"]
 }

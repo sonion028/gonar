@@ -1,5 +1,9 @@
 import { useRef, useCallback } from 'react';
-import { type RAfIntervalReturn, rAfInterval, clearRAfInterval } from '@/utils';
+import {
+  type RAfIntervalReturn,
+  rAfInterval,
+  clearRAfInterval,
+} from '@gonar/utils';
 import { useLatestCallback } from './state';
 
 /**
