@@ -4,7 +4,7 @@ import { libInjectCss } from 'vite-plugin-lib-inject-css';
 import baseConfig from '../../vite.base.config';
 import dts from 'vite-plugin-dts';
 
-const merged = mergeConfig(
+export default mergeConfig(
   baseConfig(),
   defineConfig({
     plugins: [
@@ -37,13 +37,7 @@ const merged = mergeConfig(
       },
       rolldownOptions: {
         external: ['react', 'react-dom', 'react/jsx-runtime', '@gonar/utils'],
-        output: {
-          chunkFileNames: 'js/[name].[hash].js', // 除入口外的 chunk 文件放js文件夹
-        },
       },
     },
   })
 );
-
-console.log('======>', merged);
-export default merged;

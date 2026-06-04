@@ -19,7 +19,7 @@
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "pnpm -r run build",
+    "build": "pnpm -r --stream run build",
     "tsc": "pnpm -r exec tsc --noEmit",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
