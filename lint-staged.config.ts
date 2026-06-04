@@ -4,16 +4,18 @@ import { relative } from 'node:path';
 
 /**
  * @author sonion
- * @description
- * @param {string} file
- * @returns {}
+ * @description 转换为相对路径
+ * @param {string} file - 文件路径
  */
-
-// 转相对路径
 const toRelativePath = (file: string) =>
   relative(import.meta.dirname, file).replaceAll('\\', '/');
 
-// 相对路径列表 和 获取子包路径
+//
+/**
+ * @author sonion
+ * @description 相对路径列表 和 获取子包路径
+ * @param {string[]} files - 文件路径列表
+ */
 const getSubPackagePaths = (files: string[]) => {
   const relativePathFiles = files.map(toRelativePath);
   const subPackagePaths = relativePathFiles.reduce((pre, cur) => {
@@ -27,7 +29,11 @@ const getSubPackagePaths = (files: string[]) => {
   };
 };
 
-// 生成tsc检查命令
+/**
+ * @author sonion
+ * @description 生成tsc检查命令
+ * @param {string[]} files - 文件路径列表
+ */
 const getAffectedTypecheckCommands = (files: string[]) => {
   const commands: string[] = [];
   const { relativePathFiles, subPackagePaths } = getSubPackagePaths(files);
