@@ -10,6 +10,5 @@
       "@gonar/utils": ["../utils/src/index.ts"]
     }
   },
-  "include": ["src", "types"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src", "types"]
 }
