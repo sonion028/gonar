@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // 读取 package.json
-const syncNodeVersion = (projectPath) => {
+export const syncNodeVersion = (projectPath) => {
   const packageJsonPath = path.join(projectPath, 'package.json');
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
@@ -61,5 +61,3 @@ const syncNodeVersion = (projectPath) => {
   fs.writeFileSync(nodeVersionPath, validVersion, 'utf8');
   console.log(`✓ Node version synced: ${validVersion}`);
 };
-
-export default syncNodeVersion;
