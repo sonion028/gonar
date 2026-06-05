@@ -23,7 +23,7 @@
     "check": "pnpm run tsc && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "test": "vitest --run",
-    "preinstall": "pnpm -r exec sync-node-version",
+    "preinstall": "pnpm -r --include-workspace-root exec sync-node-version",
     "prepare": "pnpm exec simple-git-hooks"
   },
   "devDependencies": {
@@ -53,7 +53,7 @@
     "packageManager": {
       "name": "pnpm",
       "version": ">=10.33.4",
-      "onFail": "warn"
+      "onFail": "error"
     },
     "runtime": {
       "name": "node",
