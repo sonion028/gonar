@@ -9,7 +9,7 @@ runs:
       shell: bash
       run: |
         echo "运行 tsc 检查..."
-        pnpm exec tsc --noEmit
+        pnpm run tsc
         echo "tsc 检查通过 ✅"
 
     # Lint 检查
