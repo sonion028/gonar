@@ -3,21 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
-  "keywords": [
-    "components",
-    "hooks",
-    "react",
-    "utils"
-  ],
-  "bugs": {
-    "url": "https://github.com/sonion028/gonar/issues"
-  },
+  "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
   "type": "module",
-  "module": "dist/index.esm.js",
-  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "pnpm -r --stream run build",
     "tsc": "pnpm -r exec tsc --noEmit",
@@ -67,5 +57,8 @@
       "version": ">=24.15.0",
       "onFail": "error"
     }
+  },
+  "engines": {
+    "node": ">=22.22.0"
   }
 }
