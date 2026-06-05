@@ -24,6 +24,16 @@ jobs:
         with:
           fetch-depth: 0 # 拉取完整历史。当仓库历史多时可能变慢，可考虑用 GitHub API compare 优化
 
+      # 推送 tag  github.event.base_ref不稳定，可能没有值
+      - name: 验证 Tag 在 main 分支上
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor ${{ github.sha }} origin/main; then
+            echo "错误：Tag ${{ github.ref_name }} 不在 main 分支上"
+            exit 1
+          fi
+          echo "Tag 在 main 分支上 ✅"
+
       - name: 准备环境
         uses: ./.github/actions/env-setup # 引入 环境准备
       - name: 基础检查
@@ -92,7 +102,7 @@ jobs:
       - name: Publish 到 npm
         run: |
           echo "开始发布到 npm..."
-          pnpm -r publish --access public --no-git-checks --tag canary
+          pnpm -r publish --access public --no-git-checks
           echo "发布成功 ✅"
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }} # 首次发布需要
