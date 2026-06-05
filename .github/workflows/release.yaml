@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build-and-publish:
-    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')'
+    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest # 使用最新的 Ubuntu Runner
     # environment: production-publish-npm # 指定环境名
 
