@@ -15,6 +15,9 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
+  "bin": {
+    "sync-node-version": "./scripts/sync-node-version/index.js"
+  },
   "type": "module",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -38,7 +41,7 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build",
-    "preinstall": "node scripts/sync-node-version/index.js",
+    "preinstall": "pnpm exec sync-node-version",
     "prepare": "pnpm exec simple-git-hooks",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
