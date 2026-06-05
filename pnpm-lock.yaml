@@ -72,6 +72,15 @@ importers:
         specifier: ^4.1.7
         version: 4.1.7(@types/node@24.12.4)(jsdom@29.1.1)(vite@8.0.14(@types/node@24.12.4)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
 
+  packages/gonar:
+    dependencies:
+      '@gonar/react':
+        specifier: workspace:*
+        version: link:../react
+      '@gonar/utils':
+        specifier: workspace:*
+        version: link:../utils
+
   packages/react:
     dependencies:
       '@gonar/utils':
