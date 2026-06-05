@@ -36,13 +36,7 @@ const getSubPackagePaths = (files: string[]) => {
  */
 const getAffectedTypecheckCommands = (files: string[]) => {
   const commands: string[] = [];
-  const { relativePathFiles, subPackagePaths } = getSubPackagePaths(files);
-
-  // 是否在根src检查
-  if (relativePathFiles.some((file) => file.startsWith('src/'))) {
-    commands.push('tsc -p tsconfig.json --noEmit');
-  }
-
+  const { subPackagePaths } = getSubPackagePaths(files);
   if (!subPackagePaths.size) return commands;
   const paths = [...subPackagePaths];
   // 单个子包不支持大括号写法
@@ -52,8 +46,10 @@ const getAffectedTypecheckCommands = (files: string[]) => {
 };
 
 export default {
-  // 仅检查受影响的子包；若命中根目录源码或关键配置，再补充根级 tsc
-  '{src,packages,apps}/**/*.{ts,tsx,vue}': getAffectedTypecheckCommands,
+  // 仅检查受影响的子包
+  '{packages,apps}/**/*.{ts,tsx,vue}': getAffectedTypecheckCommands,
+  // tsc 检查只能整个包，不能只检查某个文件
+  'src/**/*.{ts,tsx,vue}': () => ['tsc --noEmit'],
   '{src,packages,apps}/**/*.{js,jsx,ts,tsx,vue}': ['eslint --fix'],
   '{src,packages,apps}/**/*.{js,jsx,ts,tsx,vue,css,scss,less,md,mdx,html,json,yml,yaml}':
     ['oxfmt', 'cspell lint'],

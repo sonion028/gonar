@@ -51,9 +51,6 @@ export default defineConfig([
       react: {
         version: 'detect', // 自动检测 React 版本
       },
-      '@eslint-react': {
-        reactVersion: '18', // @eslint-react 插件
-      },
     },
     extends: [
       reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
