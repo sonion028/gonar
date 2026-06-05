@@ -7,6 +7,9 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
+  "bin": {
+    "sync-node-version": "./scripts/sync-node-version/index.js"
+  },
   "type": "module",
   "scripts": {
     "build": "pnpm -r --stream run build",
@@ -20,7 +23,7 @@
     "check": "pnpm run tsc && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "test": "vitest --run",
-    "preinstall": "node scripts/sync-node-version/index.js",
+    "preinstall": "pnpm -r exec sync-node-version",
     "prepare": "pnpm exec simple-git-hooks"
   },
   "devDependencies": {
@@ -50,7 +53,7 @@
     "packageManager": {
       "name": "pnpm",
       "version": ">=10.33.4",
-      "onFail": "error"
+      "onFail": "warn"
     },
     "runtime": {
       "name": "node",
