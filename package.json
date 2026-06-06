@@ -15,9 +15,6 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
-  "bin": {
-    "sync-node-version": "./scripts/sync-node-version/index.js"
-  },
   "type": "module",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -77,6 +74,7 @@
     "rimraf": "^6.1.3",
     "sass-embedded": "^1.100.0",
     "simple-git-hooks": "^2.13.1",
+    "sync-node-version": "^0.0.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.0",
     "vite": "^8.0.14",
