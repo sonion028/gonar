@@ -38,7 +38,7 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build",
-    "preinstall": "node scripts/sync-node-version/index.js",
+    "preinstall": "pnpm exec sync-node-version",
     "prepare": "pnpm exec simple-git-hooks",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
@@ -74,6 +74,7 @@
     "rimraf": "^6.1.3",
     "sass-embedded": "^1.100.0",
     "simple-git-hooks": "^2.13.1",
+    "sync-node-version": "^0.0.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.0",
     "vite": "^8.0.14",

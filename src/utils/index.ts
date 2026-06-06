@@ -2,9 +2,9 @@ export * from './thenable';
 export * from './concurrency';
 export * from './debounce';
 export * from './hash';
-export * from './download';
+export * from './web/download';
 export * from './deep-copy';
-export * from './raf-interval';
+export * from './web/raf-interval';
 
 export * from './json-convert';
 export * from './fetch-xhr';

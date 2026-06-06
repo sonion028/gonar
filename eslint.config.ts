@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
