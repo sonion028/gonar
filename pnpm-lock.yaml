@@ -56,6 +56,9 @@ importers:
       simple-git-hooks:
         specifier: ^2.13.1
         version: 2.13.1
+      sync-node-version:
+        specifier: ^0.0.1
+        version: 0.0.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -2357,6 +2360,11 @@ packages:
   sync-message-port@1.2.0:
     resolution: {integrity: sha512-gAQ9qrUN/UCypHtGFbbe7Rc/f9bzO88IwrG8TDo/aMKAApKyD6E3W4Cm0EfhfBb6Z6SKt59tTCTfD+n1xmAvMg==}
     engines: {node: '>=16.0.0'}
+
+  sync-node-version@0.0.1:
+    resolution: {integrity: sha512-vdBCul3sJxsVQQ7BUOBKgi1Ki6xxssIPF/LWlldid6y+R4/67LJoPcuO1egX/jra/JhFWqCqlUkcfkCu8RtQMw==}
+    engines: {node: '>=22.22.0'}
+    hasBin: true
 
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
@@ -4831,6 +4839,8 @@ snapshots:
       sync-message-port: 1.2.0
 
   sync-message-port@1.2.0: {}
+
+  sync-node-version@0.0.1: {}
 
   tinybench@2.9.0: {}
 
