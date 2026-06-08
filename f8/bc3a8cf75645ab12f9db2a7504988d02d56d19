@@ -1,0 +1,16 @@
+.github/actions/base-check/action.yaml
+  h_8198a3bddb05e6 7-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "f8bc3a8cf75645ab12f9db2a7504988d02d56d19",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
