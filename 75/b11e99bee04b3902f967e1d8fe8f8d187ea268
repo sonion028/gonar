@@ -1,0 +1,27 @@
+lint-staged.config.ts
+  s_e13016446f8b82::t_1b47fbb0d137d0 6
+  h_8198a3bddb05e6 2-4,9,12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "75b11e99bee04b3902f967e1d8fe8f8d187ea268",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_e13016446f8b82": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-f30e268a-a255-4991-af16-fe51ada76f08",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
