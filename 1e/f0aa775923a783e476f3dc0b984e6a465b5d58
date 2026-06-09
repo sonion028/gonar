@@ -1,0 +1,58 @@
+scripts/staged-packages/index.ts
+  s_2fd0c044306ed4::t_a96b53d8a1a24a 30
+  s_bfb67a2620fc0d::t_c2d0c0084e6844 5
+  h_8198a3bddb05e6 22
+lint-staged.config.ts
+  h_8198a3bddb05e6 1,5 gitai:{"mixed_line_ranges":[{"Single":1}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "1ef0aa775923a783e476f3dc0b984e6a465b5d58",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_2fd0c044306ed4": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-aec369e9-b01c-4a84-b177-7291f3b96c8d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_bfb67a2620fc0d": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-c2c9b9ee-e953-4190-bb63-8d4b2771bd08",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "lint-staged.config.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 1
+          },
+          {
+            "Single": 5
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
