@@ -16,6 +16,9 @@
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "exports": {
@@ -89,7 +92,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=10.33.4",
+      "version": ">=11.4.0",
       "onFail": "error"
     },
     "runtime": {
