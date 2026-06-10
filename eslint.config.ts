@@ -48,8 +48,8 @@ export default defineConfig([
       },
     },
     settings: {
-      react: {
-        version: 'detect', // 自动检测 React 版本
+      'react-x': {
+        version: '18.0.0', // 指定 React 18
       },
     },
     extends: [
