@@ -16,6 +16,9 @@
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "exports": {
