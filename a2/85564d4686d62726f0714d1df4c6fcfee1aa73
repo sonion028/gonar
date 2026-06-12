@@ -1,0 +1,22 @@
+packages/gonar/vite.config.ts
+  h_8198a3bddb05e6 2-3,11,15
+commitlint.config.ts
+  h_8198a3bddb05e6 3-5
+packages/utils/vite.config.ts
+  h_8198a3bddb05e6 2-3,13-15
+packages/react/vite.config.ts
+  h_8198a3bddb05e6 5,13,17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "a285564d4686d62726f0714d1df4c6fcfee1aa73",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
