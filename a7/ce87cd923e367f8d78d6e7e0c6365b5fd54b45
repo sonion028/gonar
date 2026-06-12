@@ -1,0 +1,16 @@
+.github/actions/env-setup/action.yaml
+  h_8198a3bddb05e6 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "a7ce87cd923e367f8d78d6e7e0c6365b5fd54b45",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
