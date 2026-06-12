@@ -318,12 +318,12 @@ importers:
       typescript-eslint:
         specifier: ^8.61.0
         version: 8.61.0(eslint@10.4.1(jiti@2.6.1))(typescript@6.0.3)
+      unplugin-dts:
+        specifier: ^1.0.2
+        version: 1.0.2(rolldown@1.0.3)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
       vite:
         specifier: ^8.0.16
         version: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)
-      vite-plugin-dts:
-        specifier: ^5.0.2
-        version: 5.0.2(rolldown@1.0.3)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
       vitest:
         specifier: ^4.1.8
         version: 4.1.8(@types/node@24.13.2)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
@@ -2732,20 +2732,6 @@ packages:
 
   varint@6.0.0:
     resolution: {integrity: sha512-cXEIW6cfr15lFv563k4GuVuW/fiwjknytD37jIOLSdSWuOI6WnO/oKwmP2FQTU2l01LP8/M5TSAJpzUaGe3uWg==}
-
-  vite-plugin-dts@5.0.2:
-    resolution: {integrity: sha512-lNeHS+dwGju6eRmNvZQt8Shwv9j3m98hbHse/lIbLq9q3yE2DcIOBBYQEVUF6tS0kOmv+VA9Z5FqmzFnGe4U8g==}
-    peerDependencies:
-      '@microsoft/api-extractor': '>=7'
-      rollup: '>=3'
-      vite: '>=3'
-    peerDependenciesMeta:
-      '@microsoft/api-extractor':
-        optional: true
-      rollup:
-        optional: true
-      vite:
-        optional: true
 
   vite-plugin-lib-inject-css@2.2.2:
     resolution: {integrity: sha512-NF30p0GwtfSAmVlxo2NgPXM2rEdtgV7LFi4lkzajKD7P3Ru/ZAFmI533M0Z5qyMZpvNMxVGkewzpjD0HOWtbDQ==}
@@ -5181,20 +5167,6 @@ snapshots:
       punycode: 2.3.1
 
   varint@6.0.0: {}
-
-  vite-plugin-dts@5.0.2(rolldown@1.0.3)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)):
-    dependencies:
-      unplugin-dts: 1.0.2(rolldown@1.0.3)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
-    optionalDependencies:
-      vite: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)
-    transitivePeerDependencies:
-      - '@rspack/core'
-      - '@vue/language-core'
-      - esbuild
-      - rolldown
-      - supports-color
-      - typescript
-      - webpack
 
   vite-plugin-lib-inject-css@2.2.2(vite@8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)):
     dependencies:

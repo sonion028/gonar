@@ -2,7 +2,7 @@ import { defineConfig, mergeConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
 import baseConfig from '../../vite.base.config';
-import dts from 'vite-plugin-dts';
+import dts from 'unplugin-dts/vite';
 
 export default mergeConfig(
   baseConfig(),
@@ -10,10 +10,11 @@ export default mergeConfig(
     plugins: [
       dts({
         insertTypesEntry: true,
-        entryRoot: 'src',
+        // entryRoot: 'src',
         outDirs: 'dist/types',
         include: ['src/**/*', 'types/**/*'],
         compilerOptions: {
+          rootDir: 'src',
           paths: {
             '@/*': ['./src/*'],
           },

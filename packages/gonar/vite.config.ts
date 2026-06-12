@@ -1,5 +1,6 @@
 import { defineConfig, mergeConfig } from 'vite';
-import dts from 'vite-plugin-dts';
+import dts from 'unplugin-dts/vite';
+
 import baseConfig from '../../vite.base.config';
 
 export default mergeConfig(
@@ -7,10 +8,11 @@ export default mergeConfig(
   defineConfig({
     plugins: [
       dts({
-        entryRoot: 'src',
+        // entryRoot: 'src',
         outDirs: 'dist/types',
         include: ['src/**/*'],
         compilerOptions: {
+          rootDir: 'src',
           paths: {},
         },
       }), // 生成类型声明文件
