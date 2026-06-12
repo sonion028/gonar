@@ -1,0 +1,27 @@
+package.json
+  s_200a7fe3fe1d03::t_d369c6fdbd4ccc 21
+  h_8198a3bddb05e6 95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "2b5c9ef10bbebb04b41499d7254e194bc9ba1b30",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_200a7fe3fe1d03": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-8ee6e721-fe01-450a-a56c-5048aa22cd3d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
