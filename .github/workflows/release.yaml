@@ -38,6 +38,8 @@ jobs:
         uses: ./.github/actions/env-setup # 引入 环境准备
       - name: 基础检查
         uses: ./.github/actions/base-check # 引入 基础检查
+        name: monorepo 处理
+      - uses: ./.github/actions/monorepo # 引入 monorepo 处理 action
 
       # 找到上一个 tag
       - name: 获取上一个 Tag
@@ -72,7 +74,7 @@ jobs:
           fi
           echo "Commitlint 检查通过 ✅"
 
-      # tag 同步 package.json 版本 依赖jq
+      # tag 同步 package.json 版本
       - name: 同步 Tag 为 package.json 版本
         run: |
           set -eo pipefail
@@ -94,7 +96,7 @@ jobs:
 
       # 打印将要发布的文件列表，避免误发布
       - name: 打印发布文件列表
-        run: pnpm pack --dry-run
+        run: pnpm -r pack --dry-run
 
       # 发布到 npm registry - 只在标签触发时执行
       - name: Publish 到 npm
@@ -102,9 +104,9 @@ jobs:
           echo "开始发布到 npm..."
           pnpm -r publish --access public --no-git-checks
           echo "发布成功 ✅"
-        # 加 --tag canary 发布到 canary channel
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }} # 首次发布需要
+        # 加 --tag canary 发布到 canary channel
 
       # 只有发布成功后才生成 GitHub Release
       - name: 创建 GitHub Release 记录
