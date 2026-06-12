@@ -83,10 +83,8 @@ jobs:
             echo "错误：版本号为空，请检查 Tag 格式（应为 vX.Y.Z）"
             exit 1
           fi
-          find packages -maxdepth 2 -name package.json | while IFS= read -r f; do
-            jq --arg v "$VERSION" '.version = $v' "$f" > "${f}.tmp" && mv "${f}.tmp" "$f"
-            echo "✓ $f → $VERSION"
-          done
+          pnpm -r pkg set version="$VERSION"
+          echo "更新后 package.json 版本: $(pnpm pkg get version)"
 
       - name: 编译
         run: |
