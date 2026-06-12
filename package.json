@@ -44,8 +44,8 @@
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
     "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
-    "fmt": "oxfmt '{src,packages,apps}/**/*.*'",
-    "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
+    "fmt": "oxfmt '{src,apps,packages}/**/*.*'",
+    "fmt:check": "oxfmt --check '{src,apps,packages}/**/*.*'",
     "check": "pnpm exec tsc --noEmit && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "test": "vitest --run"
@@ -89,7 +89,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=10.33.4",
+      "version": ">=11.4.0",
       "onFail": "error"
     },
     "runtime": {
