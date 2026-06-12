@@ -75,7 +75,7 @@ jobs:
       # tag 同步 package.json 版本 依赖jq
       - name: 同步 Tag 为 package.json 版本
         run: |
-          set -e
+          set -eo pipefail
           TAG=${GITHUB_REF#refs/tags/}
           VERSION=${TAG#v}
           echo "当前 Tag: $TAG，提取版本号: $VERSION"
