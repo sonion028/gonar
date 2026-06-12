@@ -72,7 +72,7 @@ jobs:
           fi
           echo "Commitlint 检查通过 ✅"
 
-      # tag 同步 package.json 版本 依赖jq
+      # tag 同步 package.json 版本
       - name: 同步 Tag 为 package.json 版本
         run: |
           set -eo pipefail
