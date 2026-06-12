@@ -38,7 +38,7 @@ jobs:
         uses: ./.github/actions/env-setup # 引入 环境准备
       - name: 基础检查
         uses: ./.github/actions/base-check # 引入 基础检查
-        name: monorepo 处理
+        name: monorepo处理
       - uses: ./.github/actions/monorepo # 引入 monorepo 处理 action
 
       # 找到上一个 tag
