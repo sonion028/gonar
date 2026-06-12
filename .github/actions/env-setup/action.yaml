@@ -42,7 +42,7 @@ runs:
       with:
         run_install: false # 不运行 pnpm install
         # 不写version会读取package.json 的 packageManager
-        version: 10.33.4 # ${{ steps.read-pnpm-version.outputs.pnpm-version }}
+        version: ${{ steps.read-pnpm-version.outputs.pnpm-version }}
 
     - name: 配置 Node cache
       uses: actions/setup-node@v4
