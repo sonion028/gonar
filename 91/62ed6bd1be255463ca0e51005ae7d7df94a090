@@ -1,0 +1,89 @@
+.github/workflows/release.yaml
+  h_8198a3bddb05e6 41
+  s_16aba0142703c9::t_057c6c0299f9e9 42
+.github/actions/monorepo/action.yaml
+  h_8198a3bddb05e6 1-2,11-12,14 gitai:{"mixed_line_ranges":[{"Single":1},{"Single":12},{"Single":14}],"operations":[]}
+  s_e3b4beaa7e477f::t_b61e19ea9384a2 7 gitai:{"mixed_line_ranges":[{"Single":7}],"operations":[]}
+package.json
+  h_8198a3bddb05e6 23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9162ed6bd1be255463ca0e51005ae7d7df94a090",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_16aba0142703c9": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-38ee30c6-c342-47d0-a979-6e15dec64465",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_e3b4beaa7e477f": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-e0edb56d-d7e8-454f-9f85-2a5d33ba0948",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    ".github/actions/monorepo/action.yaml": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              1,
+              2
+            ]
+          },
+          {
+            "Range": [
+              11,
+              12
+            ]
+          },
+          {
+            "Single": 14
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 1
+          },
+          {
+            "Single": 12
+          },
+          {
+            "Single": 14
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_e3b4beaa7e477f::t_b61e19ea9384a2",
+        "line_ranges": [
+          {
+            "Single": 7
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 7
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
