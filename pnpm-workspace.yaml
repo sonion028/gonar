@@ -1,6 +1,7 @@
 allowBuilds:
   "@parcel/watcher": true
   esbuild: false
+  rolldown-plugin-css: false
   simple-git-hooks: true
 minimumReleaseAge: 0 # 小时
 
