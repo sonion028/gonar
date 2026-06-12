@@ -1,0 +1,35 @@
+vite.config.ts
+  s_55bf6641dd3e13::t_2b5c0651fa5490 16
+  s_2ae43d649e395f::t_fecf54a9c0300b 15,17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "06191eeaed306dc4bccbdd3254cb7a7f4eac3e48",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_2ae43d649e395f": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-c0f6e171-4532-46be-b0f6-585b2f2ea66c",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_55bf6641dd3e13": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-7f9a723c-8ee2-40fa-a3d1-d5ebbffa639c",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
