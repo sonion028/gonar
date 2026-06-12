@@ -1,0 +1,16 @@
+.github/workflows/release.yaml
+  h_8198a3bddb05e6 28-35,105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "311928a8642bcaf8b6c495eabca1c572831343b8",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
