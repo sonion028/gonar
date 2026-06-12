@@ -1,0 +1,18 @@
+.github/workflows/release.yaml
+  h_8198a3bddb05e6 75
+.github/actions/env-setup/action.yaml
+  h_8198a3bddb05e6 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "1f8803a6f86f8c6f551469fe99c442d080a185d2",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
