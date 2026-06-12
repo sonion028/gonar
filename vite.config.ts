@@ -11,8 +11,10 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       outDirs: 'dist/types',
-      entryRoot: 'src',
       include: ['src/**/*'],
+      compilerOptions: {
+        rootDir: 'src',
+      },
     }), // 生成类型声明文件
   ],
   resolve: {
