@@ -9,9 +9,7 @@
     "react",
     "utils"
   ],
-  "bugs": {
-    "url": "https://github.com/sonion028/gonar/issues"
-  },
+  "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
