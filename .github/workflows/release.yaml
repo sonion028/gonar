@@ -83,9 +83,8 @@ jobs:
             echo "错误：版本号为空，请检查 Tag 格式（应为 vX.Y.Z）"
             exit 1
           fi
-          jq ".version = \"$VERSION\"" package.json > package.json.tmp
-          mv package.json.tmp package.json
-          echo "更新后 package.json 版本: $(cat package.json | grep version)"
+          pnpm -r pkg set version="$VERSION"
+          echo "更新后 package.json 版本: $(pnpm pkg get version)"
 
       - name: 编译
         run: |
