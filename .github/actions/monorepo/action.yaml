@@ -10,5 +10,5 @@ runs:
       run: |
         echo "同步子包 Engines node 版本..."
         NODE_VERSION=$(pnpm pkg get engines.node)
-        pnpm -r pkg set engines.node="$NODE_VERSION"
+        pnpm -r --filter "\!." pkg set engines.node="$NODE_VERSION"
         echo "engines.node synced to $NODE_VERSION ✅"
