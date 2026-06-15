@@ -3,7 +3,7 @@ import {
   convertPascal2Camel,
   convertCamel2Snake,
   convertSnake2Camel,
-} from '../src/utils';
+} from '../../src';
 
 const testObj = {
   camelCaseKey: 'value',

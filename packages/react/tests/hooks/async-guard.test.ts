@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { useAsyncActionLock } from '../../src/hooks/async-guard';
-import '../../src/utils/dev';
+import '../../../utils/src/common/dev';
 
 const clog = vi.fn();
 console.clog = clog;
