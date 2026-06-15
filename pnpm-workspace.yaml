@@ -3,10 +3,10 @@ allowBuilds:
   esbuild: false
   simple-git-hooks: true
 minimumReleaseAge: 0 # 小时
+strictPeerDependencies: true
+packages:
+  - "packages/*"
 
 # v10.x
 onlyBuiltDependencies:
   - simple-git-hooks
-
-packages:
-  - "packages/*"
