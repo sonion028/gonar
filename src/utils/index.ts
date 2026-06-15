@@ -1,18 +1,18 @@
-export * from './thenable';
-export * from './concurrency';
-export * from './debounce';
-export * from './hash';
-export * from './web/download';
-export * from './deep-copy';
+export * from './common/thenable';
+export * from './common/concurrency';
+export * from './common/debounce';
+export * from './common/hash';
+export * from './common/deep-copy';
+export * from './common/json-convert';
+export * from './common/class-singleton';
+export * from './common/event-emitter';
+export * from './common/micro-queue-scheduler';
+export * from './common/record-typed-map';
+export * from './common/retry-async';
+export * from './common/is-deep-plain-equal';
+
 export * from './web/raf-interval';
-
-export * from './json-convert';
+export * from './web/download';
 export * from './web/fetch-xhr';
-export * from './class-singleton';
-export * from './event-emitter';
-export * from './micro-queue-scheduler';
-export * from './record-typed-map';
-export * from './retry-async';
-export * from './is-deep-plain-equal';
 
-import './dev';
+import './common/dev';
