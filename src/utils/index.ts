@@ -7,7 +7,7 @@ export * from './deep-copy';
 export * from './web/raf-interval';
 
 export * from './json-convert';
-export * from './fetch-xhr';
+export * from './web/fetch-xhr';
 export * from './class-singleton';
 export * from './event-emitter';
 export * from './micro-queue-scheduler';
