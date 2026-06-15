@@ -33,7 +33,8 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build"
+    "build": "rimraf dist && vite build",
+    "test": "vitest --run"
   },
   "dependencies": {
     "@gonar/utils": "workspace:*"

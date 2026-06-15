@@ -19,7 +19,6 @@
     "fmt:check": "oxfmt --check '{src,apps,packages}/**/*.*'",
     "check": "pnpm run tsc && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
-    "test": "vitest --run",
     "preinstall": "pnpm exec sync-node-version",
     "postinstall": "pnpm -r exec rimraf .node-version && pnpm -r --filter './{apps,packages}/*' pkg delete engines",
     "prepare": "pnpm exec simple-git-hooks"
