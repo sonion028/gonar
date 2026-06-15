@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useDistinctState } from './state';
+import { useDistinctState } from '../state';
 
 type StorageParams<T> = Omit<
   Parameters<typeof useDistinctState<T>>[0],

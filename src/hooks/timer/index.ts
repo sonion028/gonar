@@ -1,6 +1,6 @@
 import { useRef, useCallback } from 'react';
 import { type RAfIntervalReturn, rAfInterval, clearRAfInterval } from '@/utils';
-import { useLatestCallback } from './state';
+import { useLatestCallback } from '../state';
 
 /**
  * @author sonion

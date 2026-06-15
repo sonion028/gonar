@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
-import { useLatestCallback } from './state';
+import { useLatestCallback } from '../state';
 
 /**
  * @author sonion
