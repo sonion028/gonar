@@ -1,0 +1,24 @@
+packages/utils/tests/manual/retry-async-test.ts
+  h_8198a3bddb05e6 1-8
+packages/react/tests/hooks/async-guard.test.ts
+  h_8198a3bddb05e6 1-235
+packages/utils/tests/manual/index.ts
+  h_8198a3bddb05e6 1-35
+packages/utils/tests/manual/emiter-test.ts
+  h_8198a3bddb05e6 1-19
+packages/react/tests/hooks/state.test.ts
+  h_8198a3bddb05e6 1-333
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "899af8ae55424964453e27c2d102136c4bd4c074",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
