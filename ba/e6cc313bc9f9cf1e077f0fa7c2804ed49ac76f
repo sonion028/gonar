@@ -1,0 +1,16 @@
+commitlint.config.ts
+  h_8198a3bddb05e6 3-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "bae6cc313bc9f9cf1e077f0fa7c2804ed49ac76f",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
