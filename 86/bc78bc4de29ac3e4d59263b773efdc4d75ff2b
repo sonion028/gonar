@@ -1,0 +1,28 @@
+pnpm-workspace.yaml
+  s_b7859fb7a15639::t_5fe7195c1d417a 6
+.npmrc
+  h_8198a3bddb05e6 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "86bc78bc4de29ac3e4d59263b773efdc4d75ff2b",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b7859fb7a15639": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-ba41b6c7-3392-4bba-ad36-1b9c226e1f78",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
