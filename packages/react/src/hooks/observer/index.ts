@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { useCreateSafeRef, useLatestCallback } from './index';
+import { useCreateSafeRef, useLatestCallback } from '../state';
 
 type MutationObserverCallback = (
   entry: MutationRecord[],

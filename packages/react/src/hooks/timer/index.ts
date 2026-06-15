@@ -4,7 +4,7 @@ import {
   rAfInterval,
   clearRAfInterval,
 } from '@gonar/utils';
-import { useLatestCallback } from './state';
+import { useLatestCallback } from '../state';
 
 /**
  * @author sonion
