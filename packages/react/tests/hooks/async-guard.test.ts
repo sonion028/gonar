@@ -1,19 +1,15 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { useAsyncActionLock } from '../../src/hooks/async-guard';
-import '../../../utils/src/common/dev';
-
-const clog = vi.fn();
-console.clog = clog;
 
 describe('useAsyncActionLock', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    clog.mockClear();
   });
 
   afterEach(() => {
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   it('should return isPending as false initially', () => {
@@ -221,12 +217,14 @@ describe('useAsyncActionLock', () => {
     );
     const [, handler] = result.current;
 
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
     act(() => {
       handler();
       handler();
     });
 
-    expect(clog).toHaveBeenCalledWith('custom warning message');
+    expect(logSpy).toHaveBeenCalledWith('custom warning message');
 
     await act(async () => {
       resolvePromise!('done');
