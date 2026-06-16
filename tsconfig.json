@@ -15,7 +15,7 @@
     "verbatimModuleSyntax": true, // 保持模块语法，不自动修改。区分类型导入和值导入。
     "moduleDetection": "force", // 强制检测模块，避免在非模块上下文使用模块语法
     "noEmit": true, // 不生成类型文件，库开发不需要
-    "allowImportingTsExtensions": true, // 仅onEmit有效
+    "allowImportingTsExtensions": true, // 仅onEmit有效，允许.ts/.tsx 后缀导入。
 
     /* 严格检查与 lint */
     "strict": true,
