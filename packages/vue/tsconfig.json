@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    /* JSX */
-    "jsx": "react-jsx",
+    // vue 必须
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
     // 增量编译缓存位置
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
@@ -12,5 +13,5 @@
       "@gonar/utils": ["../utils/src/index.ts"]
     }
   },
-  "include": ["src", "types"]
+  "include": ["src"]
 }
