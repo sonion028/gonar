@@ -3,7 +3,8 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "oxc.oxc-vscode",
-    "streetsidesoftware.code-spell-checker"
+    "streetsidesoftware.code-spell-checker",
+    "Vue.volar"
   ]
   // 不希望安装的插件
   // "unwantedRecommendations": ["some.extension.you.dont.want"]
