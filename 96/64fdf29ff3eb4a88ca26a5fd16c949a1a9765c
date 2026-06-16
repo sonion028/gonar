@@ -1,0 +1,50 @@
+tsconfig.json
+  s_d62ed97009157d::t_23b24a67a215a9 32-33
+  h_8198a3bddb05e6 15-16 gitai:{"mixed_line_ranges":[{"Range":[15,16]}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "9664fdf29ff3eb4a88ca26a5fd16c949a1a9765c",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_d62ed97009157d": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-2663b39b-19e6-438c-aa58-3d15cc9c01ac",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "tsconfig.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              15,
+              16
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Range": [
+              15,
+              16
+            ]
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
