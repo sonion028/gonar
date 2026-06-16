@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": [],
+    "types": ["vite/client"],
 
     /* 目标与模块 */
     "target": "ESNext",

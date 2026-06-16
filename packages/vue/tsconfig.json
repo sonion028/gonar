@@ -13,5 +13,5 @@
       "@gonar/utils": ["../utils/src/index.ts"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

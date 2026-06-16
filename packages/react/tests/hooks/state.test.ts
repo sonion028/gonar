@@ -135,7 +135,7 @@ describe('useDistinctState', () => {
         hasDiff: (prev, next) => prev !== next,
       })
     );
-    const [value, setValue] = result.current;
+    const [, setValue] = result.current;
 
     act(() => {
       setValue(1);
