@@ -1,0 +1,16 @@
+packages/vue/src/components/so-authority/index.ts
+  h_8198a3bddb05e6 1,5,10-12,17-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "99d3d32a0a55f9e272d2ce1bc4c134742ff34680",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
