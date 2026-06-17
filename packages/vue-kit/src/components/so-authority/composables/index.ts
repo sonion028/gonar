@@ -16,7 +16,9 @@ const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
  * @returns {boolean} - 类型是否有错误
  */
 const isPermissionType = (val: unknown): val is PermissionType =>
-  typeof val === 'string' || typeof val === 'number' || !isEmptyArray(val);
+  typeof val === 'string' ||
+  typeof val === 'number' ||
+  (Array.isArray(val) && !!val?.length);
 
 /**
  * @author sonion
