@@ -322,11 +322,11 @@ importers:
         specifier: ^8.0.16
         version: 8.0.16(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0)
 
-  packages/gonar:
+  packages/react:
     dependencies:
-      '@gonar/react':
+      '@gonar/react-kit':
         specifier: workspace:*
-        version: link:../react
+        version: link:../react-kit
       '@gonar/utils':
         specifier: workspace:*
         version: link:../utils
@@ -337,7 +337,7 @@ importers:
         specifier: ^18.0.0
         version: 18.3.1(react@18.3.1)
 
-  packages/react:
+  packages/react-kit:
     dependencies:
       '@gonar/utils':
         specifier: workspace:*
@@ -376,11 +376,7 @@ importers:
 
   packages/utils: {}
 
-  packages/vue:
-    dependencies:
-      '@gonar/utils':
-        specifier: workspace:*
-        version: link:../utils
+  packages/vue-kit:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^6.0.7

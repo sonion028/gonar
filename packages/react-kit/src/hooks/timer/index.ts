@@ -3,7 +3,7 @@ import {
   type RAfIntervalReturn,
   rAfInterval,
   clearRAfInterval,
-} from '@gonar/utils';
+} from '@tonar/utils';
 import { useLatestCallback } from '../state';
 
 /**

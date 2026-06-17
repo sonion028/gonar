@@ -6,4 +6,5 @@ noopener
 noreferrer
 oxfmt
 sonion
+tonar
 Uncapitalize

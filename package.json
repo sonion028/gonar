@@ -1,5 +1,5 @@
 {
-  "name": "gonar",
+  "name": "tonar",
   "version": "0.0.1",
   "private": true,
   "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",

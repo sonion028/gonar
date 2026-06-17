@@ -9,8 +9,7 @@
 
     /* 路径别名 */
     "paths": {
-      "@/*": ["./src/*"],
-      "@gonar/utils": ["../utils/src/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"]

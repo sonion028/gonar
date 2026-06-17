@@ -41,10 +41,10 @@ export default defineConfig([
     },
   },
   {
-    files: ['packages/react/**/*.{ts,tsx,js,jsx}'], // 仅 React 子包应用 React 规则
+    files: ['packages/react-kit/**/*.{ts,tsx,js,jsx}'], // 仅 React 子包应用 React 规则
     languageOptions: {
       parserOptions: {
-        tsconfigRootDir: `${import.meta.dirname}/packages/react`, // 指定 tsconfig
+        tsconfigRootDir: `${import.meta.dirname}/packages/react-kit`, // 指定 tsconfig
       },
     },
     settings: {

@@ -1,12 +1,12 @@
 {
-  "name": "@gonar/vue",
+  "name": "@gonar/react-kit",
   "version": "0.0.1",
   "private": false,
-  "description": "@gonar/vue: A modern frontend library offering utility functions, Vue composables, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@gonar/react: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
   "keywords": [
     "components",
     "hooks",
-    "vue"
+    "react"
   ],
   "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
@@ -23,9 +23,9 @@
       "import": "./dist/index.esm.js",
       "types": "./dist/types/index.d.ts"
     },
-    "./composables": {
-      "import": "./dist/composables.esm.js",
-      "types": "./dist/types/composables.d.ts"
+    "./hooks": {
+      "import": "./dist/hooks.esm.js",
+      "types": "./dist/types/hooks.d.ts"
     },
     "./components": {
       "import": "./dist/components.esm.js",
@@ -33,17 +33,27 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build"
+    "build": "rimraf dist && vite build",
+    "test": "vitest --run"
   },
   "dependencies": {
     "@gonar/utils": "workspace:*"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.7",
-    "vue": "^3.5.38"
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass-embedded": "^1.100.0",
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vitest": "^4.1.8"
   },
   "peerDependencies": {
-    "vue": "^3.5.38"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devEngines": {
     "packageManager": {

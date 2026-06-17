@@ -1,42 +1,28 @@
 import { defineConfig, mergeConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { libInjectCss } from 'vite-plugin-lib-inject-css';
-import baseConfig from '../../vite.base.config';
 import dts from 'unplugin-dts/vite';
+
+import baseConfig from '../../vite.base.config';
 
 export default mergeConfig(
   baseConfig(),
   defineConfig({
     plugins: [
-      react(),
       dts({
+        // entryRoot: 'src',
         outDirs: 'dist/types',
-        include: ['src/**/*', 'types/**/*'],
+        include: ['src/**/*'],
         compilerOptions: {
           rootDir: 'src',
-          paths: {
-            '@/*': ['./src/*'],
-          },
+          paths: {},
         },
       }), // 生成类型声明文件
-      libInjectCss(), // 注入 CSS 到每个生成的 chunk 文件
     ],
-    // CSS 配置
-    css: {
-      modules: {
-        localsConvention: 'camelCaseOnly', // 推荐使用驼峰命名
-      },
-    },
     build: {
       lib: {
-        entry: {
-          index: 'src/index.ts',
-          hooks: 'src/hooks/index.ts',
-          components: 'src/components/index.ts',
-        },
+        entry: 'src/index.ts',
       },
       rolldownOptions: {
-        external: ['react', 'react-dom', 'react/jsx-runtime', '@gonar/utils'],
+        external: ['@gonar/react-kit', '@gonar/utils'],
       },
     },
   })
