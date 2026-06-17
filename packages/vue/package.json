@@ -1,6 +1,6 @@
 {
   "name": "@tonar/vue",
-  "version": "0.0.1",
+  "version": "0.0.1-canary",
   "private": false,
   "description": "@tonar/vue: Tonar entry for Vue applications with Vue components and general utilities.",
   "keywords": [

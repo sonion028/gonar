@@ -1,6 +1,6 @@
 {
   "name": "tonar",
-  "version": "0.0.1",
+  "version": "0.0.1-canary",
   "private": true,
   "description": "Tonar: A TypeScript-first ESM monorepo for framework-agnostic utilities plus React and Vue UI toolkits.",
   "bugs": "https://github.com/sonion028/gonar/issues",
