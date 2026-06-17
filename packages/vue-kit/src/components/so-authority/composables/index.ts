@@ -3,13 +3,6 @@ import { computed } from 'vue';
 type PermissionType = string | number | string[] | number[];
 
 /**
- * 检查是否为空数组
- * @param val - 待检查的值
- */
-const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
-
-/**
-/**
  * @author sonion
  * @description 权限类型检查
  * @param {unknown} val - 权限
@@ -18,7 +11,7 @@ const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
 const isPermissionType = (val: unknown): val is PermissionType =>
   typeof val === 'string' ||
   typeof val === 'number' ||
-  (Array.isArray(val) && !!val?.length);
+  (Array.isArray(val) && !!val.length);
 
 /**
  * @author sonion
@@ -57,6 +50,12 @@ const permissionVerify = (
     (userPermissions as Array<string | number>).includes(item)
   );
 };
+
+/**
+ * 检查是否为空数组
+ * @param val - 待检查的值
+ */
+const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
 
 export type AuthorityProps = {
   requiredPermissions:
