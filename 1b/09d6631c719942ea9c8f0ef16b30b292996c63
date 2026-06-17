@@ -1,0 +1,56 @@
+packages/vue-kit/package.json
+  h_8198a3bddb05e6 2,5,15-20,49
+packages/vue/src/index.ts
+  h_8198a3bddb05e6 1-2
+packages/vue/package.json
+  h_8198a3bddb05e6 2,5,36-37,40
+  s_9589b839eda3c5::t_9accc88a4ec3e7 8
+packages/vue/vite.config.ts
+  h_8198a3bddb05e6 1-28
+packages/vue/tsconfig.json
+  h_8198a3bddb05e6 1-11
+packages/react/README.md
+  h_8198a3bddb05e6 25-27
+packages/react/package.json
+  h_8198a3bddb05e6 2,5,16-21,36-37
+packages/react-kit/vite.config.ts
+  h_8198a3bddb05e6 39
+packages/react-kit/package.json
+  s_3eef81647c4d9b::t_3fec714e24916e 5
+  h_8198a3bddb05e6 46
+packages/react/vite.config.ts
+  h_8198a3bddb05e6 25
+packages/utils/package.json
+  h_8198a3bddb05e6 2,13-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "1b09d6631c719942ea9c8f0ef16b30b292996c63",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_3eef81647c4d9b": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-5234ff2a-81c9-4aba-a5e6-f1a8236c8262",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_9589b839eda3c5": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-942eaedd-c039-44d9-845b-b078176174d0",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
