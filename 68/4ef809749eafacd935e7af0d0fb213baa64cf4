@@ -1,0 +1,27 @@
+README.md
+  s_a820640db0a65f::t_b56f37046101ab 48
+  h_8198a3bddb05e6 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "684ef809749eafacd935e7af0d0fb213baa64cf4",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_a820640db0a65f": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-b08696b4-5955-47eb-81a8-eeeb75e961ed",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
