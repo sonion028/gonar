@@ -15,13 +15,13 @@ Tonar is a TypeScript-first, ESM-only frontend utility monorepo with framework-a
 
 根 README 只做总览。各包的具体能力、安装方式和示例请进入对应子包 README 查看。
 
-| Package                                    | Description                                                           |
-| ------------------------------------------ | --------------------------------------------------------------------- |
+| Package                                    | Description                                                              |
+| ------------------------------------------ | ------------------------------------------------------------------------ |
 | [`@tonar/utils`](./packages/utils)         | 框架无关工具函数包，提供异步控制、事件、对象转换、下载、XHR fetch 等能力 |
-| [`@tonar/react-kit`](./packages/react-kit) | React 18 组件和 Hooks 包，提供 React 专用 UI 与状态/观察器等能力       |
-| [`@tonar/react`](./packages/react)         | React 使用入口，适合在 React 项目中使用 Tonar                         |
-| [`@tonar/vue-kit`](./packages/vue-kit)     | Vue 3 组件包，提供权限渲染等 Vue 专用能力                             |
-| [`@tonar/vue`](./packages/vue)             | Vue 使用入口，适合在 Vue 项目中使用 Tonar                             |
+| [`@tonar/react-kit`](./packages/react-kit) | React 18 组件和 Hooks 包，提供 React 专用 UI 与状态/观察器等能力         |
+| [`@tonar/react`](./packages/react)         | React 使用入口，适合在 React 项目中使用 Tonar                            |
+| [`@tonar/vue-kit`](./packages/vue-kit)     | Vue 3 组件包，提供 Vue3 组件和组合式函数                                 |
+| [`@tonar/vue`](./packages/vue)             | Vue 使用入口，适合在 Vue 项目中使用 Tonar                                |
 
 ## 🧩 Installation / 安装
 
@@ -45,7 +45,7 @@ pnpm add @tonar/vue-kit
 - 通用工具函数：[`@tonar/utils`](./packages/utils)
 - React 组件和 Hooks：[`@tonar/react-kit`](./packages/react-kit)
 - React 使用入口：[`@tonar/react`](./packages/react)
-- Vue 组件：[`@tonar/vue-kit`](./packages/vue-kit)
+- Vue 组件和组合式函数：[`@tonar/vue-kit`](./packages/vue-kit)
 - Vue 使用入口：[`@tonar/vue`](./packages/vue)
 
 ## 📝 License / 许可证
