@@ -45,7 +45,7 @@ pnpm add @tonar/vue-kit
 - 通用工具函数：[`@tonar/utils`](./packages/utils)
 - React 组件和 Hooks：[`@tonar/react-kit`](./packages/react-kit)
 - React 使用入口：[`@tonar/react`](./packages/react)
-- Vue 组件和组合式函数：[`@tonar/vue-kit`](./packages/vue-kit)
+- Vue 组件和 Composables：[`@tonar/vue-kit`](./packages/vue-kit)
 - Vue 使用入口：[`@tonar/vue`](./packages/vue)
 
 ## 📝 License / 许可证
