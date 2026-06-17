@@ -8,7 +8,7 @@ export default (): Omit<UserConfig, 'build'> & { build: BuildConfig } => ({
   build: {
     target: 'es2020',
     lib: {
-      name: 'Gonar',
+      name: 'Tonar',
       formats: ['es'], // 只输出 ESM
       fileName: '[name].[format]', // 不用后缀
     },

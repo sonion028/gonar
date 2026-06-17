@@ -2,7 +2,7 @@
   "name": "tonar",
   "version": "0.0.1",
   "private": true,
-  "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "Tonar: A TypeScript-first ESM monorepo for framework-agnostic utilities plus React and Vue UI toolkits.",
   "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
   "author": "sonion",

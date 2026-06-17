@@ -2,7 +2,7 @@
   "name": "@tonar/utils",
   "version": "0.0.1",
   "private": false,
-  "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/utils: Framework-agnostic TypeScript utilities for async control, events, object conversion, browser downloads, XHR-based fetch, and animation-frame timers.",
   "keywords": [
     "utils"
   ],

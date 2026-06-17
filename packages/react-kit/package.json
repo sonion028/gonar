@@ -2,7 +2,7 @@
   "name": "@tonar/react-kit",
   "version": "0.0.1",
   "private": false,
-  "description": "@tonar/react-kit: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/react-kit: React 18 components and hooks for carousels, conditional rendering, error boundaries, state helpers, observers, storage, timers, and async action locking.",
   "keywords": [
     "components",
     "hooks",
