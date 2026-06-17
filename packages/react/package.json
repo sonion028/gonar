@@ -2,7 +2,7 @@
   "name": "@tonar/react",
   "version": "0.0.1",
   "private": false,
-  "description": "@tonar/react: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/react: Tonar entry for React applications with React components, hooks, and general utilities.",
   "keywords": [
     "components",
     "hooks",

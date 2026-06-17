@@ -1,159 +1,52 @@
-# Gonar
+# Tonar
 
-**Gonar** 是一个现代前端工具库，提供常用的 **工具函数 (Utils)**、**React 钩子函数 (Hooks)** 和 **React 组件 (Components)**。
+**Tonar** 是一个 TypeScript 优先、仅支持 ESM 的前端工具库 monorepo，包含框架无关的工具函数，以及面向 React 和 Vue 的轻量 UI 工具包。
 
-[![npm version](https://img.shields.io/npm/v/gonar)](https://www.npmjs.com/package/gonar)
-[![license](https://img.shields.io/npm/l/gonar)](./LICENSE)
+Tonar is a TypeScript-first, ESM-only frontend utility monorepo with framework-agnostic utilities plus lightweight React and Vue toolkits.
 
-- ✅ 支持 **React 18+**
-- ✅ 支持 **TypeScript**
-- ✅ 仅支持 **ESM（不支持 CommonJS）**
-- ✅ 支持 **Tree-shaking**
-
-Gonar is a modern frontend library that provides **utility functions**, **React hooks**, and **React components**.
-
-- ✅ Supports **React 18+**
-- ✅ Supports **TypeScript**
-- ✅ Only supports **ESM (does not support CommonJS)**
-- ✅ Supports **Tree-shaking**
+- ✅ TypeScript 类型支持
+- ✅ 仅支持 ESM（不支持 CommonJS）
+- ✅ 支持 Tree-shaking
+- ✅ 按需选择独立子包
 
 ---
 
-## 📦 Installation / 安装
+## 📦 Packages / 子包
+
+根 README 只做总览。各包的具体能力、安装方式和示例请进入对应子包 README 查看。
+
+| Package                                    | Description                                                           |
+| ------------------------------------------ | --------------------------------------------------------------------- |
+| [`@tonar/utils`](./packages/utils)         | 框架无关工具函数包，提供异步控制、事件、对象转换、下载、XHR fetch 等能力 |
+| [`@tonar/react-kit`](./packages/react-kit) | React 18 组件和 Hooks 包，提供 React 专用 UI 与状态/观察器等能力       |
+| [`@tonar/react`](./packages/react)         | React 使用入口，适合在 React 项目中使用 Tonar                         |
+| [`@tonar/vue-kit`](./packages/vue-kit)     | Vue 3 组件包，提供权限渲染等 Vue 专用能力                             |
+| [`@tonar/vue`](./packages/vue)             | Vue 使用入口，适合在 Vue 项目中使用 Tonar                             |
+
+## 🧩 Installation / 安装
+
+按需安装对应子包：
 
 ```bash
-npm install gonar@latest
-pnpm add gonar@latest
-yarn add gonar@latest
+pnpm add @tonar/utils
+pnpm add @tonar/react
+pnpm add @tonar/vue
 ```
 
-## 🚀 Usage / 使用方法
+也可以安装更细粒度的 kit 包：
 
-#### 📥 Unified Import（统一导入：utils、hooks、components）
-
-```ts
-import {
-  Carousel,
-  useDistinctState,
-  rAfInterval,
-  type RAfIntervalReturn,
-  // ...other components、hooks、utils
-} from 'gonar';
+```bash
+pnpm add @tonar/react-kit
+pnpm add @tonar/vue-kit
 ```
 
-#### 🧩 Components / 组件
+## 📚 Documentation / 文档入口
 
-- Carousel （轮播组件，支持轮播项宽度小于容器宽度）
-- CustomShow （条件展示组件）
-- AsyncCustomShow （异步条件展示组件）
-- ErrorBoundary （错误边界组件）
-
-```js
-import {
-  Carousel,
-  CustomShow,
-  // ...other components
-} from 'gonar/components';
-```
-
-#### 🔗 Hooks / 钩子函数
-
-- useDistinctState （差异才更新的状态，支持onChange事件和自定义差异对比函数）
-- useStaticState （静态属性，不触发react更新）
-- useCreateSafeRef （安全引用，相同不更新，改变可触发更新, 支持自定义差异对比函数）
-- useLatestCallback （保持稳定的最新回调，稳定引用函数与闭包获取新值不可兼得的问题）
-- useAsyncActionLock （异步操作锁，根据传入异步函数确定是否可再触发，并提供运行中状态）
-- useIntersectionObserver （交叉观察器）
-- useMutationObserver （节点变化观察器）
-- useResizeObserver （尺寸变化观察器）
-- useInterval （定时器）
-- useRAfInterval （RAf 定时器）
-- useStorage （支持事件的本地存储）
-
-```js
-import {
-  useCreateSafeRef,
-  useDistinctState,
-  // ...other hooks
-} from 'gonar/hooks';
-```
-
-#### 🛠️ Utils / 工具函数
-
-- singleton （创建单例类，不可通过原型链绕过）
-- ConcurrencyController （并发控制器）
-- safeAwait （安全 await，通过返回状态处理 reject 情况，避免 try-catch 嵌套）
-- fetchXHR （基于 XMLHttpRequest 的 fetch 实现，支持超时、取消请求、进度回调）
-- EventEmitter （事件中心。支持自定义调度器、API对齐原生事件、类型安全，支持 “事件类型/事件参数” 泛型）
-- createMicroQueueScheduler （创建微队列调度器，同一个同步执行阶段中的所有任务合并到一个微任务中执行）
-- RecordTypedMap （Record类型化Map，键和值的类型一一对应。通过对象类型定义）
-- retryAsync （重试任务，支持重试次数、动态间隔时间，可指数退避 或 线性递增）
-- isDeepPlainEqual （深度比较两个未知类型的值是否相等。引用不同，值相等返回 true）
-- convertSnake2Camel （对象属性名，蛇形命名转小驼峰命名）
-- convertCamel2Snake （对象属性名，小驼峰命名转蛇形命名）
-- convertPascal2Camel （对象属性名，大驼峰命名转小驼峰命名）
-- convertCamel2Pascal （对象属性名，小驼峰命名转大驼峰命名）
-- deepClone （深拷贝，支持Set、Map、ExpReg、Date、循环引用）
-- debounce （防抖）
-- stringToHash （字符串转哈希值）
-- browserNativeDownload （浏览器原生下载，支持检测是否被浏览器拦截）
-- blobDownload （Blob 下载）
-- rAfInterval （RAf 定时器）
-- clearRAfInterval （清除 RAf 定时器）
-
-```js
-import {
-  debounce,
-  ConcurrencyController,
-  // ...other utils
-} from 'gonar/utils';
-```
-
-## 📖 Example / 示例
-
-#### 一个简单的 React 页面同时使用 Carousel 组件、Hook 和 Utils：
-
-```tsx
-import React from 'react';
-import { Carousel, ErrorBoundary } from 'gonar/components';
-import { useDistinctState } from 'gonar/hooks';
-import { debounce } from 'gonar/utils';
-
-export default function App() {
-  // 支持onChange事件和自定义差异对比函数
-  const [count, setCount] = useDistinctState({ initialValue: 0 });
-
-  const handleClick = debounce(() => {
-    setCount(count + 1); // 仅值不相等时更新
-  }, 300);
-
-  return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
-      <h1>Gonar Demo</h1>
-      <button onClick={handleClick}>Click Me ({count})</button>
-      <Carousel cardWidth={200} cardHeight={120}>
-        <div style={{ background: 'lightblue' }}>Slide 1</div>
-        <div style={{ background: 'lightgreen' }}>Slide 2</div>
-        <div style={{ background: 'lightpink' }}>Slide 3</div>
-      </Carousel>
-    </ErrorBoundary>
-  );
-}
-```
-
-## 📚 TypeScript tips / 类型导入提示
-
-#### 从包根目录直接导入类型（例如组件 Props）：
-
-```ts
-import { type CarouselProps } from 'gonar';
-```
-
-#### 或按子路径导入（如果你更喜欢明确的来源）：
-
-```ts
-import type { CarouselProps } from 'gonar/components';
-```
+- 通用工具函数：[`@tonar/utils`](./packages/utils)
+- React 组件和 Hooks：[`@tonar/react-kit`](./packages/react-kit)
+- React 使用入口：[`@tonar/react`](./packages/react)
+- Vue 组件：[`@tonar/vue-kit`](./packages/vue-kit)
+- Vue 使用入口：[`@tonar/vue`](./packages/vue)
 
 ## 📝 License / 许可证
 

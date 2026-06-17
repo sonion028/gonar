@@ -2,7 +2,7 @@
   "name": "@tonar/vue",
   "version": "0.0.1",
   "private": false,
-  "description": "@tonar/vue: A modern frontend library offering utility functions, Vue composables, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/vue: Tonar entry for Vue applications with Vue components and general utilities.",
   "keywords": [
     "components",
     "composables",
