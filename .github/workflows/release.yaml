@@ -112,7 +112,7 @@ jobs:
       - name: 创建 GitHub Release 记录
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }} [Monorepo]
           tag_name: ${{ github.ref_name }}
           body: |
             🎉 Auto-generated Release
