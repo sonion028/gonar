@@ -20,7 +20,7 @@ Tonar is a TypeScript-first, ESM-only frontend utility monorepo with framework-a
 | [`@tonar/utils`](./packages/utils)         | 框架无关工具函数包，提供异步控制、事件、对象转换、下载、XHR fetch 等能力 |
 | [`@tonar/react-kit`](./packages/react-kit) | React 18 组件和 Hooks 包，提供 React 专用 UI 与状态/观察器等能力         |
 | [`@tonar/react`](./packages/react)         | React 使用入口，适合在 React 项目中使用 Tonar                            |
-| [`@tonar/vue-kit`](./packages/vue-kit)     | Vue 3 组件包，提供 Vue3 组件和组合式函数                                 |
+| [`@tonar/vue-kit`](./packages/vue-kit)     | Vue 3 组件包，提供 Vue3 组件和 Composables 组合式函数                    |
 | [`@tonar/vue`](./packages/vue)             | Vue 使用入口，适合在 Vue 项目中使用 Tonar                                |
 
 ## 🧩 Installation / 安装
