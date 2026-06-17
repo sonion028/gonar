@@ -1,0 +1,16 @@
+packages/vue-kit/src/components/so-authority/composables/index.ts
+  h_8198a3bddb05e6 54-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "84b7de727e474b0885d0361633f40cd38629dd07",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
