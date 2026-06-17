@@ -25,14 +25,14 @@ jobs:
           fetch-depth: 0 # 拉取完整历史。当仓库历史多时可能变慢，可考虑用 GitHub API compare 优化
 
       # 推送 tag  github.event.base_ref不稳定，可能没有值
-      # - name: 验证 Tag 在 main 分支上
-      #   run: |
-      #     git fetch origin main
-      #     if ! git merge-base --is-ancestor ${{ github.sha }} origin/main; then
-      #       echo "错误：Tag ${{ github.ref_name }} 不在 main 分支上"
-      #       exit 1
-      #     fi
-      #     echo "Tag 在 main 分支上 ✅"
+      - name: 验证 Tag 在 monorepo 分支上
+        run: |
+          git fetch origin monorepo
+          if ! git merge-base --is-ancestor ${{ github.sha }} origin/monorepo; then
+            echo "错误：Tag ${{ github.ref_name }} 不在 monorepo 分支上"
+            exit 1
+          fi
+          echo "Tag 在 monorepo 分支上 ✅"
 
       - name: 准备环境
         uses: ./.github/actions/env-setup # 引入 环境准备
