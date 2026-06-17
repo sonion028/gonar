@@ -1,6 +1,12 @@
-import { ref } from 'vue';
+import { computed } from 'vue';
 
 type PermissionType = string | number | string[] | number[];
+
+/**
+ * 检查是否为空数组
+ * @param val - 待检查的值
+ */
+const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
 
 /**
 /**
@@ -10,9 +16,7 @@ type PermissionType = string | number | string[] | number[];
  * @returns {boolean} - 类型是否有错误
  */
 const isPermissionType = (val: unknown): val is PermissionType =>
-  typeof val === 'string' ||
-  typeof val === 'number' ||
-  (Array.isArray(val) && !!val.length);
+  typeof val === 'string' || typeof val === 'number' || !isEmptyArray(val);
 
 /**
  * @author sonion
@@ -62,28 +66,26 @@ export type AuthorityProps = {
  * @author sonion
  * @description 验证是否有具有权限
  * @param {object} props - 组件props
- * @param {PermissionType} props.componentPermissions - 组件所需权限 常改变，每个组件需要的权限不一样
+ * @param {PermissionType} props.requiredPermissions - 组件所需权限 常改变，每个组件需要的权限不一样
  * @param {PermissionType} props.userPermissions - 用户具有的权限 不怎么改变
  * @returns {boolean} - 是否具有权限
  */
 export const usePermission = (props: AuthorityProps) => {
-  const isPermission = ref(false); // 是否有权限
-  /**
-   * @author sonion
-   * @description 也是验证是否有权限
-   * @returns {boolean} - 是否具有权限
-   */
-  const permissionCheck = () => {
-    // 参数是函数时，只用传入用户权限，判断是否有权限。兼容permissionVerify多一个参数
-    const method =
-      typeof props.requiredPermissions === 'function'
-        ? props.requiredPermissions
-        : permissionVerify;
+  const isPermission = computed(() => {
+    if (typeof props.requiredPermissions === 'function') {
+      return props.requiredPermissions(props.userPermissions);
+    }
 
-    return (isPermission.value = method(
-      props.userPermissions,
-      props.requiredPermissions as PermissionType
-    ));
-  };
-  return [isPermission, permissionCheck] as const;
+    if (
+      !props.requiredPermissions ||
+      !props.userPermissions ||
+      isEmptyArray(props.requiredPermissions) ||
+      isEmptyArray(props.userPermissions)
+    )
+      return false;
+
+    return permissionVerify(props.userPermissions, props.requiredPermissions);
+  }); // 是否有权限
+
+  return [isPermission] as const;
 };

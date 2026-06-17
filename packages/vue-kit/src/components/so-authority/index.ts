@@ -21,10 +21,10 @@ export default defineComponent({
     },
   },
   setup(props, { slots }) {
-    const [isPermission, permissionCheck] = usePermission(props);
+    const [isPermission] = usePermission(props);
     // 除了在setup函数返回函数，还能配置render项（函数），通过this拿变量
     return () => {
-      return permissionCheck()
+      return isPermission.value
         ? slots.default?.({
             userPermissions: props.userPermissions,
             isPermission: isPermission.value,
