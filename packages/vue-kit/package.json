@@ -1,8 +1,8 @@
 {
-  "name": "@gonar/vue-kit",
+  "name": "@tonar/vue-kit",
   "version": "0.0.1",
   "private": false,
-  "description": "@gonar/vue-core: A modern frontend library offering utility functions, Vue composables, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/vue-kit: A modern frontend library offering utility functions, Vue composables, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
   "keywords": [
     "components",
     "hooks",
@@ -12,6 +12,12 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "module",
   "sideEffects": [
     "**/*.css"
@@ -40,7 +46,7 @@
     "vue": "^3.5.38"
   },
   "peerDependencies": {
-    "vue": "^3.5.38"
+    "vue": "^3.0.0"
   },
   "devEngines": {
     "packageManager": {

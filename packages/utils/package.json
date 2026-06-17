@@ -1,5 +1,5 @@
 {
-  "name": "@gonar/utils",
+  "name": "@tonar/utils",
   "version": "0.0.1",
   "private": false,
   "description": "Gonar: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
@@ -10,6 +10,12 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "module",
   "sideEffects": false,
   "module": "dist/index.esm.js",

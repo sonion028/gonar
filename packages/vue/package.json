@@ -1,13 +1,13 @@
 {
-  "name": "@tonar/react",
+  "name": "@tonar/vue",
   "version": "0.0.1",
   "private": false,
-  "description": "@tonar/react: A modern frontend library offering utility functions, React hooks, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
+  "description": "@tonar/vue: A modern frontend library offering utility functions, Vue composables, and components with TypeScript support, ESM only, and tree-shaking capabilities.",
   "keywords": [
     "components",
-    "hooks",
-    "react",
-    "utils"
+    "composables",
+    "utils",
+    "vue"
   ],
   "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
@@ -33,12 +33,11 @@
     "build": "rimraf dist && vite build"
   },
   "dependencies": {
-    "@tonar/react-kit": "workspace:*",
-    "@tonar/utils": "workspace:*"
+    "@tonar/utils": "workspace:*",
+    "@tonar/vue-kit": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "vue": "^3.0.0"
   },
   "devEngines": {
     "packageManager": {

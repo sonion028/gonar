@@ -22,9 +22,9 @@ Gonar is a modern frontend library that provides **utility functions**, **React 
 ## 📦 Installation / 安装
 
 ```bash
-npm install @tonar/react@latest
-pnpm add @tonar/react
-yarn add @tonar/react
+npm install gonar@latest
+pnpm add gonar@latest
+yarn add gonar@latest
 ```
 
 ## 🚀 Usage / 使用方法

@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      // /* 仅类型检查需要 */
+      // "@/*": ["../vue-kit/src/*"],
+      "@tonar/*": ["../*/src"]
+    }
+  },
+  "include": ["src"]
+}

@@ -8,7 +8,6 @@ export default mergeConfig(
   defineConfig({
     plugins: [
       dts({
-        // entryRoot: 'src',
         outDirs: 'dist/types',
         include: ['src/**/*'],
         compilerOptions: {
@@ -22,7 +21,7 @@ export default mergeConfig(
         entry: 'src/index.ts',
       },
       rolldownOptions: {
-        external: ['@tonar/react-kit', '@tonar/utils'],
+        external: ['@tonar/vue-kit', '@tonar/utils'],
       },
     },
   })

@@ -36,7 +36,7 @@ export default mergeConfig(
         },
       },
       rolldownOptions: {
-        external: ['react', 'react-dom', 'react/jsx-runtime', '@gonar/utils'],
+        external: ['react', 'react-dom', 'react/jsx-runtime', '@tonar/utils'],
       },
     },
   })
