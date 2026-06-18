@@ -1,12 +1,26 @@
 /// <reference types="node" />
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig, globalIgnores, type Config } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import prettier from 'eslint-config-prettier';
+import prettier from 'eslint-config-prettier/flat';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import react from '@eslint-react/eslint-plugin';
 import jsdoc from 'eslint-plugin-jsdoc';
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from '@vue/eslint-config-typescript';
+import pluginVue from 'eslint-plugin-vue';
+
+const vueConfigs = defineConfigWithVueTs({
+  files: ['packages/vue-kit/**/*.{vue}'],
+  extends: [
+    vueTsConfigs.recommended,
+    jsdoc.configs['flat/recommended'],
+    prettier,
+  ],
+}) as unknown as Config[];
 
 export default defineConfig([
   globalIgnores(['**/dist/**', '**/node_modules/**']), // 忽略 dist 和 node_modules 目录
@@ -66,4 +80,11 @@ export default defineConfig([
       '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
     },
   },
+  {
+    files: ['packages/vue-kit/**/*.{ts,tsx,js,jsx,vue}'],
+    extends: [
+      pluginVue.configs['flat/recommended'], // ✅ Vue 规则, essential 基本的
+    ],
+  },
+  ...vueConfigs,
 ]);
