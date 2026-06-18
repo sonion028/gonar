@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { defineConfig, globalIgnores, type Config } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -12,15 +12,6 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript';
 import pluginVue from 'eslint-plugin-vue';
-
-const vueConfigs = defineConfigWithVueTs({
-  files: ['packages/vue-kit/**/*.{vue}'],
-  extends: [
-    vueTsConfigs.recommended,
-    jsdoc.configs['flat/recommended'],
-    prettier,
-  ],
-}) as unknown as Config[];
 
 export default defineConfig([
   globalIgnores(['**/dist/**', '**/node_modules/**']), // 忽略 dist 和 node_modules 目录
@@ -54,6 +45,7 @@ export default defineConfig([
       '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
     },
   },
+  // 👇 React 规则
   {
     files: ['packages/react-kit/**/*.{ts,tsx,js,jsx}'], // 仅 React 子包应用 React 规则
     languageOptions: {
@@ -80,11 +72,19 @@ export default defineConfig([
       '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
     },
   },
+  // 👇 Vue 规则
   {
     files: ['packages/vue-kit/**/*.{ts,tsx,js,jsx,vue}'],
     extends: [
       pluginVue.configs['flat/recommended'], // ✅ Vue 规则, essential 基本的
     ],
   },
-  ...vueConfigs,
+  ...defineConfigWithVueTs({
+    files: ['packages/vue-kit/**/*.vue'],
+    extends: [
+      vueTsConfigs.recommended,
+      jsdoc.configs['flat/recommended'],
+      prettier,
+    ],
+  }),
 ]);

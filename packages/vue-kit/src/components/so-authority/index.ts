@@ -3,7 +3,7 @@ import { type PropType, defineComponent } from 'vue';
 import { usePermission, type AuthorityProps } from './composables';
 
 export default defineComponent({
-  name: 'so-authority',
+  name: 'SoAuthority',
   props: {
     /** 组件需要的权限 */
     requiredPermissions: {
