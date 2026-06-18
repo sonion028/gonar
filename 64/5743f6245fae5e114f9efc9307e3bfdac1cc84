@@ -1,0 +1,85 @@
+packages/vue-kit/src/components/index.ts
+  h_8198a3bddb05e6 2 gitai:{"mixed_line_ranges":[{"Single":2}],"operations":[]}
+packages/vue-kit/src/components/so-test/so-test.vue
+  s_fb1272a6145167::t_436b004444f17a 16 gitai:{"mixed_line_ranges":[{"Single":16}],"operations":[]}
+packages/vue-kit/tsconfig.json
+  h_8198a3bddb05e6 15 gitai:{"mixed_line_ranges":[{"Single":15}],"operations":[]}
+packages/vue-kit/src/components/so-authority/index.ts
+  h_8198a3bddb05e6 6
+packages/vue/tsconfig.json
+  h_8198a3bddb05e6 10
+packages/vue-kit/types/vue.d.ts
+  h_8198a3bddb05e6 1-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "645743f6245fae5e114f9efc9307e3bfdac1cc84",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_fb1272a6145167": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-6782ac20-a4e9-40fb-9bce-f0690cb53f85",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/vue-kit/src/components/index.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 2
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 2
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/vue-kit/src/components/so-test/so-test.vue": [
+      {
+        "hash": "s_fb1272a6145167::t_436b004444f17a",
+        "line_ranges": [
+          {
+            "Single": 16
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 16
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/vue-kit/tsconfig.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 15
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 15
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
