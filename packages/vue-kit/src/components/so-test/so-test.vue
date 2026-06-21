@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-// let name: any;
+
 const count = ref(0);
 /**
  * @author sonion
