@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "types": ["vite/client"],
-
+    
     /* 目标与模块 */
     "target": "ESNext",
     "module": "ESNext",
@@ -34,6 +34,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src", "packages"], // "*.config.ts", "vite.config.base.ts"
+  "include": ["packages"], // "*.config.ts", "vite.config.base.ts"
   "exclude": ["node_modules", "dist"]
 }

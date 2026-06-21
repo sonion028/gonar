@@ -119,4 +119,4 @@ jobs:
             - Release Version: ${{ github.ref_name }}
             - Commit SHA: ${{ github.sha }}
           draft: false
-          prerelease: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
