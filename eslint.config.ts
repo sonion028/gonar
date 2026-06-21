@@ -21,7 +21,7 @@ const commonRules = {
   'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
   '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
   '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
-} as Linter.RulesRecord;
+} satisfies Linter.RulesRecord;
 
 export default defineConfig([
   globalIgnores(['**/dist/**', '**/node_modules/**']), // 忽略 dist 和 node_modules 目录
