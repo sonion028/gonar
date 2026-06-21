@@ -9,7 +9,6 @@ export default mergeConfig(
     plugins: [
       dts({
         outDirs: 'dist/types',
-        include: ['src/**/*'],
         compilerOptions: {
           rootDir: 'src',
           paths: {},

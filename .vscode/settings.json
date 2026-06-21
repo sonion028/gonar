@@ -18,6 +18,9 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
+  "[vue]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "[html]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
@@ -40,6 +43,7 @@
   },
   // 需要检查的文件类型
   "eslint.validate": [
+    "vue",
     "javascript",
     "javascriptreact",
     "typescript",

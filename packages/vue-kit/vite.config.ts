@@ -10,12 +10,8 @@ export default mergeConfig(
       vue(),
       dts({
         outDirs: 'dist/types',
-        include: ['src/**/*', 'types/**/*'],
         compilerOptions: {
           rootDir: 'src',
-          paths: {
-            '@/*': ['./src/*'],
-          },
         },
       }), // 生成类型声明文件
     ],
