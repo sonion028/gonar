@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
@@ -15,11 +16,11 @@ export default defineConfig([
       ecmaVersion: 2020, // 语法检查 支持的 ES 版本
       globals: globals.browser, // 浏览器全局变量
       // env: globals.node, // Node.js 环境变量
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname, // 指定 tsconfig 根目录，避免 node_modules 中的 tsconfig 干扰
+      },
     },
     settings: {
-      react: {
-        version: 'detect', // 自动检测 React 版本
-      },
       jsdoc: {
         mode: 'typescript',
       },

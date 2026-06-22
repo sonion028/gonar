@@ -1,6 +1,9 @@
 allowBuilds:
-  '@parcel/watcher': set this to true or false
+  "@parcel/watcher": true
   esbuild: false
-  simple-git-hooks: set this to true or false
+  simple-git-hooks: true
+minimumReleaseAge: 0 # 小时
+
+# v10.x
 onlyBuiltDependencies:
   - simple-git-hooks

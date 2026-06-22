@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*.*.*' # 例如 v1.2.3
+      - "v*.*.*" # 例如 v1.2.3
 
 # Trusted Publisher 权限
 permissions:
@@ -12,9 +12,9 @@ permissions:
 
 jobs:
   build-and-publish:
-    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v') && github.event.base_ref == 'refs/heads/main'
+    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest # 使用最新的 Ubuntu Runner
-    environment: production-publish-npm # 指定环境名
+    # environment: production-publish-npm # 指定环境名
 
     steps:
       # 使用本地 composite action 前需要先 checkout 代码
@@ -23,6 +23,16 @@ jobs:
         uses: actions/checkout@v4 # 拉取触发工作流的 tag 对应 commit
         with:
           fetch-depth: 0 # 拉取完整历史。当仓库历史多时可能变慢，可考虑用 GitHub API compare 优化
+
+      # 推送 tag  github.event.base_ref不稳定，可能没有值
+      - name: 验证 Tag 在 main 分支上
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor ${{ github.sha }} origin/main; then
+            echo "错误：Tag ${{ github.ref_name }} 不在 main 分支上"
+            exit 1
+          fi
+          echo "Tag 在 main 分支上 ✅"
 
       - name: 准备环境
         uses: ./.github/actions/env-setup # 引入 环境准备
@@ -62,10 +72,10 @@ jobs:
           fi
           echo "Commitlint 检查通过 ✅"
 
-      # tag 同步 package.json 版本 依赖jq
+      # tag 同步 package.json 版本
       - name: 同步 Tag 为 package.json 版本
         run: |
-          set -e
+          set -eo pipefail
           TAG=${GITHUB_REF#refs/tags/}
           VERSION=${TAG#v}
           echo "当前 Tag: $TAG，提取版本号: $VERSION"
@@ -73,28 +83,28 @@ jobs:
             echo "错误：版本号为空，请检查 Tag 格式（应为 vX.Y.Z）"
             exit 1
           fi
-          jq ".version = \"$VERSION\"" package.json > package.json.tmp
-          mv package.json.tmp package.json
-          echo "更新后 package.json 版本: $(cat package.json | grep version)"
+          pnpm -r pkg set version="$VERSION"
+          echo "更新后 package.json 版本: $(pnpm pkg get version)"
 
       - name: 编译
         run: |
           echo "开始构建..."
-          pnpm run build
+          pnpm -r run build
           echo "构建完成 ✅"
 
       # 打印将要发布的文件列表，避免误发布
       - name: 打印发布文件列表
-        run: npm pack --dry-run
+        run: pnpm -r pack --dry-run
 
       # 发布到 npm registry - 只在标签触发时执行
       - name: Publish 到 npm
         run: |
           echo "开始发布到 npm..."
-          npm publish --access public --verbose
+          pnpm -r publish --access public --no-git-checks
           echo "发布成功 ✅"
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }} # 首次发布需要
+        # 加 --tag canary 发布到 canary channel
 
       # 只有发布成功后才生成 GitHub Release
       - name: 创建 GitHub Release 记录

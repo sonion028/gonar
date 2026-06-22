@@ -9,13 +9,14 @@
     "react",
     "utils"
   ],
-  "bugs": {
-    "url": "https://github.com/sonion028/gonar/issues"
-  },
+  "bugs": "https://github.com/sonion028/gonar/issues",
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
   "exports": {
@@ -38,36 +39,35 @@
   },
   "scripts": {
     "build": "rimraf dist && rolldown -c rolldown.config.ts",
-    "preinstall": "node scripts/sync-node-version/index.js && (npx -y only-allow pnpm || exit 1)",
-    "prepare": "npx simple-git-hooks",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
     "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
-    "fmt": "oxfmt '{src,packages,apps}/**/*.*'",
-    "fmt:check": "oxfmt --check '{src,packages,apps}/**/*.*'",
-    "check": "npx tsc --noEmit && npm run lint && npm run fmt:check && npm run lint:spell",
-    "fix": "npm run lint:fix && npm run fmt",
-    "test": "vitest --run"
+    "fmt": "oxfmt '{src,apps,packages}/**/*.*'",
+    "fmt:check": "oxfmt --check '{src,apps,packages}/**/*.*'",
+    "check": "pnpm exec tsc --noEmit && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
+    "fix": "pnpm run lint:fix && pnpm run fmt",
+    "test": "vitest --run",
+    "preinstall": "node scripts/sync-node-version/index.js",
+    "prepare": "pnpm exec simple-git-hooks"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.0.1",
-    "@commitlint/config-conventional": "^21.0.1",
-    "@eslint-react/eslint-plugin": "^5.8.1",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
+    "@eslint-react/eslint-plugin": "^5.8.19",
     "@eslint/js": "^10.0.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^24.12.4",
-    "@types/react": "^18.3.28",
+    "@types/node": "^24.13.2",
+    "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
-    "cspell": "^10.0.0",
-    "eslint": "^10.4.0",
+    "cspell": "^10.0.1",
+    "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsdoc": "^62.9.0",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
-    "lint-staged": "^17.0.5",
-    "only-allow": "^1.2.2",
+    "lint-staged": "^17.0.7",
     "oxfmt": "^0.50.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -75,18 +75,30 @@
     "rolldown": "1.0.1",
     "rolldown-plugin-dts": "^0.25.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "sass": "^1.99.0",
+    "sass": "^1.100.0",
     "simple-git-hooks": "^2.13.1",
+    "sync-node-version": "^0.1.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4",
-    "vitest": "^4.1.6"
+    "typescript-eslint": "^8.61.0",
+    "vitest": "^4.1.8"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=11.4.0",
+      "onFail": "error"
+    },
+    "runtime": {
+      "name": "node",
+      "version": ">=24.15.0",
+      "onFail": "error"
+    }
+  },
   "engines": {
-    "node": ">=24.15.0",
-    "pnpm": ">=10.33.4"
+    "node": ">=22.22.0"
   }
 }
