@@ -1,0 +1,18 @@
+eslint.config.ts
+  h_8198a3bddb05e6 1,7
+package.json
+  h_8198a3bddb05e6 12,17-19,46-47,50-52,55-57,64-65,67-68,74,83-84,94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "05d2cbbe6422ce711d69eed5afe7512c160c079f",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
