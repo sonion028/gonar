@@ -1,0 +1,16 @@
+package.json
+  h_8198a3bddb05e6 17-19,42-52,55-57,60-62,64-66,69,72-73,77,79-81,87-97,100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e62ae6e8ff0ed3f2994ea9925cdb740ac47489b2",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
