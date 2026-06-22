@@ -59,7 +59,6 @@
     "@types/node": "^24.12.4",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
-    "@typescript/native-preview": "7.0.0-dev.20260518.1",
     "cspell": "^10.0.0",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
@@ -78,6 +77,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.99.0",
     "simple-git-hooks": "^2.13.1",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.4",
     "vitest": "^4.1.6"
   },
