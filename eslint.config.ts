@@ -1,11 +1,12 @@
+/// <reference types="node" />
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
+import jsdoc from 'eslint-plugin-jsdoc';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import react from '@eslint-react/eslint-plugin';
-import jsdoc from 'eslint-plugin-jsdoc';
 
 export default defineConfig([
   globalIgnores(['dist', 'node_modules']), // 忽略 dist 和 node_modules 目录
@@ -20,9 +21,6 @@ export default defineConfig([
       },
     },
     settings: {
-      react: {
-        version: 'detect', // 自动检测 React 版本
-      },
       jsdoc: {
         mode: 'typescript',
       },

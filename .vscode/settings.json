@@ -49,7 +49,7 @@
   // JSDoc 注释配置
   "fileheader.configObj": {
     "colon": [" ", " "],
-    "functionParamsShape": ["", ""],
+    "functionParamsShape": ["{", "}"],
     "functionTypeSymbol": ""
   }
 }

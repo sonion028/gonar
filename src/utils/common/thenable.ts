@@ -28,3 +28,19 @@ export const promiseTry = <T>(p: PromiseLike<T> | (() => PromiseLike<T>)) => {
     resolve(typeof p === 'function' ? p() : p);
   });
 };
+
+/**
+ * @author sonion
+ * @description 创建一个可解析的 Promise Promise.withResolvers的polyfill实现
+ * @returns {{promise, resolve, reject}} - 包含 Promise、resolve、reject 函数的对象
+ */
+export const withResolver = <T>() => {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  let reject!: (reason?: unknown) => void;
+
+  const promise = new Promise<T>((_resolve, _reject) => {
+    resolve = _resolve;
+    reject = _reject;
+  });
+  return { promise, resolve, reject };
+};
