@@ -1,10 +1,10 @@
-.github/workflows/release.yaml
-  h_8198a3bddb05e6 78
+commitlint.config.ts
+  h_8198a3bddb05e6 3-5
 ---
 {
   "schema_version": "authorship/3.0.0",
   "git_ai_version": "1.5.2",
-  "base_commit_sha": "a83e624a9355973f8e5ffecb6ae1399c274b9917",
+  "base_commit_sha": "cd1c94cb5b7dbfbbdf32e501d81d6ebf7c5f296c",
   "prompts": {},
   "humans": {
     "h_8198a3bddb05e6": {
