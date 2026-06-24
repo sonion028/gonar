@@ -27,7 +27,8 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build"
+    "build": "rimraf dist && vite build",
+    "typecheck": "pnpm exec tsc --noEmit"
   },
   "devEngines": {
     "packageManager": {

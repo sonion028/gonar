@@ -39,7 +39,8 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build"
+    "build": "rimraf dist && vite build",
+    "typecheck": "pnpm exec tsc --noEmit"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",

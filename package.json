@@ -7,18 +7,17 @@
   "license": "MIT",
   "author": "sonion",
   "repository": "https://github.com/sonion028/gonar",
-  "packageManager": "pnpm@11.6.0",
   "type": "module",
   "scripts": {
     "build": "turbo run build",
-    "tsc": "pnpm -r exec tsc --noEmit",
+    "typecheck": "turbo run typecheck",
     "lint": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
     "lint:error": "eslint '{src,apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --quiet",
     "lint:spell": "cspell lint '{src,apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
     "fmt": "oxfmt '{src,apps,packages}/**/*.*'",
     "fmt:check": "oxfmt --check '{src,apps,packages}/**/*.*'",
-    "check": "pnpm run tsc && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
+    "check": "turbo run typecheck && pnpm run lint && pnpm run fmt:check && pnpm run lint:spell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "preinstall": "pnpm exec sync-node-version",
     "postinstall": "pnpm -r exec rimraf .node-version && pnpm -r --filter './{apps,packages}/*' pkg delete engines",
@@ -63,5 +62,6 @@
   },
   "engines": {
     "node": ">=22.22.0"
-  }
+  },
+  "packageManager": "pnpm@11.6.0"
 }
