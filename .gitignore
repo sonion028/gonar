@@ -26,6 +26,9 @@ dist-ssr
 # typescript
 *.tsbuildinfo
 
+# Turborepo
+.turbo
+
 # Git
 .git
 
@@ -38,4 +41,3 @@ dist-ssr
 *.local
 *.tmp
 *.cache
-
