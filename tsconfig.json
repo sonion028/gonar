@@ -12,10 +12,10 @@
 
     /* 模块解析：现代 bundler 模式 */
     "moduleResolution": "bundler", // 更适合 Vite/Rollup
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
+    "verbatimModuleSyntax": true, // 保持模块语法，不自动修改。区分类型导入和值导入。
+    "moduleDetection": "force", // 强制检测模块，避免在非模块上下文使用模块语法
     "noEmit": true, // 不生成类型文件，库开发不需要
-    "allowImportingTsExtensions": true, // 仅onEmit有效
+    "allowImportingTsExtensions": true, // 仅onEmit有效，允许.ts/.tsx 后缀导入。
 
     /* 严格检查与 lint */
     "strict": true,
@@ -29,6 +29,8 @@
     "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
+    "noImplicitThis": true, // 对 `this` 上的数据属性启用更严格的推断。
+    "libReplacement": false, // 禁止三方库提替换lib声明。
 
     /* 互操作与工具支持 */
     "esModuleInterop": true,
