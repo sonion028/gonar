@@ -1,4 +1,4 @@
-import { promiseTry } from './thenable';
+import { promiseTry } from '../async/thenable';
 
 /**
  * @author sonion
