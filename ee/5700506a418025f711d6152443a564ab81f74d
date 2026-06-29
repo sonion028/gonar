@@ -1,0 +1,26 @@
+packages/utils/src/common/structured/is-deep-plain-equal.ts
+  s_ea23ad316858e9::t_7c0bed39325a80 27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "ee5700506a418025f711d6152443a564ab81f74d",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_ea23ad316858e9": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-34392ede-4aa9-45ef-a3c4-6c8c8a4fe18c",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
