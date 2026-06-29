@@ -1,0 +1,16 @@
+packages/utils/src/common/tasks/concurrency.ts
+  h_8198a3bddb05e6 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "0e14d3e628ab65452c0e4623b7868f17c5162891",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
