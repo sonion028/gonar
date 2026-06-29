@@ -1,22 +1,4 @@
-/**
- * @author sonion
- * @param value 要判断的值
- * @description 是否为null或undefined
- */
-export const isNil = (value: unknown): value is null | undefined =>
-  value === null || value === void 0;
-
-/**
- * @author sonion
- * @description 是否为纯对象
- * @param val 要判断的值
- * @returns 如果为纯对象则返回 true，否则返回 false
- */
-export const isPlainObject = (val: unknown): val is Record<string, unknown> => {
-  if (Object(val) !== val) return false;
-  const proto = Object.getPrototypeOf(val);
-  return proto === Object.prototype || isNil(proto);
-};
+import { isPlainObject, isObject } from './helpers';
 
 /**
  * @author sonion
@@ -42,7 +24,7 @@ export const isDeepPlainEqual = (
       throw new Error('Symbols are not supported for deep comparison');
     }
     if (aType !== bType) return false;
-    if (Object(a) !== a || Object(b) !== b) return Object.is(a, b);
+    if (!isObject(a) || !isObject(b)) return Object.is(a, b);
     if (Object.is(a, b)) return true;
     if (Array.isArray(a) && Array.isArray(b)) {
       if (a.length !== b.length) return false;
