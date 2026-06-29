@@ -1,0 +1,16 @@
+TYPESCRIPT-7-COMPAT.md
+  h_8198a3bddb05e6 15,24,32,67,73-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "833c017ae5113656c7de473ce1bb0ebda62abb26",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
