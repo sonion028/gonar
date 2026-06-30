@@ -308,7 +308,7 @@ importers:
         specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.31)
       '@vitejs/plugin-react':
-        specifier: ^6.0.2
+        specifier: ^6.0.3
         version: 6.0.3(vite@8.1.0(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
       jsdom:
         specifier: ^29.1.1
@@ -326,7 +326,7 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2(vite@8.1.0(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
       vitest:
-        specifier: ^4.1.8
+        specifier: ^4.1.9
         version: 4.1.9(@types/node@24.13.2)(jsdom@29.1.1)(vite@8.1.0(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))
 
   packages/utils: {}
@@ -349,7 +349,7 @@ importers:
         specifier: ^6.0.7
         version: 6.0.7(vite@8.1.0(@types/node@24.13.2)(jiti@2.6.1)(sass-embedded@1.100.0)(sass@1.100.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
       vue:
-        specifier: ^3.5.38
+        specifier: ^3.5.39
         version: 3.5.39(typescript@6.0.3)
 
 packages:

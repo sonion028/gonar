@@ -10,6 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "clear": "pnpm -r exec rimraf {node_modules,dist,.turbo} && pnpm exec rimraf {node_modules,dist,.turbo}",
     "typecheck": "turbo run typecheck",
     "lint": "eslint '{apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint:fix": "eslint '{apps,packages}/**/*.{ts,tsx,js,jsx,vue}' --fix",
