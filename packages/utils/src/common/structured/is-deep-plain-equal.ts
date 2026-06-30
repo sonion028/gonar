@@ -1,19 +1,65 @@
-import { isPlainObject, isObject } from './helpers';
+import { isObject, isPlainObject, isSet, isMap } from './helpers';
 
 /**
  * @author sonion
  * @description 深度比较两个未知类型的值是否相等。支持 Plain Object。
  * 仅支持纯数据对象，不支持函数、Symbol、Date、RegExp、自定义类实例对比。
- * @param a 要比较的第一个值
- * @param b 要比较的第二个值
- * @param ignoreArrayOrder 是否忽略数组顺序 -默认值：true
+ * @param {unknown} a - 要比较的第一个值
+ * @param {unknown} b - 要比较的第二个值
+ * @param {object} options - 对比参数
+ * @param {boolean} [options.ignoreArrayOrder] - 是否忽略数组顺序 -默认值：true
+ * @param {boolean} [options.ignoreSetOrder] - 是否忽略 Set 顺序 -默认值：true
  * @returns 如果两个值相等则返回 true，否则返回 false
  */
 export const isDeepPlainEqual = (
   a: unknown,
   b: unknown,
-  ignoreArrayOrder = true
+  { ignoreArrayOrder = true, ignoreSetOrder = true } = {}
 ): boolean => {
+  // 比较数组是否相等
+  const isArrayEqual = (a: unknown[], b: unknown[], ignoreOrder: boolean) => {
+    if (a.length !== b.length) return false;
+    // 不忽略数组顺序：逐项比较
+    if (!ignoreOrder) {
+      for (let i = 0, length = a.length; i < length; i++) {
+        if (!_isDeepPlainEqual(a[i], b[i])) return false;
+      }
+      return true;
+    }
+
+    // 忽略数组顺序：按“多重集”匹配，正确处理重复元素
+    const matched = new Array<boolean>(b.length).fill(false);
+    outer: for (let i = 0, length = a.length; i < length; i++) {
+      const aItem = a[i];
+      for (let j = 0, len = b.length; j < len; j++) {
+        if (matched[j]) continue;
+        if (_isDeepPlainEqual(aItem, b[j])) {
+          matched[j] = true;
+          continue outer;
+        }
+      }
+      return false;
+    }
+    return true;
+  };
+
+  // 比较键值集合是否相等
+  const isKeyValueEqual = (
+    aSize: number,
+    bSize: number,
+    aEntries: Iterable<[unknown, unknown]>,
+    bHas: (key: unknown) => boolean,
+    bGet: (key: unknown) => unknown
+  ): boolean => {
+    if (aSize !== bSize) return false;
+    for (const [key, value] of aEntries) {
+      if (!bHas(key)) return false;
+      if (!_isDeepPlainEqual(value, bGet(key))) return false;
+    }
+    return true;
+  };
+
+  // 比较值是否相等
   const _isDeepPlainEqual = (a: unknown, b: unknown): boolean => {
     const aType = typeof a,
       bType = typeof b;
@@ -26,45 +72,36 @@ export const isDeepPlainEqual = (
     if (aType !== bType) return false;
     if (!isObject(a) || !isObject(b)) return Object.is(a, b);
     if (Object.is(a, b)) return true;
-    if (Array.isArray(a) && Array.isArray(b)) {
-      if (a.length !== b.length) return false;
-      // 不忽略数组顺序：逐项比较
-      if (!ignoreArrayOrder) {
-        for (let i = 0, length = a.length; i < length; i++) {
-          if (!_isDeepPlainEqual(a[i], b[i])) return false;
-        }
-        return true;
-      }
 
-      // 忽略数组顺序：按“多重集”匹配，正确处理重复元素
-      const matched = new Array<boolean>(b.length).fill(false);
-      outer: for (let i = 0, length = a.length; i < length; i++) {
-        const aItem = a[i];
-        for (let j = 0, len = b.length; j < len; j++) {
-          if (matched[j]) continue;
-          if (_isDeepPlainEqual(aItem, b[j])) {
-            matched[j] = true;
-            continue outer;
-          }
-        }
-        return false;
-      }
-      return true;
+    if (isSet(a) && isSet(b)) {
+      if (a.size !== b.size) return false;
+      return isArrayEqual([...a], [...b], ignoreSetOrder);
     }
 
+    if (Array.isArray(a) && Array.isArray(b)) {
+      return isArrayEqual(a, b, ignoreArrayOrder);
+    }
+
+    if (isMap(a) && isMap(b)) {
+      return isKeyValueEqual(
+        a.size,
+        b.size,
+        a,
+        (key) => b.has(key),
+        (key) => b.get(key)
+      );
+    }
     if (!isPlainObject(a) || !isPlainObject(b)) {
       throw new Error('Only plain objects are supported for deep comparison');
     }
-    const aKeys = Object.keys(a);
-    const bKeys = Object.keys(b);
-    if (aKeys.length !== bKeys.length) return false;
-    for (const key of aKeys) {
-      if (!Object.hasOwnProperty.call(b, key)) return false; // 解决无属性和有属性但值为 undefined 的情况
-      if (!_isDeepPlainEqual(a[key], b[key])) {
-        return false;
-      }
-    }
-    return true;
+    const aEntries = Object.entries(a);
+    return isKeyValueEqual(
+      aEntries.length,
+      Object.keys(b).length,
+      aEntries,
+      (key) => Object.hasOwnProperty.call(b, key as PropertyKey), // 解决无属性和有属性但值为 undefined 的情况
+      (key) => b[key as string]
+    );
   };
 
   return _isDeepPlainEqual(a, b);
