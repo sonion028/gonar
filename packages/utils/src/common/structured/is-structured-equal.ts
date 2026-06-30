@@ -39,7 +39,7 @@ const initCache = () => {
 
 /**
  * @author sonion
- * @description 深度比较两个未知类型的值是否相等。支持 Plain Object。
+ * @description 比较两个结构化数据是否相等。支持 primitive、Array、Plain Object、Map、Set 及循环引用。
  * 仅支持纯数据对象，不支持函数、Symbol、Date、RegExp、自定义类实例对比。
  * @param {unknown} a - 要比较的第一个值
  * @param {unknown} b - 要比较的第二个值
@@ -48,7 +48,7 @@ const initCache = () => {
  * @param {boolean} [options.ignoreSetOrder] - 是否忽略 Set 顺序 -默认值：true
  * @returns 如果两个值相等则返回 true，否则返回 false
  */
-export const isDeepPlainEqual = (
+export const isStructuredEqual = (
   a: unknown,
   b: unknown,
   { ignoreArrayOrder = true, ignoreSetOrder = true } = {}
@@ -59,7 +59,7 @@ export const isDeepPlainEqual = (
     // 不忽略数组顺序：逐项比较
     if (!ignoreOrder) {
       for (let i = 0, length = a.length; i < length; i++) {
-        if (!_isDeepPlainEqual(a[i], b[i])) return false;
+        if (!_isStructuredEqual(a[i], b[i])) return false;
       }
       return true;
     }
@@ -70,7 +70,7 @@ export const isDeepPlainEqual = (
       const aItem = a[i];
       for (let j = 0, len = b.length; j < len; j++) {
         if (matched[j]) continue;
-        if (_isDeepPlainEqual(aItem, b[j])) {
+        if (_isStructuredEqual(aItem, b[j])) {
           matched[j] = true;
           continue outer;
         }
@@ -91,7 +91,7 @@ export const isDeepPlainEqual = (
     if (aSize !== bSize) return false;
     for (const [key, value] of aEntries) {
       if (!bHas(key)) return false;
-      if (!_isDeepPlainEqual(value, bGet(key))) return false;
+      if (!_isStructuredEqual(value, bGet(key))) return false;
     }
     return true;
   };
@@ -100,7 +100,7 @@ export const isDeepPlainEqual = (
   const { getCompareStatus, getCompareResult, startCompare } = initCache();
 
   // 比较值是否相等
-  const _isDeepPlainEqual = (a: unknown, b: unknown): boolean => {
+  const _isStructuredEqual = (a: unknown, b: unknown): boolean => {
     const aType = typeof a,
       bType = typeof b;
     if (aType === 'function' || bType === 'function') {
@@ -152,5 +152,5 @@ export const isDeepPlainEqual = (
     );
   };
 
-  return _isDeepPlainEqual(a, b);
+  return _isStructuredEqual(a, b);
 };
