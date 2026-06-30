@@ -1,0 +1,16 @@
+src/utils/common/structured/is-structured-equal.ts
+  h_8198a3bddb05e6 1-156
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e9969092580c701d1f9567c73d8fd2cafda5f225",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
