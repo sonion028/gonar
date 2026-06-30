@@ -8,7 +8,7 @@ export * from './common/tasks/retry-async';
 export * from './common/tasks/micro-queue-scheduler';
 
 export * from './common/structured/deep-copy';
-export * from './common/structured/is-deep-plain-equal';
+export * from './common/structured/is-structured-equal';
 export * from './common/structured/helpers';
 
 export * from './common/class/class-singleton';

@@ -88,7 +88,7 @@ import {
 - createMicroQueueScheduler （创建微队列调度器，同一个同步执行阶段中的所有任务合并到一个微任务中执行）
 - RecordTypedMap （Record类型化Map，键和值的类型一一对应。通过对象类型定义）
 - retryAsync （重试任务，支持重试次数、动态间隔时间，可指数退避 或 线性递增）
-- isDeepPlainEqual （深度比较两个未知类型的值是否相等。引用不同，值相等返回 true）
+- isStructuredEqual （比较两个结构化数据是否相等。引用不同，值相等返回 true）
 - convertSnake2Camel （对象属性名，蛇形命名转小驼峰命名）
 - convertCamel2Snake （对象属性名，小驼峰命名转蛇形命名）
 - convertPascal2Camel （对象属性名，大驼峰命名转小驼峰命名）
