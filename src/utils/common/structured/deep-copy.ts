@@ -1,10 +1,12 @@
+import { isMap, isObject, isSet } from './helpers';
+
 /**
  * @author sonion
  * @description 获取元素的数据类型
  * @param {unknown} data - 要判断的参数
  * @returns {string} - 元素的数据类型
  */
-const getObjectType = (() => {
+export const getObjectType = (() => {
   const regexp = /^\[[a-z]+ ([A-Za-z]+)\]$/;
   return (data: object) => {
     return (
@@ -13,47 +15,6 @@ const getObjectType = (() => {
     );
   };
 })();
-
-/**
- * @author sonion
- * @description 判断是否为对象
- * @param {unknown} val - 要判断的参数
- * @returns {boolean} - 是否为对象
- */
-const isObject = <T extends object>(val: unknown): val is T =>
-  val === Object(val);
-
-/**
- * @author sonion
- * @description 判断是否为Set
- * @param {unknown} val - 要判断的参数
- * @returns {boolean} - 是否为Set
- */
-const isSet = <T>(val: unknown): val is Set<T> => {
-  if (!isObject(val)) return false;
-  if (val instanceof Set) return true;
-  return (
-    Object.prototype.hasOwnProperty.call(val as object, 'size') &&
-    typeof (val as Set<T>).add === 'function' &&
-    typeof (val as Set<T>).has === 'function'
-  );
-};
-
-/**
- * @author sonion
- * @description 判断是否为Map
- * @param {unknown} val - 要判断的参数
- * @returns {boolean} - 是否为Map
- */
-const isMap = <K, V>(val: unknown): val is Map<K, V> => {
-  if (!isObject(val)) return false;
-  if (val instanceof Map) return true;
-  return (
-    Object.prototype.hasOwnProperty.call(val as object, 'size') &&
-    typeof (val as Map<K, V>).set === 'function' &&
-    typeof (val as Map<K, V>).get === 'function'
-  );
-};
 
 // 深拷贝参数和返回类型
 type DeepCloneResult = Record<string | symbol, unknown>;
