@@ -39,8 +39,8 @@ const initCache = () => {
 
 /**
  * @author sonion
- * @description 比较两个结构化数据是否相等。支持 primitive、Array、Plain Object、Map、Set 及循环引用。
- * 仅支持纯数据对象，不支持函数、Symbol、Date、RegExp、自定义类实例对比。
+ * @description 比较两个结构化数据是否相等。
+ * 支持 primitive、Array、Plain Object、Map、Set 及循环引用，不支持函数、Symbol、Date、RegExp、自定义类实例对比。
  * @param {unknown} a - 要比较的第一个值
  * @param {unknown} b - 要比较的第二个值
  * @param {object} options - 对比参数

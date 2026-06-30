@@ -42,7 +42,7 @@ import {
 - `createMicroQueueScheduler`：创建微队列调度器，将同一个同步执行阶段中的任务合并到一个微任务中执行
 - `RecordTypedMap`：Record 类型化 Map，键和值的类型一一对应
 - `deepClone`：深拷贝，支持 Set、Map、RegExp、Date、循环引用
-- `isDeepPlainEqual`：深度比较两个未知类型的值是否相等，引用不同但值相等时返回 true
+- `isStructuredEqual`：比较两个结构化数据是否相等，引用不同，但值相等时返回 true
 - `debounce`：防抖函数
 - `stringToHash`：字符串转哈希值
 - `convertSnake2Camel`：对象属性名从蛇形命名转小驼峰命名
