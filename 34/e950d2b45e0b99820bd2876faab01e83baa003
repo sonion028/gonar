@@ -1,0 +1,22 @@
+README.md
+  h_8198a3bddb05e6 91
+src/utils/index.ts
+  h_8198a3bddb05e6 11
+package.json
+  h_8198a3bddb05e6 42-48
+src/utils/common/structured/is-structured-equal.ts
+  h_8198a3bddb05e6 42-43,51,62,73,94,103,155
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "34e950d2b45e0b99820bd2876faab01e83baa003",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
