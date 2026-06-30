@@ -7,8 +7,8 @@ import {
   createEventOptionExecutor,
   hasOwnProperty,
 } from './helpers';
-import { createMicroQueueScheduler } from '../micro-queue-scheduler';
-import { RecordTypedMap } from '../record-typed-map';
+import { RecordTypedMap } from '../collection/record-typed-map';
+import { createMicroQueueScheduler } from '../tasks/micro-queue-scheduler';
 
 // 定义一个排除函数的类型
 type NonFunction =
