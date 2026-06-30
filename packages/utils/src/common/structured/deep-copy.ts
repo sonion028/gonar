@@ -1,4 +1,20 @@
-import { getObjectType, isMap, isObject, isSet } from './helpers';
+import { isMap, isObject, isSet } from './helpers';
+
+/**
+ * @author sonion
+ * @description 获取元素的数据类型
+ * @param {unknown} data - 要判断的参数
+ * @returns {string} - 元素的数据类型
+ */
+export const getObjectType = (() => {
+  const regexp = /^\[[a-z]+ ([A-Za-z]+)\]$/;
+  return (data: object) => {
+    return (
+      (data.constructor && data.constructor.name) ||
+      Object.prototype.toString.call(data).replace(regexp, '$1')
+    );
+  };
+})();
 
 // 深拷贝参数和返回类型
 type DeepCloneResult = Record<string | symbol, unknown>;

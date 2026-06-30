@@ -1,18 +1,10 @@
 /**
  * @author sonion
- * @description 获取元素的数据类型
- * @param {unknown} data - 要判断的参数
- * @returns {string} - 元素的数据类型
+ * @param value 要判断的值
+ * @description 是否为null或undefined
  */
-export const getObjectType = (() => {
-  const regexp = /^\[[a-z]+ ([A-Za-z]+)\]$/;
-  return (data: object) => {
-    return (
-      (data.constructor && data.constructor.name) ||
-      Object.prototype.toString.call(data).replace(regexp, '$1')
-    );
-  };
-})();
+export const isNil = (value: unknown): value is null | undefined =>
+  value === null || value === void 0;
 
 /**
  * @author sonion
@@ -22,6 +14,18 @@ export const getObjectType = (() => {
  */
 export const isObject = <T extends object>(val: unknown): val is T =>
   val === Object(val);
+
+/**
+ * @author sonion
+ * @description 是否为纯对象
+ * @param val 要判断的值
+ * @returns 如果为纯对象则返回 true，否则返回 false
+ */
+export const isPlainObject = (val: unknown): val is Record<string, unknown> => {
+  if (Object(val) !== val) return false;
+  const proto = Object.getPrototypeOf(val);
+  return proto === Object.prototype || isNil(proto);
+};
 
 /**
  * @author sonion
@@ -53,24 +57,4 @@ export const isMap = <K, V>(val: unknown): val is Map<K, V> => {
     typeof (val as Map<K, V>).set === 'function' &&
     typeof (val as Map<K, V>).get === 'function'
   );
-};
-
-/**
- * @author sonion
- * @param value 要判断的值
- * @description 是否为null或undefined
- */
-export const isNil = (value: unknown): value is null | undefined =>
-  value === null || value === void 0;
-
-/**
- * @author sonion
- * @description 是否为纯对象
- * @param val 要判断的值
- * @returns 如果为纯对象则返回 true，否则返回 false
- */
-export const isPlainObject = (val: unknown): val is Record<string, unknown> => {
-  if (Object(val) !== val) return false;
-  const proto = Object.getPrototypeOf(val);
-  return proto === Object.prototype || isNil(proto);
 };
