@@ -1,0 +1,62 @@
+packages/utils/src/common/structured/is-deep-plain-equal.ts
+  s_7392b7d40c5365::t_2f3ebbeb7a35c3 62
+  h_8198a3bddb05e6 9,97,99,101 gitai:{"mixed_line_ranges":[{"Single":9}],"operations":[]}
+  s_06a72a4d4d4304::t_3189b6e657f3f2 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b80dea492ec4f010ed87e8691ca3b2a8f9974e6d",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_06a72a4d4d4304": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-ef169fc9-1e14-4b0e-9497-e658cdb2707d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_7392b7d40c5365": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-15d6c3b5-a839-4b8f-bde3-c979ef8b556f",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/utils/src/common/structured/is-deep-plain-equal.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 9
+          },
+          {
+            "Single": 97
+          },
+          {
+            "Single": 99
+          },
+          {
+            "Single": 101
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 9
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
