@@ -1,5 +1,42 @@
 import { isObject, isPlainObject, isSet, isMap } from './helpers';
 
+type CompareStatus = 'checking' | 'equal' | 'different';
+
+/**
+ * @author sonion
+ * @description 初始化缓存, 用于存储已对比过的结果，避免循环引用。
+ */
+const initCache = () => {
+  const cache = new WeakMap<object, WeakMap<object, CompareStatus>>();
+  // 读取循环引用缓存
+  const getCompareStatus = (a: object, b: object) => cache.get(a)?.get(b);
+  // 获取循环引用缓存对应的比较结果
+  const getCompareResult = (status?: CompareStatus) => {
+    if (status === 'checking' || status === 'equal') return true;
+    if (status === 'different') return false;
+    return void 0;
+  };
+
+  // 标记对象对正在比较，并返回完成比较的更新函数
+  const startCompare = (a: object, b: object) => {
+    let cachedResult = cache.get(a);
+    if (!cachedResult) {
+      cachedResult = new WeakMap<object, CompareStatus>();
+      cache.set(a, cachedResult);
+    }
+    cachedResult.set(b, 'checking');
+    return (result: boolean) => {
+      cachedResult.set(b, result ? 'equal' : 'different');
+      return result;
+    };
+  };
+  return {
+    getCompareStatus,
+    getCompareResult,
+    startCompare,
+  };
+};
+
 /**
  * @author sonion
  * @description 深度比较两个未知类型的值是否相等。支持 Plain Object。
@@ -59,6 +96,9 @@ export const isDeepPlainEqual = (
     return true;
   };
 
+  // 初始化缓存, 用于存储已对比过的结果
+  const { getCompareStatus, getCompareResult, startCompare } = initCache();
+
   // 比较值是否相等
   const _isDeepPlainEqual = (a: unknown, b: unknown): boolean => {
     const aType = typeof a,
@@ -73,34 +113,42 @@ export const isDeepPlainEqual = (
     if (!isObject(a) || !isObject(b)) return Object.is(a, b);
     if (Object.is(a, b)) return true;
 
+    const cachedCompareResult = getCompareResult(getCompareStatus(a, b));
+    if (cachedCompareResult !== void 0) return cachedCompareResult;
+    const finishCompare = startCompare(a, b);
+
     if (isSet(a) && isSet(b)) {
-      if (a.size !== b.size) return false;
-      return isArrayEqual([...a], [...b], ignoreSetOrder);
+      if (a.size !== b.size) return finishCompare(false);
+      return finishCompare(isArrayEqual([...a], [...b], ignoreSetOrder));
     }
 
     if (Array.isArray(a) && Array.isArray(b)) {
-      return isArrayEqual(a, b, ignoreArrayOrder);
+      return finishCompare(isArrayEqual(a, b, ignoreArrayOrder));
     }
 
     if (isMap(a) && isMap(b)) {
-      return isKeyValueEqual(
-        a.size,
-        b.size,
-        a,
-        (key) => b.has(key),
-        (key) => b.get(key)
+      return finishCompare(
+        isKeyValueEqual(
+          a.size,
+          b.size,
+          a,
+          (key) => b.has(key),
+          (key) => b.get(key)
+        )
       );
     }
     if (!isPlainObject(a) || !isPlainObject(b)) {
       throw new Error('Only plain objects are supported for deep comparison');
     }
     const aEntries = Object.entries(a);
-    return isKeyValueEqual(
-      aEntries.length,
-      Object.keys(b).length,
-      aEntries,
-      (key) => Object.hasOwnProperty.call(b, key as PropertyKey), // 解决无属性和有属性但值为 undefined 的情况
-      (key) => b[key as string]
+    return finishCompare(
+      isKeyValueEqual(
+        aEntries.length,
+        Object.keys(b).length,
+        aEntries,
+        (key) => Object.hasOwnProperty.call(b, key as PropertyKey), // 解决无属性和有属性但值为 undefined 的情况
+        (key) => b[key as string]
+      )
     );
   };
 
