@@ -71,4 +71,4 @@ pnpm add -D @typescript/typescript6
 
 目前你的项目 `typescript: "^6.0.3"` 是安全的，与所有依赖兼容。TS 7.0 的正式发布时间表尚未明确，生态适配还需要一段时间。
 
-## 另 turborepo 当前不支持devEngines的版本为 2.10.0
+## 另 turborepo 对devEngines支持的不完整的版本为 2.10.1
