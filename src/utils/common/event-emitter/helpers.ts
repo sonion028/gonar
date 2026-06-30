@@ -1,4 +1,4 @@
-import type { RecordTypedMap } from '../record-typed-map';
+import type { RecordTypedMap } from '../collection/record-typed-map';
 
 /**
  * @author sonion
