@@ -1,2 +1,3 @@
-export * from '@tonar/react-kit';
-export * from '@tonar/utils';
+export * from './components';
+export * from './hooks';
+export * from './utils';

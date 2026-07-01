@@ -1,15 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    /* 仅类型检查需要 */
-    "jsx": "react-jsx",
-
-    "paths": {
-      /* 仅类型检查需要 */
-      "@/*": ["../react-kit/src/*"],
-      "@tonar/*": ["../*/src"]
-    }
-  },
-  /* types 也仅类型检查需要 */
-  "include": ["src", "../*/types"]
+  "include": ["src"]
 }
