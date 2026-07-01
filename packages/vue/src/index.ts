@@ -1,2 +1,2 @@
-export * from '@tonar/vue-kit';
-export * from '@tonar/utils';
+export * from './components';
+export * from './utils';
