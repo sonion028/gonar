@@ -26,6 +26,6 @@ export const getStagedPackagesTscCmd = (files: string[]) => {
   const paths = [...subPackagePaths];
   // 单个子包不支持大括号写法
   const filters = `"./${paths.length === 1 ? paths[0] : `{${paths.join(',')}}`}"`;
-  commands.push(`pnpm --filter ${filters} exec tsc --noEmit`);
+  commands.push(`pnpm --filter ${filters} exec turbo run typecheck`);
   return commands;
 };
