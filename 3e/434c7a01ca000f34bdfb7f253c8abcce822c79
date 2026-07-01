@@ -1,0 +1,41 @@
+packages/react/tsconfig.json
+  h_8198a3bddb05e6 3
+packages/react/src/index.ts
+  s_21769564b3c588::t_d39f06bf253269 3
+  s_352c3d85f0e1d0::t_bf8b3532b01ef8 1
+package.json
+  h_8198a3bddb05e6 46,50
+turbo.json
+  h_8198a3bddb05e6 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "3e434c7a01ca000f34bdfb7f253c8abcce822c79",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_21769564b3c588": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-64636013-394d-47e3-bcc0-466882f12c65",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_352c3d85f0e1d0": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-5a8a2c48-ffc8-4eac-81c4-1e950ceb6918",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
