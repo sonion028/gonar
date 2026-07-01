@@ -1,0 +1,188 @@
+packages/vue/src/components.ts
+  h_8198a3bddb05e6 1
+packages/vue/src/utils.ts
+  h_8198a3bddb05e6 1 gitai:{"mixed_line_ranges":[{"Single":1}],"operations":[]}
+packages/vue/vite.config.ts
+  h_8198a3bddb05e6 20-24,27 gitai:{"mixed_line_ranges":[{"Range":[22,24]}],"operations":[]}
+packages/react/src/utils.ts
+  h_8198a3bddb05e6 1 gitai:{"mixed_line_ranges":[{"Single":1}],"operations":[]}
+packages/react/package.json
+  h_8198a3bddb05e6 34-41
+  s_ded042778939c5::t_2c0c3553ef71a2 30-33
+packages/react/vite.config.ts
+  h_8198a3bddb05e6 30 gitai:{"mixed_line_ranges":[{"Single":30}],"operations":[]}
+  s_1b0a53877274d3::t_999d6beab0dc36 23-26
+packages/vue/package.json
+  s_10299c991dea24::t_c56642f7a7aee9 35-37
+  s_1d530993f001ef::t_c9e466c557f12b 31-34
+packages/react/src/hooks.ts
+  h_8198a3bddb05e6 1 gitai:{"mixed_line_ranges":[{"Single":1}],"operations":[]}
+packages/vue-kit/package.json
+  s_98071c23a7ec08::t_80207e74180bad 34
+  s_5ccb393b3d88eb::t_b1478efaeb745b 38
+packages/react-kit/package.json
+  h_8198a3bddb05e6 34,38
+packages/react/src/components.ts
+  s_4b40a08686724e::t_5193faf83fe8bf 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "e3576ce66c1aaa51940aed5fea271cfb2fc05178",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_10299c991dea24": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-7251db2c-b351-48c4-81b0-09fe260af529",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_1b0a53877274d3": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-bb012fa0-75ea-467f-9005-04af9b3273fd",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_1d530993f001ef": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-7050a50e-ac20-46fd-b3ff-7544617aed21",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_4b40a08686724e": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-a78338d7-ad0d-4c6d-9720-74cf71cb6f7b",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_5ccb393b3d88eb": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-dce517fc-2ca3-4afa-8368-12047833754d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_98071c23a7ec08": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-71026b2e-da81-4624-ac7e-ff9f56f736e6",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_ded042778939c5": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-8a7d2333-59b7-4f61-8014-48eb88ee45e6",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react/src/hooks.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/react/src/utils.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/react/vite.config.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 30
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 30
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/vue/src/utils.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 1
+          }
+        ],
+        "operations": []
+      }
+    ],
+    "packages/vue/vite.config.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              20,
+              24
+            ]
+          },
+          {
+            "Single": 27
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Range": [
+              22,
+              24
+            ]
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
