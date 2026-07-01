@@ -26,6 +26,7 @@ export const getStagedPackagesTscCmd = (files: string[]) => {
   const paths = [...subPackagePaths];
   // 单个子包不支持大括号写法
   const filters = `"./${paths.length === 1 ? paths[0] : `{${paths.join(',')}}`}"`;
+  // 使用turbo跑子包typecheck命令，能先构建依赖子包，不用别名类型检查也正常
   commands.push(`pnpm --filter ${filters} exec turbo run typecheck`);
   return commands;
 };
