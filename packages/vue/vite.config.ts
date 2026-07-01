@@ -17,10 +17,14 @@ export default mergeConfig(
     ],
     build: {
       lib: {
-        entry: 'src/index.ts',
+        entry: {
+          index: 'src/index.ts',
+          components: 'src/components.ts',
+          utils: 'src/utils.ts',
+        },
       },
       rolldownOptions: {
-        external: ['@tonar/vue-kit', '@tonar/utils'],
+        external: [/^@tonar\/vue-kit(?:\/.+)?$/, '@tonar/utils'],
       },
     },
   })

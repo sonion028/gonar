@@ -31,11 +31,11 @@
     },
     "./hooks": {
       "import": "./dist/hooks.esm.js",
-      "types": "./dist/types/hooks.d.ts"
+      "types": "./dist/types/hooks/index.d.ts"
     },
     "./components": {
       "import": "./dist/components.esm.js",
-      "types": "./dist/types/components.d.ts"
+      "types": "./dist/types/components/index.d.ts"
     }
   },
   "scripts": {

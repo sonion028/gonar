@@ -31,11 +31,11 @@
     },
     "./composables": {
       "import": "./dist/composables.esm.js",
-      "types": "./dist/types/composables.d.ts"
+      "types": "./dist/types/composables/index.d.ts"
     },
     "./components": {
       "import": "./dist/components.esm.js",
-      "types": "./dist/types/components.d.ts"
+      "types": "./dist/types/components/index.d.ts"
     }
   },
   "scripts": {

@@ -19,10 +19,15 @@ export default mergeConfig(
     ],
     build: {
       lib: {
-        entry: 'src/index.ts',
+        entry: {
+          index: 'src/index.ts',
+          components: 'src/components.ts',
+          hooks: 'src/hooks.ts',
+          utils: 'src/utils.ts',
+        },
       },
       rolldownOptions: {
-        external: ['@tonar/react-kit', '@tonar/utils'],
+        external: [/^@tonar\/react-kit(?:\/.+)?$/, '@tonar/utils'],
       },
     },
   })

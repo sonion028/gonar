@@ -27,6 +27,14 @@
     ".": {
       "import": "./dist/index.esm.js",
       "types": "./dist/types/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components.esm.js",
+      "types": "./dist/types/components/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils.esm.js",
+      "types": "./dist/types/utils/index.d.ts"
     }
   },
   "scripts": {
