@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useDistinctState } from '../state';
+import { useDistinctState, useLatestCallback } from '../state';
 
 type StorageParams<T> = Omit<
   Parameters<typeof useDistinctState<T>>[0],
@@ -25,7 +25,7 @@ type StorageParams<T> = Omit<
  * @param params.onChange - 变化回调
  * @param [params.storage] - 储存类型。 localStorage 或 sessionStorage
  * @param [params.checkType] - 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误
- * @param [params.beforeunload] - tab关闭前的回调, 相同key的不同回调只有初始生效。
+ * @param [params.beforeunload] - tab关闭前的回调。
  */
 export const useStorage = <T>({
   key,
@@ -76,35 +76,43 @@ export const useStorage = <T>({
     [key, storage, setStoredValue]
   );
 
-  useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      if (
-        selfDispatchedEventsRef.current.has(event) ||
-        event.storageArea !== storage ||
-        event.key !== key
-      ) {
-        return;
-      }
-      try {
-        const newValue = event.newValue
-          ? JSON.parse(event.newValue)
-          : initialValue;
-        setStoredValue(newValue);
-      } catch (error) {
-        console.error('storage事件处理出错', error);
-      }
-    };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, [key, storage, initialValue, setStoredValue]);
+  const handleStorageChange = useLatestCallback((event: StorageEvent) => {
+    if (
+      selfDispatchedEventsRef.current.has(event) ||
+      event.storageArea !== storage ||
+      event.key !== key
+    ) {
+      return;
+    }
+    try {
+      const newValue = event.newValue
+        ? JSON.parse(event.newValue)
+        : initialValue;
+      setStoredValue(newValue);
+    } catch (error) {
+      console.error('storage事件处理出错', error);
+    }
+  });
 
   useEffect(() => {
-    if (!beforeunload) return;
-    // eslint-disable-next-line @eslint-react/web-api-no-leaked-event-listener
-    window.addEventListener('beforeunload', beforeunload);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [handleStorageChange]);
+
+  const handleBeforeunload = useLatestCallback(beforeunload);
+  useEffect(() => {
     // 不用返回清理，因为组件卸载事件不移除
+    // eslint-disable-next-line @eslint-react/web-api-no-leaked-event-listener
+    beforeunload && window.addEventListener('beforeunload', handleBeforeunload);
     // eslint-disable-next-line @eslint-react/exhaustive-deps
   }, []);
 
-  return [storedValue, setValue] as const;
+  return [
+    storedValue,
+    setValue,
+    () => window.removeEventListener('storage', handleStorageChange),
+    () =>
+      beforeunload &&
+      window.removeEventListener('beforeunload', handleBeforeunload),
+  ] as const;
 };

@@ -22,9 +22,10 @@ export function useStaticState<T>(initialValue?: T) {
   return [getValue, setValue, withValue] as const;
 }
 
+type AnyFn = (...args: never[]) => unknown;
 interface UseLatestCallbackType {
-  <T extends (...args: never[]) => unknown>(cb: T): T;
-  <T extends (...args: never[]) => unknown>(cb?: T | undefined): T | undefined;
+  <T extends AnyFn>(cb: T): T;
+  <T extends AnyFn>(cb?: T): (...args: Parameters<T>) => ReturnType<T>;
 }
 /**
  * @author sonion
@@ -44,7 +45,7 @@ export const useLatestCallback: UseLatestCallbackType = (cb) => {
   // ESLint 规则 @eslint-react/refs 对此场景存在误判，故禁用。
   // eslint-disable-next-line @eslint-react/refs
   ref.current !== cb && (ref.current = cb);
-  type Args = Parameters<Exclude<typeof cb, undefined>>;
+  type Args = Parameters<NonNullable<typeof cb>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
 };
 

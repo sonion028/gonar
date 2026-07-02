@@ -19,7 +19,7 @@ export default mergeConfig(
       lib: {
         entry: {
           index: 'src/index.ts',
-          // composables: 'src/composables/index.ts',
+          composables: 'src/composables/index.ts',
           components: 'src/components/index.ts',
         },
       },
