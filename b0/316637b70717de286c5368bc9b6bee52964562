@@ -1,0 +1,77 @@
+src/hooks/state/index.ts
+  h_8198a3bddb05e6 25,27
+  s_ebf21881cb2ed8::t_52b8eb3e3003fe 28
+src/hooks/storage/index.ts
+  s_6fffb50fd067e7::t_4e954303c063c7 17 gitai:{"mixed_line_ranges":[{"Single":17}],"operations":[]}
+  s_2d4b6fb1cc72c8::t_052892bf7e34d0 81 gitai:{"mixed_line_ranges":[{"Single":81}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b0316637b70717de286c5368bc9b6bee52964562",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_2d4b6fb1cc72c8": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-8a7c824c-1689-4896-bd64-4c5455fac1a0",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_6fffb50fd067e7": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-2baab368-e5b0-4bf9-b929-c0f6447dfe81",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_ebf21881cb2ed8": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-e51da1fc-b334-415e-b1ed-3f38a3046c20",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "src/hooks/storage/index.ts": [
+      {
+        "hash": "s_6fffb50fd067e7::t_4e954303c063c7",
+        "line_ranges": [
+          {
+            "Single": 17
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 17
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_2d4b6fb1cc72c8::t_052892bf7e34d0",
+        "line_ranges": [
+          {
+            "Single": 81
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 81
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
