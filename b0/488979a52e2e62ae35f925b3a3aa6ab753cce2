@@ -1,0 +1,128 @@
+packages/vue-kit/src/composables/storage/index.ts
+  h_8198a3bddb05e6 1-102
+packages/vue-kit/src/composables/index.ts
+  s_7c3f520166e6c7::t_394a2075dfae70 1
+packages/vue/package.json
+  s_0b48ff05039eaa::t_a9e5eae69f52d0 35-38
+packages/react-kit/src/hooks/storage/index.ts
+  s_e0b456309d5610::t_7f1f1b05587e0c 110-112,114,117
+  h_8198a3bddb05e6 79,95-96,100,105-106,113,115 gitai:{"mixed_line_ranges":[{"Single":106}],"operations":[]}
+  s_efd9d3678c0474::t_4eb9379176442e 2
+  s_50c2d7b743d828::t_8f3d726d29f64a 116
+  s_ba5a046f9381a0::t_580728e0d6944e 102
+packages/vue/src/composables.ts
+  h_8198a3bddb05e6 1
+packages/react-kit/src/hooks/state/index.ts
+  h_8198a3bddb05e6 25,27-28,48
+packages/vue/vite.config.ts
+  s_125eed5d1bd94c::t_b35b24a004408e 23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b0488979a52e2e62ae35f925b3a3aa6ab753cce2",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_0b48ff05039eaa": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-67d250dd-90ab-42fc-8040-88aef6b727d1",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_125eed5d1bd94c": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-38cc1795-525c-43f8-8a3b-fc2b2d6a70b9",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_50c2d7b743d828": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-79192e2e-a90a-4908-beb1-3da54fa8fb08",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_7c3f520166e6c7": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-c5dfeb25-7417-4502-a695-bc7d5f7c677b",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_ba5a046f9381a0": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-8af3e17d-2650-4e48-996c-daba087e3635",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_e0b456309d5610": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-23c64444-ee93-4fd1-ba97-648f9a7dc7d3",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_efd9d3678c0474": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-9fb61bec-14c8-417c-a255-046ad56e7fdb",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react-kit/src/hooks/storage/index.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 79
+          },
+          {
+            "Range": [
+              95,
+              96
+            ]
+          },
+          {
+            "Single": 100
+          },
+          {
+            "Range": [
+              105,
+              106
+            ]
+          },
+          {
+            "Single": 113
+          },
+          {
+            "Single": 115
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 106
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
