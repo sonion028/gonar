@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDistinctState } from '../state';
 
 type StorageParams<T> = Omit<
@@ -51,6 +51,8 @@ export const useStorage = <T>({
     onChange,
   });
 
+  const selfDispatchedEventsRef = useRef(new WeakSet<StorageEvent>());
+
   const setValue = useCallback(
     (value: T | ((val: T) => T)) => {
       try {
@@ -58,13 +60,13 @@ export const useStorage = <T>({
           const valueToStore = value instanceof Function ? value(old) : value;
           const newValue = JSON.stringify(valueToStore);
           storage.setItem(key, newValue);
-          window.dispatchEvent(
-            new StorageEvent('storage', {
-              key,
-              newValue,
-              storageArea: storage,
-            })
-          );
+          const event = new StorageEvent('storage', {
+            key,
+            newValue,
+            storageArea: storage,
+          });
+          selfDispatchedEventsRef.current.add(event);
+          window.dispatchEvent(event);
           return valueToStore;
         });
       } catch (error) {
@@ -76,7 +78,11 @@ export const useStorage = <T>({
 
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.storageArea !== storage || event.key !== key) {
+      if (
+        selfDispatchedEventsRef.current.has(event) ||
+        event.storageArea !== storage ||
+        event.key !== key
+      ) {
         return;
       }
       try {
