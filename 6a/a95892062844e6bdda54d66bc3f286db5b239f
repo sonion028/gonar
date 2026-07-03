@@ -1,0 +1,245 @@
+package.json
+  h_8198a3bddb05e6 41
+  s_97ad4231bb0cdf::t_4cfca79bd854ba 52
+  s_97ad4231bb0cdf::t_2f0fb2e7c291f5 51
+packages/react-kit/vitest.config.ts
+  h_8198a3bddb05e6 1,3
+packages/vue-kit/vite.config.ts
+  s_233368ca67ebf4::t_1647492f3e668a 27
+packages/utils/package.json
+  h_8198a3bddb05e6 31
+packages/vue-kit/package.json
+  s_947c06bfb83f6f::t_9ec86fb098d253 47
+  s_4c05052c39aa0e::t_c9222693caad94 46,48
+packages/utils/src/web/fetch-xhr/index.ts
+  h_8198a3bddb05e6 44,46
+packages/vue-kit/src/components/so-authority/index.ts
+  s_79bcf90440dbda::t_07fc25c224cc47 10
+  s_904edee7851744::t_b382a099468008 17
+packages/react-kit/package.json
+  h_8198a3bddb05e6 57
+packages/vue-kit/tsconfig.json
+  s_3ff7895876a421::t_d4741100faa10f 15
+packages/vue-kit/src/components/so-authority/composables/index.ts
+  s_11b8654721149c::t_b2b4b2442d5392 44
+  s_ca36dd4497721c::t_6611f32fde4110 10
+  s_46fd6446423af6::t_cbdda77a90fadc 28-29
+  s_eaf31f567a58c4::t_f6f956736089cf 59
+  s_d7f9ef53e3e87d::t_4e15e09412fa23 12 gitai:{"mixed_line_ranges":[{"Single":12}],"operations":[]}
+  s_9b8e03df48df76::t_657695d819b846 2
+  s_e3d5c2fa3b65cf::t_5673cc8d5dd31a 4-5 gitai:{"mixed_line_ranges":[{"Range":[4,5]}],"operations":[]}
+  h_8198a3bddb05e6 9,27,48,62-63,65,88 gitai:{"mixed_line_ranges":[{"Single":9}],"operations":[]}
+  s_d7f9ef53e3e87d::t_19b1f081a9e76b 13-15
+packages/react-kit/tsconfig.json
+  s_01c69bfbecdf17::t_8e864b5580894d 15
+vitest.base.config.ts
+  h_8198a3bddb05e6 1-30
+packages/utils/tsconfig.json
+  h_8198a3bddb05e6 7
+packages/react-kit/src/components/async-custom-show/index.tsx
+  h_8198a3bddb05e6 32-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "6aa95892062844e6bdda54d66bc3f286db5b239f",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_01c69bfbecdf17": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-2c967ab1-1eee-47f8-8b6a-7aebae94d751",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_11b8654721149c": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-b553a372-cb5b-4037-a540-42a8cb300940",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_233368ca67ebf4": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-3d5783d2-7c65-43ef-bc0d-368652f8d089",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_3ff7895876a421": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-7bdf7be4-7d68-4a79-b444-562b8c7e5951",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_46fd6446423af6": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-cab412f0-7141-40b2-b15e-ac553c09d441",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_4c05052c39aa0e": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-0462616b-2101-4de0-9e19-240c4f1d9454",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_79bcf90440dbda": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-9b6fb81b-b352-43db-8837-b7b3f18a6fff",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_904edee7851744": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-43c59e13-299f-4801-8c1b-0cfd1378ca9d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_947c06bfb83f6f": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-6993614e-9ca2-470f-bf70-f761f251f2de",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_97ad4231bb0cdf": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-a540402c-905e-442d-9b42-c45da59e9ede",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_9b8e03df48df76": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-f05f4143-4611-453e-9ccb-1fd98281c300",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_ca36dd4497721c": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-987fa616-2ecb-4ee9-8bfa-166268c371d3",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_d7f9ef53e3e87d": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-efad2a05-d5ab-405f-afb5-130bf53fe311",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_e3d5c2fa3b65cf": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-6b789d45-68fd-41f8-b0ac-3a01b358b0ef",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_eaf31f567a58c4": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-56622e7c-2b56-4974-965a-39f84ffc4011",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/vue-kit/src/components/so-authority/composables/index.ts": [
+      {
+        "hash": "s_d7f9ef53e3e87d::t_4e15e09412fa23",
+        "line_ranges": [
+          {
+            "Single": 12
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 12
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_e3d5c2fa3b65cf::t_5673cc8d5dd31a",
+        "line_ranges": [
+          {
+            "Range": [
+              4,
+              5
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Range": [
+              4,
+              5
+            ]
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 9
+          },
+          {
+            "Single": 27
+          },
+          {
+            "Single": 48
+          },
+          {
+            "Range": [
+              62,
+              63
+            ]
+          },
+          {
+            "Single": 65
+          },
+          {
+            "Single": 88
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 9
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
