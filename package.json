@@ -22,7 +22,7 @@
     "check": "turbo run typecheck && pnpm run lint && pnpm run fmt:check && pnpm run cspell",
     "fix": "pnpm run lint:fix && pnpm run fmt",
     "preinstall": "pnpm exec sync-node-version",
-    "postinstall": "pnpm -r exec rimraf .node-version && pnpm -r --filter './{apps,packages}/*' pkg delete engines",
+    "postinstall": "pnpm -r exec rimraf .node-version && pnpm -F './{apps,packages}/*' pkg delete engines",
     "prepare": "pnpm exec simple-git-hooks"
   },
   "devDependencies": {
