@@ -5,10 +5,12 @@ type StorageType = typeof localStorage | typeof sessionStorage;
 
 type StorageParams<T> = Omit<
   Parameters<typeof useDistinctState<T>>[0],
-  'onlyEvent'
+  'onlyEvent' | 'initialValue'
 > & {
   /** 储存的key */
   key: string;
+  /** 默认值 */
+  defaultValue: T;
   /** 储存类型。 localStorage 或 sessionStorage */
   storage?: StorageType;
   /** 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误 */
@@ -22,7 +24,7 @@ type StorageParams<T> = Omit<
  * @description 本地储存
  * @param params - 参数对象
  * @param params.key - 储存的key
- * @param params.initialValue - 初始值
+ * @param params.defaultValue - 默认值
  * @param [params.hasDiff] - 对比函数，默认对比引用是否不相同。
  * @param params.onChange - 变化回调
  * @param [params.storage] - 储存类型。 localStorage 或 sessionStorage
@@ -31,24 +33,26 @@ type StorageParams<T> = Omit<
  */
 export const useStorage = <T>({
   key,
-  initialValue,
+  defaultValue,
   hasDiff,
   onChange,
   storage = localStorage,
   checkType = () => true,
   beforeunload,
 }: StorageParams<T>) => {
+  // 值规范化
+  const normalizedValue = useLatestCallback((val: string) => {
+    try {
+      const saved = val ? JSON.parse(val) : defaultValue;
+      return checkType(saved) ? saved : defaultValue;
+    } catch (err) {
+      console.warn('规范化出错，已使用默认值', err);
+      return defaultValue;
+    }
+  });
+
   const [storedValue, setStoredValue] = useDistinctState<T>({
-    initialValue: () => {
-      try {
-        const saved = storage.getItem(key);
-        const saved2 = saved ? JSON.parse(saved) : initialValue;
-        return checkType(saved2) ? saved2 : initialValue;
-      } catch (err) {
-        console.warn('初始化出错，已使用默认值', err);
-        return initialValue;
-      }
-    },
+    initialValue: () => normalizedValue(storage.getItem(key) ?? ''),
     hasDiff,
     onChange,
   });
@@ -87,9 +91,7 @@ export const useStorage = <T>({
       return;
     }
     try {
-      const newValue = event.newValue
-        ? JSON.parse(event.newValue)
-        : initialValue;
+      const newValue = normalizedValue(event.newValue ?? '');
       setStoredValue(newValue);
     } catch (error) {
       console.error('storage事件处理出错', error);

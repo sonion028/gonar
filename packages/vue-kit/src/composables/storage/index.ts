@@ -3,8 +3,8 @@ import { computed, ref } from 'vue';
 type StorageParams<T> = {
   /** 储存的key */
   key: string;
-  /** 初始值 */
-  initialValue: T;
+  /** 默认值 */
+  defaultValue: T;
   /** 对比函数，默认对比引用是否不相同。 */
   hasDiff?: (prev: T, next: T) => boolean;
   /** 变化回调 */
@@ -19,38 +19,25 @@ type StorageParams<T> = {
 
 export const useStorage = <T>({
   key,
-  initialValue,
+  defaultValue,
   hasDiff,
   onChange,
   storage = localStorage,
   checkType = () => true,
   beforeunload,
 }: StorageParams<T>) => {
-  // 初始化值
-  const getInitialValue = () => {
+  // 值规范化
+  const normalizedValue = (val: string) => {
     try {
-      const saved = storage.getItem(key);
-      const saved2 = saved ? JSON.parse(saved) : initialValue;
-      return checkType(saved2) ? saved2 : initialValue;
+      const saved = val ? JSON.parse(val) : defaultValue;
+      return checkType(saved) ? saved : defaultValue;
     } catch (err) {
-      console.warn('初始化出错，已使用默认值', err);
-      return initialValue;
+      console.warn('规范化出错，已使用默认值', err);
+      return defaultValue;
     }
-  };
-  const internalRef = ref(getInitialValue());
-  // 更新值
-  const setInternalRef = (value: T, dispatch = false) => {
-    const isDiff = hasDiff ?? ((prev: T, next: T) => prev !== next);
-    if (!isDiff(internalRef.value, value)) {
-      return;
-    }
-    onChange?.(value);
-    internalRef.value = value;
-    dispatch && dispatchPersist(value);
   };
 
   const selfDispatchedEvents = new WeakSet<StorageEvent>();
-
   // 派发事件并持久化
   const dispatchPersist = (value: T) => {
     const newValue = JSON.stringify(value);
@@ -64,8 +51,20 @@ export const useStorage = <T>({
     window.dispatchEvent(event);
   };
 
+  const internalRef = ref<T>(normalizedValue(storage.getItem(key) ?? ''));
+  // 更新值
+  const setInternalRef = (value: T, dispatch = false) => {
+    const isDiff = hasDiff ?? ((prev: T, next: T) => prev !== next);
+    if (!isDiff(internalRef.value, value)) {
+      return;
+    }
+    onChange?.(value);
+    internalRef.value = value;
+    dispatch && dispatchPersist(value);
+  };
+
   // 外部使用值
-  const storedValue = computed({
+  const storedValue = computed<T>({
     get() {
       return internalRef.value;
     },
@@ -83,9 +82,7 @@ export const useStorage = <T>({
       return;
     }
     try {
-      const newValue = event.newValue
-        ? JSON.parse(event.newValue)
-        : initialValue;
+      const newValue = normalizedValue(event.newValue ?? '');
       setInternalRef(newValue, false);
     } catch (error) {
       console.error('storage事件处理出错', error);
