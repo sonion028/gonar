@@ -1,0 +1,41 @@
+.cspell/custom-dictionary.txt
+  h_8198a3bddb05e6 11
+turbo.json
+  h_8198a3bddb05e6 12-14
+packages/utils/tests/web/fetch-xhr.test.ts
+  h_8198a3bddb05e6 1-209
+packages/utils/tests/common/call-control.test.ts
+  h_8198a3bddb05e6 1-35,37-43,45-50
+package.json
+  h_8198a3bddb05e6 14 gitai:{"mixed_line_ranges":[{"Single":14}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "0f0d480798bec58018ab2a8be3697fc63d63d2c3",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "package.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 14
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 14
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
