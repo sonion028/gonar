@@ -10,6 +10,7 @@ export default mergeConfig(
       vue(),
       dts({
         outDirs: 'dist/types',
+        include: ['src/**/*', 'types/**/*'],
         compilerOptions: {
           rootDir: 'src',
         },
