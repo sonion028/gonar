@@ -9,6 +9,9 @@
       "dependsOn": ["^build", "^typecheck"],
       "outputs": []
     },
+    "test": {
+      "outputs": []
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,

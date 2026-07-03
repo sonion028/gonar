@@ -66,6 +66,7 @@ describe('useAsyncActionLock', () => {
   });
 
   it('should prevent duplicate calls while pending', async () => {
+    const consoleLog = vi.spyOn(console, 'log').mockImplementation(() => {});
     let resolvePromise: (value: string) => void;
     const asyncAction = vi.fn().mockImplementation(
       () =>
@@ -84,6 +85,7 @@ describe('useAsyncActionLock', () => {
     });
 
     expect(asyncAction).toHaveBeenCalledTimes(1);
+    expect(consoleLog).toHaveBeenCalledTimes(2);
 
     await act(async () => {
       resolvePromise!('done');
