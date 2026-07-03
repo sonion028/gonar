@@ -70,9 +70,9 @@ describe('useStorage', () => {
     vi.clearAllMocks();
   });
 
-  it('should return initial value when storage is empty', () => {
+  it('should return default value when storage is empty', () => {
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const [value] = result.current;
@@ -83,14 +83,14 @@ describe('useStorage', () => {
     window.localStorage.setItem('test-key', JSON.stringify('stored'));
 
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const [value] = result.current;
     expect(value).toBe('stored');
   });
 
-  it('should use initialValue when checkType fails', () => {
+  it('should use defaultValue when checkType fails', () => {
     window.localStorage.setItem('test-key', JSON.stringify('invalid-type'));
 
     const checkType = (val: unknown): val is number => typeof val === 'number';
@@ -98,7 +98,7 @@ describe('useStorage', () => {
     const { result } = renderHook(() =>
       useStorage({
         key: 'test-key',
-        initialValue: 42,
+        defaultValue: 42,
         checkType,
       })
     );
@@ -115,7 +115,7 @@ describe('useStorage', () => {
     const { result } = renderHook(() =>
       useStorage({
         key: 'test-key',
-        initialValue: 42,
+        defaultValue: 42,
         checkType,
       })
     );
@@ -126,7 +126,7 @@ describe('useStorage', () => {
 
   it('should save value to storage when setValue is called', () => {
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
     const [, setValue] = result.current;
 
@@ -143,7 +143,7 @@ describe('useStorage', () => {
     window.localStorage.setItem('test-key', JSON.stringify(10));
 
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 0 })
+      useStorage({ key: 'test-key', defaultValue: 0 })
     );
     const [, setValue] = result.current;
 
@@ -158,7 +158,7 @@ describe('useStorage', () => {
     const { result } = renderHook(() =>
       useStorage({
         key: 'test-key',
-        initialValue: 'initial',
+        defaultValue: 'initial',
         storage: window.sessionStorage,
       })
     );
@@ -180,7 +180,7 @@ describe('useStorage', () => {
     window.localStorage.setItem('test-key', 'invalid-json');
 
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const [value] = result.current;
@@ -198,7 +198,7 @@ describe('useStorage', () => {
     };
 
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: complexObject })
+      useStorage({ key: 'test-key', defaultValue: complexObject })
     );
     const [, setValue] = result.current;
 
@@ -212,7 +212,7 @@ describe('useStorage', () => {
 
   it('should handle storage event from other tabs', () => {
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const event = new Event('storage') as StorageEvent;
@@ -231,7 +231,7 @@ describe('useStorage', () => {
 
   it('should ignore storage event for different key', () => {
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const event = new Event('storage') as StorageEvent;
@@ -250,7 +250,7 @@ describe('useStorage', () => {
 
   it('should ignore storage event from different storage area', () => {
     const { result } = renderHook(() =>
-      useStorage({ key: 'test-key', initialValue: 'initial' })
+      useStorage({ key: 'test-key', defaultValue: 'initial' })
     );
 
     const event = new Event('storage') as StorageEvent;
