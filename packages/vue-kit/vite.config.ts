@@ -24,7 +24,7 @@ export default mergeConfig(
         },
       },
       rolldownOptions: {
-        external: ['vue'],
+        external: ['vue', '@tonar/utils'],
       },
     },
   })

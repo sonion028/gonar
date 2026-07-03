@@ -16,6 +16,7 @@ export const rAfInterval = (
   const stop = () => (isStop = true);
   const _interval = () => {
     requestAnimationFrame(() => {
+      if (isStop) return;
       const currentTime = Date.now();
       if (currentTime - startTime >= wait) {
         fn();
@@ -37,6 +38,6 @@ export const rAfInterval = (
 export const clearRAfInterval = (
   intervalId: RAfIntervalReturn | (() => void) | undefined
 ) => {
-  typeof intervalId === 'object' && intervalId.stop && intervalId.stop();
+  typeof intervalId === 'object' && intervalId.stop?.();
   typeof intervalId === 'function' && intervalId();
 };

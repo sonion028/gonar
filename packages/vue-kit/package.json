@@ -40,10 +40,15 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build",
+    "test": "vitest --run",
     "typecheck": "pnpm exec tsc --noEmit"
+  },
+  "dependencies": {
+    "@tonar/utils": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/test-utils": "^2.4.11",
     "vue": "^3.5.39"
   },
   "peerDependencies": {

@@ -7,14 +7,14 @@ export default defineComponent({
   props: {
     /** 组件需要的权限 */
     requiredPermissions: {
-      type: [String, Number, Array, Function] as PropType<
+      type: [String, Number, BigInt, Array, Function] as PropType<
         AuthorityProps['requiredPermissions']
       >, // 如参数是组件时，调用参数传入用户权限，判断是否有权限
       required: true,
     },
     /** 用户具有的权限 */
     userPermissions: {
-      type: [String, Number, Array] as PropType<
+      type: [String, Number, BigInt, Array] as PropType<
         AuthorityProps['userPermissions']
       >,
       required: true,

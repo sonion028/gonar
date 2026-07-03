@@ -1,6 +1,18 @@
 import { computed } from 'vue';
+import { isNil } from '@tonar/utils';
 
-type PermissionType = string | number | string[] | number[];
+type PermissionValue = string | number | bigint;
+type PermissionType = PermissionValue | PermissionValue[];
+
+/**
+ * @author sonion
+ * @description 检查是否为合法权限值
+ * @param val - 待检查的值
+ */
+const isPermissionValue = (val: unknown): val is PermissionValue =>
+  typeof val === 'string' ||
+  typeof val === 'bigint' ||
+  (typeof val === 'number' && Number.isFinite(val));
 
 /**
  * @author sonion
@@ -9,9 +21,12 @@ type PermissionType = string | number | string[] | number[];
  * @returns {boolean} - 类型是否有错误
  */
 const isPermissionType = (val: unknown): val is PermissionType =>
-  typeof val === 'string' ||
-  typeof val === 'number' ||
-  (Array.isArray(val) && !!val.length);
+  isPermissionValue(val) ||
+  (Array.isArray(val) && val.every(isPermissionValue));
+
+// 类型守卫
+const isArray = (val: PermissionType): val is PermissionValue[] =>
+  Array.isArray(val);
 
 /**
  * @author sonion
@@ -26,36 +41,29 @@ const permissionVerify = (
 ) => {
   if (!isPermissionType(requiredPermissions))
     throw new TypeError(
-      `组件所需权限类型错误: 应该为 String、Number 或 String[]`
+      `组件所需权限类型错误: 应该为 String、Number、BigInt 或 String[]、Number[]、BigInt[]`
     );
   if (!isPermissionType(userPermissions))
-    throw new TypeError(`用户权限类型错误: 应该为 String、Number 或 String[]`);
+    throw new TypeError(
+      `用户权限类型错误: 应该为 String、Number、BigInt 或 String[]、Number[]、BigInt[]`
+    );
 
-  const isRequiredArray = Array.isArray(requiredPermissions);
-  const isUserArray = Array.isArray(userPermissions);
+  const isRequiredArray = isArray(requiredPermissions);
+  const isUserArray = isArray(userPermissions);
+
   if (isRequiredArray && !isUserArray) {
     // 需要权限是数组，用户权限不是数组，就不可能有权限了
     return false;
   }
   if (!isRequiredArray && isUserArray) {
-    return (userPermissions as Array<string | number>).includes(
-      requiredPermissions
-    );
+    return userPermissions.includes(requiredPermissions);
   }
-  if (!isRequiredArray && !isUserArray) {
-    return Object.is(userPermissions, requiredPermissions);
+  if (isRequiredArray && isUserArray) {
+    // 都是数组了
+    return requiredPermissions.every((item) => userPermissions.includes(item));
   }
-  // 只能都是数组了
-  return (requiredPermissions as Array<string | number>).every((item) =>
-    (userPermissions as Array<string | number>).includes(item)
-  );
+  return Object.is(userPermissions, requiredPermissions);
 };
-
-/**
- * 检查是否为空数组
- * @param val - 待检查的值
- */
-const isEmptyArray = (val: unknown) => Array.isArray(val) && !val.length;
 
 export type AuthorityProps = {
   requiredPermissions:
@@ -77,12 +85,7 @@ export const usePermission = (props: AuthorityProps) => {
       return props.requiredPermissions(props.userPermissions);
     }
 
-    if (
-      !props.requiredPermissions ||
-      !props.userPermissions ||
-      isEmptyArray(props.requiredPermissions) ||
-      isEmptyArray(props.userPermissions)
-    )
+    if (isNil(props.requiredPermissions) || isNil(props.userPermissions))
       return false;
 
     return permissionVerify(props.userPermissions, props.requiredPermissions);
