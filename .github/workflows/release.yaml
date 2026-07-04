@@ -118,5 +118,6 @@ jobs:
             🎉 Auto-generated Release
             - Release Version: ${{ github.ref_name }}
             - Commit SHA: ${{ github.sha }}
+            - Channel: Beta
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}

@@ -16,9 +16,9 @@ runs:
     - name: TypeScript 检查
       shell: bash
       run: |
-        echo "运行 tsc 检查..."
-        pnpm run tsc
-        echo "tsc 检查通过 ✅"
+        echo "运行 typecheck 检查..."
+        pnpm run typecheck
+        echo "typecheck 检查通过 ✅"
 
     # Lint 检查
     - name: ESLint 检查
