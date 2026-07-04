@@ -22,9 +22,10 @@ export function useStaticState<T>(initialValue?: T) {
   return [getValue, setValue, withValue] as const;
 }
 
+type AnyFn = (...args: never[]) => unknown;
 interface UseLatestCallbackType {
-  <T extends (...args: never[]) => unknown>(cb: T): T;
-  <T extends (...args: never[]) => unknown>(cb?: T | undefined): T | undefined;
+  <T extends AnyFn>(cb: T): T;
+  <T extends AnyFn>(cb?: T | undefined): T;
 }
 /**
  * @author sonion

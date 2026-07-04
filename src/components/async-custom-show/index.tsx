@@ -29,7 +29,9 @@ function AsyncCustomShow<T>({
   const [show, setShow] = useState<Awaited<typeof when>>(void 0);
   useEffect(() => {
     if (!when) return;
-    Promise.resolve(when).then(setShow);
+    let active = true;
+    Promise.resolve(when).then((value) => active && setShow(value));
+    return () => void (active = false);
   }, [when]);
   return <>{show ? children(show) : fallback}</>;
 }
