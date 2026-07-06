@@ -41,8 +41,9 @@ export interface FetchXHRInit extends Pick<RequestInit, RequestInitFields> {
  * @param url 请求地址
  * @param init 请求配置。
  */
-export const fetchXHR = async (url: string, init?: FetchXHRInit) => {
-  return new Promise<Response>((resolve, reject) => {
+export const fetchXHR = async (url: string, init?: FetchXHRInit) =>
+  new Promise<Response>((resolve, reject) => {
+    init?.signal?.throwIfAborted();
     const {
       body,
       method = 'GET',
@@ -101,4 +102,3 @@ export const fetchXHR = async (url: string, init?: FetchXHRInit) => {
       xhr.send(['GET', 'HEAD'].includes(normalizedMethod) ? null : res)
     );
   });
-};

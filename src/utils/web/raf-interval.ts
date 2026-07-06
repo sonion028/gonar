@@ -3,22 +3,23 @@ export type RAfIntervalReturn = Record<'stop', () => void>;
 /**
  * @author sonion
  * @description rAf版setInterval。可利用rAf页面隐藏暂停的特性，实现页面隐藏时暂停，页面显示时继续
- * @param {() => void} fn - 回调函数
- * @param {number} wait - 间隔时间 毫秒
+ * @param {() => void} frame - 回调函数
+ * @param {number} duration - 间隔时间 毫秒
  * @returns {RAfIntervalReturn} - 返回取消函数
  */
 export const rAfInterval = (
-  fn: () => void,
-  wait: number
+  frame: () => void,
+  duration: number
 ): RAfIntervalReturn => {
   let startTime = Date.now();
   let isStop = false;
   const stop = () => (isStop = true);
   const _interval = () => {
     requestAnimationFrame(() => {
+      if (isStop) return;
       const currentTime = Date.now();
-      if (currentTime - startTime >= wait) {
-        fn();
+      if (currentTime - startTime >= duration) {
+        frame();
         startTime = currentTime;
       }
       isStop || _interval();
@@ -37,6 +38,6 @@ export const rAfInterval = (
 export const clearRAfInterval = (
   intervalId: RAfIntervalReturn | (() => void) | undefined
 ) => {
-  typeof intervalId === 'object' && intervalId.stop && intervalId.stop();
+  typeof intervalId === 'object' && intervalId.stop?.();
   typeof intervalId === 'function' && intervalId();
 };
