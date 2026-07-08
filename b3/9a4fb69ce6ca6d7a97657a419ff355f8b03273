@@ -1,0 +1,59 @@
+eslint.config.ts
+  h_8198a3bddb05e6 5,31,34-47,49,56 gitai:{"mixed_line_ranges":[{"Single":34}],"operations":[]}
+  s_35bf22ccdff0f9::t_67fc58dd481467 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b39a4fb69ce6ca6d7a97657a419ff355f8b03273",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_35bf22ccdff0f9": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-83b4ccbd-4e8c-46b3-b1e0-64fc91f5d761",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "eslint.config.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 5
+          },
+          {
+            "Single": 31
+          },
+          {
+            "Range": [
+              34,
+              47
+            ]
+          },
+          {
+            "Single": 49
+          },
+          {
+            "Single": 56
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 34
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
