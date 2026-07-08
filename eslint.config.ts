@@ -1,32 +1,18 @@
 /// <reference types="node" />
 import { defineConfig, globalIgnores } from 'eslint/config';
-import type { Linter } from 'eslint';
 import globals from 'globals';
 import jslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import tslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier/flat';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import pluginReact from '@eslint-react/eslint-plugin';
 import jsdoc from 'eslint-plugin-jsdoc';
 import pluginVue from 'eslint-plugin-vue';
-import {
-  defineConfigWithVueTs,
-  vueTsConfigs,
-} from '@vue/eslint-config-typescript';
-
-const commonRules = {
-  'jsdoc/no-undefined-types': 'off', // JSDoc 里的泛型会报错
-  'jsdoc/require-returns': 'off', // 关闭 JSDoc 缺少返回值规则
-  'jsdoc/require-returns-type': 'off', // 关闭 JSDoc 缺少返回值类型规则
-  'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
-  '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
-  '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
-} satisfies Linter.RulesRecord;
 
 export default defineConfig([
   globalIgnores(['**/dist/**', '**/node_modules/**']), // 忽略 dist 和 node_modules 目录
   {
-    files: ['**/*.{ts,tsx,js,jsx}'], // 对所有 TS TSX JS JSX 文件应用规则
+    files: ['**/*.{ts,tsx,js,jsx,vue}'], // 对所有 TS TSX JS JSX 文件应用规则
     languageOptions: {
       ecmaVersion: 2020, // 语法检查 支持的 ES 版本
       globals: globals.browser, // 浏览器全局变量
@@ -42,11 +28,32 @@ export default defineConfig([
     },
     extends: [
       jslint.configs.recommended, // ✅ JavaScript 规则
-      ...tseslint.configs.recommended, // ✅ TypeScript 规则
+      ...tslint.configs.recommended, // ✅ TypeScript 规则
       jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
       prettier, // ✅ 关闭和 Prettier 冲突的规则
+      pluginVue.configs['flat/recommended'], // ✅ Vue 规则, 自带vue-parser且限制仅对.vue文件生效
+      // 👇 vue-parser 需要ts-parser
+      {
+        files: ['**/*.vue'],
+        languageOptions: {
+          parserOptions: {
+            parser: {
+              ts: tslint.parser,
+              tsx: tslint.parser,
+            },
+            extraFileExtensions: ['.vue'],
+          },
+        },
+      },
     ],
-    rules: commonRules,
+    rules: {
+      'jsdoc/no-undefined-types': 'off', // JSDoc 里的泛型会报错
+      'jsdoc/require-returns': 'off', // 关闭 JSDoc 缺少返回值规则
+      'jsdoc/require-returns-type': 'off', // 关闭 JSDoc 缺少返回值类型规则
+      'jsdoc/require-param-type': 'off', // 关闭 JSDoc 缺少参数类型规则
+      '@typescript-eslint/no-unused-expressions': 'off', // 关闭未使用表达式校验，开启React常用的短路规则可能误判
+      '@typescript-eslint/no-unused-vars': ['warn'], // 警告未使用变量 如遇到 与tsconfig.json 冲突，以ts为准
+    },
   },
   // 👇 React 规则
   {
@@ -75,21 +82,4 @@ export default defineConfig([
       '@eslint-react/naming-convention-ref-name': 'off', // 关闭ref 名称规范
     },
   },
-  // 👇 Vue 规则
-  {
-    files: ['packages/vue-kit/**/*.{ts,tsx,js,jsx,vue}'],
-    extends: [
-      pluginVue.configs['flat/recommended'], // ✅ Vue 规则, essential 基本的
-    ],
-  },
-  // vue 文件要单独parser，再应用规则通用规则
-  ...(defineConfigWithVueTs({
-    files: ['packages/vue-kit/**/*.vue'],
-    extends: [
-      vueTsConfigs.recommended,
-      jsdoc.configs['flat/recommended'],
-      prettier,
-    ],
-    rules: commonRules,
-  }) as Linter.Config[]),
 ]);
