@@ -1,0 +1,37 @@
+tests/hooks/async-guard.test.ts
+  h_8198a3bddb05e6 8,13,226
+package.json
+  s_be3b26a5f94989::t_b3e2fc8c8c6b80 50
+  s_53c30039e8a47e::t_649109fc68f759 48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "eab891ed304ea7759e2089d6992f36cd9998d133",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_53c30039e8a47e": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-91d2fd3d-5b4a-4ac8-8cfd-8e3959a02c6f",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_be3b26a5f94989": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-5b1a3808-386b-4d06-9af5-b180577da6e7",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
