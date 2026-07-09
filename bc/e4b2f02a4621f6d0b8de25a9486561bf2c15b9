@@ -1,0 +1,103 @@
+packages/react-kit/src/hooks/async-guard/index.ts
+  s_7d9e1a6360f63e::t_9e51ff318e5959 48
+  h_8198a3bddb05e6 1,18,26
+  s_d06a53ff5b5409::t_b244f1ebd58bee 22
+  s_92120db9b3e75c::t_b2ac64b4ab2c7b 33
+packages/react-kit/src/hooks/timer/index.ts
+  h_8198a3bddb05e6 1,17,21-22,30,32-33,45
+  s_7c265ccfe36f26::t_38ba0468ff4e98 50
+  s_bb7f1c02dc06da::t_b8cdefb807e1c3 7
+  s_7c265ccfe36f26::t_20b19abe27c4ea 47-49
+packages/react-kit/src/hooks/observer/index.ts
+  s_5ec020107c2f91::t_f57aeeca2c093f 121
+  s_31fe49eb25d0e9::t_6e65d7d8c77f5f 3
+  h_8198a3bddb05e6 107 gitai:{"mixed_line_ranges":[{"Single":107}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "bce4b2f02a4621f6d0b8de25a9486561bf2c15b9",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_31fe49eb25d0e9": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-ed46b068-d2c2-4cca-bdba-66a2602cc75d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_5ec020107c2f91": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-11e62c00-2021-4c93-9bca-6c4f2a47ba0f",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_7c265ccfe36f26": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-cd52e9c9-16de-4874-977d-c12b69320c41",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_7d9e1a6360f63e": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-863d9d75-b68c-4d35-b2c5-29ecee1adaaf",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_92120db9b3e75c": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-b1a3d13e-ac0d-4e03-b927-6fe02bc8409e",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_bb7f1c02dc06da": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-15a36040-67de-466e-a96c-ec88c183dc5d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_d06a53ff5b5409": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-6e3fc583-00d5-438c-b243-7f25aa1b8f4d",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react-kit/src/hooks/observer/index.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 107
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 107
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
