@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { useCreateSafeRef, useLatestCallback } from '../state';
+import { useCreateSafeRef, useLatestCallback, useStaticState } from '../state';
 
 type MutationObserverCallback = (
   entry: MutationRecord[],
@@ -104,8 +104,7 @@ export const useIntersectionObserver = ({
     }),
     [rootRef, rootMargin, threshold]
   );
-
-  const prevOptions = useRef(options); // 纪录上一次的options，用于比较是否变化
+  const [, , withPrevOptions] = useStaticState(options); // 纪录上一次的options，用于比较是否变化
 
   useEffect(
     () => () => {
@@ -119,10 +118,10 @@ export const useIntersectionObserver = ({
     (el: Element | null) => {
       if (!el) return;
       // options变化，取消观察，重新生成观察器
-      if (prevOptions.current !== options) {
+      if (withPrevOptions() !== options) {
         observerRef.current?.disconnect?.();
         observerRef.current = void 0;
-        prevOptions.current = options; // 纪录新值
+        withPrevOptions(options); // 纪录新值
       }
 
       observerRef.current ??= new IntersectionObserver((entries, observer) => {

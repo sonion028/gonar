@@ -1,5 +1,5 @@
-import { useState, useRef, useCallback } from 'react';
-import { useLatestCallback } from '../state';
+import { useState, useCallback } from 'react';
+import { useLatestCallback, useStaticState } from '../state';
 
 /**
  * @author sonion
@@ -15,22 +15,22 @@ export const useAsyncActionLock = <T extends unknown[], R>(
   msg?: string
 ) => {
   const [isPending, setIsPending] = useState(false); // 对外可能需要触发渲染
-  const syncPending = useRef(isPending); // 对内，同步更改，返回的函数不更改
+  const [, , withSyncPending] = useStaticState(isPending); // 对内，同步更改，返回的函数不更改
   const latestOnPendingChange = useLatestCallback(onPendingChange); // 稳定函数引用
   const setPending = useCallback(
     (val: boolean, ...args: T) => {
-      syncPending.current = val;
+      withSyncPending(val);
       setIsPending(val);
       latestOnPendingChange?.(val, ...args);
     },
-    [latestOnPendingChange]
+    [latestOnPendingChange, withSyncPending]
   );
 
   const latestAsyncAction = useLatestCallback(asyncAction); // 稳定函数引用
 
   const handler = useCallback<(...args: T) => Promise<R | void>>(
     (...args: T) => {
-      if (syncPending.current) {
+      if (withSyncPending()) {
         console.log(msg || '正在提交中，请稍后再试');
         return Promise.resolve();
       }
@@ -45,7 +45,7 @@ export const useAsyncActionLock = <T extends unknown[], R>(
         setPending(false, ...args);
       });
     },
-    [latestAsyncAction, msg, setPending]
+    [latestAsyncAction, msg, setPending, withSyncPending]
   );
 
   return [isPending, handler] as const;
