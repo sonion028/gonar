@@ -32,7 +32,7 @@ export default defineConfig([
       jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
       prettier, // ✅ 关闭和 Prettier 冲突的规则
       pluginVue.configs['flat/recommended'], // ✅ Vue 规则, 自带vue-parser且限制仅对.vue文件生效
-      // 👇 vue-parser 需要ts-parser
+      // 👇 vue-parser 需要的 ts-parser
       {
         files: ['**/*.vue'],
         languageOptions: {
