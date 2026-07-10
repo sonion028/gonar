@@ -2,10 +2,10 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import jslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import prettier from 'eslint-config-prettier';
+import tslint from 'typescript-eslint';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import react from '@eslint-react/eslint-plugin';
+import prettier from 'eslint-config-prettier';
 import jsdoc from 'eslint-plugin-jsdoc';
 
 export default defineConfig([
@@ -27,7 +27,7 @@ export default defineConfig([
     },
     extends: [
       jslint.configs.recommended, // ✅ JavaScript 规则
-      ...tseslint.configs.recommended, // ✅ TypeScript 规则
+      ...tslint.configs.recommended, // ✅ TypeScript 规则
       jsdoc.configs['flat/recommended'], // ✅ JSDoc 扁平插件配置对象
       prettier, // ✅ 关闭和 Prettier 冲突的规则
       reactRefresh.configs.vite, // ✅ React Refresh 插件注册; 扁平插件配置对象, vite 环境下需要配置
