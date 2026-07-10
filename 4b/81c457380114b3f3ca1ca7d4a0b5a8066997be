@@ -1,0 +1,49 @@
+packages/react-kit/tsdown.config.ts
+  h_8198a3bddb05e6 4-8 gitai:{"mixed_line_ranges":[{"Single":8}],"operations":[]}
+  s_786263fd4d01e5::t_a4c0aa6a4ab929 12
+tsdown.config.base.ts
+  h_8198a3bddb05e6 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "4b81c457380114b3f3ca1ca7d4a0b5a8066997be",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_786263fd4d01e5": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-69b9beb6-7521-4082-9bf0-b459e670e91b",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react-kit/tsdown.config.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              4,
+              8
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 8
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
