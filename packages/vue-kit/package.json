@@ -39,7 +39,7 @@
     }
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "vite build",
     "test": "vitest --run",
     "typecheck": "pnpm exec tsc --noEmit"
   },
@@ -47,6 +47,7 @@
     "@tonar/utils": "workspace:*"
   },
   "devDependencies": {
+    "@typescript/typescript6": "^6.0.2",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.11",
     "unplugin-vue": "^7.2.0",
