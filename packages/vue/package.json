@@ -42,7 +42,7 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build",
+    "build": "tsdown",
     "typecheck": "pnpm exec tsc --noEmit"
   },
   "dependencies": {
