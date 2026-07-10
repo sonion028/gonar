@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "types": ["vite/client"],
     // vue 必须
     "jsx": "preserve",
     "jsxImportSource": "vue",
