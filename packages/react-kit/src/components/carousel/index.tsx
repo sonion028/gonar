@@ -195,7 +195,6 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
         <div className={`${styles.indicator} ${indicatorType}`}>
           {children.map((_, i) => (
             <i
-              // eslint-disable-next-line @eslint-react/no-array-index-key
               key={i}
               onClick={(e) => {
                 e.stopPropagation();

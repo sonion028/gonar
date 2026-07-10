@@ -108,9 +108,7 @@ export const useStorage = <T>({
   );
   useEffect(() => {
     // 不用返回清理，因为组件卸载事件不移除
-    // eslint-disable-next-line @eslint-react/web-api-no-leaked-event-listener
     beforeunload && window.addEventListener('beforeunload', handleBeforeunload);
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
   }, []);
 
   return [

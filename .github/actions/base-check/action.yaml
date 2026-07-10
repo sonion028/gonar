@@ -1,5 +1,5 @@
 name: Common Checks
-description: 运行 TypeScript 编译检查和 ESLint 检查
+description: 运行 TypeScript 编译检查和 Oxlint 检查
 
 runs:
   using: composite
@@ -21,10 +21,10 @@ runs:
         echo "typecheck 检查通过 ✅"
 
     # Lint 检查
-    - name: ESLint 检查
+    - name: Oxlint 检查
       shell: bash
       run: |
-        echo "运行 ESLint 检查..."
+        echo "运行 Oxlint 检查..."
         pnpm run lint
         echo "Lint 检查通过 ✅"
     - name: Oxfmt 检查

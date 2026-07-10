@@ -200,7 +200,6 @@ export const usePlayControl = ({
     }
     const arrowStatus = getShowArrow(indexRef.current);
     arrowDomOperation(wrapper, arrowStatus);
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
   }, [length]);
 
   const stepChange = useCallback(
@@ -255,7 +254,6 @@ export const usePlayControl = ({
   );
 
   const getCurrentIndex = useCallback(() => indexRef.current, []);
-  // eslint-disable-next-line @eslint-react/exhaustive-deps
   useEffect(() => jumpChange(indexRef.current), [ref]); // 初始化时设置--index
   return [setRef, stepChange, jumpChange, getCurrentIndex, isReadyRef] as const;
 };
@@ -308,5 +306,4 @@ export const useLoopChildren = (
       return clonedChildren;
     }
     return children;
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
   }, [rerender === 'child' ? children : children?.length, loop]);

@@ -42,8 +42,6 @@ export const useLatestCallback: UseLatestCallbackType = (cb) => {
   // https://jser.dev/react/2023/03/18/useeffectevent/
   // https://www.epicreact.dev/the-latest-ref-pattern-in-react
   // 这是实现"稳定引用 + 最新值"语义的标准做法。
-  // ESLint 规则 @eslint-react/refs 对此场景存在误判，故禁用。
-  // eslint-disable-next-line @eslint-react/refs
   ref.current !== cb && (ref.current = cb);
   type Args = Parameters<NonNullable<typeof cb>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
@@ -109,7 +107,6 @@ export function useDistinctState<T>({
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [latestOnChange, onlyEvent, setValue, depHasDiff]
   );
   return [
@@ -138,7 +135,6 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
         setEl(node);
       }
     },
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
     [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 
