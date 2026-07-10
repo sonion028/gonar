@@ -8,8 +8,7 @@
 
     /* 路径别名 */
     "paths": {
-      "@/*": ["./src/*"],
-      "@tonar/*": ["../*/src"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "types", "tests"]
