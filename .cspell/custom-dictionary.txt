@@ -5,6 +5,7 @@ gonar
 noopener
 noreferrer
 oxfmt
+oxlint
 sonion
 tonar
 Uncapitalize
