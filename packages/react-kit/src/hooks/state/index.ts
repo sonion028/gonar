@@ -93,7 +93,6 @@ export function useDistinctState<T>({
   // useState 的初始化函数只在组件挂载时执行一次，此时修改 prevRef.current 是安全的。
   const [value, setValue] = useState(initial);
   const latestOnChange = useLatestCallback(onChange);
-  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
   const setValueDistinct = useCallback(
     (val: SetStateAction<T>) => {
       const value =
@@ -107,7 +106,8 @@ export function useDistinctState<T>({
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    [latestOnChange, onlyEvent, setValue, depHasDiff]
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    [latestOnChange, onlyEvent, setValue, !!hasDiff]
   );
   return [
     onlyEvent ? void 0 : value, // 仅触发事件时，返回undefined
@@ -126,7 +126,6 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
 ) => {
   const [el, setEl] = useState<T>();
   const isReadyRef = useRef(false); // 是否赋值完成
-  const depHasDiff = !!hasDiff; // 直接放依赖中，lint会报错
   const safeRef = useCallback(
     (node: T | null) => {
       const isDiff = hasDiff ?? ((oldNode, newNode) => oldNode !== newNode);
@@ -135,7 +134,8 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
         setEl(node);
       }
     },
-    [el, depHasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    [el, !!hasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 
   return [el, safeRef, isReadyRef] as const;

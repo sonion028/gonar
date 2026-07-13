@@ -136,7 +136,8 @@ export const useIntersectionObserver = ({
       observerRef.current?.observe?.(el);
     },
     // rootRef 已经是options 依赖了
-    [options, once, latestCallback]
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    [options, once, latestCallback, withPrevOptions]
   );
 
   const unobserve = useCallback(

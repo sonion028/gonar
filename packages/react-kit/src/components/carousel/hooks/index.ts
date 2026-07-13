@@ -200,6 +200,7 @@ export const usePlayControl = ({
     }
     const arrowStatus = getShowArrow(indexRef.current);
     arrowDomOperation(wrapper, arrowStatus);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [length]);
 
   const stepChange = useCallback(
@@ -254,6 +255,7 @@ export const usePlayControl = ({
   );
 
   const getCurrentIndex = useCallback(() => indexRef.current, []);
+  // oxlint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => jumpChange(indexRef.current), [ref]); // 初始化时设置--index
   return [setRef, stepChange, jumpChange, getCurrentIndex, isReadyRef] as const;
 };
@@ -306,4 +308,5 @@ export const useLoopChildren = (
       return clonedChildren;
     }
     return children;
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [rerender === 'child' ? children : children?.length, loop]);
