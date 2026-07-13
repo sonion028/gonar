@@ -109,6 +109,7 @@ export const useStorage = <T>({
   useEffect(() => {
     // 不用返回清理，因为组件卸载事件不移除
     beforeunload && window.addEventListener('beforeunload', handleBeforeunload);
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [

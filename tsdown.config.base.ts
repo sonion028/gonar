@@ -50,7 +50,6 @@ const baseConfig = defineConfig([
  * @description 合并基础配置和项目配置
  * @param {UserConfig} config - 通用配置，编译和生成类型声明文件都需要的配置
  * @param {Record<number, UserConfig>} itemConfig - 项目配置，键为配置需要合并的配置的索引，值为配置对象
- * @return {UserConfig[]} - 合并后的配置数组
  */
 export default (config: UserConfig, itemConfig?: Record<number, UserConfig>) =>
   defineConfig(
