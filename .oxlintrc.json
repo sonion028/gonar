@@ -1,13 +1,13 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
+  "env": {
+    "builtin": true
+  },
   "plugins": [],
   "categories": {
     "correctness": "error"
   },
-  "env": {
-    "builtin": true
-  },
-  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
   "overrides": [
     {
       "files": ["**/*.{ts,tsx,js,jsx,vue}"],
