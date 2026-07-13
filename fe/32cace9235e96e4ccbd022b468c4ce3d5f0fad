@@ -1,0 +1,43 @@
+.oxlintrc.json
+  h_8198a3bddb05e6 7,13,18,33-40
+.cspell/custom-dictionary.txt
+  h_8198a3bddb05e6 11
+packages/vue-kit/src/components/so-test/so-test.vue
+  h_8198a3bddb05e6 16-21 gitai:{"mixed_line_ranges":[{"Range":[17,19]}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "fe32cace9235e96e4ccbd022b468c4ce3d5f0fad",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/vue-kit/src/components/so-test/so-test.vue": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              16,
+              21
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Range": [
+              17,
+              19
+            ]
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
