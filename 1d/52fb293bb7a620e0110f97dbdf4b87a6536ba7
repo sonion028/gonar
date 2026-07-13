@@ -1,0 +1,46 @@
+packages/react-kit/src/hooks/state/index.ts
+  h_8198a3bddb05e6 109-110,137-138 gitai:{"mixed_line_ranges":[{"Single":110}],"operations":[]}
+packages/react-kit/src/hooks/observer/index.ts
+  h_8198a3bddb05e6 139-140
+packages/react-kit/src/components/carousel/hooks/index.ts
+  h_8198a3bddb05e6 203,258,311
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1d52fb293bb7a620e0110f97dbdf4b87a6536ba7",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react-kit/src/hooks/state/index.ts": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              109,
+              110
+            ]
+          },
+          {
+            "Range": [
+              137,
+              138
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 110
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
