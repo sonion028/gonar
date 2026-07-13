@@ -8,5 +8,6 @@ oxfmt
 oxlint
 sonion
 tonar
+tsgolint
 Uncapitalize
 unstub

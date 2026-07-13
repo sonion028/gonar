@@ -13,6 +13,13 @@ const handleClick = (a: number) => {
   return count.value;
 };
 
+// const df = {
+//   a: 12,
+//   b: 13,
+//   c: 14,
+//   a: 15,
+// };
+
 console.log('SoTest', handleClick);
 </script>
 <template>
