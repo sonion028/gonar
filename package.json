@@ -13,7 +13,6 @@
     "clear": "pnpm -r exec rimraf {node_modules,dist,.turbo} && pnpm exec rimraf {node_modules,dist,.turbo}",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "eslint": "eslint '{apps,packages}/**/*.{ts,tsx,js,jsx,vue}'",
     "lint": "oxlint --type-aware apps packages",
     "lint:fix": "oxlint --type-aware --fix apps packages",
     "lint:error": "oxlint --type-aware --quiet apps packages",
