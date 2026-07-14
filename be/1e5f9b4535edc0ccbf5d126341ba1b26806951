@@ -1,0 +1,60 @@
+packages/utils/src/common/structured/is-structured-equal.ts
+  h_8198a3bddb05e6 68
+package.json
+  h_8198a3bddb05e6 16
+packages/react-kit/src/components/carousel/index.tsx
+  h_8198a3bddb05e6 177,190,194,207,214 gitai:{"mixed_line_ranges":[{"Single":214}],"operations":[]}
+  s_55c5f31733f2cd::t_dfddab15cc77e9 178-182,191,195
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "be1e5f9b4535edc0ccbf5d126341ba1b26806951",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_55c5f31733f2cd": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-a34ca41e-f6d6-451d-9373-ee1148de8195",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "packages/react-kit/src/components/carousel/index.tsx": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 177
+          },
+          {
+            "Single": 190
+          },
+          {
+            "Single": 194
+          },
+          {
+            "Single": 207
+          },
+          {
+            "Single": 214
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 214
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
