@@ -4,13 +4,13 @@
   "env": {
     "builtin": true
   },
-  // "plugins": ["typescript", "jsdoc"],
+  "plugins": [],
   "categories": {
     "correctness": "error"
   },
   "overrides": [
     {
-      "files": ["**/*.{ts,tsx,js,jsx}"],
+      "files": ["**/*.{ts,tsx,js,jsx,vue}"],
       "env": {
         "es2020": true,
         "browser": true
@@ -35,8 +35,7 @@
         "es2020": true,
         "browser": true
       },
-      "plugins": ["vue"],
-      "rules": {}
+      "plugins": ["vue"]
     },
     {
       "files": ["packages/react-kit/**/*.{ts,tsx,js,jsx}"],
