@@ -1,0 +1,36 @@
+.oxlintrc.json
+  h_8198a3bddb05e6 13,38 gitai:{"mixed_line_ranges":[{"Single":13}],"operations":[]}
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "10ab88ab4a6ad685ee181bc702e0174d0d9b37ba",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    ".oxlintrc.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 13
+          },
+          {
+            "Single": 38
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 13
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
