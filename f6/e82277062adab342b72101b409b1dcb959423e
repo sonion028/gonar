@@ -1,0 +1,55 @@
+package.json
+  h_8198a3bddb05e6 17 gitai:{"mixed_line_ranges":[{"Single":17}],"operations":[]}
+  s_ee87eb1243d5f2::t_cd949f461a1501 19
+.oxlintrc.json
+  s_bcd2df1f7e9980::t_0895d4a4e2d49a 18-23,27
+  h_8198a3bddb05e6 24-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f6e82277062adab342b72101b409b1dcb959423e",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_bcd2df1f7e9980": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-0ef32d0d-96fa-450b-a4b0-01c7b49e9a6c",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_ee87eb1243d5f2": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-01b28e56-c0ec-4b45-aa82-adc736bff827",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    "package.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Single": 17
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 17
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
