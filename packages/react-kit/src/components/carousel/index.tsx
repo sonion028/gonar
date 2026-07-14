@@ -174,7 +174,12 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
                 className: styles.left,
               })
             ) : (
-              <i className={styles.left} onClick={() => stepChange('prev')} />
+              // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
+              <i
+                className={styles.left}
+                onClick={() => stepChange('prev')}
+                onKeyDown={(e) => e.key === 'ArrowLeft' && stepChange('prev')}
+              />
             )}
             {arrows?.[1] ? (
               arrows[1]({
@@ -182,7 +187,12 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
                 className: styles.right,
               })
             ) : (
-              <i className={styles.right} onClick={() => stepChange()} />
+              // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
+              <i
+                className={styles.right}
+                onClick={() => stepChange()}
+                onKeyDown={(e) => e.key === 'ArrowRight' && stepChange()}
+              />
             )}
           </div>
 
@@ -194,12 +204,14 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
         </div>
         <div className={`${styles.indicator} ${indicatorType}`}>
           {children.map((_, i) => (
+            // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
             <i
               key={i}
               onClick={(e) => {
                 e.stopPropagation();
                 jumpChange(i);
               }}
+              onKeyDown={(e) => e.key === String(i) && jumpChange(i)}
             />
           ))}
         </div>
