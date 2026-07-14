@@ -1,0 +1,26 @@
+.oxlintrc.json
+  s_7e4c5ff888c11b::t_b13dcde94b0320 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "7cd9bad14b7045cc4e5a0b87ecf87b27887ebd43",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_7e4c5ff888c11b": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-af2a44e3-7259-4063-8210-467b3c999ea0",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
