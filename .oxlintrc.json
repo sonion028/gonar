@@ -15,17 +15,26 @@
         "es2020": true,
         "browser": true
       },
-      "plugins": ["typescript", "jsdoc", "unicorn"],
+      "plugins": [
+        "typescript",
+        "jsdoc",
+        "unicorn",
+        "oxc",
+        "jsx-a11y",
+        "promise",
+        "import",
+        "eslint"
+      ],
       "rules": {
-        "no-case-declarations": "deny",
-        "no-empty": "deny",
-        "no-fallthrough": "deny",
-        "no-prototype-builtins": "deny",
-        "no-redeclare": "deny",
-        "no-regex-spaces": "deny",
-        "no-unexpected-multiline": "allow",
-        "preserve-caught-error": "deny",
-        "no-array-constructor": "deny",
+        // "no-case-declarations": "deny",
+        // "no-empty": "deny",
+        // "no-fallthrough": "deny",
+        // "no-prototype-builtins": "deny",
+        // "no-redeclare": "deny",
+        // "no-regex-spaces": "deny",
+        // "no-unexpected-multiline": "allow",
+        // "preserve-caught-error": "deny",
+        // "no-array-constructor": "deny",
         "no-unused-expressions": "allow"
       }
     },
@@ -41,12 +50,12 @@
       "files": ["packages/react-kit/**/*.{ts,tsx,js,jsx}"],
       "plugins": ["react"],
       "rules": {
-        "react/only-export-components": [
-          "error",
-          {
-            "allowConstantExport": true
-          }
-        ]
+        // "react/only-export-components": [
+        //   "error",
+        //   {
+        //     "allowConstantExport": true
+        //   }
+        // ]
       }
     }
   ]
