@@ -4,7 +4,7 @@
   "env": {
     "builtin": true
   },
-  "plugins": [],
+  // "plugins": [], // 不写默认 typescript、oxc、unicorn
   "categories": {
     "correctness": "error"
   },
@@ -15,16 +15,7 @@
         "es2020": true,
         "browser": true
       },
-      "plugins": [
-        "typescript",
-        "jsdoc",
-        "unicorn",
-        "oxc",
-        "jsx-a11y",
-        "promise",
-        "import",
-        "eslint"
-      ],
+      "plugins": ["jsdoc", "jsx-a11y", "promise", "import", "eslint"],
       "rules": {
         // "no-case-declarations": "deny",
         // "no-empty": "deny",
