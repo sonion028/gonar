@@ -88,6 +88,7 @@ export function useDistinctState<T>({
   const prevRef = useRef<T>(void 0 as T);
   // 初始化只可能是函数，所以包一层，在这层一起初始化 prevRef 的值，避免初始化重复调用
   const initial = () =>
+    // eslint-disable-next-line @eslint-react/refs
     (prevRef.current =
       typeof initialValue === 'function'
         ? (initialValue as () => T)()
