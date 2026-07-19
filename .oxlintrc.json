@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**"],
+  "env": {
+    "builtin": true
+  },
+  "plugins": ["typescript", "oxc", "unicorn"], // 不写默认 typescript、oxc、unicorn
+  "categories": {
+    "correctness": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx,js,jsx,vue}"],
+      "env": {
+        "es2020": true,
+        "browser": true
+      },
+      "plugins": ["jsdoc", "jsx-a11y", "promise", "import", "eslint"],
+      "rules": {
+        // "no-case-declarations": "deny",
+        // "no-empty": "deny",
+        // "no-fallthrough": "deny",
+        // "no-prototype-builtins": "deny",
+        // "no-redeclare": "deny",
+        // "no-regex-spaces": "deny",
+        // "no-unexpected-multiline": "allow",
+        // "preserve-caught-error": "deny",
+        // "no-array-constructor": "deny",
+        "no-unused-expressions": "allow"
+      }
+    },
+    {
+      "files": ["packages/react-kit/**/*.{ts,tsx,js,jsx}"],
+      "plugins": ["react"],
+      "rules": {
+        // "react/only-export-components": [
+        //   "error",
+        //   {
+        //     "allowConstantExport": true
+        //   }
+        // ]
+      }
+    }
+  ]
+}
