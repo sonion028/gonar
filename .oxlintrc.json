@@ -15,7 +15,7 @@
         "es2020": true,
         "browser": true
       },
-      "plugins": ["jsdoc", "jsx-a11y", "promise", "import", "eslint"],
+      "plugins": ["eslint","jsdoc", "jsx-a11y", "promise", "import"],
       "rules": {
         // "no-case-declarations": "deny",
         // "no-empty": "deny",
