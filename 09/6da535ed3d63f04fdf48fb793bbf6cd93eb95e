@@ -1,0 +1,201 @@
+.oxlintrc.json
+  s_6240210b18bf84::t_e87f4b18485c39 78
+  s_2f03246fd46e11::t_eb191b3c478bed 29
+  h_8198a3bddb05e6 20-22,41-54,59-60,62-64,66-67,79-85,87 gitai:{"mixed_line_ranges":[{"Range":[52,53]},{"Single":62},{"Single":87}],"operations":[]}
+  s_723fe6e8f39c24::t_7cf11fa16fa9a2 30
+  s_8900f3a8bbde3a::t_337b8d65b627cd 33 gitai:{"mixed_line_ranges":[{"Single":33}],"operations":[]}
+  s_055e8de23c93b1::t_849795ff43ce16 24
+  s_20f0c7524a7001::t_6b5ca2042eec4a 61,65 gitai:{"mixed_line_ranges":[{"Single":65}],"operations":[]}
+  s_3ed2d4625770d2::t_f91d3d680ea4f9 25
+  s_e4c60039e77444::t_4c7bb4a88868ec 26-27 gitai:{"mixed_line_ranges":[{"Single":27}],"operations":[]}
+  s_6240210b18bf84::t_9a69efd39ce80b 75-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "096da535ed3d63f04fdf48fb793bbf6cd93eb95e",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_055e8de23c93b1": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-35ebff77-f60c-400f-841a-cc77e54cac91",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_20f0c7524a7001": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-06ef8f01-6058-44b4-9b7f-4d01ad8bcb24",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_2f03246fd46e11": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-1c8888b7-05af-4798-9f52-6633f6d0edd3",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_3ed2d4625770d2": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-1f1c5679-afb6-4765-9f21-d84abfd53991",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_6240210b18bf84": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-847b86cc-8635-4958-be6f-ad8e5a37ce94",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_723fe6e8f39c24": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-95164c4e-9fc5-4b65-b101-89bd54b72402",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_8900f3a8bbde3a": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-a423facf-f8cf-432c-8142-9a4043ca9b70",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_e4c60039e77444": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-94502f37-e1a1-4d63-a1bf-7313ad4e60c3",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {
+    ".oxlintrc.json": [
+      {
+        "hash": "h_8198a3bddb05e6",
+        "line_ranges": [
+          {
+            "Range": [
+              20,
+              22
+            ]
+          },
+          {
+            "Range": [
+              41,
+              54
+            ]
+          },
+          {
+            "Range": [
+              59,
+              60
+            ]
+          },
+          {
+            "Range": [
+              62,
+              64
+            ]
+          },
+          {
+            "Range": [
+              66,
+              67
+            ]
+          },
+          {
+            "Range": [
+              79,
+              85
+            ]
+          },
+          {
+            "Single": 87
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Range": [
+              52,
+              53
+            ]
+          },
+          {
+            "Single": 62
+          },
+          {
+            "Single": 87
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_8900f3a8bbde3a::t_337b8d65b627cd",
+        "line_ranges": [
+          {
+            "Single": 33
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 33
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_20f0c7524a7001::t_6b5ca2042eec4a",
+        "line_ranges": [
+          {
+            "Single": 61
+          },
+          {
+            "Single": 65
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 65
+          }
+        ],
+        "operations": []
+      },
+      {
+        "hash": "s_e4c60039e77444::t_4c7bb4a88868ec",
+        "line_ranges": [
+          {
+            "Range": [
+              26,
+              27
+            ]
+          }
+        ],
+        "mixed_line_ranges": [
+          {
+            "Single": 27
+          }
+        ],
+        "operations": []
+      }
+    ]
+  },
+  "remote_transcripts": {}
+}
