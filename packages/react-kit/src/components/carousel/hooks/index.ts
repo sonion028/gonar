@@ -296,6 +296,7 @@ export const useLoopChildren = (
   // 依赖 children?.length 或 children 的问题可忽略
 
   useMemo(() => {
+    // oxlint-disable-next-line react/react-compiler
     if (!Array.isArray(children) || !children.length) {
       throw new Error('Carousel children must be an array');
     }

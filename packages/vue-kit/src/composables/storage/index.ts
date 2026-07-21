@@ -10,7 +10,7 @@ type StorageParams<T> = {
   /** 变化回调 */
   onChange?: (val: T) => void;
   /** 储存类型。 localStorage 或 sessionStorage */
-  storage?: typeof localStorage | typeof sessionStorage;
+  storage?: Storage;
   /** 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误 */
   checkType?: (val: T) => boolean;
   /** tab关闭前的回调, 相同key的不同回调只有初始生效。 */

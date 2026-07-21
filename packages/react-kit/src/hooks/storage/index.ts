@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useDistinctState, useLatestCallback } from '../state';
 
-type StorageType = typeof localStorage | typeof sessionStorage;
-
 type StorageParams<T> = Omit<
   Parameters<typeof useDistinctState<T>>[0],
   'onlyEvent' | 'initialValue'
@@ -12,11 +10,11 @@ type StorageParams<T> = Omit<
   /** 默认值 */
   defaultValue: T;
   /** 储存类型。 localStorage 或 sessionStorage */
-  storage?: StorageType;
+  storage?: Storage;
   /** 初始化类型检查函数，检查不通过使用初始值。可避免类型不对引起的错误 */
   checkType?: (val: T) => boolean;
   /** tab关闭前的回调, 相同key的不同回调只有初始生效。 */
-  beforeunload?: (key: string, value: T, storage: StorageType) => void;
+  beforeunload?: (key: string, value: T, storage: Storage) => void;
 };
 
 /**

@@ -43,6 +43,7 @@ export const useMutationObserver = (
       );
       observerRef.current?.observe?.(el, options);
     },
+    // oxlint-disable-next-line react/react-compiler
     [once, latestCallback]
   );
 
@@ -136,7 +137,7 @@ export const useIntersectionObserver = ({
       observerRef.current?.observe?.(el);
     },
     // rootRef 已经是options 依赖了
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
     [options, once, latestCallback, withPrevOptions]
   );
 
@@ -212,6 +213,7 @@ export const useResizeObserver = (
       observerRef.current?.unobserve?.(el); // 避免重复
       observerRef.current?.observe?.(el, options);
     },
+    // oxlint-disable-next-line react/react-compiler
     [once, latestCallback]
   );
 
