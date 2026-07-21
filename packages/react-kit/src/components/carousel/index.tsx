@@ -206,6 +206,7 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(
           {children.map((_, i) => (
             // oxlint-disable-next-line jsx-a11y/no-static-element-interactions
             <i
+              // oxlint-disable-next-line react/no-array-index-key
               key={i}
               onClick={(e) => {
                 e.stopPropagation();

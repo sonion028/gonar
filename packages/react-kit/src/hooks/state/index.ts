@@ -42,6 +42,7 @@ export const useLatestCallback: UseLatestCallbackType = (cb) => {
   // https://jser.dev/react/2023/03/18/useeffectevent/
   // https://www.epicreact.dev/the-latest-ref-pattern-in-react
   // 这是实现"稳定引用 + 最新值"语义的标准做法。
+  // oxlint-disable-next-line react/react-compiler
   ref.current !== cb && (ref.current = cb);
   type Args = Parameters<NonNullable<typeof cb>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
@@ -91,6 +92,7 @@ export function useDistinctState<T>({
         ? (initialValue as () => T)()
         : initialValue);
   // useState 的初始化函数只在组件挂载时执行一次，此时修改 prevRef.current 是安全的。
+  // oxlint-disable-next-line react/react-compiler
   const [value, setValue] = useState(initial);
   const latestOnChange = useLatestCallback(onChange);
   const setValueDistinct = useCallback(
@@ -99,6 +101,7 @@ export function useDistinctState<T>({
         typeof val === 'function'
           ? (val as (prevState: T) => T)(prevRef.current)
           : val;
+      // oxlint-disable-next-line react/react-compiler
       const isDiff = hasDiff ?? ((prev, next) => prev !== next);
       if (isDiff(prevRef.current, value)) {
         latestOnChange?.(value);
@@ -106,7 +109,7 @@ export function useDistinctState<T>({
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
     [latestOnChange, onlyEvent, setValue, !!hasDiff]
   );
   return [
@@ -128,13 +131,14 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
   const isReadyRef = useRef(false); // 是否赋值完成
   const safeRef = useCallback(
     (node: T | null) => {
+      // oxlint-disable-next-line react/react-compiler
       const isDiff = hasDiff ?? ((oldNode, newNode) => oldNode !== newNode);
       if (node && isDiff(el, node)) {
         isReadyRef.current = true;
         setEl(node);
       }
     },
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
     [el, !!hasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 
