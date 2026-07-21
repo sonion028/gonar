@@ -1,0 +1,40 @@
+packages/react-kit/src/hooks/timer/index.ts
+  h_8198a3bddb05e6 29
+packages/react-kit/src/components/carousel/index.tsx
+  h_8198a3bddb05e6 209
+packages/react-kit/src/hooks/state/index.ts
+  s_379a89b5b0e74f::t_2b5e3a4ebf4191 141
+  s_51e90e9b6bbdb7::t_81457e54b812d8 134
+  h_8198a3bddb05e6 45,95,104,112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a3f7e9a5cec8305957d16a02dfa2b99e2b11a56d",
+  "prompts": {},
+  "humans": {
+    "h_8198a3bddb05e6": {
+      "author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_379a89b5b0e74f": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-05b7f48d-db39-4a87-8510-7f640c54f3d9",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    },
+    "s_51e90e9b6bbdb7": {
+      "agent_id": {
+        "tool": "trae-cue",
+        "id": "ai_tab-icr-d35a53ea-c3ef-433b-8677-8ef4e5ec9909",
+        "model": "default"
+      },
+      "human_author": "Mr.r <sonion028@gmail.com>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
