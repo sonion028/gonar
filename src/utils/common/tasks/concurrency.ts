@@ -39,7 +39,7 @@ export class ConcurrencyController<T> {
     const { task, resolve, reject } = this.queue.shift() ?? {};
     if (!task) return;
     this.running++;
-    promiseTry(task)
+    void promiseTry(task)
       .then(resolve, reject)
       .finally(() => {
         this.running--;

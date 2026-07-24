@@ -65,7 +65,7 @@ export const isStructuredEqual = (
     }
 
     // 忽略数组顺序：按“多重集”匹配，正确处理重复元素
-    const matched = new Array<boolean>(b.length).fill(false);
+    const matched = Array.from({ length: b.length }, () => false);
     outer: for (let i = 0, length = a.length; i < length; i++) {
       const aItem = a[i];
       for (let j = 0, len = b.length; j < len; j++) {
