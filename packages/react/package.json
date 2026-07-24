@@ -21,23 +21,23 @@
   ],
   "type": "module",
   "sideEffects": false,
-  "module": "dist/index.esm.js",
+  "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.esm.js",
+      "import": "./dist/index.es.js",
       "types": "./dist/types/index.d.ts"
     },
     "./components": {
-      "import": "./dist/components.esm.js",
+      "import": "./dist/components.es.js",
       "types": "./dist/types/components/index.d.ts"
     },
     "./hooks": {
-      "import": "./dist/hooks.esm.js",
+      "import": "./dist/hooks.es.js",
       "types": "./dist/types/hooks/index.d.ts"
     },
     "./utils": {
-      "import": "./dist/utils.esm.js",
+      "import": "./dist/utils.es.js",
       "types": "./dist/types/utils/index.d.ts"
     }
   },
