@@ -296,6 +296,7 @@ export const useLoopChildren = (
   // 依赖 children?.length 或 children 的问题可忽略
 
   useMemo(() => {
+    // oxlint-disable-next-line react/react-compiler
     if (!Array.isArray(children) || !children.length) {
       throw new Error('Carousel children must be an array');
     }
@@ -308,5 +309,5 @@ export const useLoopChildren = (
       return clonedChildren;
     }
     return children;
-    // eslint-disable-next-line @eslint-react/exhaustive-deps
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
   }, [rerender === 'child' ? children : children?.length, loop]);

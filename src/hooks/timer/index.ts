@@ -22,6 +22,7 @@ export const useInterval = (cb: () => void, duration: number) => {
         } catch (err) {
           console.error('useInterval error', err);
         }
+        // oxlint-disable-next-line react/react-compiler
         run?.();
       }, duration)
     );
