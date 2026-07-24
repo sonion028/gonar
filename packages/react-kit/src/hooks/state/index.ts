@@ -25,7 +25,9 @@ export function useStaticState<T>(initialValue?: T) {
 type AnyFn = (...args: never[]) => unknown;
 interface UseLatestCallbackType {
   <T extends AnyFn>(cb: T): T;
-  <T extends AnyFn>(cb?: T): (...args: Parameters<T>) => ReturnType<T>;
+  <T extends AnyFn | undefined = undefined>(
+    cb?: T
+  ): T extends undefined ? () => void : T;
 }
 /**
  * @author sonion
@@ -34,7 +36,7 @@ interface UseLatestCallbackType {
  * @param {T} cb - 依赖函数、依赖函数数组、依赖函数对象
  * @returns {T} - 返回稳定的函数引用，始终调用最新的 cb
  */
-export const useLatestCallback: UseLatestCallbackType = (cb) => {
+export const useLatestCallback: UseLatestCallbackType = (cb: AnyFn) => {
   const ref = useRef(cb);
   // 注意：在渲染期间更新 ref.current 是 React 官方认可的模式。
   // 参考：React 19 useEffectEvent 实现、Dan Abramov 的博客文章。
