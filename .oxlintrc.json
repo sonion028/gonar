@@ -8,6 +8,9 @@
   "categories": {
     "correctness": "error"
   },
+  "options": {
+    "typeAware": true
+  },
   "overrides": [
     {
       "files": ["**/*.{ts,tsx,js,jsx,vue}"],
@@ -15,7 +18,7 @@
         "es2020": true,
         "browser": true
       },
-      "plugins": ["eslint", "jsdoc", "jsx-a11y", "promise", "import"],
+      "plugins": ["eslint", "jsdoc", "promise", "jsx-a11y", "import"],
       "rules": {
         "no-unused-expressions": "allow", // Correctness 分类
         "no-unexpected-multiline": "allow", // Suspicious 分类
@@ -27,6 +30,10 @@
         "no-array-constructor": "deny", // Pedantic 分类
         "no-empty": "deny", // Restriction 分类
         "no-regex-spaces": "deny", // Restriction 分类
+        "no-var": "deny", // Restriction 分类
+        "no-undef": "deny", // Nursery 分类
+        "no-useless-assignment": "deny", // Nursery 分类
+        "prefer-const": "deny", // Style 分类
         "curly": "allow", // Style 分类
         // 👆 eslint插件（内置）
         "typescript/ban-ts-comment": "error", // Pedantic 分类
@@ -36,6 +43,7 @@
         "typescript/no-namespace": "error", // Restriction 分类
         "typescript/no-require-imports": "error", // Restriction 分类
         "typescript/no-unnecessary-type-constraint": "error", // Suspicious 分类
+
         "unicorn/empty-brace-spaces": "allow", // style 分类
         "unicorn/no-nested-ternary": "allow", // style 分类
         "unicorn/number-literal-case": "allow", // style 分类
