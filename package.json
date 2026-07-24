@@ -17,28 +17,28 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "module": "dist/index.esm.js",
+  "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.esm.js",
+      "import": "./dist/index.es.js",
       "types": "./dist/types/index.d.ts"
     },
     "./utils": {
-      "import": "./dist/utils.esm.js",
+      "import": "./dist/utils.es.js",
       "types": "./dist/types/utils.d.ts"
     },
     "./hooks": {
-      "import": "./dist/hooks.esm.js",
+      "import": "./dist/hooks.es.js",
       "types": "./dist/types/hooks.d.ts"
     },
     "./components": {
-      "import": "./dist/components.esm.js",
+      "import": "./dist/components.es.js",
       "types": "./dist/types/components.d.ts"
     }
   },
   "scripts": {
-    "build": "rimraf dist && vite build",
+    "build": "tsdown",
     "lint": "oxlint src",
     "lint:fix": "oxlint  --fix src",
     "lint:error": "oxlint --quiet src",
@@ -56,11 +56,10 @@
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
     "@testing-library/react": "^16.3.2",
+    "@tsdown/css": "^0.22.14",
     "@types/node": "^24.13.3",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
-    "@typescript/typescript6": "^6.0.2",
-    "@vitejs/plugin-react": "^6.0.4",
     "cspell": "^10.0.1",
     "jsdom": "^29.1.1",
     "lint-staged": "^17.2.0",
@@ -73,10 +72,8 @@
     "sass-embedded": "^1.100.0",
     "simple-git-hooks": "^2.13.1",
     "sync-node-version": "^0.1.0",
+    "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
-    "unplugin-dts": "^1.0.3",
-    "vite": "^8.1.5",
-    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^4.1.10"
   },
   "peerDependencies": {
