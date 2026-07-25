@@ -39,7 +39,7 @@
     }
   },
   "scripts": {
-    "build": "vite build",
+    "build": "tsdown",
     "test": "vitest --run",
     "typecheck": "pnpm exec tsc --noEmit"
   },
@@ -48,11 +48,8 @@
   },
   "devDependencies": {
     "@typescript/typescript6": "^6.0.2",
-    "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.4.11",
-    "unplugin-dts": "^1.0.3",
     "unplugin-vue": "^7.2.0",
-    "vite": "^8.1.5",
     "vue": "^3.5.40",
     "vue-tsc": "^3.3.8"
   },
