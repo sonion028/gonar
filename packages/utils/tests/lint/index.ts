@@ -21,7 +21,9 @@ declare function callback(value: unknown): void;
  */
 export function lint_probe_eslint_constructor_super() {
   class Base {}
-  class Probe extends Base { constructor() {} }
+  class Probe extends Base {
+    constructor() {}
+  }
   void Probe;
 }
 
@@ -29,14 +31,21 @@ export function lint_probe_eslint_constructor_super() {
  * 规则错误：eslint/for-direction
  */
 export function lint_probe_eslint_for_direction() {
-  for (let index = 0; index < 2; index--) { void index; }
+  for (let index = 0; index < 2; index--) {
+    void index;
+  }
 }
 
 /**
  * 规则错误：eslint/getter-return
  */
 export function lint_probe_eslint_getter_return() {
-  class Probe { get value() { const local = 1; void local; } }
+  class Probe {
+    get value() {
+      const local = 1;
+      void local;
+    }
+  }
   void Probe;
 }
 
@@ -44,14 +53,18 @@ export function lint_probe_eslint_getter_return() {
  * 规则错误：eslint/no-async-promise-executor
  */
 export function lint_probe_eslint_no_async_promise_executor() {
-  new Promise(async (resolve) => { resolve(await Promise.resolve(1)); });
+  new Promise(async (resolve) => {
+    resolve(await Promise.resolve(1));
+  });
 }
 
 /**
  * 规则错误：eslint/no-caller
  */
 export function lint_probe_eslint_no_caller() {
-  function inner() { return arguments.callee; }
+  function inner() {
+    return arguments.callee;
+  }
   void inner;
 }
 
@@ -77,7 +90,9 @@ export function lint_probe_eslint_no_compare_neg_zero() {
  */
 export function lint_probe_eslint_no_cond_assign() {
   let probe = 0;
-  if (probe = 1) { void probe; }
+  if ((probe = 1)) {
+    void probe;
+  }
 }
 
 /**
@@ -100,7 +115,9 @@ export function lint_probe_eslint_no_constant_binary_expression() {
  * 规则错误：eslint/no-constant-condition
  */
 export function lint_probe_eslint_no_constant_condition() {
-  if (true) { void 1; }
+  if (true) {
+    void 1;
+  }
 }
 
 /**
@@ -137,7 +154,11 @@ export function lint_probe_eslint_no_dupe_class_members() {
  */
 export function lint_probe_eslint_no_dupe_else_if() {
   const value = Math.random();
-  if (value > 0.5) { void 1; } else if (value > 0.5) { void 2; }
+  if (value > 0.5) {
+    void 1;
+  } else if (value > 0.5) {
+    void 2;
+  }
 }
 
 /**
@@ -152,7 +173,12 @@ export function lint_probe_eslint_no_dupe_keys() {
  * 规则错误：eslint/no-duplicate-case
  */
 export function lint_probe_eslint_no_duplicate_case() {
-  switch (Math.random()) { case 1: break; case 1: break; }
+  switch (Math.random()) {
+    case 1:
+      break;
+    case 1:
+      break;
+  }
 }
 
 /**
@@ -174,7 +200,9 @@ export function lint_probe_eslint_no_empty_pattern() {
  * 规则错误：eslint/no-empty-static-block
  */
 export function lint_probe_eslint_no_empty_static_block() {
-  class Probe { static {} }
+  class Probe {
+    static {}
+  }
   void Probe;
 }
 
@@ -189,7 +217,11 @@ export function lint_probe_eslint_no_eval() {
  * 规则错误：eslint/no-ex-assign
  */
 export function lint_probe_eslint_no_ex_assign() {
-  try { throw new Error('probe'); } catch (error) { error = 1; }
+  try {
+    throw new Error('probe');
+  } catch (error) {
+    error = 1;
+  }
 }
 
 /**
@@ -235,7 +267,7 @@ export function lint_probe_eslint_no_invalid_regexp() {
 export function lint_probe_eslint_no_irregular_whitespace() {
   const probe = 'normal';
   void probe;
-  const anotherProbe = 1; 
+  const anotherProbe = 1;
   void anotherProbe;
 }
 
@@ -298,7 +330,11 @@ export function lint_probe_eslint_no_self_assign() {
  * 规则错误：eslint/no-setter-return
  */
 export function lint_probe_eslint_no_setter_return() {
-  const probe = { set value(input) { return input; } };
+  const probe = {
+    set value(input) {
+      return input;
+    },
+  };
   void probe;
 }
 
@@ -306,7 +342,9 @@ export function lint_probe_eslint_no_setter_return() {
  * 规则错误：eslint/no-shadow-restricted-names
  */
 export function lint_probe_eslint_no_shadow_restricted_names() {
-  function probe(undefined) { return undefined; }
+  function probe(undefined) {
+    return undefined;
+  }
   void probe;
 }
 
@@ -314,7 +352,7 @@ export function lint_probe_eslint_no_shadow_restricted_names() {
  * 规则错误：eslint/no-sparse-arrays
  */
 export function lint_probe_eslint_no_sparse_arrays() {
-  const probe = [1,, 3];
+  const probe = [1, , 3];
   void probe;
 }
 
@@ -323,7 +361,12 @@ export function lint_probe_eslint_no_sparse_arrays() {
  */
 export function lint_probe_eslint_no_this_before_super() {
   class Base {}
-  class Probe extends Base { constructor() { this.value = 1; super(); } }
+  class Probe extends Base {
+    constructor() {
+      this.value = 1;
+      super();
+    }
+  }
   void Probe;
 }
 
@@ -347,14 +390,18 @@ export function lint_probe_eslint_no_unreachable() {
  * 规则错误：eslint/no-unsafe-finally
  */
 export function lint_probe_eslint_no_unsafe_finally() {
-  try { return 1; } finally { return 2; }
+  try {
+    return 1;
+  } finally {
+    return 2;
+  }
 }
 
 /**
  * 规则错误：eslint/no-unsafe-negation
  */
 export function lint_probe_eslint_no_unsafe_negation() {
-  const probe = !1 in {};
+  const probe = (!1) in {};
   void probe;
 }
 
@@ -377,14 +424,18 @@ export function lint_probe_eslint_no_unused_expressions() {
  * 规则错误：eslint/no-unused-labels
  */
 export function lint_probe_eslint_no_unused_labels() {
-  unusedLabel: while (false) { break; }
+  unusedLabel: while (false) {
+    break;
+  }
 }
 
 /**
  * 规则错误：eslint/no-unused-private-class-members
  */
 export function lint_probe_eslint_no_unused_private_class_members() {
-  class Probe { #value = 1; }
+  class Probe {
+    #value = 1;
+  }
   void Probe;
 }
 
@@ -407,7 +458,11 @@ export function lint_probe_eslint_no_useless_backreference() {
  * 规则错误：eslint/no-useless-catch
  */
 export function lint_probe_eslint_no_useless_catch() {
-  try { throw new Error('probe'); } catch (error) { throw error; }
+  try {
+    throw new Error('probe');
+  } catch (error) {
+    throw error;
+  }
 }
 
 /**
@@ -438,7 +493,9 @@ export function lint_probe_eslint_no_with() {
  * 规则错误：eslint/require-yield
  */
 export function lint_probe_eslint_require_yield() {
-  function* probe() { return 1; }
+  function* probe() {
+    return 1;
+  }
   void probe;
 }
 
@@ -512,7 +569,9 @@ export function lint_probe_jsdoc_no_defaults() {
   /**
    * @param {string} [value=default] probe
    */
-  function probe(value) { return value; }
+  function probe(value) {
+    return value;
+  }
   void probe;
 }
 
@@ -568,7 +627,9 @@ export function lint_probe_jsdoc_require_property_type() {
  */
 export function lint_probe_jsdoc_require_yields() {
   /** probe generator */
-  function* probe() { yield 1; }
+  function* probe() {
+    yield 1;
+  }
   void probe;
 }
 
@@ -576,7 +637,9 @@ export function lint_probe_jsdoc_require_yields() {
  * 规则错误：oxc/bad-array-method-on-arguments
  */
 export function lint_probe_oxc_bad_array_method_on_arguments() {
-  function probe() { return arguments.map((value) => value); }
+  function probe() {
+    return arguments.map((value) => value);
+  }
   void probe;
 }
 
@@ -665,7 +728,9 @@ export function lint_probe_oxc_number_arg_out_of_range() {
  * 规则错误：oxc/only-used-in-recursion
  */
 export function lint_probe_oxc_only_used_in_recursion() {
-  function probe(value) { return probe(value); }
+  function probe(value) {
+    return probe(value);
+  }
   void probe;
 }
 
@@ -702,7 +767,9 @@ export function lint_probe_promise_valid_params() {
  * 规则错误：typescript/await-thenable
  */
 export function lint_probe_typescript_await_thenable() {
-  async function inner() { await 1; }
+  async function inner() {
+    await 1;
+  }
   void inner;
 }
 
@@ -726,7 +793,10 @@ export function lint_probe_typescript_no_base_to_string() {
  * 规则错误：typescript/no-duplicate-enum-values
  */
 export function lint_probe_typescript_no_duplicate_enum_values() {
-  enum Probe { A = 'same', B = 'same' }
+  enum Probe {
+    A = 'same',
+    B = 'same',
+  }
   void Probe;
 }
 
@@ -757,7 +827,9 @@ export function lint_probe_typescript_no_floating_promises() {
  * 规则错误：typescript/no-for-in-array
  */
 export function lint_probe_typescript_no_for_in_array() {
-  for (const key in [1, 2]) { void key; }
+  for (const key in [1, 2]) {
+    void key;
+  }
 }
 
 /**
@@ -779,7 +851,9 @@ export function lint_probe_typescript_no_meaningless_void_operator() {
  * 规则错误：typescript/no-misused-new
  */
 export function lint_probe_typescript_no_misused_new() {
-  interface Probe { new(): Probe; }
+  interface Probe {
+    new (): Probe;
+  }
   void (0 as unknown as Probe);
 }
 
@@ -819,7 +893,11 @@ export function lint_probe_typescript_no_this_alias() {
  * 规则错误：typescript/no-unnecessary-parameter-property-assignment
  */
 export function lint_probe_typescript_no_unnecessary_parameter_property_assignment() {
-  class Probe { constructor(public value: string) { this.value = value; } }
+  class Probe {
+    constructor(public value: string) {
+      this.value = value;
+    }
+  }
   void Probe;
 }
 
@@ -827,8 +905,12 @@ export function lint_probe_typescript_no_unnecessary_parameter_property_assignme
  * 规则错误：typescript/no-unsafe-declaration-merging
  */
 export function lint_probe_typescript_no_unsafe_declaration_merging() {
-  interface Probe { value: string; }
-  class Probe { value = 'probe'; }
+  interface Probe {
+    value: string;
+  }
+  class Probe {
+    value = 'probe';
+  }
   void Probe;
 }
 
@@ -899,7 +981,11 @@ export function lint_probe_typescript_restrict_template_expressions() {
  * 规则错误：typescript/unbound-method
  */
 export function lint_probe_typescript_unbound_method() {
-  class Probe { method() { return this; } }
+  class Probe {
+    method() {
+      return this;
+    }
+  }
   const { method } = new Probe();
   void method;
 }
@@ -908,7 +994,9 @@ export function lint_probe_typescript_unbound_method() {
  * 规则错误：unicorn/no-await-in-promise-methods
  */
 export function lint_probe_unicorn_no_await_in_promise_methods() {
-  async function inner() { Promise.all([await Promise.resolve(1)]); }
+  async function inner() {
+    Promise.all([await Promise.resolve(1)]);
+  }
   void inner;
 }
 
@@ -954,7 +1042,11 @@ export function lint_probe_unicorn_no_single_promise_in_promise_methods() {
  * 规则错误：unicorn/no-thenable
  */
 export function lint_probe_unicorn_no_thenable() {
-  const probe = { then() { return 1; } };
+  const probe = {
+    then() {
+      return 1;
+    },
+  };
   void probe;
 }
 
@@ -962,7 +1054,9 @@ export function lint_probe_unicorn_no_thenable() {
  * 规则错误：unicorn/no-unnecessary-await
  */
 export function lint_probe_unicorn_no_unnecessary_await() {
-  async function inner() { return await 1; }
+  async function inner() {
+    return await 1;
+  }
   void inner;
 }
 
@@ -979,7 +1073,9 @@ export function lint_probe_unicorn_no_useless_fallback_in_spread() {
  */
 export function lint_probe_unicorn_no_useless_length_check() {
   const probe = [1, 2];
-  if (probe.length > 0 && probe.some(Boolean)) { void probe; }
+  if (probe.length > 0 && probe.some(Boolean)) {
+    void probe;
+  }
 }
 
 /**

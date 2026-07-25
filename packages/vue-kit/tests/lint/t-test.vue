@@ -47,7 +47,11 @@ export const DeprecatedModelProbe = defineComponent({
 export const DeprecatedPropsDefaultThisProbe = defineComponent({
   props: {
     a: String,
-    b: { default() { return this.a; } },
+    b: {
+      default() {
+        return this.a;
+      },
+    },
   },
 });
 
@@ -87,16 +91,25 @@ export const RequirePropTypesConstructorProbe = defineComponent({
  * 规则错误：vue/return-in-emits-validator
  */
 export const ReturnInEmitsValidatorProbe = defineComponent({
-  emits: { foo() { /* missing return */ } },
+  emits: {
+    foo() {
+      /* missing return */
+    },
+  },
 });
 
 /**
  * 规则错误：vue/no-side-effects-in-computed-properties
  */
 export const SideEffectsInComputedProbe = defineComponent({
-  data() { return { value: 1 }; },
+  data() {
+    return { value: 1 };
+  },
   computed: {
-    doubled() { this.value++; return this.value; },
+    doubled() {
+      this.value++;
+      return this.value;
+    },
   },
 });
 
@@ -111,30 +124,50 @@ export const SharedComponentDataProbe = defineComponent({
  * 规则错误：vue/no-dupe-keys
  */
 export const DupeKeysProbe = defineComponent({
-  data() { return { value: 1 }; },
-  methods: { value() { return 2; } },
+  data() {
+    return { value: 1 };
+  },
+  methods: {
+    value() {
+      return 2;
+    },
+  },
 });
 
 /**
  * 规则错误：vue/no-computed-properties-in-data
  */
 export const ComputedInDataProbe = defineComponent({
-  computed: { value() { return 1; } },
-  data() { return { copy: this.value }; },
+  computed: {
+    value() {
+      return 1;
+    },
+  },
+  data() {
+    return { copy: this.value };
+  },
 });
 
 /**
  * 规则错误：vue/require-render-return
  */
 export const RequireRenderReturnProbe = defineComponent({
-  render() { const value = 1; void value; },
+  render() {
+    const value = 1;
+    void value;
+  },
 });
 
 /**
  * 规则错误：vue/return-in-computed-property
  */
 export const ReturnInComputedProbe = defineComponent({
-  computed: { value() { const local = 1; void local; } },
+  computed: {
+    value() {
+      const local = 1;
+      void local;
+    },
+  },
 });
 </script>
 

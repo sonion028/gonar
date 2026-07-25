@@ -115,7 +115,11 @@ export function lint_probe_jsx_a11y_img_redundant_alt() {
  * 规则错误：jsx_a11y/interactive-supports-focus
  */
 export function lint_probe_jsx_a11y_interactive_supports_focus() {
-  return <div role="button" onClick={() => undefined}>probe</div>;
+  return (
+    <div role="button" onClick={() => undefined}>
+      probe
+    </div>
+  );
 }
 
 /**
@@ -255,7 +259,9 @@ export function lint_probe_jsx_a11y_tabindex_no_positive() {
  * 规则错误：react/exhaustive-deps
  */
 export function LintProbeReactExhaustiveDeps({ value }) {
-  useEffect(() => { console.log(value); }, []);
+  useEffect(() => {
+    console.log(value);
+  }, []);
   return null;
 }
 
@@ -263,7 +269,9 @@ export function LintProbeReactExhaustiveDeps({ value }) {
  * 规则错误：react/forward-ref-uses-ref
  */
 export function lint_probe_react_forward_ref_uses_ref() {
-  const Probe = forwardRef(function Probe(props) { return React.createElement('div', props); });
+  const Probe = forwardRef(function Probe(props) {
+    return React.createElement('div', props);
+  });
   void Probe;
 }
 
@@ -307,14 +315,25 @@ export function lint_probe_react_no_children_prop() {
  * 规则错误：react/no-danger-with-children
  */
 export function lint_probe_react_no_danger_with_children() {
-  return React.createElement('div', { dangerouslySetInnerHTML: { __html: '<b>x</b>' } }, 'child');
+  return React.createElement(
+    'div',
+    { dangerouslySetInnerHTML: { __html: '<b>x</b>' } },
+    'child'
+  );
 }
 
 /**
  * 规则错误：react/no-did-mount-set-state
  */
 export function lint_probe_react_no_did_mount_set_state() {
-  class Probe extends React.Component { componentDidMount() { this.setState({ ready: true }); } render() { return null; } }
+  class Probe extends React.Component {
+    componentDidMount() {
+      this.setState({ ready: true });
+    }
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 
@@ -322,7 +341,14 @@ export function lint_probe_react_no_did_mount_set_state() {
  * 规则错误：react/no-did-update-set-state
  */
 export function lint_probe_react_no_did_update_set_state() {
-  class Probe extends React.Component { componentDidUpdate() { this.setState({ ready: true }); } render() { return null; } }
+  class Probe extends React.Component {
+    componentDidUpdate() {
+      this.setState({ ready: true });
+    }
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 
@@ -330,7 +356,14 @@ export function lint_probe_react_no_did_update_set_state() {
  * 规则错误：react/no-direct-mutation-state
  */
 export function lint_probe_react_no_direct_mutation_state() {
-  class Probe extends React.Component { componentDidMount() { this.state = { ready: true }; } render() { return null; } }
+  class Probe extends React.Component {
+    componentDidMount() {
+      this.state = { ready: true };
+    }
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 
@@ -345,7 +378,14 @@ export function lint_probe_react_no_find_dom_node() {
  * 规则错误：react/no-is-mounted
  */
 export function lint_probe_react_no_is_mounted() {
-  class Probe extends React.Component { componentDidMount() { this.isMounted(); } render() { return null; } }
+  class Probe extends React.Component {
+    componentDidMount() {
+      this.isMounted();
+    }
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 
@@ -353,7 +393,10 @@ export function lint_probe_react_no_is_mounted() {
  * 规则错误：react/no-render-return-value
  */
 export function lint_probe_react_no_render_return_value() {
-  const probe = ReactDOM.render(React.createElement('div'), document.createElement('div'));
+  const probe = ReactDOM.render(
+    React.createElement('div'),
+    document.createElement('div')
+  );
   void probe;
 }
 
@@ -378,7 +421,12 @@ export function lint_probe_react_no_this_in_sfc() {
  * 规则错误：react/no-unsafe
  */
 export function lint_probe_react_no_unsafe() {
-  class Probe extends React.Component { UNSAFE_componentWillMount() {} render() { return null; } }
+  class Probe extends React.Component {
+    UNSAFE_componentWillMount() {}
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 
@@ -386,7 +434,14 @@ export function lint_probe_react_no_unsafe() {
  * 规则错误：react/no-will-update-set-state
  */
 export function lint_probe_react_no_will_update_set_state() {
-  class Probe extends React.Component { componentWillUpdate() { this.setState({ ready: true }); } render() { return null; } }
+  class Probe extends React.Component {
+    componentWillUpdate() {
+      this.setState({ ready: true });
+    }
+    render() {
+      return null;
+    }
+  }
   void Probe;
 }
 

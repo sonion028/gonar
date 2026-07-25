@@ -3,7 +3,16 @@
  * 每个函数对应一条规则。
  */
 
-import { defineComponent, nextTick, onMounted, watch, defineExpose, defineEmits, defineOptions, defineProps } from 'vue';
+import {
+  defineComponent,
+  nextTick,
+  onMounted,
+  watch,
+  defineExpose,
+  defineEmits,
+  defineOptions,
+  defineProps,
+} from 'vue';
 import { ref } from '@vue/reactivity';
 declare const Vue: any;
 
@@ -18,14 +27,29 @@ export function lint_probe_vue_no_arrow_functions_in_watch() {
  * 规则错误：vue/no-async-in-computed-properties
  */
 export function lint_probe_vue_no_async_in_computed_properties() {
-  defineComponent({ computed: { async value() { return 1; } } });
+  defineComponent({
+    computed: {
+      async value() {
+        return 1;
+      },
+    },
+  });
 }
 
 /**
  * 规则错误：vue/no-computed-properties-in-data
  */
 export function lint_probe_vue_no_computed_properties_in_data() {
-  defineComponent({ computed: { value() { return 1; } }, data() { return { copy: this.value }; } });
+  defineComponent({
+    computed: {
+      value() {
+        return 1;
+      },
+    },
+    data() {
+      return { copy: this.value };
+    },
+  });
 }
 
 /**
@@ -53,7 +77,11 @@ export function lint_probe_vue_no_deprecated_destroyed_lifecycle() {
  * 规则错误：vue/no-deprecated-events-api
  */
 export function lint_probe_vue_no_deprecated_events_api() {
-  defineComponent({ mounted() { this.$on('event', () => undefined); } });
+  defineComponent({
+    mounted() {
+      this.$on('event', () => undefined);
+    },
+  });
 }
 
 /**
@@ -67,7 +95,15 @@ export function lint_probe_vue_no_deprecated_model_definition() {
  * 规则错误：vue/no-deprecated-props-default-this
  */
 export function lint_probe_vue_no_deprecated_props_default_this() {
-  defineComponent({ props: { value: { default() { return this.other; } } } });
+  defineComponent({
+    props: {
+      value: {
+        default() {
+          return this.other;
+        },
+      },
+    },
+  });
 }
 
 /**
@@ -81,7 +117,16 @@ export function lint_probe_vue_no_deprecated_vue_config_keycodes() {
  * 规则错误：vue/no-dupe-keys
  */
 export function lint_probe_vue_no_dupe_keys() {
-  defineComponent({ data() { return { value: 1 }; }, methods: { value() { return 2; } } });
+  defineComponent({
+    data() {
+      return { value: 1 };
+    },
+    methods: {
+      value() {
+        return 2;
+      },
+    },
+  });
 }
 
 /**
@@ -96,7 +141,10 @@ export function lint_probe_vue_no_export_in_script_setup() {
  * 规则错误：vue/no-expose-after-await
  */
 export function lint_probe_vue_no_expose_after_await() {
-  async function inner() { await Promise.resolve(); defineExpose({}); }
+  async function inner() {
+    await Promise.resolve();
+    defineExpose({});
+  }
   void inner;
 }
 
@@ -104,7 +152,10 @@ export function lint_probe_vue_no_expose_after_await() {
  * 规则错误：vue/no-lifecycle-after-await
  */
 export function lint_probe_vue_no_lifecycle_after_await() {
-  async function inner() { await Promise.resolve(); onMounted(() => undefined); }
+  async function inner() {
+    await Promise.resolve();
+    onMounted(() => undefined);
+  }
   void inner;
 }
 
@@ -119,7 +170,11 @@ export function lint_probe_vue_no_reserved_component_names() {
  * 规则错误：vue/no-reserved-keys
  */
 export function lint_probe_vue_no_reserved_keys() {
-  defineComponent({ data() { return { $el: 1 }; } });
+  defineComponent({
+    data() {
+      return { $el: 1 };
+    },
+  });
 }
 
 /**
@@ -140,21 +195,38 @@ export function lint_probe_vue_no_shared_component_data() {
  * 规则错误：vue/no-side-effects-in-computed-properties
  */
 export function lint_probe_vue_no_side_effects_in_computed_properties() {
-  defineComponent({ data() { return { value: 1 }; }, computed: { doubled() { this.value++; return this.value; } } });
+  defineComponent({
+    data() {
+      return { value: 1 };
+    },
+    computed: {
+      doubled() {
+        this.value++;
+        return this.value;
+      },
+    },
+  });
 }
 
 /**
  * 规则错误：vue/no-this-in-before-route-enter
  */
 export function lint_probe_vue_no_this_in_before_route_enter() {
-  defineComponent({ beforeRouteEnter() { return this.value; } });
+  defineComponent({
+    beforeRouteEnter() {
+      return this.value;
+    },
+  });
 }
 
 /**
  * 规则错误：vue/no-watch-after-await
  */
 export function lint_probe_vue_no_watch_after_await() {
-  async function inner() { await Promise.resolve(); watch(ref(1), () => undefined); }
+  async function inner() {
+    await Promise.resolve();
+    watch(ref(1), () => undefined);
+  }
   void inner;
 }
 
@@ -176,28 +248,50 @@ export function lint_probe_vue_require_prop_type_constructor() {
  * 规则错误：vue/require-render-return
  */
 export function lint_probe_vue_require_render_return() {
-  defineComponent({ render() { const value = 1; void value; } });
+  defineComponent({
+    render() {
+      const value = 1;
+      void value;
+    },
+  });
 }
 
 /**
  * 规则错误：vue/require-slots-as-functions
  */
 export function lint_probe_vue_require_slots_as_functions() {
-  defineComponent({ mounted() { return this.$slots.default; } });
+  defineComponent({
+    mounted() {
+      return this.$slots.default;
+    },
+  });
 }
 
 /**
  * 规则错误：vue/return-in-computed-property
  */
 export function lint_probe_vue_return_in_computed_property() {
-  defineComponent({ computed: { value() { const local = 1; void local; } } });
+  defineComponent({
+    computed: {
+      value() {
+        const local = 1;
+        void local;
+      },
+    },
+  });
 }
 
 /**
  * 规则错误：vue/return-in-emits-validator
  */
 export function lint_probe_vue_return_in_emits_validator() {
-  defineComponent({ emits: { change(value) { void value; } } });
+  defineComponent({
+    emits: {
+      change(value) {
+        void value;
+      },
+    },
+  });
 }
 
 /**
@@ -227,4 +321,3 @@ export function lint_probe_vue_valid_define_props() {
 export function lint_probe_vue_valid_next_tick() {
   nextTick('not-a-function');
 }
-
