@@ -1,6 +1,6 @@
 {
   "name": "@tonar/vue-kit",
-  "version": "0.0.1-canary",
+  "version": "0.0.1-beta",
   "private": false,
   "description": "@tonar/vue-kit: Vue 3 ESM toolkit with permission-based rendering components such as SoAuthority.",
   "keywords": [
