@@ -13,5 +13,6 @@ export default createTsdownConfig(
       neverBundle: ['vue', '@tonar/utils'],
     },
   },
-  { 1: { dts: { emitDtsOnly: true, vue: false } } }
+  // 仅生成类型声明文件，不需要 Vue 插件
+  { 1: { dts: { emitDtsOnly: true, vue: true }, plugins: [] } }
 );

@@ -15,8 +15,8 @@
     "typecheck": "turbo run typecheck",
     "lint": "oxlint apps/*/src packages/*/src",
     "lint-all": "oxlint apps packages",
-    "lint:fix": "oxlint --fix apps packages",
-    "lint:error": "oxlint --quiet apps packages",
+    "lint:fix": "oxlint --fix apps/*/src packages/*/src",
+    "lint:error": "oxlint --quiet apps/*/src packages/*/src",
     "cspell": "cspell lint '{apps,packages}/**/*.{js,ts,jsx,tsx,mjs,cjs,json,css,less,scss,vue,html,md}'",
     "fmt": "oxfmt '{apps,packages}/**/*.*'",
     "fmt:check": "oxfmt --check '{apps,packages}/**/*.*'",
@@ -42,7 +42,7 @@
     "sync-node-version": "^0.1.0",
     "tsdown": "^0.22.14",
     "turbo": "^2.10.9",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.10"
   },
   "devEngines": {
