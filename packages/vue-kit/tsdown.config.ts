@@ -13,5 +13,5 @@ export default createTsdownConfig(
       neverBundle: ['vue', '@tonar/utils'],
     },
   },
-  { 1: { dts: { emitDtsOnly: true, vue: false } } }
+  { 1: { dts: { emitDtsOnly: true, vue: true } } }
 );
