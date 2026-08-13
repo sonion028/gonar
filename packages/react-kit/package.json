@@ -16,7 +16,8 @@
     "dist",
     "package.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    ".npmrc"
   ],
   "type": "module",
   "sideEffects": [
