@@ -249,6 +249,23 @@ const convertPascal2Camel = <
   }) as ConvertKeys<T, typeof ConvertMode.PascalToCamel, K>;
 };
 
+export type ConvertSnake2CamelResult<T> = ConvertKeys<
+  T,
+  typeof ConvertMode.SnakeToCamel
+>;
+export type ConvertCamel2SnakeResult<T> = ConvertKeys<
+  T,
+  typeof ConvertMode.CamelToSnake
+>;
+export type ConvertCamel2PascalResult<T> = ConvertKeys<
+  T,
+  typeof ConvertMode.CamelToPascal
+>;
+export type ConvertPascal2CamelResult<T> = ConvertKeys<
+  T,
+  typeof ConvertMode.PascalToCamel
+>;
+
 export {
   convertSnake2Camel,
   convertCamel2Snake,
