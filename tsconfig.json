@@ -5,32 +5,54 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
 
-    /* 模块解析：现代 bundler 模式 */
-    "moduleResolution": "bundler", // 更适合 Vite/Rollup
-    "verbatimModuleSyntax": true, // 保持模块语法，不自动修改。区分类型导入和值导入。
-    "moduleDetection": "force", // 强制检测模块，避免在非模块上下文使用模块语法
-    "noEmit": true, // 不生成类型文件，库开发不需要
-    "allowImportingTsExtensions": true, // 仅onEmit有效，允许.ts/.tsx 后缀导入。
+    /** 模块 */
+    /** 模块标准。要求 module 为 ESNext/Preserve */
+    "moduleResolution": "bundler",
+    /** 强制所有文件都视为模块（即使无 import/export），声明不会进入全局作用域 */
+    "moduleDetection": "force",
+    /** 导入/导出语句按原样保留输出，不自动删除只用作类型的导入（无type）；
+      * 类型导入必须显式写 import type。配合 lint 检查，避免使用无type类型导入。
+      */
+    "verbatimModuleSyntax": true,
+    /** 不生成任何编译输出,一般由打包工具处理 */
+    "noEmit": true,
+    /** 允许.ts/.tsx/.mts/.cts 后缀导入。仅 noEmit:true 有效 */
+    "allowImportingTsExtensions": true,
 
     /* 严格检查与 lint */
     "strict": true,
+    /** 未使用的局部变量检查 */
     "noUnusedLocals": true,
+    /** 未使用的参数检查 */
     "noUnusedParameters": true,
+    /** switch 语句缺少break/return 的检查 */
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "noUncheckedSideEffectImports": true,
-    "useDefineForClassFields": true,
-    "erasableSyntaxOnly": true,
+    /** 数组 未定义项/未知项，类型强制联合undefined */
     "noUncheckedIndexedAccess": true,
+    /** 支持类中直接定义属性，而不转为通过constructor赋值。且按规范属性比构造函数先执行 */
+    "useDefineForClassFields": true,
+    /** 强制检查代码里的大小写与磁盘大小写是否对应 */
     "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": true,
-    "noImplicitThis": true, // 对 `this` 上的数据属性启用更严格的推断。
-    "libReplacement": false, // 禁止三方库提替换lib声明。
+    /** 
+      * 对副作用导入（如 import './x.css'）也执行模块解析检查。
+      * 注意：配合 Vite 时需要在 env.d.ts 里有 /// <reference types="vite/client" />（或 declare module "*.css"），否则 CSS 导入会报错
+    */
+    "noUncheckedSideEffectImports": true,
+    /** 仅使用可擦除语法 */
+    "erasableSyntaxOnly": true,
+    /** 跳过所有 d.ts 类型声明文件检查，不跳过用户 .ts/.tsx/.mts/.cts 代码 */
+    "skipLibCheck": true,
+    /** 禁止三方库替换lib声明 */
+    "libReplacement": false,
+    
 
     /* 互操作与工具支持 */
+    /** 保证每个文件能被单文件转译器（oxc/Babel等）正确处理，禁止依赖跨文件信息的语法 */
+    "isolatedModules": true,
+    /** 启用 CommonJS/ESM 互操作，允许对 CJS 模块使用默认导入。module.exports 视作 export default。 */
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    /** 允许直接import json文件 */
+    "resolveJsonModule": true
   },
   "include": ["packages"], // "*.config.ts", "vite.config.base.ts"
   "exclude": ["node_modules", "dist"]
