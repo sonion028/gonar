@@ -129,6 +129,7 @@ type CamelToPascal<S extends string> = Capitalize<S>;
 type PascalToCamel<S extends string> = Uncapitalize<S>;
 
 /** 转换模式 */
+// oxlint-disable-next-line no-redeclare
 export const ConvertMode = {
   SnakeToCamel: 'snakeToCamel',
   CamelToSnake: 'camelToSnake',

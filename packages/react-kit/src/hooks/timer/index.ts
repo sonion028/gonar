@@ -26,10 +26,11 @@ export const useInterval = (cb: () => void, duration: number) => {
         } catch (err) {
           console.error('useInterval error', err);
         }
-        // oxlint-disable-next-line react/react-compiler
+        // oxlint-disable-next-line react/immutability
         run?.();
       }, duration)
     );
+    // oxlint-disable-next-line react/memo-dependencies
   }, [duration, latestCallback, withTimer]);
   const stop = useCallback(() => clearTimeout(withTimer()), [withTimer]);
   return [run, stop] as const;

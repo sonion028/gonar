@@ -198,9 +198,10 @@ export const usePlayControl = ({
     if (showArrow !== 'auto' || !wrapper) {
       return;
     }
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
     const arrowStatus = getShowArrow(indexRef.current);
     arrowDomOperation(wrapper, arrowStatus);
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/rule-suppression react-hooks/exhaustive-deps
   }, [length]);
 
   const stepChange = useCallback(
@@ -255,7 +256,7 @@ export const usePlayControl = ({
   );
 
   const getCurrentIndex = useCallback(() => indexRef.current, []);
-  // oxlint-disable-next-line react-hooks/exhaustive-deps
+  // oxlint-disable-next-line react/rule-suppression react-hooks/exhaustive-deps react/exhaustive-effect-dependencies
   useEffect(() => jumpChange(indexRef.current), [ref]); // 初始化时设置--index
   return [setRef, stepChange, jumpChange, getCurrentIndex, isReadyRef] as const;
 };
@@ -296,7 +297,7 @@ export const useLoopChildren = (
   // 依赖 children?.length 或 children 的问题可忽略
 
   useMemo(() => {
-    // oxlint-disable-next-line react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies
     if (!Array.isArray(children) || !children.length) {
       throw new Error('Carousel children must be an array');
     }
@@ -309,5 +310,5 @@ export const useLoopChildren = (
       return clonedChildren;
     }
     return children;
-    // oxlint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/rule-suppression react-hooks/exhaustive-deps
   }, [rerender === 'child' ? children : children?.length, loop]);

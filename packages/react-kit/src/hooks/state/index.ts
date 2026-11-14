@@ -44,7 +44,7 @@ export const useLatestCallback: UseLatestCallbackType = (cb: AnyFn) => {
   // https://jser.dev/react/2023/03/18/useeffectevent/
   // https://www.epicreact.dev/the-latest-ref-pattern-in-react
   // 这是实现"稳定引用 + 最新值"语义的标准做法。
-  // oxlint-disable-next-line react/react-compiler
+  // oxlint-disable-next-line react/refs
   ref.current !== cb && (ref.current = cb);
   type Args = Parameters<NonNullable<typeof cb>>;
   return useCallback((...args: Args) => ref.current?.(...args), []);
@@ -74,6 +74,7 @@ export function useDistinctState<T>(params: {
 export function useDistinctState<T>({
   initialValue,
   onChange,
+  // oxlint-disable-next-line react/todo
   hasDiff = (prev, next) => prev !== next,
   onlyEvent,
 }: {
@@ -94,7 +95,8 @@ export function useDistinctState<T>({
         ? (initialValue as () => T)()
         : initialValue);
   // useState 的初始化函数只在组件挂载时执行一次，此时修改 prevRef.current 是安全的。
-  // oxlint-disable-next-line react/react-compiler
+
+  // oxlint-disable-next-line react/refs
   const [value, setValue] = useState(initial);
   const latestOnChange = useLatestCallback(onChange);
   const setValueDistinct = useCallback(
@@ -111,7 +113,7 @@ export function useDistinctState<T>({
         onlyEvent || setValue(value); // 仅触发事件时，不更新值
       }
     },
-    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies react-hooks/exhaustive-deps react/use-memo
     [latestOnChange, onlyEvent, setValue, !!hasDiff]
   );
   return [
@@ -140,7 +142,7 @@ export const useCreateSafeRef = <T extends object = HTMLElement>(
         setEl(node);
       }
     },
-    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies react/use-memo react-hooks/exhaustive-deps
     [el, !!hasDiff] // 对比函数是否存在，对比函数又要稳定函数引用
   );
 

@@ -85,7 +85,21 @@ export default defineConfig({
             allowConstantExport: true,
           },
         ], // Restriction 分类
-        'react/react-compiler': 'warn', // Nursery 分类
+        // React Compiler 检查(oxlint v1.79.0 起由单条 react-compiler 拆分为 22 条细粒度规则):
+        // - correctness 类 12 条(refs、purity、immutability、set-state-in-render 等)无需在此配置,
+        //   由全局 categories.correctness: 'error' 自动启用
+        // - 以下为非 correctness 类,需显式开启:
+        'react/capitalized-calls': 'warn', // Suspicious
+        'react/hooks': 'warn', // Suspicious,与 rules-of-hooks 重叠,上游默认关闭
+        'react/memo-dependencies': 'warn', // Suspicious
+        'react/exhaustive-effect-dependencies': 'warn', // Suspicious
+        'react/incompatible-library': 'warn', // Suspicious
+        'react/todo': 'warn', // Restriction,React Compiler 暂不支持的语法/场景
+        'react/rule-suppression': 'warn', // Restriction
+        'react/unsupported-syntax': 'warn', // Restriction
+        'react/invariant': 'warn', // Restriction,编译器内部一致性检查,极少触发
+        'react/no-deriving-state-in-effects': 'warn', // Perf
+
         'react/no-array-index-key': 'warn', // Perf 分类
         'react/rules-of-hooks': 'deny', // Pedantic 分类
         'react/jsx-no-target-blank': 'deny', // Pedantic 分类

@@ -22,6 +22,7 @@ export interface CustomShowType<T> extends FC<CustomShowProps<T>> {
  */
 function CustomShow<T>({
   when,
+  // oxlint-disable-next-line react/todo
   fallback = void 0,
   children,
 }: CustomShowProps<T>): JSX.Element {

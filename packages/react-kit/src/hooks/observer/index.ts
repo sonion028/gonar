@@ -35,6 +35,7 @@ export const useMutationObserver = (
   const observe = useCallback(
     (el: Node | null, options?: MutationObserverInit) => {
       if (!el) return;
+      // oxlint-disable-next-line react/todo
       observerRef.current ??= new MutationObserver(
         (mutations: MutationRecord[], observer: MutationObserver) => {
           latestCallback?.(mutations, observer);
@@ -43,7 +44,7 @@ export const useMutationObserver = (
       );
       observerRef.current?.observe?.(el, options);
     },
-    // oxlint-disable-next-line react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies
     [once, latestCallback]
   );
 
@@ -112,6 +113,7 @@ export const useIntersectionObserver = ({
       observerRef.current?.disconnect?.();
       observerRef.current = void 0;
     },
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
     [options]
   );
 
@@ -125,6 +127,7 @@ export const useIntersectionObserver = ({
         withPrevOptions(options); // 纪录新值
       }
 
+      // oxlint-disable-next-line react/todo
       observerRef.current ??= new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -137,7 +140,7 @@ export const useIntersectionObserver = ({
       observerRef.current?.observe?.(el);
     },
     // rootRef 已经是options 依赖了
-    // oxlint-disable-next-line react-hooks/exhaustive-deps react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies react-hooks/exhaustive-deps
     [options, once, latestCallback, withPrevOptions]
   );
 
@@ -202,6 +205,7 @@ export const useResizeObserver = (
   const observe = useCallback(
     (el: Element | null, options?: ResizeObserverOptions) => {
       if (!el) return;
+      // oxlint-disable-next-line react/todo
       observerRef.current ??= new ResizeObserver(
         (entries: ResizeObserverEntry[], observer: ResizeObserver) => {
           entries.forEach((entry) => {
@@ -213,7 +217,7 @@ export const useResizeObserver = (
       observerRef.current?.unobserve?.(el); // 避免重复
       observerRef.current?.observe?.(el, options);
     },
-    // oxlint-disable-next-line react/react-compiler
+    // oxlint-disable-next-line react/memo-dependencies
     [once, latestCallback]
   );
 
