@@ -9,7 +9,7 @@ runs:
       shell: bash
       run: |
         echo "开始安装依赖..."
-        pnpm install --frozen-lockfile --verbose
+        pnpm ci
         echo "依赖安装完成 ✅"
 
     # TypeScript 编译检查
