@@ -2,10 +2,11 @@ allowBuilds:
   "@parcel/watcher": true
   esbuild: false
   simple-git-hooks: true
-minimumReleaseAge: 0 # 小时
-strictPeerDependencies: true
 packages:
   - "packages/*"
+minimumReleaseAge: 0 # 小时
+autoInstallPeers: true
+strictPeerDependencies: true
 
 # v10.x
 onlyBuiltDependencies:
