@@ -1,6 +1,6 @@
 {
   "name": "@tonar/react",
-  "version": "0.0.1-canary",
+  "version": "0.0.1",
   "private": false,
   "description": "@tonar/react: Tonar entry for React applications with React components, hooks, and general utilities.",
   "keywords": [

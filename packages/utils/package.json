@@ -1,6 +1,6 @@
 {
   "name": "@tonar/utils",
-  "version": "0.0.1-canary",
+  "version": "0.0.1",
   "private": false,
   "description": "@tonar/utils: Framework-agnostic TypeScript utilities for async control, events, object conversion, browser downloads, XHR-based fetch, and animation-frame timers.",
   "keywords": [
