@@ -20,6 +20,8 @@
     "**/static/**",
     "**/out/**",
     "**/tmp/**",
+    "**/test/**",
+    "**/tests/**",
     "**/stats.html",
     "cspell.json",
     ".cspell"
