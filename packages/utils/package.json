@@ -24,6 +24,10 @@
     ".": {
       "import": "./dist/index.es.js",
       "types": "./dist/types/index.d.ts"
+    },
+    "./common": {
+      "import": "./dist/common/index.es.js",
+      "types": "./dist/types/common/index.d.ts"
     }
   },
   "scripts": {
