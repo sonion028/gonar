@@ -26,7 +26,7 @@
       "types": "./dist/types/index.d.ts"
     },
     "./common": {
-      "import": "./dist/common/index.es.js",
+      "import": "./dist/common.es.js",
       "types": "./dist/types/common/index.d.ts"
     }
   },
