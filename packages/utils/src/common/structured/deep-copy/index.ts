@@ -1,4 +1,4 @@
-import { isMap, isObject, isSet } from './helpers';
+import { isMap, isObject, isSet } from '../helpers';
 
 /**
  * @author sonion
@@ -50,6 +50,7 @@ export const deepClone = <
   isCopyProto = true
 ): U => {
   const cache = new WeakMap(); // 解决循环引用 weakMap不影响垃圾回收
+
   const _deepClone = <T>(value: T) => {
     if (!isObject(value)) return value;
     switch (getObjectType(value)) {
