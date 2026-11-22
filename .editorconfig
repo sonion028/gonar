@@ -1,0 +1,24 @@
+# 是否向上级目录继续查找 .editorconfig（root 标记当前文件为最顶层配置）
+root = true
+
+# 通配所有文件
+[*]
+# 文件编码使用 UTF-8
+charset = utf-8
+# 换行符统一为 LF（与 oxfmt endOfLine: 'lf' 一致）
+end_of_line = lf
+# 文件末尾保留一个空行
+insert_final_newline = true
+# 删除行尾多余空白字符
+trim_trailing_whitespace = true
+# 缩进使用空格（与 oxfmt useTabs: false 一致）
+indent_style = space
+# 缩进宽度为 2 个空格（与 oxfmt tabWidth: 2 一致）
+indent_size = 2
+# 行宽限制为 80 个字符（与 oxfmt printWidth: 80 一致） 
+max_line_length = 80
+
+
+[*.md] # 表示仅对 md 文件适用以下规则
+max_line_length = off # 关闭最大行长度限制
+trim_trailing_whitespace = false # 关闭末尾空格修剪

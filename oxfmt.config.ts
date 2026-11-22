@@ -13,4 +13,13 @@ export default defineConfig({
   endOfLine: 'lf',
   sortPackageJson: true, // 是否排序package.json
   ignorePatterns: [], // 忽略的文件模式
+  overrides: [
+    {
+      files: ['*.md'],
+      options: {
+        // 或使用 oxfmt 支持的无限制写法
+        printWidth: 9999,
+      },
+    },
+  ],
 });
