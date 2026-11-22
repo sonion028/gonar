@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { isNil } from '@tonar/utils';
+import { isNil } from '@tonar/utils/common';
 
 type PermissionValue = string | number | bigint;
 type PermissionType = PermissionValue | PermissionValue[];
