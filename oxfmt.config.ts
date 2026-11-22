@@ -9,6 +9,8 @@ export default defineConfig({
   useTabs: false, // 是否tab缩进
   tabWidth: 2, // 缩进空格数
   printWidth: 80, // 行宽限制
+  // 换行符使用 lf 结尾是 可选值"<auto|lf|crlf|cr>"
+  endOfLine: 'lf',
   sortPackageJson: true, // 是否排序package.json
   ignorePatterns: [], // 忽略的文件模式
 });
