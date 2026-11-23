@@ -11,8 +11,8 @@
     /** 强制所有文件都视为模块（即使无 import/export），声明不会进入全局作用域 */
     "moduleDetection": "force",
     /** 导入/导出语句按原样保留输出，不自动删除只用作类型的导入（无type）；
-      * 类型导入必须显式写 import type。配合 lint 检查，避免使用无type类型导入。
-      */
+     * 类型导入必须显式写 import type。配合 lint 检查，避免使用无type类型导入。
+     */
     "verbatimModuleSyntax": true,
     /** 不生成任何编译输出,一般由打包工具处理 */
     "noEmit": true,
@@ -33,10 +33,10 @@
     "useDefineForClassFields": true,
     /** 强制检查代码里的大小写与磁盘大小写是否对应 */
     "forceConsistentCasingInFileNames": true,
-    /** 
-      * 对副作用导入（如 import './x.css'）也执行模块解析检查。
-      * 注意：配合 Vite 时需要在 env.d.ts 里有 /// <reference types="vite/client" />（或 declare module "*.css"），否则 CSS 导入会报错
-    */
+    /**
+     * 对副作用导入（如 import './x.css'）也执行模块解析检查。
+     * 注意：配合 Vite 时需要在 env.d.ts 里有 /// <reference types="vite/client" />（或 declare module "*.css"），否则 CSS 导入会报错
+     */
     "noUncheckedSideEffectImports": true,
     /** 仅使用可擦除语法 */
     "erasableSyntaxOnly": true,
@@ -44,7 +44,6 @@
     "skipLibCheck": true,
     /** 禁止三方库替换lib声明 */
     "libReplacement": false,
-    
 
     /* 互操作与工具支持 */
     /** 保证每个文件能被单文件转译器（oxc/Babel等）正确处理，禁止依赖跨文件信息的语法 */
