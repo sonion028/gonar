@@ -17,8 +17,7 @@ export default defineConfig({
     {
       files: ['*.md'],
       options: {
-        // 或使用 oxfmt 支持的无限制写法
-        printWidth: 9999,
+        proseWrap: 'never',
       },
     },
   ],
