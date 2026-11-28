@@ -70,6 +70,22 @@ export const getResponseHeaders = function (xhr: XMLHttpRequest) {
 };
 
 /**
+ * @description 自定义 DOMException 类, 仅仅避免无 DOMException 环境报错
+ */
+class MyDOMException extends Error {
+  constructor(message?: string, name?: string) {
+    super(message);
+    this.name = name || 'DOMException';
+  }
+}
+
+/** 无 DOMException 环境，使用自定义 DOMException 类避免报错 */
+if (typeof DOMException === 'undefined') {
+  // oxlint-disable-next-line no-global-assign
+  DOMException = MyDOMException as unknown as typeof DOMException;
+}
+
+/**
  * @author sonion
  * @description 自定义超时错误类
  */
